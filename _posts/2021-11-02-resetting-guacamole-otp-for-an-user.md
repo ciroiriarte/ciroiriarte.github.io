@@ -28,12 +28,12 @@ All you need to do is setup your mysql DB connection in ~/.my.cnf and get the sc
 
 In most Linux machines, you can copy it to ~/bin/.
 
-```
-<pre class="EnlighterJSRAW" data-enlighter-group="" data-enlighter-highlight="" data-enlighter-language="generic" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-theme="" data-enlighter-title="">mkdir ~/bin
+{% highlight shell %}
+mkdir ~/bin
 cd ~/bin
 wget https://raw.githubusercontent.com/ciroiriarte/sysadmin-scripts/main/guacamole-reset-user-otp.sh
 chmod +x guacamole-reset-user-otp.sh
-```
+{% endhighlight %}
 
 If you run the script with no options, it will show you the syntax
 
