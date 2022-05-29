@@ -37,14 +37,14 @@ chmod +x guacamole-reset-user-otp.sh
 
 If you run the script with no options, it will show you the syntax
 
-```
-<pre class="EnlighterJSRAW" data-enlighter-group="" data-enlighter-highlight="" data-enlighter-language="generic" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-theme="" data-enlighter-title="">me@workstation:>; guacamole-reset-user-otp.sh
+{% highlight shell %}
+guacamole-reset-user-otp.sh
 Usage: /home/me/bin/guacamole-reset-user-otp.sh <username>
       /home/me/bin/guacamole-reset-user-otp.sh ciro.iriarte
-```
+{% endhighlight %}
 
 And the execution should be as simple as:
 
-```
-<pre class="EnlighterJSRAW" data-enlighter-group="" data-enlighter-highlight="" data-enlighter-language="generic" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-theme="" data-enlighter-title="">guacamole-reset-user-otp.sh the.user
-```
+{% highlight shell %}
+guacamole-reset-user-otp.sh the.user
+{% endhighlight %}

@@ -22,7 +22,7 @@ title: Doing the blog thing
 email: ciro.iriarte+blog@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   This are personal notes I believe would like to recall at some point in time,
-  sharing them here in case other people find value in them.
+  sharing them to the wind...
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://iriarte.it" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: ciroiriarte
