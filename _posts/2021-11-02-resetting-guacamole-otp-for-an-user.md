@@ -14,7 +14,9 @@ tags:
 
 I’ve implemented Guacamole for remote access, for the time being it uses the builtin OTP module. In the future I might migrate to LemonLDAP or Keycloak for 2FA, for the time being the solution if good enough and works with zero configuration after module installation 🙂
 
-<figure class="wp-block-image size-full">![](https://iriarte.it/wp-content/uploads/2022/01/totp-enroll.png)</figure>My particular setup is pulling users from FreeIPA through LDAP, but also uses MySQL as a supplement to handle the connections definitions and things like the OTP plugin information.
+![Multifactor Enrollment](https://iriarte.it/wp-content/uploads/2022/01/totp-enroll.png)
+
+My particular setup is pulling users from FreeIPA through LDAP, but also uses MySQL as a supplement to handle the connections definitions and things like the OTP plugin information.
 
 From time to time, an user would need to re-enroll a device because the original device was stolen or reset. Did a quick search, but couldn’t find a clean/easy option to reset it from the GUI in version 1.3.0.
 
