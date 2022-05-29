@@ -22,7 +22,7 @@ Looking to provide multiple users sane access to Apstra 4.0.0, I found it suppor
 
 I happily adapted the default configuration to match the FreeIPA schema (tested with Freeipa 4.6.8), I could authenticate users succesfully but authorization failed, not matter what parameter I change to modify the group lookup function.
 
-<figure class="wp-block-table is-style-stripes">| Parameter | Value |
+| Parameter | Value |
 |---|---|
 | Groups Search DN | cn=groups,cn=accounts,dc=ipa,dc=mydomain,dc=com |
 | Users Search DN | cn=users,cn=accounts,dc=ipa,dc=mydomain,dc=com |
