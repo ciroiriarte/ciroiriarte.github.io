@@ -108,4 +108,6 @@ As only the group lookup fails, we’ll use the compat view only for the groups.
 
 Even though I can get proper authentication &amp; authorization, the “role” user attribute in the profile just shows a gray box for the LDAP backed user. Might be a presentation bug, otherwise the authorization works as expected
 
-<figure class="wp-block-image size-full">![](https://iriarte.it/wp-content/uploads/2021/10/image-3.png)<figcaption>Profile for LDAP backed user</figcaption></figure><figure class="wp-block-image size-full">![](https://iriarte.it/wp-content/uploads/2021/10/image-4.png)<figcaption>Profile for internal admin user</figcaption></figure>
+![Profile for LDAP backed user](https://iriarte.it/wp-content/uploads/2021/10/image-3.png)
+
+![Profile for internal admin user](https://iriarte.it/wp-content/uploads/2021/10/image-4.png)
