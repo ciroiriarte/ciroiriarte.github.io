@@ -29,8 +29,9 @@ I happily adapted the default configuration to match the FreeIPA schema (tested 
 | Bind DN | uid=sys.apstra,cn=users,cn=accounts,dc=ipa,dc=mydomain,dc=com |
 | Password | you.wish |
 | Encryption | STARTTLS |
-
+<figure>
 <figcaption>Tested “Provider-specific Parameters” – Not working</figcaption>
+</figure>
 
 
 | **Parameter** | **Value** | **Apstra default?** |
