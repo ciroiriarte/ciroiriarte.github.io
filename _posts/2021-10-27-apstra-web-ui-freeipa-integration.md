@@ -1,17 +1,17 @@
 ---
+title: Apstra Web UI + FreeIPA integration
 id: 319
-title: 'Apstra Web UI &#038; FreeIPA integration'
 date: '2021-10-27T12:42:05-03:00'
 author: ciroiriarte
 layout: post
-guid: 'https://iriarte.it/?p=319'
-permalink: /index.php/2021/10/27/apstra-web-ui-freeipa-integration/
+guid: https://iriarte.it/?p=319
+permalink: "/index.php/2021/10/27/apstra-web-ui-freeipa-integration/"
 categories:
-    - Uncategorized
+- Uncategorized
 tags:
-    - Apstra
-    - FreeIPA
-    - LDAP
+- Apstra
+- FreeIPA
+- LDAP
 ---
 
 ## First Attempt (the correct one?)
@@ -20,7 +20,7 @@ Looking to provide multiple users sane access to Apstra 4.0.0, I found it suppor
 
 <https://www.juniper.net/documentation/us/en/software/apstra/apstra4.0.0/providers.html#creating-ldap-provider>
 
-I happily adapted the default configuration to match the FreeIPA schema (tested with Freeipa 4.6.8), I could authenticate users succesfully but authorization failed, not matter what parameter I change to modify the group lookup function.
+I happily adapted the default configuration to match the FreeIPA schema (tested with FreeIPA 4.6.8), I could authenticate users succesfully but authorization failed, not matter what parameter I change to modify the group lookup function.
 
 | Parameter | Value |
 |---|---|
@@ -30,7 +30,10 @@ I happily adapted the default configuration to match the FreeIPA schema (tested 
 | Password | you.wish |
 | Encryption | STARTTLS |
 
-<figcaption>Tested “Provider-specific Parameters” – Not working</figcaption></figure><figure class="wp-block-table is-style-stripes">| **Parameter** | **Value** | **Apstra default?** |
+<figcaption>Tested “Provider-specific Parameters” – Not working</figcaption>
+
+
+| **Parameter** | **Value** | **Apstra default?** |
 |---|---|---|
 | Username Attribute Name | uid | Yes |
 | User Search Attribute Name | uid | Yes |
@@ -46,7 +49,12 @@ I happily adapted the default configuration to match the FreeIPA schema (tested 
 | Group Member Mapping Attribute Name | member | No |
 | Group Object Class Attribute Name | groupofnames\* | No |
 
-<figcaption>Tested “Advanced configuration” – Not working</figcaption></figure>Take into account that “Group Object Class Attribute Name” can take “groupofnames” or “ipausergroup” for this usecase.
+<figure>
+<figcaption>Tested “Advanced configuration” – Not working</figcaption>
+</figure>
+
+
+Take into account that “Group Object Class Attribute Name” can take “groupofnames” or “ipausergroup” for this usecase.
 
 Looking at the logs, the attribute for user membership lookup seems to be hardcoded to UID, hence the lookup is:
 
@@ -71,7 +79,8 @@ In the hope of waiting for a proper fix from [Juniper ](https://www.juniper.net/
 
 As only the group lookup fails, we’ll use the compat view only for the groups.
 
-<figure class="wp-block-table is-style-stripes">| **Parameter** | **Value** |
+
+| **Parameter** | **Value** |
 |---|---|
 | Groups Search DN | cn=groups,cn=**compat**,dc=ipa,dc=mydomain,dc=com |
 | Users Search DN | cn=users,cn=accounts,dc=ipa,dc=mydomain,dc=com |
@@ -79,7 +88,13 @@ As only the group lookup fails, we’ll use the compat view only for the groups.
 | Password | you.wish |
 | Encryption | STARTTLS |
 
-<figcaption>Tested “Provider-specific Parameters” – Working workaround</figcaption></figure><figure class="wp-block-table is-style-stripes">| **Parameter** | **Value** | Apstra default? |
+<figure>
+<figcaption>Tested “Provider-specific Parameters” – Working workaround</figcaption>
+</figure>
+
+
+
+| **Parameter** | **Value** | Apstra default? |
 |---|---|---|
 | Username Attribute Name | uid | Yes |
 | User Search Attribute Name | uid | Yes |
@@ -94,20 +109,44 @@ As only the group lookup fails, we’ll use the compat view only for the groups.
 | Group Member Attribute Name | entryDN | Yes |
 | Group Member Mapping Attribute Name | **memberUid** | **Yes** |
 | Group Object Class Attribute Name | **posixGroup** | **Yes** |
+<figure>
+<figcaption>Tested “Advanced configuration” – Working workaround</figcaption>
+</figure>
 
-<figcaption>Tested “Advanced configuration” – Working workaround</figcaption></figure>Don’t forget to setup the “Provider Role Mapping” section to get authorization working.
+Don’t forget to setup the “Provider Role Mapping” section to get authorization working.
 
-<figure class="wp-block-table is-style-stripes">| **AOS Role** | **Provide Group** |
+
+| **AOS Role** | **Provide Group** |
 |---|---|
-| administrator | gapstra-administrator |
+| administrator | gapstra-administrator | 
 | device\_ztp | gapstra-device\_ztp |
 | user | gapstra-user |
 | viewer | gapstra-viewer |
+<figure>
+<figcaption>Role Mapping setup</figcaption>
+	</figure>
 
-<figcaption>Role Mapping setup</figcaption></figure>## Side note
+## Side note
 
 Even though I can get proper authentication &amp; authorization, the “role” user attribute in the profile just shows a gray box for the LDAP backed user. Might be a presentation bug, otherwise the authorization works as expected
 
-![Profile for LDAP backed user](https://iriarte.it/wp-content/uploads/2021/10/image-3.png)
+<!--
+|  ![Profile for LDAP backed user](https://iriarte.it/wp-content/uploads/2021/10/image-3.png) |
+|:--:| 
+| *Profile for LDAP backed user* |
+-->
 
+<figure>
+  <img src="/wp-content/uploads/2021/10/image-3.png" alt="my alt text"/>
+  <figcaption>Profile for LDAP backed user.</figcaption>
+</figure>
+
+
+<!--
 ![Profile for internal admin user](https://iriarte.it/wp-content/uploads/2021/10/image-4.png)
+-->
+
+<figure>
+  <img src="/wp-content/uploads/2021/10/image-4.png" alt="my alt text"/>
+  <figcaption>Profile for internal admin user.</figcaption>
+</figure>

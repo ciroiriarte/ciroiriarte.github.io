@@ -1,15 +1,15 @@
 ---
+title: Resetting Guacamole OTP for an user
 id: 329
-title: 'Resetting Guacamole OTP for an user'
 date: '2021-11-02T10:19:37-03:00'
 author: ciroiriarte
 layout: post
-guid: 'https://iriarte.it/?p=329'
-permalink: /index.php/2021/11/02/resetting-guacamole-otp-for-an-user/
+guid: https://iriarte.it/?p=329
+permalink: "/index.php/2021/11/02/resetting-guacamole-otp-for-an-user/"
 categories:
-    - Uncategorized
+- Uncategorized
 tags:
-    - Guacamole
+- Guacamole
 ---
 
 I’ve implemented Guacamole for remote access, for the time being it uses the builtin OTP module. In the future I might migrate to LemonLDAP or Keycloak for 2FA, for the time being the solution if good enough and works with zero configuration after module installation 🙂
@@ -20,7 +20,6 @@ My particular setup is pulling users from FreeIPA through LDAP, but also uses My
 
 From time to time, an user would need to re-enroll a device because the original device was stolen or reset. Did a quick search, but couldn’t find a clean/easy option to reset it from the GUI in version 1.3.0.
 
-- - - - - -
 
 As a quick fix (don’t want to have to rethink this each time a user has this requirement), I created a simple script to do the job for me.
 
