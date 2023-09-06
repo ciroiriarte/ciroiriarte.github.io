@@ -1,5 +1,7 @@
 ---
 title: ESXi on Proxmox as nested hypervisor
+description: Step by step implementation of a nested ESXi machine running on Proxmox/PVE KVM host.
+#permalink: esxi-on-pve
 layout: post
 author: ciroiriarte
 categories:
