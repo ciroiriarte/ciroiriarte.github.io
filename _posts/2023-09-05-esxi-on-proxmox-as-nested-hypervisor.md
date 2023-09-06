@@ -22,7 +22,7 @@ Now, if for some reason you cannot install ESXi on your home lab machine, and li
 The starting point would be a propperly setup [Proxmox host for nested virtualization](https://pve.proxmox.com/wiki/Nested_Virtualization). After you get it up & running, we're ready to move forward.
 
 # The ESXi appliance
-William Lam works on a [ESXi appliance](https://williamlam.com/nested-virtualization/nested-esxi-virtual-appliance) pre-configured to simplify deployment as a nested hypervisor. With each new vSphere release, a matching appliance is created and published.
+This [ESXi appliance](https://williamlam.com/nested-virtualization/nested-esxi-virtual-appliance) is pre-configured to simplify deployment as a nested hypervisor. With each new vSphere release, a matching appliance is created and published.
 
 # Downloading the appliance
 The mentioned appliances are published via a public vSphere Content Library. To get a list of the available releases, we can run the following command from your PVE host:
@@ -311,7 +311,7 @@ With more time, I'll take a look at the list and provide an update if needed.
 
 PVE provides support for cloud-init as a way to automate VM provisioning & initial configuration. ESXi doesn't provide a cloud-init agent out of the box.
 
-I've found a basic implementation for ESXi that some people have reported to be working to deploy ESXi on top of Openstack. Pending to review how to inject that script in our freshly downloaded appliance (encrypted local.tgz proven to be cumbersome for this usecase).
+I've found a basic implementation of a cloud-init agent for ESXi by Gonéri Le Bouder, which some people have reported to be working to deploy ESXi on top of Openstack. Pending to review how to inject that script in our freshly downloaded appliance (encrypted local.tgz proven to be cumbersome for this usecase).
 
 - [https://github.com/goneri/esxi-cloud-init](https://github.com/goneri/esxi-cloud-init)
 - [https://github.com/virt-lightning/esxi-cloud-images](https://github.com/virt-lightning/esxi-cloud-images)
