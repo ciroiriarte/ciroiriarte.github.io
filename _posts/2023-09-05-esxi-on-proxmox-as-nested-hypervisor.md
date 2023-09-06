@@ -13,17 +13,17 @@ tags:
 
 Thanks to the work of [William Lam](https://williamlam.com/nested-virtualization), running ESXi on top of ESXi for testing/lab purposes is really straightforward. 
 
-Now, if for some reason you cannot install ESXi on you home lab machine, and like me you use Proxmox, this post is for you.
+Now, if for some reason you cannot install ESXi on your home lab machine, and like me you use Proxmox, this post is for you.
 
-[Proxmox Virtual Environment](https://www.proxmox.com/) or PVE is a nice KVM-based virtualization solution from a german company. It's free to use, and has a wide user base.
+[Proxmox Virtual Environment](https://www.proxmox.com/) or PVE is a nice KVM-based virtualization solution from [Proxmox Server Solutions GmbH](https://www.proxmox.com/en/about/company). It's free to use, and has a wide user base.
 
-The starting point would be a propperly setup [Proxmox host for nested virtualization](https://pve.proxmox.com/wiki/Nested_Virtualization). After you go it up & running, we're ready to move forward.
+The starting point would be a propperly setup [Proxmox host for nested virtualization](https://pve.proxmox.com/wiki/Nested_Virtualization). After you get it up & running, we're ready to move forward.
 
 # The ESXi appliance
 William Lam works on a [ESXi appliance](https://williamlam.com/nested-virtualization/nested-esxi-virtual-appliance) pre-configured to simplify deployment as a nested hypervisor. With each new vSphere release, a matching appliance is created and published.
 
 # Downloading the appliance
-The mentioned appliances are published via a vSphere Content Library. To get a list of the available releases, we can run the following command from your PVE host:
+The mentioned appliances are published via a public vSphere Content Library. To get a list of the available releases, we can run the following command from your PVE host:
 
 {% highlight shell %}
 BASEURL=https://download3.vmware.com/software/vmw-tools
