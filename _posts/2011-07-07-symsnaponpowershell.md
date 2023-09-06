@@ -28,73 +28,72 @@ El script es ejecutado desde el equipo auxiliar/secundario por un usuario del do
 
 Decidí darle una ojeada rápida a PowerShell y armando un collage con info de internet esto es lo que salió.
 
-> ```
->  
-> ##
-> # Clonado de BD SQL Analisis Services
-> ##
-> # Changelog
-> # ---------
-> # v0.1 - Ciro Iriarte
-> # - Initial release
-> 
-> param($accion)
-> 
-> $Global:HOST_ORIGEN="produccion1"
-> #$Global:USER="usuario"
-> #$Global:PASS="blah"
-> $Global:DRIVE_ORIGEN="E:"
-> $Global:DRIVE_DESTINO="W:"
-> $Global:SERVICIO_ORIGEN="MSSQLServerOLAPService"
-> 
-> $Global:GRUPO_SNAP="SNAP_SSAS"
-> $Global:SID="612"
-> $Global:SYMDEV_DESTINO="0473"
-> 
-> function crear ()
-> {
-> 	write-host "Deteniendo el servicio SSAS en " $HOST_ORIGEN
-> 	#psexec \\$HOST_ORIGEN -u $USER -p $PASS net stop $SERVICIO_ORIGEN
-> 	psexec \\$HOST_ORIGEN net stop $SERVICIO_ORIGEN
-> 
-> 	#psexec \\$HOST_ORIGEN -u $USER -p $PASS symntctl flush -drive $DRIVE_ORIGEN
-> 	psexec \\$HOST_ORIGEN symntctl flush -drive $DRIVE_ORIGEN
-> 
-> 	sleep 60
-> 
-> 	write-host "Creando snapshot"
-> 	symsnap -g $GRUPO_SNAP create -nop
-> 	symsnap -g $GRUPO_SNAP activate -consistent -nop
-> 
-> 	write-host "Montando snapshot"
-> 	symntctl rescan
-> 	symntctl mount -drive $DRIVE_DESTINO -sid $SID -symdev $SYMDEV_DESTINO
-> 
-> 	write-host "Levantando el servicios SSAS en " $HOST_ORIGEN
-> 	#psexec \\$HOST_ORIGEN -u $USER -p $PASS net start $SERVICIO_ORIGEN
-> 	psexec \\$HOST_ORIGEN net start $SERVICIO_ORIGEN
-> }
-> 
-> function destruir ()
-> {
-> 	write-host "Eliminando snapshot"
-> 	symntctl umount -drive $DRIVE_DESTINO -sid $SID -symdev $SYMDEV_DESTINO
-> 	symsnap -g $GRUPO_SNAP terminate -nop
-> 	symntctl rescan
-> }
-> 
-> function consulta ()
-> {
-> 	symsnap -g $GRUPO_SNAP query
-> }
-> 
-> ## MAIN
-> 
-> switch($accion)
-> {
-> 	"start" { crear }
-> 	"stop" { destruir }
-> 	"status" { consulta }
-> 	default { write-host "Sintaxis:" $myinvocation.mycommand.name "start|stop|status" }
-> }
-> ```
+{% highlight powershell %}
+##
+# Clonado de BD SQL Analisis Services
+##
+# Changelog
+# ---------
+# v0.1 - Ciro Iriarte
+# - Initial release
+
+param($accion)
+
+$Global:HOST_ORIGEN="produccion1"
+#$Global:USER="usuario"
+#$Global:PASS="blah"
+$Global:DRIVE_ORIGEN="E:"
+$Global:DRIVE_DESTINO="W:"
+$Global:SERVICIO_ORIGEN="MSSQLServerOLAPService"
+
+$Global:GRUPO_SNAP="SNAP_SSAS"
+$Global:SID="612"
+$Global:SYMDEV_DESTINO="0473"
+
+function crear ()
+{
+	write-host "Deteniendo el servicio SSAS en " $HOST_ORIGEN
+	#psexec \\$HOST_ORIGEN -u $USER -p $PASS net stop $SERVICIO_ORIGEN
+	psexec \\$HOST_ORIGEN net stop $SERVICIO_ORIGEN
+
+	#psexec \\$HOST_ORIGEN -u $USER -p $PASS symntctl flush -drive $DRIVE_ORIGEN
+	psexec \\$HOST_ORIGEN symntctl flush -drive $DRIVE_ORIGEN
+
+	sleep 60
+
+	write-host "Creando snapshot"
+	symsnap -g $GRUPO_SNAP create -nop
+	symsnap -g $GRUPO_SNAP activate -consistent -nop
+
+	write-host "Montando snapshot"
+	symntctl rescan
+	symntctl mount -drive $DRIVE_DESTINO -sid $SID -symdev $SYMDEV_DESTINO
+
+	write-host "Levantando el servicios SSAS en " $HOST_ORIGEN
+	#psexec \\$HOST_ORIGEN -u $USER -p $PASS net start $SERVICIO_ORIGEN
+	psexec \\$HOST_ORIGEN net start $SERVICIO_ORIGEN
+}
+
+function destruir ()
+{
+	write-host "Eliminando snapshot"
+	symntctl umount -drive $DRIVE_DESTINO -sid $SID -symdev $SYMDEV_DESTINO
+	symsnap -g $GRUPO_SNAP terminate -nop
+	symntctl rescan
+}
+
+function consulta ()
+{
+	symsnap -g $GRUPO_SNAP query
+}
+
+## MAIN
+
+switch($accion)
+{
+	"start" { crear }
+	"stop" { destruir }
+	"status" { consulta }
+	default { write-host "Sintaxis:" $myinvocation.mycommand.name "start|stop|status" }
+}
+{% endhighlight %}
