@@ -311,7 +311,7 @@ With more time, I'll take a look at the list and provide an update if needed.
 
 PVE provides support for cloud-init as a way to automate VM provisioning & initial configuration. ESXi doesn't provide a cloud-init agent out of the box.
 
-I've found a basic implementation of a cloud-init agent for ESXi by Gonéri Le Bouder, which some people have reported to be working to deploy ESXi on top of Openstack. Pending to review how to inject that script in our freshly downloaded appliance (encrypted local.tgz proven to be cumbersome for this usecase).
+I've found a basic implementation of a cloud-init agent for ESXi by [Gonéri Le Bouder](https://github.com/goneri), which some people have reported to be working to deploy ESXi on top of Openstack. Pending to review how to inject that script in our freshly downloaded appliance (encrypted local.tgz proven to be cumbersome for this usecase).
 
 - [https://github.com/goneri/esxi-cloud-init](https://github.com/goneri/esxi-cloud-init)
 - [https://github.com/virt-lightning/esxi-cloud-images](https://github.com/virt-lightning/esxi-cloud-images)
