@@ -16,9 +16,9 @@ tags:
 
 ## First Attempt (the correct one?)
 
-Looking to provide multiple users sane access to Apstra 4.0.0, I found it supports LDAP based directories in the form of “Providers” in the “External Systems” section.
+Looking to provide multiple users sane access to Apstra 4.0.0, I found it supports LDAP based directories in the form of “Providers” in the “External Systems” section:
 
-<https://www.juniper.net/documentation/us/en/software/apstra/apstra4.0.0/providers.html#creating-ldap-provider>
+[Apstra Documentation](https://www.juniper.net/documentation/us/en/software/apstra/apstra4.0.0/providers.html#creating-ldap-provider)
 
 I happily adapted the default configuration to match the FreeIPA schema (tested with FreeIPA 4.6.8), I could authenticate users succesfully but authorization failed, not matter what parameter I change to modify the group lookup function.
 
@@ -29,8 +29,9 @@ I happily adapted the default configuration to match the FreeIPA schema (tested 
 | Bind DN | uid=sys.apstra,cn=users,cn=accounts,dc=ipa,dc=mydomain,dc=com |
 | Password | you.wish |
 | Encryption | STARTTLS |
+
 <figure>
-<figcaption>Tested “Provider-specific Parameters” – Not working</figcaption>
+<figcaption><i>Table 1 - Tested “Provider-specific Parameters” – Not working</i></figcaption>
 </figure>
 
 
@@ -51,7 +52,7 @@ I happily adapted the default configuration to match the FreeIPA schema (tested 
 | Group Object Class Attribute Name | groupofnames\* | No |
 
 <figure>
-<figcaption>Tested “Advanced configuration” – Not working</figcaption>
+<figcaption><i>Table 2 - Tested “Advanced configuration” – Not working</i></figcaption>
 </figure>
 
 
@@ -59,11 +60,12 @@ Take into account that “Group Object Class Attribute Name” can take “group
 
 Looking at the logs, the attribute for user membership lookup seems to be hardcoded to UID, hence the lookup is:
 
-`SRCH base="cn=groups,cn=accounts,dc=ipa,dc=mydomain,dc=com" scope=2 filter="(member=john.doe)" attrs="cn"`
+
+> SRCH base="cn=groups,cn=accounts,dc=ipa,dc=mydomain,dc=com" scope=2 filter="(member=john.doe)" attrs="cn"
 
 When it should be like:
 
-`SRCH base="cn=groups,cn=accounts,dc=ipa,dc=mydomain,dc=com" scope=2 filter="(member=uid=john.doe,cn=users,cn=accounts,dc=ipa,dc=mydomain,dc=com)" attrs="cn"`
+> SRCH base="cn=groups,cn=accounts,dc=ipa,dc=mydomain,dc=com" scope=2 filter="(member=uid=john.doe,cn=users,cn=accounts,dc=ipa,dc=mydomain,dc=com)" attrs="cn"
 
 ## The workaround
 
@@ -90,7 +92,7 @@ As only the group lookup fails, we’ll use the compat view only for the groups.
 | Encryption | STARTTLS |
 
 <figure>
-<figcaption>Tested “Provider-specific Parameters” – Working workaround</figcaption>
+<figcaption><i>Table 3 - Tested “Provider-specific Parameters” – Working workaround</i></figcaption>
 </figure>
 
 
@@ -110,9 +112,11 @@ As only the group lookup fails, we’ll use the compat view only for the groups.
 | Group Member Attribute Name | entryDN | Yes |
 | Group Member Mapping Attribute Name | **memberUid** | **Yes** |
 | Group Object Class Attribute Name | **posixGroup** | **Yes** |
+
 <figure>
-<figcaption>Tested “Advanced configuration” – Working workaround</figcaption>
+<figcaption><i>Table 4 - Tested “Advanced configuration” – Working workaround</i></figcaption>
 </figure>
+
 
 Don’t forget to setup the “Provider Role Mapping” section to get authorization working.
 
@@ -123,8 +127,9 @@ Don’t forget to setup the “Provider Role Mapping” section to get authoriza
 | device\_ztp | gapstra-device\_ztp |
 | user | gapstra-user |
 | viewer | gapstra-viewer |
+
 <figure>
-<figcaption>Role Mapping setup</figcaption>
+<figcaption><i>Table 5 - Role Mapping setup</i></figcaption>
 	</figure>
 
 ## Side note
@@ -139,7 +144,7 @@ Even though I can get proper authentication &amp; authorization, the “role” 
 
 <figure>
   <img src="/wp-content/uploads/2021/10/image-3.png" alt="my alt text"/>
-  <figcaption>Profile for LDAP backed user.</figcaption>
+  <figcaption><i>Image 1 - Profile for LDAP backed user.</i></figcaption>
 </figure>
 
 
@@ -149,5 +154,5 @@ Even though I can get proper authentication &amp; authorization, the “role” 
 
 <figure>
   <img src="/wp-content/uploads/2021/10/image-4.png" alt="my alt text"/>
-  <figcaption>Profile for internal admin user.</figcaption>
+  <figcaption><i>Image 2 - Profile for internal admin user.</i></figcaption>
 </figure>
