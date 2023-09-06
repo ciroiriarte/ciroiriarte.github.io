@@ -1,6 +1,6 @@
 ---
 id: 293
-title: 'Relocating&#8230;'
+title: 'Relocating;'
 date: '2013-12-07T15:24:38-03:00'
 author: ciroiriarte
 layout: post
