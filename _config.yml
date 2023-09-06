@@ -38,6 +38,9 @@ theme: minima
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-compose
+
 
 # Exclude from processing.
 # The following items will not be processed, by default.
@@ -60,6 +63,7 @@ plugins:
 #   - vendor/ruby/
 
 languages: ["en", "es"]
+timezone: America/Asuncion
 
 jekyll_admin:
   #hidden_links:
@@ -69,3 +73,15 @@ jekyll_admin:
   #  - datafiles
   #  - configuration
   homepage: "posts"
+
+jekyll_compose:
+  post_default_front_matter:
+    last_modified_at: 
+    permalink: 
+    description:
+    image:
+    published: true
+    sitemap: true
+    excerpt_separator: <!--more-->
+    categories:
+    tags:
