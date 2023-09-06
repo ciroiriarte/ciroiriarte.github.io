@@ -188,14 +188,14 @@ In the end, we should have the 3 VMs up & running and ready for testing.
   <a href="/assets/img/2023-09-05-nested-esxi-console.png">
   <img src="/assets/img/2023-09-05-nested-esxi-console.png" alt="VM console"/>
   </a>
-  <figcaption><i>Image 2 -  Created Virtual Machines</i></figcaption>
+  <figcaption><i>Image 2 - VM console</i></figcaption>
 </figure>
 
 <figure>
   <a href="/assets/img/2023-09-05-nested-esxi-webUI.png">
   <img src="/assets/img/2023-09-05-nested-esxi-webUI.png" alt="ESXi Web UI"/>
   </a>
-  <figcaption><i>Image 3 - Created Virtual Machines</i></figcaption>
+  <figcaption><i>Image 3 - ESXi web UI</i></figcaption>
 </figure>
 
 # ToDo list
