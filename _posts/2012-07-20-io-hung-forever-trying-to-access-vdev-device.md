@@ -22,20 +22,16 @@ The thing is, that’s a good feature, if you have really small gaps of times wi
 
 On the other side, VDEVs appear failed if the snapshots are not active, so most of the time you don’t want to queue the probes from udev (hundreds of proceses in less than a day in our case). To solve this you can enable the “fail\_if\_no\_path” feature per LUN, here’s an example:
 
-```
-<pre class="wp-block-code">```bash
-`multipath {wwid 350760e9016040b000001040a00002001alias snapdata02LUno_path_retry fail}`
-```
-```
+{% highlight shell %}
+multipath {wwid 350760e9016040b000001040a00002001alias snapdata02LUno_path_retry fail}
+{% endhighlight %}
 
 And don’t forget to restart multipath daemon…
 
 If needed, you can release pending I/O processes (and return I/O error) with the following command:
 
-```
-<pre class="wp-block-code">```
-`dmsetup message snapdata02LU 0 "fail_if_no_path"`
-```
-```
+{% highlight shell %}
+dmsetup message snapdata02LU 0 "fail_if_no_path"
+{% endhighlight %}
 
 That’s all…
