@@ -3,7 +3,7 @@ title: ESXi on Proxmox as nested hypervisor
 layout: post
 author: ciroiriarte
 categories:
-- Home Lab
+- HomeLab
 tags:
 - ESXi
 - Proxmox
