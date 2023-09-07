@@ -31,6 +31,8 @@ twitter:
   username: ciroiriarte
   card: summary
 #google_site_verification: wLRgHwF6nai9tTLgxgfnssURwBRLZG68NZtpiEPMN94
+google_search_console:
+  verification_file_code: bb8c66e6541c937c
 
 
 # Build settings
@@ -40,6 +42,7 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-compose
+  - jekyll-google_search_console_verification_file
 
 
 # Exclude from processing.
