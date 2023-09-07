@@ -1,6 +1,6 @@
 ---
 id: 16
-title: 'The toy arrived&#8230;'
+title: 'The toy arrived!'
 date: '2007-10-12T01:43:16-04:00'
 author: ciroiriarte
 layout: post
