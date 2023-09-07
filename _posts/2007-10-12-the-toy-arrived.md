@@ -19,7 +19,9 @@ Well, the GPS logger is here, not thanks to EMS, as it arrived to Asuncion on 8/
 So far i tested it on a few trips around town.. This is a picture with APs discovered using kismet:
 
 <figure>
+  <a href="/wp-content/uploads/2007/10/paseogps.jpg">
   <img src="/wp-content/uploads/2007/10/paseogps.jpg" alt="Trip to Villa Morra"/>
+  </a>
   <figcaption><i>Trip record</i></figcaption>
 </figure>
 
