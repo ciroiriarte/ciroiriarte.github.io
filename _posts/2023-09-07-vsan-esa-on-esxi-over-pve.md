@@ -36,7 +36,7 @@ Warnings will be present, because we don't meet any [supported configuration](ht
 - 512GB RAM per node
 etc....
 
-In the ideal world, we should use a NVMe controller, which QEMU supports, but [Proxmox doesn't support yet](https://bugzilla.proxmox.com/show_bug.cgi?id=2255). Given that scenario, we're going with the default SATA controller.
+In a ideal world, we should use a NVMe controller, which QEMU supports, but [Proxmox doesn't support yet](https://bugzilla.proxmox.com/show_bug.cgi?id=2255). Given that scenario, we're going with the default SATA controller.
 
 # Provisioning of the disks
 
