@@ -20,7 +20,7 @@ Also, coming from the background of FiberChannel based solutions like [EMC's vMA
 
 Another way of seeing it, if you compare it to other solutions serving Xen or KVM, it lacks flexibility (single pool per cluster, single disk type, cache drive as important failure points, etc) and when non-ESXi at sight, we would just go with any other alternatives like [CEPH](https://docs.ceph.com/en/latest/architecture/) or [MooseFS](https://moosefs.com/blog/architecture/) in the past (no [GlusterFS](https://docs.gluster.org/en/main/Quick-Start-Guide/Architecture/), nobody likes you....)
 
-On the bright side, it makes sense if you're a VMware shop with very limited teams regarding infra and you want a quick way to introduce a virtualization platform, or no Centralized Storage + SAN in place to start with and your storage needs are not disproportionate in comparison with Compute.
+On the bright side, it makes sense if you're a VMware shop with very limited teams regarding infra and you want a quick way to introduce a virtualization platform, or no Centralized Storage + SAN in place to start with and your storage needs are not disproportionate in comparison with compute.
 
 # vSAN ESA
 First time I heard about [vSAN ESA](https://core.vmware.com/blog/introduction-vsan-express-storage-architecture) was in the 2022 VMware Explore event. It's not perfect, but it's a step in the right direction.
