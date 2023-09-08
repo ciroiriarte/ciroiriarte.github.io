@@ -60,8 +60,8 @@ You can setup the vSAN Cluster as you would normally do, during vCenter Deployme
 First warning you would see, is that the NICs are not supported (25GbE is mandated). You can keep moving forward eitherway.
 
 <figure>
-  <a href="/assets/img/2023-09-07-nic-speed-warning">
-  <img src="/assets/img/2023-09-07-nic-speed-warning" alt="NIC warningI"/>
+  <a href="/assets/img/2023-09-07-nic-speed-warning.png">
+  <img src="/assets/img/2023-09-07-nic-speed-warning.png" alt="NIC warning"/>
   </a>
   <figcaption><i>Image 1 - NIC warning</i></figcaption>
 </figure>
@@ -69,15 +69,15 @@ First warning you would see, is that the NICs are not supported (25GbE is mandat
 If you keep moving forward, disks will be marked as incompatible. Just claim them manually.
 
 <figure>
-  <a href="/assets/img/2023-09-07-incompatible-disk-warning">
-  <img src="/assets/img/2023-09-07-incompatible-disk-warning" alt="Disk marked as not compatible"/>
+  <a href="/assets/img/2023-09-07-incompatible-disk-warning.png">
+  <img src="/assets/img/2023-09-07-incompatible-disk-warning.png" alt="Disk marked as not compatible"/>
   </a>
   <figcaption><i>Image 2 - Disk marked as not compatible</i></figcaption>
 </figure>
 
 <figure>
-  <a href="/assets/img/2023-09-07-disk-claiming">
-  <img src="/assets/img/2023-09-07-disk-claiming" alt="Manual claim"/>
+  <a href="/assets/img/2023-09-07-disk-claiming.png">
+  <img src="/assets/img/2023-09-07-disk-claiming.png" alt="Manual claim"/>
   </a>
   <figcaption><i>Image 3 - Manual claim</i></figcaption>
 </figure>
