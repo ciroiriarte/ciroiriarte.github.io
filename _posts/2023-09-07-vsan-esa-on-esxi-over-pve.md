@@ -14,7 +14,7 @@ tags:
 ---
 
 # vSAN OSA
-One of my biggest grief as a customer regarding the VMware SDDC offering is vSAN OSA. When I first saw it in action, it looked like a "me too" response to [Nutanix](https://www.nutanix.com/mx/info/software-defined-storage), which we introduced successfully I believe as a first customer in Paraguay during 2016-ish (if memory serves right). 
+One of my biggest griefs as a customer regarding the VMware SDDC offering is vSAN OSA. When I first saw it in action, it looked like a "me too" response to [Nutanix](https://www.nutanix.com/mx/info/software-defined-storage), which we introduced successfully I believe as a first customer in Paraguay during 2016-ish (if memory serves right). 
 
 Also, coming from the background of FiberChannel based solutions like [EMC's vMAX](https://www.youtube.com/watch?v=Zp3yMGlzZhM) & [Hitachi's VSP](https://knowledge.hitachivantara.com/Documents/Storage/VSP_G1X00_and_VSP_F1500/80-06-6x/Hardware_Guide/03_Hardware_architecture) it was a really hard sell feature wise (no snapshots, no tiering, no replication, etc) and going with 20 nodes clusters just because we needed capacity for big fat Oracle Databases didn't make sense (it's not cost effective)
 
