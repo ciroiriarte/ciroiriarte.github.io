@@ -1,5 +1,5 @@
 ---
-title: vSAN ESA on Proxmox
+title: vSAN ESA on ESXi-over-PVE
 description: Nested vSAN ESA cluster for testing purposes
 layout: post
 author: ciroiriarte
