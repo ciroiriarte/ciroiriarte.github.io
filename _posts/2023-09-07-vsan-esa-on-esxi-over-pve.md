@@ -84,7 +84,7 @@ If you keep moving forward, disks will be marked as incompatible. Just claim the
   <figcaption><i>Image 3 - Manual claim</i></figcaption>
 </figure>
 
-# Outome
+# Outcome
 
 After some minutes, you should have your working-but-not-supported ESXi-nested-on-PVE-vSAN cluster.
 
