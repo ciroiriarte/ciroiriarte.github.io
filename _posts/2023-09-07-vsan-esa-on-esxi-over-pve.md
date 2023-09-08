@@ -25,7 +25,7 @@ On the bright side, it makes sense if you're a VMware shop with very limited tea
 # vSAN ESA
 First time I heard about [vSAN ESA](https://core.vmware.com/blog/introduction-vsan-express-storage-architecture) was in the 2022 VMware Explore event. It's not perfect, but it's a step in the right direction.
 
-Make sure you watch the "Get to Know the Next-Generation of vSAN Architecture" on demand VMware Explore 2022 session.
+Make sure you watch the [Get to Know the Next-Generation of vSAN Architecture](https://www.vmware.com/explore/video-library/video-landing.html?sessionid=1663909090011001QAvr&videoId=6315818080112) on demand VMware Explore 2022 session recording.
 
 # Going back to our Proxmox nested environment.
 If you would like to get your feet wet, vSAN ESA can be deployed in our nested ESX-on-KVM/Proxmox environment. Of course, it won't be supported, but will allow you to play with it.
