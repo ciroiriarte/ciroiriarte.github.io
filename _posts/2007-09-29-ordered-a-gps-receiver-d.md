@@ -14,6 +14,6 @@ tags:
     - 'toys gps gadget'
 ---
 
-![i-Blue 747](http://fotos.wunslov.com/d/304-1/gps_iblue747_s.jpg)
+![i-Blue 747](https://commons.wikimedia.org/wiki/File:I-blue_747_A_plus.png)
 
 Well, i felt like i was in need of a new toy, so yesterday ordered an i-Blue 747 (gps receiver/track logger). So i guess i’ll be busy playing with it once it arrives. Already found two projects (http://gpsmapper.sourceforge.net/ and http://triptracker.sourceforge.net/) that would allow me to have a realtime track of my position using a GPRS enabled phone with the receiver. Also would like to contribute to OpenStreetMap, as there are no maps available for Paraguay, let’s see how hard can that be….
