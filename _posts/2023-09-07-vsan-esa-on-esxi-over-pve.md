@@ -18,9 +18,16 @@ One of my biggest griefs as a customer regarding the VMware SDDC offering is vSA
 
 Also, coming from the background of FiberChannel based solutions like [EMC's vMAX](https://www.youtube.com/watch?v=Zp3yMGlzZhM) & [Hitachi's VSP](https://knowledge.hitachivantara.com/Documents/Storage/VSP_G1X00_and_VSP_F1500/80-06-6x/Hardware_Guide/03_Hardware_architecture) it was a really hard sell feature wise (no snapshots, no tiering, no replication, etc) and going with 20 nodes clusters just because we needed capacity for big fat Oracle Databases didn't make sense (it's not cost effective)
 
-Another way of seeing it, if you compare it to other solutions serving Xen or KVM, it lacks flexibility (single pool per cluster, single disk type, cache drive as important failure points, etc) and when non-ESXi at sight, we would just go with any other alternatives like [CEPH](https://docs.ceph.com/en/latest/architecture/) or [MooseFS](https://moosefs.com/blog/architecture/) in the past (no [GlusterFS](https://docs.gluster.org/en/main/Quick-Start-Guide/Architecture/), nobody likes you....)
+Another way of seeing it, if you compare vSAN OSA on vSphere to other solutions serving Xen or KVM, it lacks flexibility:
+- single pool per cluster
+- single disk type
+- cache drive as important failure points
 
-On the bright side, it makes sense if:
+When non-ESXi at sight, we would just go with any other alternatives like [CEPH](https://docs.ceph.com/en/latest/architecture/) or [MooseFS](https://moosefs.com/blog/architecture/) (no [GlusterFS](https://docs.gluster.org/en/main/Quick-Start-Guide/Architecture/), nobody likes you....)
+
+On the bright side, it's an interesting entry point to better alternatives for folks behind technologically: think iSCSI with 1GbE or CIFS/SMB3 served from your Windows Server file server :s
+
+All in all, it makes sense if:
 - you're a VMware shop with very limited infra team(s)
 - you want a quick way to introduce a virtualization platform
 - there's no centralized Storage + SAN in place to start
