@@ -31,9 +31,12 @@ twitter:
   username: ciroiriarte
   card: summary
 google_site_verification: wLRgHwF6nai9tTLgxgfnssURwBRLZG68NZtpiEPMN94
-#google_analytics: G-THPGTGRM0T
-#google_analytics: G-TF5EZYNCJ4
-#google_analytics: 405861805
+#google_analytics: G-ZZ8BN39FB0
+
+analytics:
+  provider: "google-gtag"
+  google:
+    tracking_id: "G-ZZ8BN39FB0"
 
 
 # Build settings
@@ -41,7 +44,7 @@ google_site_verification: wLRgHwF6nai9tTLgxgfnssURwBRLZG68NZtpiEPMN94
 remote_theme: jekyll/minima
 plugins:
   - jekyll-feed
-  #- jekyll-seo-tag
+  - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-compose
   - jekyll-remote-theme
