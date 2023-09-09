@@ -39,12 +39,14 @@ google_site_verification: wLRgHwF6nai9tTLgxgfnssURwBRLZG68NZtpiEPMN94
 
 
 # Build settings
-theme: minima
+#theme: minima
+remote_theme: jekyll/minima
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-compose
+  - jekyll-remote-theme
 #  - jekyll-google_search_console_verification_file
 
 
