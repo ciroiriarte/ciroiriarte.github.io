@@ -61,7 +61,7 @@ do
     # We get the ID to operate on the VM
     VMID=$(qm list|grep ${VM}|awk '{ print $1 }')
     # Adding disks, emulating SSD
-    qm set $VMID --sata3 ${STORAGE}:100,format=qcow2,ssd=1,discard=on \
+    qm set ${VMID} --sata3 ${STORAGE}:100,format=qcow2,ssd=1,discard=on \
         --sata4 ${STORAGE}:100,format=qcow2,ssd=1,discard=on \
         --sata5 ${STORAGE}:100,format=qcow2,ssd=1,discard=on
 done
@@ -98,6 +98,6 @@ If you keep moving forward, disks will be marked as incompatible. Just claim the
 
 # Outcome
 
-After some minutes, you should have your working-but-not-supported ESXi-nested-on-PVE-vSAN cluster.
+After some minutes, you should have your working-but-not-supported ESXi-nested-on-PVE vSAN cluster.
 
 Have fun!
