@@ -22,6 +22,7 @@ group :jekyll_plugins do
   gem 'jekyll-seo-tag'
   gem 'jekyll-sitemap'
   gem 'jekyll-compose'
+  gem 'jekyll-remote-theme'
 #  gem 'jekyll-google_search_console_verification_file'
 #  gem 'jekyll-multiple-languages-plugin'
 end
