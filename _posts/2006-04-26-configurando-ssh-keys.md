@@ -14,11 +14,18 @@ Para dejar de lado la autenticacion por contraseña se usan keys DSA. Seguir los
 
 Crear el par publico/privado de llaves (keys), las misma son puestas en "~/.ssh"
 
+{% highlight shell %}
 usuario1@sshclient:~$ ssh-keygen -t dsa
+{% endhighlight %}
 
 Copiar llave publica al otro host:  
+
+{% highlight shell %}
 usuario1@sshclient:~$ cat ~/.ssh/id\_dsa.pub | ssh usuario2@sshserver "cat &gt;&gt; .ssh/authorized\_keys"
+{% endhighlight %}
 
 Cambiar permisos:
 
+{% highlight shell %}
 usuario1@sshclient:~$ ssh usuario2@sshserver chmod 600 .ssh/authorized\_keys
+{% endhighlight %}

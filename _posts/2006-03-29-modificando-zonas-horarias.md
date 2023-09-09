@@ -14,27 +14,36 @@ tags:
     - zic
 ---
 
-Los archivos con informacion sobre las zonas horarias y el popular “daylight saving” se encuentran en /usr/share/zoneinfo. Los mismos pueden ser consultados con zdump -v “archivo”.
+# Intro
+
+Los archivos con informacion sobre las zonas horarias y el popular “daylight saving” se encuentran en /usr/share/zoneinfo. Los mismos pueden ser consultados con:
+
+{% highlight shell %}
+zdump -v “archivo”
+{% endhighlight %}
 
 En nuestro caso es muy comun el que cambien las fechas donde se efectua el cambio de hora, para corregir esto hay que recompilar estos archivos luego de modificarlos, esto se realiza con el comando zic.
 
-- Los sources se bajan de ftp://elsie.nci.nih.gov/pub/
+Las definiciones de zonas se bajan de [ftp://elsie.nci.nih.gov/pub/](ftp://elsie.nci.nih.gov/pub/)
 
-**Procedimiento (ejemplo para Paraguay):**
+# Procedimiento (ejemplo para Paraguay)
 
-\# Realizar copia de seguridad  
+{% highlight shell %}
+
+# Realizar copia de seguridad  
 cp -rp /usr/share/zoneinfo{,.$(date +%Y%m%d)}
 
-\# Obtener source:  
-mkdir -p /tmp/tzdata &amp;&amp; cd /tmp/tzdata  
+# Obtener source:  
+mkdir -p /tmp/tzdata && cd /tmp/tzdata  
 wget ‘ftp://elsie.nci.nih.gov/pub/tzdata\*.tar.gz’
 
-\# Realizar modificacion  
+# Realizar modificacion  
 tar xvzf tzdata\*  
 vi southamerica
 
-\# Compilar  
+# Compilar  
 /usr/sbin/zic southamerica
 
-\# Definir zona horaria  
+# Definir zona horaria  
 cp /usr/share/zoneinfo/America/Asuncion /etc/localtime
+{% endhighlight %}
