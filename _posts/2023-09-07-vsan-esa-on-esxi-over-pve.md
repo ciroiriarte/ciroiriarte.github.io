@@ -30,7 +30,7 @@ On the bright side, it's an interesting entry point to better alternatives for f
 All in all, it makes sense if:
 - you're a VMware shop with very limited infra team(s)
 - you want a quick way to introduce a virtualization platform
-- there's no centralized Storage + SAN in place to start
+- there's no centralized Storage + SAN in place to start with
 - your storage needs are not disproportionate in comparison with compute
 - you don't need advanced storage services like taking disks snapshots from your 40TB live production Oracle database (10*4TB + ASM) to present them to a secondary reporting instance.
 
