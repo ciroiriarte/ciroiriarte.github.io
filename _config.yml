@@ -31,12 +31,12 @@ twitter:
   username: ciroiriarte
   card: summary
 google_site_verification: wLRgHwF6nai9tTLgxgfnssURwBRLZG68NZtpiEPMN94
-#google_analytics: G-ZZ8BN39FB0
+google_analytics: G-ZZ8BN39FB0
 
-analytics:
-  provider: "google-gtag"
-  google:
-    tracking_id: "G-ZZ8BN39FB0"
+#analytics:
+#  provider: "google-gtag"
+#  google:
+#    tracking_id: "G-ZZ8BN39FB0"
 
 
 # Build settings
