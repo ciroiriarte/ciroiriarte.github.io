@@ -12,8 +12,10 @@ categories:
 
 Para conectarse a un equipo (servidor, pc, etc) con kermit al puerto serial:
 
+{% highlight shell %}
 set line /dev/ttyS0  
 set speed 115200  
 set flow none  
 set carrier-watch off  
 connect
+{% endhighlight %}
