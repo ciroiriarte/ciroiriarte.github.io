@@ -13,7 +13,9 @@ tags:
 - vSAN
 ---
 
-# vSAN OSA
+# A little bit of context
+
+## vSAN OSA
 One of my biggest griefs as a customer regarding the VMware SDDC offering is vSAN OSA. When I first saw it in action, it looked like a "me too" response to [Nutanix](https://www.nutanix.com/mx/info/software-defined-storage), which we introduced successfully I believe as a first customer in Paraguay during 2016-ish (if memory serves right). 
 
 Also, coming from the background of FiberChannel based solutions like [EMC's vMAX](https://www.youtube.com/watch?v=Zp3yMGlzZhM) & [Hitachi's VSP](https://knowledge.hitachivantara.com/Documents/Storage/VSP_G1X00_and_VSP_F1500/80-06-6x/Hardware_Guide/03_Hardware_architecture) it was a really hard sell feature wise (no snapshots, no tiering, no replication, etc) and going with 20 nodes clusters just because we needed capacity for big fat Oracle Databases didn't make sense (it's not cost effective)
@@ -34,23 +36,33 @@ All in all, it makes sense if:
 - your storage needs are not disproportionate in comparison with compute
 - you don't need advanced storage services like taking disks snapshots from your 40TB live production Oracle database (10*4TB + ASM) to present them to a secondary reporting instance.
 
-# vSAN ESA
+## vSAN ESA
 First time I heard about [vSAN ESA](https://core.vmware.com/blog/introduction-vsan-express-storage-architecture) was in the 2022 VMware Explore event. It's not perfect, but it's a step in the right direction.
 
-Make sure you watch the [Get to Know the Next-Generation of vSAN Architecture](https://www.vmware.com/explore/video-library/video-landing.html?sessionid=1663909090011001QAvr&videoId=6315818080112) on demand VMware Explore 2022 session recording.
+Just to be clear, I'm quite happy with the evolution. :)
+
+Make sure you watch the [Get to Know the Next-Generation of vSAN Architecture](https://www.vmware.com/explore/video-library/video-landing.html?sessionid=1663909090011001QAvr&videoId=6315818080112) on demand VMware Explore 2022 session recording to understand all the goodies.
 
 # Going back to our Proxmox nested environment.
-If you would like to get your feet wet, vSAN ESA can be deployed in our nested ESX-on-KVM/Proxmox environment. Of course, it won't be supported, but will allow you to play with it.
 
-Warnings will be present, because we don't meet any [supported configuration](https://kb.vmware.com/s/article/90343):
+With that context, I really recommend you to explore the changes in the new architecture.
+
+If you would like to get your feet wet, vSAN ESA can be deployed in our nested ESX-on-KVM/Proxmox environment. 
+
+Of course:
+- it won't be supported, but will allow you to play with it
+- actual performance tests will require a property supported physical setup
+
+Warnings will be present, because we don't meet any [supported configuration](https://kb.vmware.com/s/article/90343), remarkably:
 - 25GbE interfaces
 - NVMe controllers
 - 512GB RAM per node
-etc....
+
+## Disk controller
 
 In a ideal world, we should use a NVMe controller, which QEMU supports, but [Proxmox doesn't support yet](https://bugzilla.proxmox.com/show_bug.cgi?id=2255). Given that scenario, we're going with the default SATA controller.
 
-# Provisioning of the disks
+## Provisioning of the disks
 
 For this test, we'll take 3 nested ESXi instances and add to each 3 x 100GB disks emulating SSD. You can go with more and/or bigger disks, the sky (your wallet?) is the limit.
 
