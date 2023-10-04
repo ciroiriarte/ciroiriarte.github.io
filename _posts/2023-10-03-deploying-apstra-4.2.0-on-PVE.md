@@ -142,17 +142,17 @@ qm start ${VMID}
 2. On first login set new password as requested.
 3. On the forced assistant, also set the Apstra UI password as proposed. Cancel at the main menu after setting up the password.
 4. Change hostname to something that makes sense for your environment. With admin user run:
-    {% highlight shell %}
-    sudo aos_hostname apstra-os-03.ipa.<my TLD>
-    {% endhighlight %}
+{% highlight shell %}
+sudo aos_hostname apstra-os-03.ipa.<my TLD>
+{% endhighlight %}
 {:start="5"}
-5. As admin, update the operating system. Juniper most probably will tell you that this is not supported. The only issue I had in the past was 4.1.0 breaking because there was a system-wide Juniper library that broke a containerized application (go figure) and required manual dependancies update to fix it. It has been flawless for 4.1.2 and now 4.2.0, pam.d files will be mentioned, keep the locally modified files.
+1. As admin, update the operating system. Juniper most probably will tell you that this is not supported. The only issue I had in the past was 4.1.0 breaking because there was a system-wide Juniper library that broke a containerized application (go figure) and required manual dependancies update to fix it. It has been flawless for 4.1.2 and now 4.2.0, pam.d files will be mentioned, keep the locally modified files.
 {% highlight shell %}
 sudo apt update
 sudo apt upgrade -y
 {% endhighlight %}
 {:start="6"}
-6. Reboot after full system update
+1. Reboot after full system update
 sudo shutdown -r now
 
 ## ZTP appliance setup
@@ -170,13 +170,18 @@ sudo sh -c 'echo "127.0.0.1 apstra-ztp-03.ipa.<my TLD>" >> /etc/hosts'
     sudo timedatectl set-timezone <my TZ>
     {% endhighlight %}
 {:start="4"}
-4. Update operating system. Again, probably Juniper will tell you it's not supported.
-   {% highlight shell %}
+4. Clean messed-up config structure: For some reason, the Juniper guys thought it was a good idea to create a directory where a file should be and that breaks Ubuntu upgrade process. We clean that up (what gives Juniper?!)
+ {% highlight shell %}
+sudo rmdir /etc/udev/rules.d/70-persistent-net.rules
+{% endhighlight %}
+{:start="5"}
+5. Update operating system. Again, probably Juniper will tell you it's not supported.
+{% highlight shell %}
 sudo apt update
 sudo apt upgrade -y
 {% endhighlight %}
-{:start="5"}
-5. Reboot virtual machine
+{:start="6"}
+1. Reboot virtual machine
    {% highlight shell %}
 sudo shutdown -r now
 {% endhighlight %}
@@ -188,7 +193,7 @@ If you already have a working environment, most probably you would like to migra
 Take into account that the script will fail if there are any uncommited changes or if devices are not reachable. Make sure the running state of the source environment is clean (no errores).
 
 {% highlight shell %}
-aos_import_state --ip-address apstra-os-02.ipa.sem.lab --username admin
+aos_import_state --ip-address apstra-os-02.ipa.<my TLD> --username admin
 {% endhighlight %}
 
 Note: 
