@@ -1,6 +1,6 @@
 ---
 title: Deploying Apstra 4.2.0 on Proxmox VE
-description: Export/Import vcsa virtual appliance to improve performance
+description: Step by step deployment of Apstra 4.2.0 AOS & ZTP appliances
 layout: post
 author: ciroiriarte
 categories:
