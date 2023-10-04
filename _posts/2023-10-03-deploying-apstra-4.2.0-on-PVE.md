@@ -196,7 +196,7 @@ cat > /containers_data/status/app/aos.conf <<EOF
    "password": "<the super securo password>"
 }
 EOF
-{% endhighlight}
+{% endhighlight %}
 {:start="7"}
 7. Reboot virtual machine
 {% highlight shell %}
