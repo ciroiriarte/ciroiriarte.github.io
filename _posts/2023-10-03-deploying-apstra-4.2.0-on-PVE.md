@@ -157,6 +157,11 @@ sudo apt update
 sudo apt upgrade -y
 {% endhighlight %}
 {:start="7"}
+1. Install QEMU guest agent
+{% highlight shell %}
+sudo apt install -y qemu-guest-agent
+{% endhighlight %}
+{:start="8"}
 1. Reboot after full system update
 sudo shutdown -r now
 
@@ -197,7 +202,12 @@ cat > /containers_data/status/app/aos.conf <<EOF
 }
 EOF
 {% endhighlight %}
-{:start="7"}
+{:start="8"}
+1. Install QEMU guest agent
+{% highlight shell %}
+sudo apt install -y qemu-guest-agent
+{% endhighlight %}
+{:start="9"}
 7. Reboot virtual machine
 {% highlight shell %}
 sudo shutdown -r now
