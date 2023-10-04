@@ -145,11 +145,13 @@ qm start ${VMID}
     {% highlight shell %}
     sudo aos_hostname apstra-os-03.ipa.<my TLD>
     {% endhighlight %}
+{:start="5"}
 5. As admin, update the operating system. Juniper most probably will tell you that this is not supported. The only issue I had in the past was 4.1.0 breaking because there was a system-wide Juniper library that broke a containerized application (go figure) and required manual dependancies update to fix it. It has been flawless for 4.1.2 and now 4.2.0, pam.d files will be mentioned, keep the locally modified files.
 {% highlight shell %}
 sudo apt update
 sudo apt upgrade -y
 {% endhighlight %}
+{:start="6"}
 6. Reboot after full system update
 sudo shutdown -r now
 
@@ -162,15 +164,18 @@ sudo shutdown -r now
 sudo hostnamectl set-hostname apstra-ztp-03.ipa.<my TLD>
 sudo sh -c 'echo "127.0.0.1 apstra-ztp-03.ipa.<my TLD>" >> /etc/hosts'
 {% endhighlight %}
+{:start="3"}
 3. Adjust timezone to match your environment.
     {% highlight shell %}
     sudo timedatectl set-timezone <my TZ>
     {% endhighlight %}
+{:start="4"}
 4. Update operating system. Again, probably Juniper will tell you it's not supported.
    {% highlight shell %}
 sudo apt update
 sudo apt upgrade -y
 {% endhighlight %}
+{:start="5"}
 5. Reboot virtual machine
    {% highlight shell %}
 sudo shutdown -r now
