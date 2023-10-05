@@ -198,7 +198,7 @@ cat > /containers_data/status/app/aos.conf <<EOF
 {
    "ip": "<your-aos-ip>",
    "user": "<your ztp user>",
-   "password": "<the super securo password>"
+   "password": "<the super secure password>"
 }
 EOF
 {% endhighlight %}
