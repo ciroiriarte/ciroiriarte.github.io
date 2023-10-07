@@ -118,6 +118,10 @@ We'll be using the OBS CLI client/tool: osc. From the man page I spotted:
 >                  --create    create new gpg signing key for this project
 
 {% highlight shell %}
+
+# Install the tool via your favorite package manager
+sudo zypper in -y osc
+
 # First execution will ask for OBS credentials
 osc
 
