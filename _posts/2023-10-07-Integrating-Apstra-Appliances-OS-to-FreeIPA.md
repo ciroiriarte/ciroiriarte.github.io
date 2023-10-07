@@ -43,7 +43,7 @@ ipa dnsrecord-add <your domain> <client shortname> --aaaa-rec <IPv6 for the clie
 
 # Python libraries and AOS
 
-Well, this is a special with Apstra 4.2.0. There are python modules installed with *pip* outside of what apt based packages provide, they apparently are needed for the Apstra platform but break other tools like ipa-client-install for the AOS appliance (doesn't happen with the ZTP appliance).
+Well, this is a special case with Apstra 4.2.0. There are python modules installed with *pip* outside of what apt based packages provide, they apparently are needed for the Apstra platform but break other tools like ipa-client-install for the AOS appliance (doesn't happen with the ZTP appliance).
 
 ZTP appliance:
 
