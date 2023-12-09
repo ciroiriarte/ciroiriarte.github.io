@@ -92,7 +92,7 @@ root@opnsense-B:~/bin # check-peer.sh 0f02bd4XXX
 0f02bd4XXX 1.12.2 LEAF       0 DIRECT   347      265      <public IP>/25545
 {% endhighlight %}
 
-In the past, I've seen through firewall logs and tcpdump captures that Zerotier is very promiscuous/aggressive and tries to reach peers using ANY available interface. I understand this is part of the "just works" experience they envisioned but it's odd it's trying to reach an underlay peer through the overlay network (by means of L3 to a remote network in this case).
+In the past, I've seen through firewall logs and tcpdump captures that Zerotier is very promiscuous/aggressive and tries to reach peers using ANY available interface. I understand this is part of the "just works" experience they envisioned but it's just odd it trying to reach an underlay peer through the overlay network (by means of L3 to a remote network in this case).
 
 I would expect that Zerotier avoids using zt* interfaces by default.
 
