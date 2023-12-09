@@ -85,10 +85,10 @@ What I found was that when the client had no response for the ICMP echo request 
 root@opnsense-B:~/bin # check-peer.sh 0f02bd4XXX
 0f02bd4XXX 1.12.2 LEAF       0 DIRECT   252      413      <public IP>/25545
 0f02bd4XXX 1.12.2 LEAF       0 DIRECT   347      265      <public IP>/25545
-0f02bd4XXX 1.12.2 LEAF       0 DIRECT   347      265      10.2.0.1/25645 
-0f02bd4XXX 1.12.2 LEAF       0 DIRECT   347      265      10.2.0.1/25645
-0f02bd4XXX 1.12.2 LEAF       0 DIRECT   347      265      10.2.0.1/25645
-0f02bd4XXX 1.12.2 LEAF       0 DIRECT   347      265      10.2.0.1/25645
+0f02bd4XXX 1.12.2 LEAF       0 DIRECT   347      265      10.1.0.1/25645 
+0f02bd4XXX 1.12.2 LEAF       0 DIRECT   347      265      10.1.0.1/25645
+0f02bd4XXX 1.12.2 LEAF       0 DIRECT   347      265      10.1.0.1/25645
+0f02bd4XXX 1.12.2 LEAF       0 DIRECT   347      265      10.1.0.1/25645
 0f02bd4XXX 1.12.2 LEAF       0 DIRECT   347      265      <public IP>/25545
 {% endhighlight %}
 
