@@ -217,7 +217,7 @@ sudo shutdown -r now
 
 If you already have a working environment, most probably you would like to migrate all the configuration to your new installation, there is a script you should run in the new Apstra Server.
 
-Take into account that the script will fail if there are any uncommited changes or if devices are not reachable. Make sure the running state of the source environment is clean (no errores).
+Take into account that the script will fail if there are any uncommited changes or if devices are not reachable. Make sure the running state of the source environment is clean (no errors).
 
 {% highlight shell %}
 aos_import_state --ip-address apstra-os-02.ipa.<my TLD> --username admin
