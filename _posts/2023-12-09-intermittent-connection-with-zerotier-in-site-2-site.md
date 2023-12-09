@@ -117,7 +117,7 @@ Not necesarrily the same scenario, but it's similar. This person blocked the unw
 
 I recall seeing similar reports which got addressed through the use of [blacklists](https://docs.zerotier.com/config/#local-configuration-options), but can't seem to find those posts right now to add links.
 
-I preffer not going that route because with firewalls, adding new interfaces is kind of frequent and I will most probably forget about blacklisting thew new interfaces that are not supposed to be used for underlay traffic. 
+I prefer not going that route because with firewalls, adding new interfaces is kind of frequent and I will most probably forget about blacklisting thew new interfaces that are not supposed to be used for underlay traffic. 
 
 For my usecase whitelisting would make much more sense, telling Zerotier "use WAN1 & WAN2 interfaces and nothing more", but unluckily, that doesn't seem to be supported.
 
