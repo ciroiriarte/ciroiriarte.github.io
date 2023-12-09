@@ -80,7 +80,7 @@ root@opnsense-A:~/bin # check-peer.sh 0f02bd4XXX
 0f02bd4XXX 1.12.2 LEAF       0 DIRECT   347      265      <public IP>/25545
 {% endhighlight %}
 
-What I found was that when the client had no response for the ICMP echo request (ping command), the output shows a change in IP for the peer to the internal LAN IP.
+What I found was that when the client had no response for the ICMP echo request (ping command), the output listed a change in IP for the peer to the internal LAN IP.
 
 {% highlight shell mark_lines="4 5 6 7" %}
 root@opnsense-B:~/bin # check-peer.sh 0f02bd4XXX
