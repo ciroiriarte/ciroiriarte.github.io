@@ -28,10 +28,11 @@ This is a basic diagram of what was tested. Each OPNSense endpoint would run the
   <figcaption><i>Image 1 - PoC network layout </i></figcaption>
 </figure>
 
+
 Routes as defined in the controller:
 
-10.1.0.0/24 via 172.16.1.10
-10.2.0.0/24 via 172.16.1.20
+> 10.1.0.0/24 via 172.16.1.10
+> 10.2.0.0/24 via 172.16.1.20
 
 # The issue
 
