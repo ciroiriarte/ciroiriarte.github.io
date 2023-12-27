@@ -469,4 +469,4 @@ Not all the Juniper shops run VMware vSphere on the compute side, and if they do
 Some low hanging fruits at your disposal:
 - VirtIO network interface drivers are already available in the appliance (recommended for KVM/QEMU, not limited to VMXNET3). Used in this deployment.
 - QEMU agent can easily be installed from Ubuntu repos pre-setup in the appliance (nice to have, covers some functionality of VMware Tools for KVM/QEMU). Used in this deployment.
-- cloud-init agent can be easily installed from Ubuntu repos pre-setup in the appliance.
+- cloud-init agent can be easily installed from Ubuntu repos pre-setup in the appliance. Not used in this deployment.
