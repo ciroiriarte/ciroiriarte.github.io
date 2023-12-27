@@ -40,9 +40,9 @@ I'll deploy vLWC on Proxmox VE to oversee QFX switches managed by Apstra & EX sw
   <figcaption><i>Image 1 - 1570 Theatrum Orbis Terrarum Map Monsters</i></figcaption>
 </figure>
 
-As a word of warning, I should highlight the setup I'm about to execute and share with you is not supported by Juniper and your Service Manager will either frown on you, yell at you or just plainly ignore you (depending on the kind of relationship you have) if you ever request help deploying vLWC on KVM. I sincerilly expect this to change at some point in time.
+As a word of warning, I should highlight the setup I'm about to execute and share with you is not supported by Juniper and your Service Manager will either frown on you, yell at you or just plainly ignore you (depending on the kind of relationship you have) if you ever request help deploying vLWC on KVM. In our case, I welcome Alejandro for the administrative support!.
 
-Also remember, "not supported" doesn't mean it's not technically possible. It just means you're on your own.
+Also remember, "not supported" doesn't mean it's not technically possible. It just means you're on your own. I hope Proxmox and/or KVM support is added at some point in the future.
 
 Yes, I'll get support via a "not supported" appliance. Does it qualify as oximoron?
 
