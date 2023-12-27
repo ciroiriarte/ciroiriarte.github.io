@@ -227,7 +227,7 @@ When you download the appliance from the Juniper Support site, you will get a OV
 
 An OVA file is basically a ZIP file with a VMDK disk image and a OVF file with the definition of the virtual machine to be created, including metadata and definition of what the user should input during rollout (we'll skip de manifest file for the sake of this discussion).
 
-The VMDK is apparently generic for all the customers, the OVF file includes the serial number specific to your deployment and will incorporated during the instantiation/rollout.
+The VMDK is apparently generic for all the customers, the OVF file includes the serial number specific to your deployment and needs to be incorporated during the instantiation/rollout.
 
 ## Initial setup
 
