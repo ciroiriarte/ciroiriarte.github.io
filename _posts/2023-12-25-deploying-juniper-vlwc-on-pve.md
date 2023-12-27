@@ -25,7 +25,7 @@ Implementing such functionality, is always a good thing to do as it allows the v
 
 We were approached by the Juniper Support team, pitching for a WLC appliance which would provide call-home capabilities, and oversee our installed base. This appliance is part of their Juniper Support Insights (JSI) initiative.
 
-One of such physical appliances is en route to one of our sites. Meanwhile, I'm overseeing a lab deployment that could benefit from the quick support and inventory capabilities. Further reviewing this topic, the Juniper team mentioned there's a virtual version of the appliance that was resently released.
+One of such physical appliances is en route to one of our sites. Meanwhile, I'm overseeing a lab deployment that could benefit from the quick support and inventory capabilities. Further reviewing this topic, the Juniper team mentioned there's a virtual version of the appliance that was recently released.
 
 The formal [documentation](https://www.juniper.net/documentation/us/en/software/jsi/vlwc-deploy/topics/topic-map/install-verify-vlwc.html) for vSphere environments is pretty straightforward and you can just follow that if you're working on a supported environment. In my case, the support sidecart environment for the lab doesn't sport VMware vSphere, but Proxmox VE.
 
@@ -316,7 +316,7 @@ echo -n "$MYSERIAL" > /home/jsas/nfxserialnum
 {% endhighlight %}
 
 {:start="4"}
-4. Nice to have changes. You make them while still inside the chroot environment.
+4. Nice to have changes. You make them while still **inside** the chroot environment.
 
 {% highlight shell %}
 
