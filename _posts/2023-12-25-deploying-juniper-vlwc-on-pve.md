@@ -460,7 +460,7 @@ Cannot verify certificate of server
 Please check your openssl configuration.
 {% endhighlight %}
 
-Old Linux distributions instances and the security implications for a given environment is a threshed topic. I would just summarize the ask as: an OS refresh is due and Ubuntu 22.04.3 LTS is at your disposal. No, "we'll eventually deploy a new version and you should re-deploy" is not acceptable
+Old Linux distributions instances and the security implications for a given environment is a threshed topic. I would just summarize the ask as: an OS refresh is due and Ubuntu 22.04.3 LTS is at your disposal. No, "we'll eventually re-package a new version of the appliance with patches applied and you should re-deploy" is not acceptable
 
 ## 3- Support for PVE/KVM
 
