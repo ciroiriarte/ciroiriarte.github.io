@@ -137,7 +137,7 @@ The mentioned static routes (in case you're curious, those segments are owned by
 ```
 **First takeaway:** We might need to massage the appliance to avoid installing the static routes, unless the static routes installation silently fails due to missing EXT interface.
 
-The SSHD & Captive Portal services binding is not limited to listen to any interface in particular. 
+The SSHD & Captive Portal services binding is not limited to any interface in particular. 
 
 {% highlight shell %}
 root@ggc-lnx:~# lsof -n -sTCP:LISTEN -i :443
