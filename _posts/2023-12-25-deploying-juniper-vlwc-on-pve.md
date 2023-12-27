@@ -58,7 +58,7 @@ To provide some stable essential services, we've built a small parallel environm
 - Monitoring tools
 - Firmware & Hardware related solutions
 
-With this "sidecart" environment, no matter what is needed to adjust in the main environment, we'll never lose administration capabilities.
+With this "sidecart" environment, no matter what is needed to be rearranged in the main environment, we'll never lose administration capabilities.
 
 For the scope of our discussion, the logical environment looks something like this:
 
