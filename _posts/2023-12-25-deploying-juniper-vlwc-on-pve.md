@@ -316,7 +316,7 @@ echo -n "$MYSERIAL" > /home/jsas/nfxserialnum
 {% endhighlight %}
 
 {:start="4"}
-4. Nice to have changes. You make them still being in the chroot environment.
+4. Nice to have changes. You make them while still inside the chroot environment.
 
 {% highlight shell %}
 
