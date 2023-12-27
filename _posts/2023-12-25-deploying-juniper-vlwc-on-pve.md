@@ -464,7 +464,7 @@ Old Linux distributions instances and the security implications for a given envi
 
 ## 3- Support for PVE/KVM
 
-Not all the Juniper shops run VMware vSphere on the compute side, and if they do, not always be the choice for each and every deployment. Even though I welcome the work done on the [OVF](https://www.dmtf.org/standards/ovf) file preparation to automate the initial setup, I strongly recommend your team invests some time implementing support for [cloud-init](https://cloudinit.readthedocs.io/en/latest/) in the initial setup script, which is the de facto standard to deploy virtual appliance in cloud environments (KVM on prem, vSphere, AWS, Azure, etc).
+Not all the Juniper shops run VMware vSphere on the compute side, and if they do, it may not always be the choice for each and every deployment. Even though I welcome the work done on the [OVF](https://www.dmtf.org/standards/ovf) file preparation to automate the initial setup, I strongly recommend your team invests some time implementing support for [cloud-init](https://cloudinit.readthedocs.io/en/latest/) in the initial setup script, which is the de facto standard to deploy virtual appliance in cloud environments (KVM on prem, vSphere, AWS, Azure, etc).
 
 Some low hanging fruits at your disposal:
 - VirtIO network interface drivers are already available in the appliance (recommended for KVM/QEMU, not limited to VMXNET3). Used in this deployment.
