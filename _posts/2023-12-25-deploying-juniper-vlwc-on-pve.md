@@ -93,7 +93,7 @@ This is relevant for the next section.
 
 ## Required network topology
 
-Reviewing the [deployment guide](https://www.juniper.net/documentation/us/en/software/jsi/vlwc-deploy/topics/concept/system-requirements.html), it mandates 3 networks interfaces:
+Reviewing the [deployment guide](https://www.juniper.net/documentation/us/en/software/jsi/vlwc-deploy/topics/concept/system-requirements.html), you can see it mandates 3 networks interfaces:
 
 Interface|Supported IP Address|Role
 ---|---|---
@@ -101,17 +101,25 @@ Internal|IPv4 or IPv6 address|Used for connection to the switches to be monitore
 External|IPv4 address only|Used to connect to Death Star (actual call-home)
 Management|IPv4 address only|Used for captive portal access (web portal presented by appliance showing status)
 
-We could try to comply, and shoe-horn the appliance requirements to our environment.
+We could try to comply, and shoe-horn the appliance requirements to our environment:
+
+<figure>
+  <a href="/assets/img/2023-12-25_lab-environment-plus-vlwc-forced-compliance.svg">
+  <img src="/assets/img/2023-12-25_lab-environment-plus-vlwc-forced-compliance.svg" alt="vLWC in the picture"/>
+  </a>
+  <figcaption><i>Image 5 - Forced compliance</i></figcaption>
+</figure>
+
 
 It doesn't make me confortable, VMs connected to different segments that should only interact through the firewall was not an option in our case.
 
-## Trial & error
+## Appliance analysis: Trial & Error
 
 I did several runs of the deployment on KVM in a vacuum to validate what's going on with the network setup and analyze what's required to deploy it with a single interface.
 
 I'll spare you on the details, but the summary of the findings is:
 
-- **First run:** 3 networks with DHCP (internal + external + management):  
+### **First run:** 3 networks with DHCP (internal + external + management)
 *"int"* keeps the default route  
 *"ext"* has static routes to reach Death Star (JNI)  
 *"cap"* is used for captive portal (appliance status page)
@@ -144,8 +152,6 @@ sshd    543 root    4u  IPv6  17621      0t0  TCP *:ssh (LISTEN)
 
 **Second Takeaway:** we don't need to fiddle with service binding configuration, all services listen on all interfaces.
 
-{% include note.html content="This is my sample note." %}
-
 So the "don't answer on EXT" behaviour should most probably come from firewall rules, except it doesn't (no firewall rule exists to limit ingress SSH requests to a given inteface), the behaviour was a construction of my imagination and there's not mention of it in the docs. 
 
 My ssh test was conducted from a client in the same subnet hosting the EXT interface. My wild guess is that any other remote client connection attempts coming from Internet should fail due to default gateway being installed on INT. 
@@ -154,15 +160,29 @@ Anyhow kids, don't place the appliance directly connected to Internet without in
 
 **Third Takeaway:** we don't need to mess with firewall configuration.
 
-- **Second run:** 2 networks setup with DHCP (internal + external)  
-*"int"* keeps the default route, provides access to captive portal (appliance status page).  
-*"ext"* has static routes to reach Death Star (JNI), same as above.
+**Fourth takeaway:** The following screenshot depicts how a healthy appliance looks like.
 
-- **Third run:** 1 network setup with DHCP (internal)
+<figure>
+  <a href="/assets/img/2023-12-25_status-deployment-test-3if.png">
+  <img src="/assets/img/2023-12-25_status-deployment-test-3if.png" alt="Appliance status"/>
+  </a>
+  <figcaption><i>Image 6 - Appliance status with supported network layout</i></figcaption>
+</figure>
+
+### **Second run:** 1 network setup with DHCP (internal)
 *"int"* keeps the default route, provides access to captive portal (appliance status page)  
 *"ext"* status is reported as failed  
 
+**Fifth takeway:** Even though the status page show a "Connection Status" errored for "External Network", you can see that we still have "Juniper Cloud Connected" & "Cloud Provisioned". My interpretation is that we have an error because there's no EXT interface that can be setup, but it's cosmetic since we have Internet access using INT with the default route.
 
+<figure>
+  <a href="/assets/img/2023-12-25_status-deployment-test-1if.png">
+  <img src="/assets/img/2023-12-25_status-deployment-test-1if.png" alt="Appliance status"/>
+  </a>
+  <figcaption><i>Image 6 - Appliance status with just one interface</i></figcaption>
+</figure>
+
+Also I can confirm that after checking the appliance at the OS level, there are no static routes. No adjustments are needed for a single interface deployment to connect to JSI.
 
 # The appliance
 ## First administrative steps.
@@ -171,13 +191,246 @@ You have to request two things to your Juniper support team:
 - Access to Juniper Support Insights to request the appliance
 - Proper permissions to be setup to manage/use the appliance. We have a myriad of support accounts and something was not setup properly for my account in JSI.
 
-## How to request it
-## Supported deployment & automated setup process
+## How to request the appliance.
+
+1. Once you have the correct permissions set for your user, head to [Juniper Support Portal](https://supportportal.juniper.net/)
+2. Request the appliance via the web portal.
+<figure>
+  <a href="/assets/img/2023-12-25_request_appliance_00.png">
+  <img src="/assets/img/2023-12-25_request_appliance_00.png" alt="Collectors section"/>
+  </a>
+  <figcaption><i>Image 7 - Access collectors section</i></figcaption>
+</figure>
+  
+<figure>
+  <a href="/assets/img/2023-12-25_request_appliance_01.png">
+  <img src="/assets/img/2023-12-25_request_appliance_01.png" alt="Request"/>
+  </a>
+  <figcaption><i>Image 8 - Click "Request Virtual Lightweight Collector"</i></figcaption>
+</figure>
+  
+<figure>
+  <a href="/assets/img/2023-12-25_request_appliance_02.png">
+  <img src="/assets/img/2023-12-25_request_appliance_02.png" alt="Request"/>
+  </a>
+  <figcaption><i>Image 9 - Click "Fill-in and submit form"</i></figcaption>
+</figure>
+
+{:start="3"}
+3. In less than an hour, you should receive an email from *do_not_reply@juniper.net* with a link to download the appliance. The file is purged in 7 days, after which you would need to re-request the appliance.
 
 # Deployment
-# Create the VM
-# Adjust generic appliance image
-# Import disk to created VM
+
+## What are you receiving from Juniper?
+
+When you download the appliance from the Juniper Support site, you will get a OVA file with a name similar to vLWC-${VERSION}-$(SERIAL_NUMBER).ova. In my case it was version 2.3.26.
+
+An OVA file is basically a ZIP file with a VMDK disk image and a OVF file with the definition of the virtual machine to be created, including metadata and definition of what the user should input during rollout (we'll skip de manifest file for the sake of this discussion).
+
+The VMDK is apparently generic for all the customers, the OVF file includes the serial number specific to your deployment and will incorporated during the instantiation/rollout.
+
+## Initial setup
+
+With OVF customization available via vSphere + VMware Tools some parameters are passed to the VM at instantiation time, but that's not supported by Proxmox VE. Proxmox VE + cloud-init could provide similar capabilities, but that's not currently support by the vLWC appliance.
+
+<figure>
+  <a href="/assets/img/2023-12-25_missmatch.jpg">
+  <img src="/assets/img/2023-12-25_missmatch.jpg" alt="Missmatch"/>
+  </a>
+  <figcaption><i>Image 10 - Autoconfig capabilities, Proxmox VE to the left, Juniper vLWC to the right "</i></figcaption>
+</figure>
+
+We would need to modify the original disk before importing it to the virtual machine. I'll try to make as few modifications as possible.
+
+- Required changes
+1. Network setup comes pre-configured in the appliance for DHCP, given we have DHCP for the sidecart environment, we'll keep it as is. Other environments might need static addressing, out of scope for the time being.
+2. In any scenario, a mandatory change for the appliance would be to introduce the serial number for it to properly report to JSI. It requires two entries, a plain text entry which we'll recover from the downloaded filename and an encrypted entry which we should recover from the OVF file.
+
+- Nice to have changes
+1. We'll adjust hostname for the sake of proper inventory. I've seen the logs of the appliance reporting home the hostname as product name & product version (Juniper guys, that's not what a hostname is for), currently it doesn't seem to affect functionality but will monitor and rollback if needed.
+2. Timezone. The appliance comes preset with UTC timezone, I'll be adjusting that for our timezone. Will have to monitor and rollback if that affects something on the JSI side.
+3. QEMU Agent. Provides some integration to PVE to help in the VM management.
+4. Install my public key for root login, helps with troubleshooting (I know, I'm not supposed to use root for this appliance, as I'm not supposed to deploy it con PVE/KVM either 🙂)
+
+Copy the OVA file to your PVE host (scp is your friend), and follow the procedure below.
+
+1. First, we need to take note of the serial number in the two representations we'll need.
+
+{% highlight shell %}
+# prepare the working directory
+mkdir -p import/juniper
+cd import/juniper
+# at this point, copy the OVA file via SCP.
+# verify file existance
+ls -l vLWC-2.3.26-<serial>.ova
+-rw-r--r-- 1 ciro.iriarte ipausers 2466766848 Dec 19 17:01 vLWC-2.3.26-<serial>.ova
+# We extract the content of the ZIP file
+mkdir vLWC-2.3.26-<serial>
+tar -C vLWC-2.3.26-<serial>/ -xf vLWC-2.3.26-<serial>.ova
+cd vLWC-2.3.26-<serial>/
+
+# Recover the un-encrypted serial number from the filename and take note of the output of this command
+basename -s .ova $(ls -1 ~/import/juniper/*ova)| awk -F "-" '{ print $NF }'
+
+# Recover the encrypted serial number from the OVF file and take note of the output of this command
+grep --color serial_number ~/import/juniper/vLWC-2.3.26-<serial>/vLWC-2.3.26-<serial>.ovf |awk '{ print $6 }'|cut -f 2 -d '"'
+
+{% endhighlight %}
+
+{:start="2"}
+2. We mount the system to modify it
+{% highlight shell %}
+# Make sure you start in the same directory we were working before. We move to the directory containing the disk image.
+cd vLWC-2.3.26-<serial>/
+
+# Convert from VMDK to RAW
+qemu-img  convert vLWC-2.3.26-<serial>-disk1.vmdk vLWC-2.3.26-<serial>-disk1.raw
+
+# Bind disk to loopback device
+losetup -f -P vLWC-2.3.26-<serial>-disk1.raw
+# Confirm binding
+losetup -l 
+
+# Create a mount point for the vLWC system
+mkdir -p /mnt/loop-root
+# Mount the first partition
+MYLOOP=$(losetup -l|grep vLWC | awk '{ print $1 }')
+mount ${MYLOOP}p1 /mnt/loop-root/
+mount -o bind /dev /mnt/loop-root/dev/
+mount -o bind /proc /mnt/loop-root/proc/
+chroot /mnt/loop-root/
+{% endhighlight %}
+
+{:start="3"}
+3. As mentioned, we need to define the correct serial number. This would be the only mandatory change
+{% highlight shell %}
+# Define variables with serial data for your appliance
+MYSERIAL="your plain text serial number"
+MYSERIALENCRYPTED="your encrypted serial number"
+
+# Set encrypted serial parameter
+echo $(cat /opt/jsas/etc/vlwc-status.json | jq --arg val "$MYSERIALENCRYPTED" '.properties.serial_number = $val') > /opt/jsas/etc/vlwc-status.json
+# Set plain text serial
+echo -n "$MYSERIAL" > /home/jsas/nfxserialnum
+
+{% endhighlight %}
+
+{:start="4"}
+4. Nice to have changes. You make them still being in the chroot environment.
+
+{% highlight shell %}
+
+##
+# QEMU agent
+##
+
+# Temporary adjust name resolution to allow package installation from Internet
+MYDNS="x.y.z.w"
+mv /etc/resolv.conf{,.orig}
+echo "nameserver $MYDNS" > /etc/resolv.conf
+# We install QEMU agent
+apt install qemu-guest-agent
+# Restore original DNS resolution config
+mv /etc/resolv.conf{.orig,}
+
+##
+# Hostname
+##
+MYHOSTNAME="short.TLD"
+# We backup original setup
+cp -p /etc/hostname{,.orig}
+# We define new hostname
+echo $MYHOSTNAME > /etc/hostname
+
+##
+# Timezone
+##
+
+# Set your preferred timezone. You can get a list from timedatectl list-timezones
+timedatectl set-timezone <Region>/<Country>
+
+##
+# SSH key for root
+##
+
+# Create the missing directory
+mkdir ~/.ssh
+# Add your public key to the trusted keys
+YOURPUBKEY="key-type your-full-public-key-should-go-here key-alias"
+echo "$YOURPUBKEY" >> ~/.ssh/authorized_keys
+
+{% endhighlight %}
+
+{:start="5"}
+5. We unmount the image and unbind the device
+
+{% highlight shell %}
+# we exit the chroot
+exit
+# umount filesystems
+umount /mnt/loop-root/dev /mnt/loop-root/proc /mnt/loop-root
+# unbind device
+losetup -d $MYLOOP
+{% endhighlight %}
+
+At this point, the disk image containes the setup required for your site/instance.
+
+## VM creation
+
+For a vSphere supported solution, the OVF file is imported in vCloud Director or vCenter. It includes the VM definition (quantity & type of CPU, RAM, disks & network adapters).
+
+We can't use the OVF file for Proxmox VE, it should work, but in practice I found some formatting issues.
+
+Login to your PVE machine via SSH and create a script to deploy the VM:
+
+{% highlight shell %}
+root@pve01:~/import/juniper# cat > import-vlwc.sh<<'EOF'
+#!/bin/bash
+# We set the bridge & the VLAN we need to integrate de VM to.
+BRIDGE=vmbr0
+VLAN=4089
+# Storage destination for the appliance to live in
+STORAGE=local-zfs
+# Source disk image
+DSK=vLWC-2.3.26-<serial>/vLWC-2.3.26-<serial>-disk1.raw
+
+# We need the next VM ID available
+NEWVM=$(pvesh get /cluster/nextid)
+# Proper VM name
+VMNAME=jsi-vlwc01.<my-TLD>
+
+# We create the VM without disks. 6 vCPU + 16GB for up to 10k devices, most probably you can live with less resources.
+qm create $NEWVM --name $VMNAME --bios seabios --machine q35 \
+--numa 1 --sockets 1 --cores 6 \
+--scsihw virtio-scsi-pci \
+--memory 16384 \
+--agent enabled=1
+
+# We add the disk we have prepared, and attach it to the VM.
+qm importdisk $NEWVM $DSK $STORAGE
+qm set $NEWVM -scsi0 ${DISK} ${STORAGE}:vm-${NEWVM}-disk-0
+# Boot device at BIOS
+qm set $NEWVM --boot order=scsi0
+
+# We add NIC with the correct VLAN mapping
+qm set $NEWVM \
+--net0 model=virtio,bridge=${BRIDGE},firewall=1,tag=${VLAN}
+
+# We start the VM
+qm start
+EOF
+
+# Allow the script to be executed
+root@pve01:~/import/juniper# chmod +x import-vlwc.sh
+
+# Create VM
+root@pve01:~/import/juniper# ./import-vlwc.sh
+{% endhighlight %}
+
+After a couple of minutes, you should be able to visit the web captive portal view through the appliance FQDN (assuming you have proper DHCP+DNS integration) or its IP address.
+
+Use the plain text serial number to login and look for "Juniper Cloud Connected" + "Cloud Provisioned" to make sure it's online.
+
 
 # Wishlist for the PLM
 
@@ -194,7 +447,7 @@ My uneducated guess is the virtual appliance basically followed a "shoehorn-in-a
 
 A virtual machine most probably will be deployed at a cozy TIER-something datacenter in a proper virtualization cluster with a very elaborated logical setup for management & monitoring, with L3 integrations to whatever destinations are required and services like filtering/segmentation outside of the appliance.
 
-The ask would be: please support/allow a "single interface" setup as an alternative to the 3-port setup.
+The ask would be: please support/allow a "single interface" setup as an alternative to the 3-port setup. Today it works as is, besides the EXT related errors in the status page.
 
 ## 2- Newer Linux distribution
 
