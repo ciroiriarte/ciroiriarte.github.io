@@ -27,7 +27,7 @@ An overview of how data collection works can be found in this [flyer](https://ww
   <a href="/assets/img/2023-12-27_datacollection_overview.png">
   <img src="/assets/img/2023-12-27_datacollection_overview.png" alt="Flow Overview"/>
   </a>
-  <figcaption><i>Image 1 - Data collection overview "</i></figcaption>
+  <figcaption><i>Image 1 - Data collection overview</i></figcaption>
 </figure>
 
 # Pre-requirements
@@ -111,7 +111,7 @@ In this environment we don't have TACACS+ (it's 2023 Juniper team, can we please
   <a href="/assets/img/2023-12-27_configlet00.png">
   <img src="/assets/img/2023-12-27_configlet00.png" alt="Apstra screenshot"/>
   </a>
-  <figcaption><i>Image 2 - Design --> Configlets "</i></figcaption>
+  <figcaption><i>Image 2 - Design --> Configlets</i></figcaption>
 </figure>
 <figure>
   <a href="/assets/img/2023-12-27_configlet01.png">
@@ -127,7 +127,7 @@ In this environment we don't have TACACS+ (it's 2023 Juniper team, can we please
   <a href="/assets/img/2023-12-27_configlet02.png">
   <img src="/assets/img/2023-12-27_configlet02.png" alt="Apstra screenshot"/>
   </a>
-  <figcaption><i>Image 4 - Actual configlet create "</i></figcaption>
+  <figcaption><i>Image 4 - Actual configlet create</i></figcaption>
 </figure>
 
 {:start="3"}
@@ -165,14 +165,14 @@ To actually apply the previously created configlet to your network elements, you
   <a href="/assets/img/2023-12-27_import-configlet00.png">
   <img src="/assets/img/2023-12-27_import-configlet00.png" alt="Apstra screenshot"/>
   </a>
-  <figcaption><i>Image 5 - Reach the import section "</i></figcaption>
+  <figcaption><i>Image 5 - Reach the import section</i></figcaption>
 </figure>
 
 <figure>
   <a href="/assets/img/2023-12-27_import-configlet01.png">
   <img src="/assets/img/2023-12-27_import-configlet01.png" alt="Apstra screenshot"/>
   </a>
-  <figcaption><i>Image 6 - Select configlet and assign to devices of interest "</i></figcaption>
+  <figcaption><i>Image 6 - Select configlet and assign to devices of interest</i></figcaption>
 </figure>
 
 {:start="2"}
@@ -182,14 +182,14 @@ To actually apply the previously created configlet to your network elements, you
   <a href="/assets/img/2023-12-27_commit00.png">
   <img src="/assets/img/2023-12-27_commit00.png" alt="Apstra screenshot"/>
   </a>
-  <figcaption><i>Image 7 - Request to push changes to the NEs "</i></figcaption>
+  <figcaption><i>Image 7 - Request to push changes to the NEs</i></figcaption>
 </figure>
 
 <figure>
   <a href="/assets/img/2023-12-27_commit01.png">
   <img src="/assets/img/2023-12-27_commit01.png" alt="Apstra screenshot"/>
   </a>
-  <figcaption><i>Image 8 - Fill-in the changelog "</i></figcaption>
+  <figcaption><i>Image 8 - Fill-in the changelog</i></figcaption>
 </figure>
 
 # Standalone switches
