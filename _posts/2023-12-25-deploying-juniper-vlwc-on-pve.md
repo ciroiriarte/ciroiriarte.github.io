@@ -252,6 +252,14 @@ We would need to modify the original disk before importing it to the virtual mac
 3. QEMU Agent. Provides some integration to PVE to help in the VM management.
 4. Install my public key for root login, helps with troubleshooting (I know, I'm not supposed to use root for this appliance, as I'm not supposed to deploy it con PVE/KVM either 🙂)
 
+***
+**Update 1**: I was contacted by someone that seems to be part of the JSI operations team, he asked nicely to rollback the hostname change since it breaks things for them.
+
+As a long shot, I'm adding this as additional request for the PLM.  
+
+***
+
+
 Copy the OVA file to your PVE host (scp is your friend), and follow the procedure below.
 
 1. First, we need to take note of the serial number in the two representations we'll need.
@@ -316,7 +324,7 @@ echo -n "$MYSERIAL" > /home/jsas/nfxserialnum
 {% endhighlight %}
 
 {:start="4"}
-4. Nice to have changes. You make them while still **inside** the chroot environment.
+4. Nice to have changes. You make them while still **inside** the chroot environment. You could add all the block to a script if you wish.
 
 {% highlight shell %}
 
@@ -334,13 +342,18 @@ apt install qemu-guest-agent
 mv /etc/resolv.conf{.orig,}
 
 ##
-# Hostname
+# Hostname. We don't do this anymore.
 ##
-MYHOSTNAME="short.TLD"
+#NO# MYHOSTNAME="short.TLD"
 # We backup original setup
-cp -p /etc/hostname{,.orig}
+#NO# cp -p /etc/hostname{,.orig}
 # We define new hostname
-echo $MYHOSTNAME > /etc/hostname
+#NO# echo $MYHOSTNAME > /etc/hostname
+
+# In case you did change the hostname, the rollback would be:
+# mv /etc/hostname{,.mine}
+# mv /etc/hostname{.orig,}
+# hostname $(cat /etc/hostname)
 
 ##
 # Timezone
@@ -470,3 +483,12 @@ Some low hanging fruits at your disposal:
 - VirtIO network interface drivers are already available in the appliance (recommended for KVM/QEMU, not limited to VMXNET3). Used in this deployment.
 - QEMU agent can easily be installed from Ubuntu repos pre-setup in the appliance (nice to have, covers some functionality of VMware Tools for KVM/QEMU). Used in this deployment.
 - cloud-init agent can be easily installed from Ubuntu repos pre-setup in the appliance. Not used in this deployment.
+
+## 4- Allow for hostname change
+
+Due to some arguable requirements/conventions we have, we need to assign a proper hostname to the VM. It seems to be used for appliance versioning as noted a little early in the article.
+- We match the VM name & OS hostname for inventory purposes (several tools data consolidation & crosscheck).
+- Part of SOX controls recommend proper hostname naming convention to be enforced.
+- DHCP registration updates DNS records, having more than one appliance deployed messes up this automated integration.
+
+My strong recomendation is that you move appliance version reporting to a proper metadata entry somewhere else, and let hostname be a hostname.
