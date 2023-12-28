@@ -201,7 +201,6 @@ Connect to the switch with an admin user, in edit mode.
 ## NETCONF
 
 1. We enable the service. Cool automation kids recommend the last 3 commands for interoperability, but given vLWC is a closed tool by Juniper for JunOS it might expect the less standard non compliant default configuration. Something to monitor and validate after adding switches to JSI.
-   
 ```
 set system services netconf ssh
 set system services netconf rfc-compliant
