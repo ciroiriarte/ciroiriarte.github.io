@@ -1,6 +1,6 @@
 ---
 title: Setting up JunOS devices for Juniper Support Insights
-description: Walkthrough NE setup to allos vLWC to connect and extract information.
+description: Walkthrough NE setup to allow vLWC to connect and extract information.
 layout: post
 author: ciroiriarte
 categories:
