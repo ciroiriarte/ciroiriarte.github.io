@@ -36,7 +36,7 @@ An overview of how data collection works can be found in this [flyer](https://ww
 
 We need a pair of public/private SSH keys for the user. You can create it on any Linux machine. 
 
-**Notes:** Down in the process I found that JunOS won't accept DSA keys but RSA only.
+**Notes:** Down the road I found that JunOS won't accept DSA keys but RSA only.
 
 {% highlight shell %}
 ciro.iriarte@jhost01:~> ssh-keygen -t rsa -C "JSI process user" -f ~/.ssh/id_rsa-jsi
