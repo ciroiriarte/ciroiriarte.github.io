@@ -67,7 +67,7 @@ You'll use:
 
 ## Actual commands that should be permitted.
 
-The overview flyer briefly mentions what's needed, but doesn't provide in details what permissions are needed for the process user. Our Juniper support team hinted about the used config from a previous deployment (thanks Alejandro for the guidance, once more). 
+The overview flyer briefly mentions what's needed, but doesn't provide the actual commands the process user will be running. Our Juniper support team provided a list of commands used in a previous deployment (thanks Alejandro for the guidance, once more). 
 
 Unofficially, this should be enough for JSI to work:
 
