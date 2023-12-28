@@ -65,7 +65,7 @@ You'll use:
 - the contents of *~/.ssh/id_rsa-jsi.pub* to setup access in the switches
 - the contents of *~/.ssh/id_rsa-jsi* + *the passphrase will* be used in the JSI portal to define the access credentials.
 
-## Actual commands that are to be allowed
+## Actual commands that should be permitted.
 
 The overview flyer briefly mentions what's needed, but doesn't provide in details what permissions are needed for the process user. Our Juniper support team hinted about the used config from a previous deployment (thanks Alejandro for the guidance, once more). 
 
