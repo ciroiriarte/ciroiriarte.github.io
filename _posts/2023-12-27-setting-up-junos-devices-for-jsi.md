@@ -1,6 +1,6 @@
 ---
 title: Setting up JunOS devices for Juniper Support Insights
-description: Walkthrough NE setup to allos vLWC to connect and extract information.
+description: Walkthrough NE setup to allow vLWC to connect and extract information.
 layout: post
 author: ciroiriarte
 categories:
@@ -27,7 +27,7 @@ An overview of how data collection works can be found in this [flyer](https://ww
   <a href="/assets/img/2023-12-27_datacollection_overview.png">
   <img src="/assets/img/2023-12-27_datacollection_overview.png" alt="Flow Overview"/>
   </a>
-  <figcaption><i>Image 1 - Data collection overview "</i></figcaption>
+  <figcaption><i>Image 1 - Data collection overview</i></figcaption>
 </figure>
 
 # Pre-requirements
@@ -36,7 +36,7 @@ An overview of how data collection works can be found in this [flyer](https://ww
 
 We need a pair of public/private SSH keys for the user. You can create it on any Linux machine. 
 
-**Notes:** Down in the process I found that JunOS won't accept DSA keys but RSA only.
+**Notes:** Down the road I found that JunOS won't accept DSA keys but RSA only.
 
 {% highlight shell %}
 ciro.iriarte@jhost01:~> ssh-keygen -t rsa -C "JSI process user" -f ~/.ssh/id_rsa-jsi
@@ -65,9 +65,9 @@ You'll use:
 - the contents of *~/.ssh/id_rsa-jsi.pub* to setup access in the switches
 - the contents of *~/.ssh/id_rsa-jsi* + *the passphrase will* be used in the JSI portal to define the access credentials.
 
-## Actual commands that are to be allowed
+## Actual commands that should be permitted.
 
-The overview flyer briefly mentions what's needed, but doesn't provide in details what permissions are needed for the process user. Our Juniper support team hinted about the used config from a previous deployment (thanks Alejandro for the guidance, once more). 
+The overview flyer briefly mentions what's needed, but doesn't provide the actual commands the process user will be running. Our Juniper support team provided a list of commands used in a previous deployment (thanks Alejandro for the guidance, once more). 
 
 Unofficially, this should be enough for JSI to work:
 
@@ -111,7 +111,7 @@ In this environment we don't have TACACS+ (it's 2023 Juniper team, can we please
   <a href="/assets/img/2023-12-27_configlet00.png">
   <img src="/assets/img/2023-12-27_configlet00.png" alt="Apstra screenshot"/>
   </a>
-  <figcaption><i>Image 2 - Design --> Configlets "</i></figcaption>
+  <figcaption><i>Image 2 - Design --> Configlets</i></figcaption>
 </figure>
 <figure>
   <a href="/assets/img/2023-12-27_configlet01.png">
@@ -127,7 +127,7 @@ In this environment we don't have TACACS+ (it's 2023 Juniper team, can we please
   <a href="/assets/img/2023-12-27_configlet02.png">
   <img src="/assets/img/2023-12-27_configlet02.png" alt="Apstra screenshot"/>
   </a>
-  <figcaption><i>Image 4 - Actual configlet create "</i></figcaption>
+  <figcaption><i>Image 4 - Actual configlet create</i></figcaption>
 </figure>
 
 {:start="3"}
@@ -165,14 +165,14 @@ To actually apply the previously created configlet to your network elements, you
   <a href="/assets/img/2023-12-27_import-configlet00.png">
   <img src="/assets/img/2023-12-27_import-configlet00.png" alt="Apstra screenshot"/>
   </a>
-  <figcaption><i>Image 5 - Reach the import section "</i></figcaption>
+  <figcaption><i>Image 5 - Reach the import section</i></figcaption>
 </figure>
 
 <figure>
   <a href="/assets/img/2023-12-27_import-configlet01.png">
   <img src="/assets/img/2023-12-27_import-configlet01.png" alt="Apstra screenshot"/>
   </a>
-  <figcaption><i>Image 6 - Select configlet and assign to devices of interest "</i></figcaption>
+  <figcaption><i>Image 6 - Select configlet and assign to devices of interest</i></figcaption>
 </figure>
 
 {:start="2"}
@@ -182,14 +182,14 @@ To actually apply the previously created configlet to your network elements, you
   <a href="/assets/img/2023-12-27_commit00.png">
   <img src="/assets/img/2023-12-27_commit00.png" alt="Apstra screenshot"/>
   </a>
-  <figcaption><i>Image 7 - Request to push changes to the NEs "</i></figcaption>
+  <figcaption><i>Image 7 - Request to push changes to the NEs</i></figcaption>
 </figure>
 
 <figure>
   <a href="/assets/img/2023-12-27_commit01.png">
   <img src="/assets/img/2023-12-27_commit01.png" alt="Apstra screenshot"/>
   </a>
-  <figcaption><i>Image 8 - Fill-in the changelog "</i></figcaption>
+  <figcaption><i>Image 8 - Fill-in the changelog</i></figcaption>
 </figure>
 
 # Standalone switches
@@ -201,7 +201,6 @@ Connect to the switch with an admin user, in edit mode.
 ## NETCONF
 
 1. We enable the service. Cool automation kids recommend the last 3 commands for interoperability, but given vLWC is a closed tool by Juniper for JunOS it might expect the less standard non compliant default configuration. Something to monitor and validate after adding switches to JSI.
-   
 ```
 set system services netconf ssh
 set system services netconf rfc-compliant
