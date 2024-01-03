@@ -342,7 +342,7 @@ apt install qemu-guest-agent
 mv /etc/resolv.conf{.orig,}
 
 ##
-# Hostname. We don't do this anymore.
+# Hostname. We don't do this anymore until Juniper releases an update that moves the appliance version validation from the hostname.
 ##
 #NO# MYHOSTNAME="short.TLD"
 # We backup original setup
