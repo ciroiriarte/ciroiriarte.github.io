@@ -13,9 +13,6 @@ tags:
 - JunOS
 ---
 
-***
-Update 1: Rewrote the article after reading the JSI FAQ, which included additional requirements.
-***
 
 
 # Intro
