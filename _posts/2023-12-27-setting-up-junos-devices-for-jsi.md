@@ -17,6 +17,7 @@ tags:
 Update 1: Rewrote the article after reading the JSI FAQ, which included additional requirements.
 ***
 
+
 # Intro
 
 Going back to the "supported" track, after deploying vLWC you need to prepare the devices being monitored. I can't seem to find a concise guide to properly setup network elements for JSI, so I'm sharing my notes notes after a long trial & error exercise.
