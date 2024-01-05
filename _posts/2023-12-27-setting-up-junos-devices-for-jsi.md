@@ -13,12 +13,20 @@ tags:
 - JunOS
 ---
 
+***
+Update 1: Rewrote the article after reading the JSI FAQ, which included additional requirements.
+***
+
 # Intro
 
-Going back to the "supported" track, after deploying vLWC you need to prepare the devices being monitored. The requirements are straightfoward conceptually, but it was hard to gather the details:
+Going back to the "supported" track, after deploying vLWC you need to prepare the devices being monitored. I can't seem to find a concise guide to properly setup network elements for JSI, so I'm sharing my notes notes after a long trial & error exercise.
 
-1. NETCONF-SSH
-2. Process user account dedicated to JSI/vLWC.
+
+After reading the [JSI FAQ](https://www.juniper.net/documentation/us/en/software/jsi/jsi-on-jsp-faqs/topics/concept/jsi-faq-list.html), my interpretation is that we'll need to at each network element:
+
+1. NETCONF-SSH enabled
+2. SFTP enabled
+3. A process user account dedicated to JSI/vLWC with sufficient permissions (principle of least privilege)
 
 An overview of how data collection works can be found in this [flyer](https://www.juniper.net/content/dam/www/assets/flyers/us/en/juniper-support-insights-security-and-privacy-overview.pdf)
 
@@ -36,7 +44,7 @@ An overview of how data collection works can be found in this [flyer](https://ww
 
 We need a pair of public/private SSH keys for the user. You can create it on any Linux machine. 
 
-**Notes:** Down the road I found that JunOS won't accept DSA keys but RSA only.
+**Note:** Down the road I found that JunOS won't accept DSA keys but RSA only.
 
 {% highlight shell %}
 ciro.iriarte@jhost01:~> ssh-keygen -t rsa -C "JSI process user" -f ~/.ssh/id_rsa-jsi
@@ -67,20 +75,29 @@ You'll use:
 
 ## Actual commands that should be permitted.
 
-The overview flyer briefly mentions what's needed, but doesn't provide the actual commands the process user will be running. Our Juniper support team provided a list of commands used in a previous deployment (thanks Alejandro for the guidance, once more). 
-
-Unofficially, this should be enough for JSI to work:
+From the FAQ mentioned before we get that the commands the appliance will execute are:
 
 ```
-show system uptime
+file list detail
+show bgp summary
 show chassis alarms
-show interfaces descriptions
-show system commit
-show chassis routing-engine
+show chassis fpc
 show chassis hardware extensive
+show chassis routing-engine
+show interfaces descriptions
 show interfaces terse
-show version
+show isis adjacency
+show ospf neighbor
+show rsvp neighbor
+show system buffers
+show system commit
 show system core-dumps
+show system license
+show system uptime
+show version
+show vrrp detail
+request support information
+sftp
 ```
 
 # Apstra managed switches
@@ -99,6 +116,9 @@ PORT    STATE SERVICE
 
 Nmap done: 1 IP address (1 host up) scanned in 6.58 seconds
 {% endhighlight %}
+
+## SFTP
+Not sure if SFTP is a requirement for Apstra, but found out that all the switches in the Apstra environment had the SFTP subsystem already enabled. If that's not your case, a configlet for enabling it is all you need.
 
 ## Process user
 
@@ -137,7 +157,7 @@ system {
     login {
         class jsi-class {
             permissions view-configuration;
-            allow-commands "(show system uptime)|(show chassis alarms)|(show interfaces descriptions)|(show system commit)|(show chassis routing-engine)|(show chassis hardware extensive)|(show interfaces terse)|(show version)|(show system core-dumps)";
+            allow-commands "(file list detail)|(show bgp summary)|(show chassis alarms)|(show chassis fpc)|(show chassis hardware extensive)|(show chassis routing-engine)|(show interfaces descriptions)|(show interfaces terse)|(show isis adjacency)|(show ospf neighbor)|(show rsvp neighbor)|(show system buffers)|(show system commit)|(show system core-dumps)|(show system license)|(show system uptime)|(show version)|(show vrrp detail)|(request support information)|(sftp)";
             deny-commands "(clear)|(file)|(file show)|(help)|(load)|(monitor)|(op)|(request)|(save)|(set)|(start)|(test)";
             deny-configuration all;
         }
@@ -146,14 +166,14 @@ system {
             uid 2007;
             class jsi-class;
             authentication {
-                ssh-rsa "full content of your private key file";
+                ssh-rsa "ssh-rsa your-key-super-long-string JSI process user";
             }
         }
     }
 }
 ```
 
-**Note:** Make sure UID is unique in your environment. I saw random documentation referencing UID 2000, I was super clever changing that 2001 so I would avoid clashing with config everybody else could be copying/pasting, it turns out whoever implemented Apstra had the same thought.
+**Note:** Make sure UID is unique in your environment. I saw random posts/notes/documentation referencing UID 2000 (for other unrelated implementations), I was super clever changing that to 2001 so I would avoid clashing with config everybody else could be copying/pasting, it turns out whoever implemented Apstra had the same thought.
 
 ### Importing Configlet to blueprint
 
@@ -200,7 +220,8 @@ Connect to the switch with an admin user, in edit mode.
 
 ## NETCONF
 
-1. We enable the service. Cool automation kids recommend the last 3 commands for interoperability, but given vLWC is a closed tool by Juniper for JunOS it might expect the less standard non compliant default configuration. Something to monitor and validate after adding switches to JSI.
+We enable the service. Cool automation kids recommend the last 3 commands for interoperability, but given vLWC is a closed tool by Juniper for JunOS it might expect the less standard non compliant default configuration. Something to monitor and validate after adding switches to JSI.
+
 ```
 set system services netconf ssh
 set system services netconf rfc-compliant
@@ -208,22 +229,30 @@ set system services netconf yang-compliant
 set system services netconf hello-message yang-module-capabilities advertise-standard-yang-modules
 ```
 
+## SFTP
+
+SFTP subssystem needs to be enabled, seems to be disabled by default.
+
+```
+set system services ssh sftp-server
+```
+
 ## Process user
 
 1. We create the user class with the required access level
 ```
 set system login class jsi-class permissions view-configuration
-set system login class jsi-class allow-commands "(show system uptime)|(show chassis alarms)|(show interfaces descriptions)|(show system commit)|(show chassis routing-engine)|(show chassis hardware extensive)|(show interfaces terse)|(show version)|(show system core-dumps)"
+set system login class jsi-class allow-commands "(file list detail)|(show bgp summary)|(show chassis alarms)|(show chassis fpc)|(show chassis hardware extensive)|(show chassis routing-engine)|(show interfaces descriptions)|(show interfaces terse)|(show isis adjacency)|(show ospf neighbor)|(show rsvp neighbor)|(show system buffers)|(show system commit)|(show system core-dumps)|(show system license)|(show system uptime)|(show version)|(show vrrp detail)|(request support information)|(sftp)"
 set system login class jsi-class deny-commands "(clear)|(file)|(file show)|(help)|(load)|(monitor)|(op)|(request)|(save)|(set)|(start)|(test)"
 set system login class jsi-class deny-configuration all
 ```
 
-2. We create the user, using the previously created class.
+2. We create the user, using the previously created class. Use your public key not mine!
 ```
 set system login user svcjsi class jsi-class
 set system login user svcjsi full-name "JSI process user"
 set system login user svcjsi uid 2007
-set system login user svcjsi authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDkPLZNw2Ypc0XAoDXP6sIP92yY3nX/OclflAVqvPHxnxLmzA8XApRxOAIpfIPeR5NHSm3KS0gpGo0kHg14wrhUkcGl+pJT5/DOZccRX+TQ6Z4NGr0aTh8KSMmrosGPW2u/gZ91Z8WjDkjRKsYcnMHdn5iqzkbH39YEeb0B4ls0pMUuWIcvmM/tRvCjSFh+5nBEPepH4yWTywYKQhoRgLXfNML7apYkkc0TkF+Mm/ZsDk9Hv/7nxaPgiKUfVChwMbN6z5KHPELORiM1lctm0pPFX9QeKTf8uppkQI3RWK0zrX6XrRRv/9xTNYTPKEeAjh+WTqzvDFbe+h/OzHedP66/dBcm8cA7BSNVE+Xg/bJTkvnHpMNIO0B11f7eWSMw6OTx2I4llJNANU5G1Ei3Ru+zDhIJIrSWPf3ksxJ25pSLr+E2qYIkg8IyLuzrAuvDmHIjxnPS3px0UvA9LbfHoj0VIKc3jZoeBQ8GTejfgZ0EVQac64UNlLErgs0IzqWcQnU= JSI process user"
+set system login user svcjsi authentication ssh-rsa "ssh-rsa your-key-super-long-string JSI process user"
 ```
 
 ## Final commit
@@ -292,3 +321,22 @@ In case you're still reading, these are some documents & notes I've reviewed in 
 - [Managing Juniped devices with SSH and NETCONF](https://www.tinfoilcipher.co.uk/2021/07/29/ansible-and-juniper-junos-managing-devices-with-ssh-and-netconf/)
 - [Example: Configuring User Permissions with Access Privileges for Operational Mode Commands](https://www.juniper.net/documentation/en_US/junos/topics/example/access-privileges-individual-operational-mode-commands-configuring.html)
 - [Connect to the NETCONF Server Using SSH](https://www.juniper.net/documentation/us/en/software/junos/netconf/topics/task/netconf-session-connecting-to-server.html)
+- [Technical note on using SSH keys with JunOS](https://supportportal.juniper.net/s/article/Junos-Generating-SSH-RSA-keys-locally-on-devices-running-Junos-OS)
+
+# Known errors
+
+## JSI reporting wrong credentials
+
+During my tests, I found that JSI web portal didn't handle credential updates. You could save the changes, you can see the new information in the web portal but it seems it doesn't reach their backend. I had to delete/recreate the credentials in the web portal for them to work.
+
+## NETCONF reported as not configured
+
+During my tests, I could confirm manually that NETCONF was properly setup, but JSI kept reporting:
+
+```
+The NETCONF subsystem is not enabled on the devices with the listed IP addresses. Please check and correct these entries
+```
+
+The JSI team reported there was a timer that didn't allow the NETCONF dialogue to finish properly. This was fixed on their end expanding the timeout configuration, not sure if this is a platform wide parameter or you should request this for your specific nodes/sites/accounts.
+
+You can reference Juniper SR # 2023-1228-038580.
