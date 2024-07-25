@@ -17,9 +17,9 @@ Thanks to the work of [William Lam](https://williamlam.com/nested-virtualization
 
 Now, if for some reason you cannot install ESXi on your home lab machine, and like me you use Proxmox, this post is for you.
 
-[Proxmox Virtual Environment](https://www.proxmox.com/) or PVE is a nice KVM-based virtualization solution from [Proxmox Server Solutions GmbH](https://www.proxmox.com/en/about/company). It's free to use, and has a wide user base.
+[Proxmox Virtual Environment](https://www.proxmox.com/) or PVE is a nice KVM-based virtualization solution from [Proxmox Server Solutions GmbH](https://www.proxmox.com/en/about/company). It's free to use, and has a wide userbase.
 
-The starting point would be a propperly setup [Proxmox host for nested virtualization](https://pve.proxmox.com/wiki/Nested_Virtualization). After you get it up & running, we're ready to move forward.
+The starting point would be a properly setup [Proxmox host for nested virtualization](https://pve.proxmox.com/wiki/Nested_Virtualization). After you get it up & running, we're ready to move forward.
 
 # The ESXi appliance
 This [ESXi appliance](https://williamlam.com/nested-virtualization/nested-esxi-virtual-appliance) is pre-configured to simplify deployment as a nested hypervisor. With each new vSphere release, a matching appliance is created and published.
