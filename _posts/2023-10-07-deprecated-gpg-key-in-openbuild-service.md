@@ -87,7 +87,9 @@ uid           [ unknown] Ubuntu Archive Automatic Signing Key (2018)
 
 In the end, the one to blame was the old deprecated key type (my home project was created a long time ago). I couln't find a way to create a new GPG key in the [web UI](https://build.opensuse.org), either it's not there or I'm just blind.
 
-We'll be using the OBS CLI client/tool: osc. From the man page I spotted:
+We'll be using the OBS CLI client/tool: osc.
+
+In the osc man page we can find:
 
 >        signkey
 >              Manage Project Signing Key
@@ -116,6 +118,10 @@ We'll be using the OBS CLI client/tool: osc. From the man page I spotted:
 >                  --extend    extend expiration date of the gpg public key for this
 >                              project
 >                  --create    create new gpg signing key for this project
+
+
+In a Linux machine, you need to follow this procedure:
+
 
 {% highlight shell %}
 
