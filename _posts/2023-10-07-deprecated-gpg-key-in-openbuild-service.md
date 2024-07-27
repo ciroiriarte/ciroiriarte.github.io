@@ -19,7 +19,7 @@ More info: [Wikipedia](https://en.wikipedia.org/wiki/Open_Build_Service)
 
 # GPG Signature
 
-To protect the each Linux distribution community, the creators of each package management solution thought about signing the repository contents and packages with GPG keys. It was very inteligent and very useful as a basic hygienic measure.
+To protect the each Linux distribution community, the creators of each package management solution thought about signing the repository contents and packages with GPG keys. It was very intelligent and very useful as a basic hygienic/safety measure.
 
 Such GPG signature functionality is included in OBS.
 
