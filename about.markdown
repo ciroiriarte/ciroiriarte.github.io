@@ -4,8 +4,8 @@ title: About
 permalink: /about/
 ---
 
-My name is Ciro Iriarte, I've been working with IT Infrastructure Technology (SAN, Centralized Storage, Virtualization, UNIX/Linux Operating System, Networking/SDN, Virtual Network Functions / VNF) in ISP/CSP environments for about 20 years. 
+This space was created to share my notes to whomever could find value in them besides me.
 
-I'll be posting as time permits. Any feedback is welcomed!
+[Pull requests are welcomed!](https://github.com/ciroiriarte/ciroiriarte.github.io)
 
-The content is related to my experiences and opinions only and are not endorsed by my current or any former employer.
+The content is related to my experiences and opinions (or the ones from any guest writter) and are not endorsed by my current or any former employer.
