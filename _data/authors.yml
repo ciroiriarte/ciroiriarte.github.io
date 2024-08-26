@@ -1,3 +1,14 @@
-ciroiriarte:
-  picture: /assets/img/avatar.jpg
-  twitter: ciroiriarte
+Ciro Iriarte:
+  name: "Ciro Iriarte"
+  bio: "IT Infrastructure guy (SAN, Centralized Storage, Virtualization, UNIX/Linux Operating System, Networking/SDN, Virtual Network Functions / VNF). Impossible solutions beta tester."
+  avatar: "/assets/img/avatar.jpg"
+  links:
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "mailto:ciro.iriarte+blog@gmail.com"
+    - label: "Website"
+      icon: "fas fa-fw fa-link"
+      url: "https://iriarte.it"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/ciroiriarte"
