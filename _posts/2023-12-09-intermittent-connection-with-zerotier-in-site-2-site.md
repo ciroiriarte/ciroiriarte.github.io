@@ -17,6 +17,8 @@ I've been evaluating an idea to connect several sites using "just Internet", ver
 
 I've identified a 128 routes limit in the "managed routes" option, so probably will need to run a BGP route reflector in the final setup, but for the initial PoC managed routes would do.
 
+<!--more-->
+
 ## Basic layout of the PoC
 
 This is a basic diagram of what was tested. Each OPNSense endpoint would run the zerotier client and provide forwarding. Route information would be pushed by the controller.

@@ -21,6 +21,8 @@ This call-home functionality is usually delivered as a piece of software running
 
 Implementing such functionality, is always a good thing to do as it allows the vendor support team to provide quicker response when there are failures.
 
+<!--more-->
+
 # The need
 
 We were approached by the Juniper Support team, pitching for a WLC appliance which would provide call-home capabilities, and oversee our installed base. This appliance is part of their Juniper Support Insights (JSI) initiative.
