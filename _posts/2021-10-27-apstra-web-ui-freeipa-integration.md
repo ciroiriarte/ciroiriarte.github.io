@@ -2,7 +2,7 @@
 title: Apstra Web UI + FreeIPA integration
 id: 319
 date: '2021-10-27T12:42:05-03:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: https://iriarte.it/?p=319
 permalink: "/index.php/2021/10/27/apstra-web-ui-freeipa-integration/"

@@ -2,7 +2,7 @@
 id: 11
 title: 'Serial Console'
 date: '2006-03-29T01:52:02-04:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: 'https://cyruspy.wordpress.com/2006/03/29/serial-console/'
 permalink: /index.php/2006/03/29/serial-console/

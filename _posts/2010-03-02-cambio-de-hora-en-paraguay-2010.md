@@ -2,7 +2,7 @@
 id: 58
 title: 'Cambio de hora en Paraguay 2010'
 date: '2010-03-02T17:17:04-03:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=58'
 permalink: /index.php/2010/03/02/cambio-de-hora-en-paraguay-2010/

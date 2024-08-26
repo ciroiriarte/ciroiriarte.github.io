@@ -2,7 +2,7 @@
 id: 16
 title: 'The toy arrived!'
 date: '2007-10-12T01:43:16-04:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/2007/10/12/the-toy-arrived/'
 permalink: /index.php/2007/10/12/the-toy-arrived/

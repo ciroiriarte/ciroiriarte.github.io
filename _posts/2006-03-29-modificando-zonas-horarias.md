@@ -2,7 +2,7 @@
 id: 9
 title: 'Modificando zonas horarias'
 date: '2006-03-29T01:50:01-04:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: 'https://cyruspy.wordpress.com/2006/03/29/modificando-zonas-horarias/'
 permalink: /index.php/2006/03/29/modificando-zonas-horarias/

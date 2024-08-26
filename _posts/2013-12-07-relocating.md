@@ -2,7 +2,7 @@
 id: 293
 title: 'Relocating;'
 date: '2013-12-07T15:24:38-03:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=293'
 permalink: /index.php/2013/12/07/relocating/

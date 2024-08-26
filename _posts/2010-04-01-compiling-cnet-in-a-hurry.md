@@ -2,7 +2,7 @@
 id: 75
 title: 'Compiling cnet in a hurry'
 date: '2010-04-01T16:06:23-03:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=75'
 permalink: /index.php/2010/04/01/compiling-cnet-in-a-hurry/

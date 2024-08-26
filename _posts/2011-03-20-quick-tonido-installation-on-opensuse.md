@@ -2,7 +2,7 @@
 id: 128
 title: 'Quick Tonido installation on openSUSE'
 date: '2011-03-20T02:08:33-03:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=128'
 permalink: /index.php/2011/03/20/quick-tonido-installation-on-opensuse/

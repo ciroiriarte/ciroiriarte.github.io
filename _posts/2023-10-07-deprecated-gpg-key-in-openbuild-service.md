@@ -2,7 +2,7 @@
 title: Deprecated GPG Key in OpenBuild Service
 description: Quick fix to force key replacement
 layout: post
-author: ciroiriarte
+author: Ciro Iriarte
 categories:
 - HomeLab
 tags:

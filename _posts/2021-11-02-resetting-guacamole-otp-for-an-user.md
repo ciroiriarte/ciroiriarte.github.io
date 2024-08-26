@@ -2,7 +2,7 @@
 title: Resetting Guacamole OTP for an user
 id: 329
 date: '2021-11-02T10:19:37-03:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: https://iriarte.it/?p=329
 permalink: "/index.php/2021/11/02/resetting-guacamole-otp-for-an-user/"

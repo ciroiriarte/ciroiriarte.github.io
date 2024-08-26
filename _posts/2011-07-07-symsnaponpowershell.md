@@ -2,7 +2,7 @@
 id: 153
 title: 'Automatizando Snapshots en Symmetrix VMAX con Powershell'
 date: '2011-07-07T10:26:25-04:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=153'
 permalink: /index.php/2011/07/07/symsnaponpowershell/

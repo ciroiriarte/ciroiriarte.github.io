@@ -2,7 +2,7 @@
 id: 46
 title: 'Running SCO Openserver 5.0.7 in VirtualBox'
 date: '2009-10-08T16:38:22-04:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=46'
 permalink: /index.php/2009/10/08/running-sco-openserver-5-0-7-in-virtualbox/

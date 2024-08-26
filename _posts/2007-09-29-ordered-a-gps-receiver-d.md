@@ -2,7 +2,7 @@
 id: 15
 title: 'Ordered a GPS receiver :D'
 date: '2007-09-29T05:32:33-04:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/2007/09/29/ordered-a-gps-receiver-d/'
 permalink: /index.php/2007/09/29/ordered-a-gps-receiver-d/

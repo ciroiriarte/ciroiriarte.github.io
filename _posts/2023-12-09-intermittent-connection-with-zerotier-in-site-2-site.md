@@ -2,7 +2,7 @@
 title: Intermittent connection with Zerotier in Site-2-Site
 description: Found an odd behaviour with Zerotier while using OPNSense as L3 peering nodes for site 2 site integration.
 layout: post
-author: ciroiriarte
+author: Ciro Iriarte
 categories:
 - SDN
 - Networking

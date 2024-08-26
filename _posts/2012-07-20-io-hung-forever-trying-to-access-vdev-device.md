@@ -2,7 +2,7 @@
 id: 282
 title: 'I/O hung forever trying to access VDEV device'
 date: '2012-07-20T11:01:53-04:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=282'
 permalink: /index.php/2012/07/20/io-hung-forever-trying-to-access-vdev-device/

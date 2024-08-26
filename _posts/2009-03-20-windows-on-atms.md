@@ -2,7 +2,7 @@
 id: 38
 title: 'Windows on ATMs'
 date: '2009-03-20T09:41:13-04:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=38'
 permalink: /index.php/2009/03/20/windows-on-atms/

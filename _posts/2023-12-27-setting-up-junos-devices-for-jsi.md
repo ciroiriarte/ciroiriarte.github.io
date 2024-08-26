@@ -2,7 +2,8 @@
 title: Setting up JunOS devices for Juniper Support Insights
 description: Walkthrough NE setup to allow vLWC to connect and extract information.
 layout: post
-author: ciroiriarte
+author_profile: true
+author: Ciro Iriarte
 categories:
 - Datacenter
 - Networking
@@ -19,6 +20,7 @@ tags:
 
 Going back to the "supported" track, after deploying vLWC you need to prepare the devices being monitored. I can't seem to find a concise guide to properly setup network elements for JSI, so I'm sharing my notes notes after a long trial & error exercise.
 
+<!--more-->
 
 After reading the [JSI FAQ](https://www.juniper.net/documentation/us/en/software/jsi/jsi-on-jsp-faqs/topics/concept/jsi-faq-list.html), my interpretation is that we'll need to at each network element:
 

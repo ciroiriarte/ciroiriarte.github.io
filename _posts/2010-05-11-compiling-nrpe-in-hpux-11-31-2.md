@@ -2,7 +2,7 @@
 id: 90
 title: 'Compiling nrpe in HPUX 11.31'
 date: '2010-05-11T16:20:32-04:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=90'
 permalink: /index.php/2010/05/11/compiling-nrpe-in-hpux-11-31-2/

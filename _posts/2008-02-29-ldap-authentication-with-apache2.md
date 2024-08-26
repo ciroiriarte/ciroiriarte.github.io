@@ -2,7 +2,7 @@
 id: 18
 title: 'LDAP authentication with apache2'
 date: '2008-02-29T08:59:34-03:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=16'
 permalink: /index.php/2008/02/29/ldap-authentication-with-apache2/

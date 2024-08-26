@@ -2,7 +2,7 @@
 id: 27
 title: 'Linux support/troubleshooting'
 date: '2008-12-05T19:41:24-03:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/2008/12/05/linux-supporttroubleshooting/'
 permalink: /index.php/2008/12/05/linux-supporttroubleshooting/

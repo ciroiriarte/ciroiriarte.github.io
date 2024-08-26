@@ -2,7 +2,7 @@
 id: 43
 title: 'Won a Netbook!, thanks Novell!!'
 date: '2009-08-03T17:13:35-04:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/2009/08/03/won-a-netbook-thanks-novell/'
 permalink: /index.php/2009/08/03/won-a-netbook-thanks-novell/

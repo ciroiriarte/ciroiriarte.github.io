@@ -2,7 +2,7 @@
 id: 7
 title: 'SLES8 SP3 Release Notes (x86)'
 date: '2006-03-25T06:07:09-04:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: 'https://cyruspy.wordpress.com/2006/03/25/sles8-sp3-release-notes-x86/'
 permalink: /index.php/2006/03/25/sles8-sp3-release-notes-x86/

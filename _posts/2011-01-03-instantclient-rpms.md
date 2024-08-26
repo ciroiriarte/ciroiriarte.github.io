@@ -2,7 +2,7 @@
 id: 120
 title: 'InstantClient RPMs'
 date: '2011-01-03T00:59:38-03:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=120'
 permalink: /index.php/2011/01/03/instantclient-rpms/

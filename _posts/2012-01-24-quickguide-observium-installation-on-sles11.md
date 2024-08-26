@@ -2,7 +2,7 @@
 id: 158
 title: 'Quickguide: Observium installation on SLES11'
 date: '2012-01-24T15:57:34-03:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=158'
 permalink: /index.php/2012/01/24/quickguide-observium-installation-on-sles11/

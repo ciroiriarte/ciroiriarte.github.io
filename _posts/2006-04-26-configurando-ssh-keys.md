@@ -2,7 +2,7 @@
 id: 13
 title: 'Configurando SSH keys'
 date: '2006-04-26T02:05:42-04:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: 'https://cyruspy.wordpress.com/2006/04/26/configurando-ssh-keys/'
 permalink: /index.php/2006/04/26/configurando-ssh-keys/

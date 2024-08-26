@@ -2,7 +2,7 @@
 id: 28
 title: 'Faster Japanese rendering in Firefox'
 date: '2009-03-15T00:10:14-04:00'
-author: ciroiriarte
+author: Ciro Iriarte
 excerpt: 'Need decent rendering time for japanese text in Firefox?, here''s the solution..'
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=28'

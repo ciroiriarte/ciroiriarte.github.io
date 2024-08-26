@@ -2,7 +2,7 @@
 title: Deploying Juniper vLWC on PVE
 description: Walkthrough of analysis and deployment of a Juniper Virtual Lightweight Collector for "call home" functionality 
 layout: post
-author: ciroiriarte
+author: Ciro Iriarte
 categories:
 - Datacenter
 - Networking

@@ -2,7 +2,7 @@
 id: 14
 title: 'Enforce HTTPS usage'
 date: '2007-09-29T05:23:10-04:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/2007/09/29/enforce-https-usage/'
 permalink: /index.php/2007/09/29/enforce-https-usage/

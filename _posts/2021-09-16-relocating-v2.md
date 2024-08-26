@@ -2,7 +2,7 @@
 id: 305
 title: 'Relocating v2'
 date: '2021-09-16T11:00:24-04:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: 'https://iriarte.it/?p=305'
 permalink: /index.php/2021/09/16/relocating-v2/

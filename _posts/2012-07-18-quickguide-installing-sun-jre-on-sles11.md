@@ -2,7 +2,7 @@
 id: 279
 title: 'Quickguide: Installing Sun JRE on SLES11'
 date: '2012-07-18T09:06:20-04:00'
-author: ciroiriarte
+author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=279'
 permalink: /index.php/2012/07/18/quickguide-installing-sun-jre-on-sles11/

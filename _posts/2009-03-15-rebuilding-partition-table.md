@@ -2,7 +2,7 @@
 id: 32
 title: 'Rebuilding partition table'
 date: '2009-03-15T20:00:26-04:00'
-author: ciroiriarte
+author: Ciro Iriarte
 excerpt: 'Recovering partition table from data on disk'
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=32'
