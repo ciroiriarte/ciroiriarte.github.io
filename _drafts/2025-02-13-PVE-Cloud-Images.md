@@ -81,5 +81,6 @@ qm set ${NEWVM_ID} --ciuser ${GUESTUSER} --cipassword ${GUESTPASS}
 qm set ${NEWVM_ID} --sshkeys "${KEYFILE}" && rm ${KEYFILE}
 qm set ${NEWVM_ID} --ipconfig0 ip=${NETIP},gw=${NETGW}
 qm set ${NEWVM_ID} --nameserver ${DNS} --searchdomain "${DNSSEARCH}"
+#qm set ${NEWVM_ID} --ciupgrade 0
 qm start ${NEWVM_ID}
 qm terminal ${NEWVM_ID}
