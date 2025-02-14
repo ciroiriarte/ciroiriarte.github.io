@@ -75,6 +75,8 @@ NEWVM_ID=$(pvesh get /cluster/nextid)
 TMPL_ID=$(pvesh get /cluster/resources --type vm --noborder|grep ${TMPL}| awk '{ print $1 }'|cut -f 2 -d "/")
 
 qm clone ${TMPL_ID} ${NEWVM_ID} --name ${NEWVMNAME} --full 1
+qm set ${NEWVM_ID} --delete net0
+qm set ${NEWVM_ID} -net0 virtio,firewall=1,bridge=${NETBR}
 qm set ${NEWVM_ID} --ciuser ${GUESTUSER} --cipassword ${GUESTPASS}
 qm set ${NEWVM_ID} --sshkeys "${KEYFILE}" && rm ${KEYFILE}
 qm set ${NEWVM_ID} --ipconfig0 ip=${NETIP},gw=${NETGW}
