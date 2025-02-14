@@ -57,6 +57,7 @@ ip prefix-list PFL_L01_OUT seq 20 permit 0.0.0.0/0 le 32
 router bgp 4000000002 vrf vrf_SDCVPN01
  neighbor LABFWSDC peer-group
  neighbor LABFWSDC remote-as external
+ neighbor LABFWSDC remote-as 4000000001
  neighbor LABFWSDC bfd
  neighbor 192.168.203.194 peer-group LABFWSDC
  neighbor 192.168.203.195 peer-group LABFWSDC
@@ -80,6 +81,7 @@ exit
 router bgp 4000000002 vrf vrf_L01VPN01
  neighbor LABFWL01 peer-group
  neighbor LABFWL01 remote-as external
+ neighbor LABFWL01 remote-as 4000000001
  neighbor LABFWL01 bfd
  neighbor 192.168.203.210 peer-group LABFWL01
  neighbor 192.168.203.211 peer-group LABFWL01
@@ -105,3 +107,12 @@ EOF
 
 # Link
 ln -s /etc/pve/sdn/frr.conf.local /etc/frr/
+
+# For multiple exit nodes, reverse path filtering needs to be disabled
+cat<<EOF >> /etc/sysctl.d/ecmp.conf
+# Disable RP filtering for ECMP to work
+net.ipv4.conf.default.rp_filter=0
+net.ipv4.conf.all.rp_filter=0
+EOF
+
+sysctl -p
