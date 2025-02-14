@@ -28,9 +28,7 @@ qm set ${VMID} --scsihw virtio-scsi-pci --scsi0 ${DSTORE}:vm-${VMID}-disk-1,disc
 qm set ${VMID} --boot c --bootdisk scsi0
 qm template ${VMID}
 rm ${IMG}
-#qm resize 90000 scsi0 10G 
-#qm set 100000 --ide2 local-lvm:cloudinit
-#qm set 100000 --serial0 socket --vga serial0
+
 
 
 ### Rocky Linux 9
