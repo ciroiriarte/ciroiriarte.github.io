@@ -10,6 +10,9 @@ tags:
 - SDN
 ---
 
+# Reference documentation
+https://pve.proxmox.com/pve-docs/chapter-pvesdn.html#_multiple_evpn_exit_nodes
+
 # VRF to IF
 
 Get VRF list from "ip vrf", take note of the VRF of interest. As of today, it's vrf_${ZONENAME}.
@@ -46,11 +49,12 @@ cat <<EOF >> /etc/pve/sdn/frr.conf.local
 # * added support 
 
 ip prefix-list PFL_SDC_OUT seq 10 deny 192.168.203.192/28
-ip prefix-list PFL_SDC_OUT seq 20 permit 0.0.0.0/0 le 32
+# https://github.com/FRRouting/frr/issues/16161
+ip prefix-list PFL_SDC_OUT seq 20 permit 0.0.0.0/0 le 31
 !
 
 ip prefix-list PFL_L01_OUT seq 10 deny 192.168.203.208/28
-ip prefix-list PFL_L01_OUT seq 20 permit 0.0.0.0/0 le 32
+ip prefix-list PFL_L01_OUT seq 20 permit 0.0.0.0/0 le 31
 !
 
 
