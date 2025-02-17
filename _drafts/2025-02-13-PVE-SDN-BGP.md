@@ -109,7 +109,7 @@ EOF
 ln -s /etc/pve/sdn/frr.conf.local /etc/frr/
 
 # For multiple exit nodes, reverse path filtering needs to be disabled
-cat<<EOF >> /etc/sysctl.d/ecmp.conf
+cat<<EOF >> /etc/sysctl.d/z-ecmp.conf
 # Disable RP filtering for ECMP to work
 net.ipv4.conf.default.rp_filter=0
 net.ipv4.conf.all.rp_filter=0
