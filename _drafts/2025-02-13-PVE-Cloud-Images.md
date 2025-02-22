@@ -23,6 +23,9 @@ qm create ${VMID} --name ${VMNAME} --cores 2 --memory 2048 \
 --serial0 socket --vga serial0 \
 --efidisk0 ${DSTORE}:${VMID},efitype=4m --scsi1 ${DSTORE}:cloudinit
 
+echo ptp_kvm > /tmp/ptp_kvm.conf
+virt-customize -a ${IMG} --copy-in /tmp/ptp_kvm.conf:/etc/modules-load.d/
+
 qm importdisk ${VMID} ${IMG} ${DSTORE} --format qcow2
 qm set ${VMID} --scsihw virtio-scsi-pci --scsi0 ${DSTORE}:vm-${VMID}-disk-1,discard=on,ssd=1
 qm set ${VMID} --boot c --bootdisk scsi0
