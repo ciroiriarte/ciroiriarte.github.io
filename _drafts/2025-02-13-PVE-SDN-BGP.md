@@ -93,7 +93,7 @@ router bgp 4000000002 vrf vrf_L01VPN01
  address-family ipv4 unicast
   neighbor LABFWL01 activate
   neighbor LABFWL01 soft-reconfiguration inbound
-  neighbor LABFWSDC prefix-list PFL_L01_OUT out
+  neighbor LABFWL01 prefix-list PFL_L01_OUT out
 #  import vrf vrf_L01VPN01
  exit-address-family
  !
