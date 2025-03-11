@@ -12,6 +12,7 @@ tags:
 
 # Reference documentation
 https://pve.proxmox.com/pve-docs/chapter-pvesdn.html#_multiple_evpn_exit_nodes
+Note: Don't define exit nodes!!!!
 
 # VRF to IF
 
