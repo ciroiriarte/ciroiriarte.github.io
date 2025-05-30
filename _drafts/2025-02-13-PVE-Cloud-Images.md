@@ -27,6 +27,7 @@ qemu-img resize ${IMG} ${DSKSIZE}
 qm create ${VMID} --name ${VMNAME} --cores 2 --memory 2048 \
 --net0 virtio,firewall=1,bridge=${BRIDGE} --scsihw virtio-scsi-pci \
 --bios ovmf --machine q35 --agent enabled=1 --ostype l26 \
+--cpu cputype=max \
 --serial0 socket --vga serial0 \
 --efidisk0 ${DSTORE}:${VMID},efitype=4m --scsi1 ${DSTORE}:cloudinit
 
@@ -50,6 +51,7 @@ qemu-img resize ${IMG} ${DSKSIZE}
 qm create ${VMID} --name ${VMNAME} --cores 2 --memory 2048 \
 --net0 virtio,firewall=1,bridge=${BRIDGE} --scsihw virtio-scsi-pci \
 --bios ovmf --machine q35 --agent enabled=1 --ostype l26 \
+--cpu cputype=max \
 --serial0 socket --vga serial0 \
 --efidisk0 ${DSTORE}:${VMID},efitype=4m --scsi1 ${DSTORE}:cloudinit
 
@@ -73,6 +75,7 @@ qemu-img resize ${IMG} ${DSKSIZE}
 qm create ${VMID} --name ${VMNAME} --cores 2 --memory 2048 \
 --net0 virtio,firewall=1,bridge=${BRIDGE} --scsihw virtio-scsi-pci \
 --bios ovmf --machine q35 --agent enabled=1 --ostype l26 \
+--cpu cputype=max \
 --serial0 socket --vga serial0 \
 --efidisk0 ${DSTORE}:${VMID},efitype=4m --scsi1 ${DSTORE}:cloudinit
 
@@ -96,6 +99,7 @@ qemu-img resize ${IMG} ${DSKSIZE}
 qm create ${VMID} --name ${VMNAME} --cores 2 --memory 2048 \
 --net0 virtio,firewall=1,bridge=${BRIDGE} --scsihw virtio-scsi-pci \
 --bios ovmf --machine q35 --agent enabled=1 --ostype l26 \
+--cpu cputype=max \
 --serial0 socket --vga serial0 \
 --efidisk0 ${DSTORE}:${VMID},efitype=4m --scsi1 ${DSTORE}:cloudinit
 
@@ -117,6 +121,7 @@ qemu-img resize ${IMG} ${DSKSIZE}
 qm create ${VMID} --name ${VMNAME} --cores 2 --memory 2048 \
 --net0 virtio,firewall=1,bridge=${BRIDGE} --scsihw virtio-scsi-pci \
 --bios ovmf --machine q35 --agent enabled=1 --ostype l26 \
+--cpu cputype=max \
 --serial0 socket --vga serial0 \
 --efidisk0 ${DSTORE}:${VMID},efitype=4m --scsi1 ${DSTORE}:cloudinit
 
