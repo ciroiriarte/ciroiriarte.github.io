@@ -1,3 +1,12 @@
+Your environment is using Ceph as a backend for one or both of nova-compute
+or cinder and as a result it is essential to use images with raw format in
+order to avoid a large capacity and performance impact on your cloud and ceph
+cluster. This format is also needed in order to benefit from Copy-on-Write
+cloning of images in both Cinder and Nova.
+
+
+
+
 To start provisioning of virtual machine instances, OS images are required. We'll be using Cloud Images provided by the Linux distributions.
 
 
