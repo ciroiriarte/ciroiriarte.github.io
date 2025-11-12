@@ -473,11 +473,11 @@ Well, the shared procedure builds a good starting point. Things I see need to be
 1- ptp_kvm for all the guests
 
 The kernel module seems to be supported by RHEL & clones like Rocky or OEL:
-- https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/virtualization_deployment_and_administration_guide/chap-kvm_guest_timing_management
+- [KVM Guest Timing Management](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/virtualization_deployment_and_administration_guide/chap-kvm_guest_timing_management)
 
 It doesn't seem to be supported by Ubuntu
-- https://bugs.launchpad.net/ubuntu/+source/linux-kvm/+bug/1896311
-- https://bugs.launchpad.net/ubuntu/+source/linux-meta-kvm/+bug/1950878
+- [LP #1896311](https://bugs.launchpad.net/ubuntu/+source/linux-kvm/+bug/1896311)
+- [LP #1950878](https://bugs.launchpad.net/ubuntu/+source/linux-meta-kvm/+bug/1950878)
 
 Need to find time to test and document the configuration procedure
 
