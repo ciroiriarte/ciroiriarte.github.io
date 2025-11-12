@@ -387,7 +387,7 @@ ${NAME}
 
 ## RedHat Enterprise Linux 10
 
-There are some shops still require this guy. You'll have to download the file via the paid portal and place it in the working directory.
+There are some shops that still require this guy. You'll have to download the file via the paid portal and place it in the working directory.
 
 {% highlight shell %}
 # Some helper variables
