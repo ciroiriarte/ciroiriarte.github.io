@@ -13,7 +13,11 @@ tags:
 
 Usually, once you have your shiny Openstack environment up & running, you would like to inmediately start provisioning virtual machines. The starting point are Images that will provide the base copy of Operating System to use for your new virtual machines.
 
-Images include both the OS disk data and would normally be virtual machine properties in other virtualization platforms.
+Images include both the OS disk data and what would normally be virtual machine properties in other virtualization platforms.
+
+I'll provide here a procedure to prepare production grade images coming from the usual Linux Distribution providers.
+
+<!--more-->
 
 # Cloud Images
 
@@ -61,7 +65,7 @@ Find a spot to download files
 	cd cloud-images
 {% endhighlight %}
 	
-### openSUSE
+## openSUSE
 
 My personal favorite, we'll download Leap which is very similar to SLES (the commercial version of the distribution). Other alternatives are Tumbleweed (bleeding edge) or Slowroll ("I want something newer, but don't get crazy").
 
@@ -110,11 +114,11 @@ ${NAME}
 {% endhighlight %}
 
 
-### Rocky Linux
+## Rocky Linux
 
 Usual tool for the CentOS refugees. Cloud-init is available out of the box. 
 
-#### LVM based image
+### LVM based image
 
 In case you want to have all your filesystems under LVM management, the project provides a specific image. Only drawback is that cloud-init filesystem resize won't work and manual maneuvering will be required (don't expect hardcore Linux users to have a problem with that).
 
@@ -157,7 +161,7 @@ ${NAME}
 {% endhighlight %}
 
 
-#### Bare partitions image
+### Bare partitions image
 
 This image has bare partitions for operating system filesystems. As with any other Linux image, you can still use LVM for data disks (and probably you should, since hot migration between Ceph pools is not supported by Openstack and LVM-in-guest can save the day when data relocation is required)
 
@@ -199,7 +203,7 @@ openstack image create \
 ${NAME}
 {% endhighlight %}
 
-### Oracle Enterprise Linux 9
+## Oracle Enterprise Linux 9
 
 This is an odd one and I've never been a fan. Another RHEL clone with unfair advantages regarding the made-up Oracle licensing rules. Similarly to Ubuntu, you can pay for support or not. Repositories are public.
 
@@ -241,7 +245,7 @@ openstack image create \
 ${NAME}
 {% endhighlight %}
 
-### Ubuntu 24.04
+## Ubuntu 24.04
 
 Ubiquitous distribution, if you like Debian you'll feel at home.
 
@@ -286,7 +290,7 @@ openstack image create \
 ${NAME}
 {% endhighlight %}
 
-### Ubuntu 22.04
+## Ubuntu 22.04
 
 Older & still used version of Ubuntu.
 
@@ -329,7 +333,7 @@ openstack image create \
 ${NAME}
 {% endhighlight %}
 
-### Debian 12
+## Debian 12
 
 Omnipresent and still relevant.
 
@@ -374,7 +378,7 @@ ${NAME}
 
 # Paid Images
 
-### RedHat Enterprise Linux 10
+## RedHat Enterprise Linux 10
 
 There are some shops still require this guy. You'll have to download the file via the paid portal and place it in the working directory.
 
@@ -414,7 +418,7 @@ ${NAME}
 {% endhighlight %}
 
 
-### RedHat Enterprise Linux 9
+## RedHat Enterprise Linux 9
 
 Same but older. File needs to be downloaded and copied to the working directory.
 
