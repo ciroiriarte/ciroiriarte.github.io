@@ -1,58 +1,78 @@
-# Cloud Images
+---
+title: PVE Cloud Images
+description: Walkthrough of the process to import Cloud Images to Proxmox VE.
+layout: post
+author_profile: true
+author: Ciro Iriarte
+categories:
+- Datacenter
+tags:
+- Virtualization
+- Proxmox
+---
 
-## Intro
+# Intro
 Cloud images are pre-configured operating system (OS) images that can be deployed in a cloud environment. The main Linux distributions offer cloud images alongside the regular ISO installers.
 
-Minimal configuration is executed on the public images and imported as PVE templates. The procedure described underneath, expects you to create all the images (some variables defined in a given step are not necessarily re-defined in the next one.
+Minimal configuration is executed on the public images and imported as PVE templates. The procedure described underneath, expects you to create all the images (some variables defined in a given step are not necessarily re-defined in the next one).
 
-We'll be working in one of the nodes only.![image](https://github.com/user-attachments/assets/049c95d6-9e19-4562-b043-d1a3a1517d77)
+PVE provides the feature of instantiating a VM from a template. We'll be creating templates using publicly available Cloud Images.
 
-## Pre-requisites
+<!--more-->
 
-	1- A fully configured PVE cluster must be set, with properly setup bridge & datastore to be used.
-In one of the PVE nodes, basic tooling is required to modify the images in some cases, most notable, Ubuntu/Debian images are missing the QEMU agent.![image](https://github.com/user-attachments/assets/56ba7e21-040b-4ccb-bc48-724b3d600040)
+# Pre-requisites
+
+A fully configured PVE cluster must be set, with properly configured bridges & datastore to be used.
+In one of the PVE nodes, basic tooling is required to modify the images in some cases, most notable, Ubuntu/Debian images are missing the QEMU agent.
 
 {% highlight shell %}
 apt install -y libguestfs-tools
+{% endhighlight %}
 
-## Template creation
+# Template creation
 
-### Basic skeleton
+## Basic skeleton
 
-To simplify the rollout of the templates, we create a template VM with the common required setup for cloud-init to work. It will be used to create the distro specific template.
+To simplify the rollout of the templates, we create a template VM with the common required configuration for cloud-init to work. It will be used to create the distro specific template.
 
 This will include serial console, cloud-init disk configuration, EFI boot mode (and disk) and Q35 machine type. Also, assumes a Linux OS.
-![image](https://github.com/user-attachments/assets/7889e754-f2e7-4f85-a81c-443e3960b878)
+
 
 {% highlight shell %}
+### We set some helper variables
+# Where are we place the template image?
 DSTORE="p-replica3"
+# Using Ceph as backend, we must use RAW disk images
 #DSKFORMAT=qcow2
 DSKFORMAT=raw
+# Bridge to connect the vNIC to
 BRIDGE=vmbr1
+# VM ID to use as starting point
 VMSKELETONID=9000
+# VM name
 VMSKELETON="tmpl-ci-skeleton"
 # Desired bootdisk size. Cloud images are by default small (3-10GB), assign here a sensible size and don't go overboard, secondary data disks are a best practice to simplify data movement and backup/restore operations. When LVM is available, data disks should be added to a secondary volume group and not to the volume group containing the OS.
 BOOTDISKSIZE=60G
 
-
+### Skeleton creation
 qm create ${VMSKELETONID} --name ${VMSKELETON} --cores 2 --memory 2048 \
 --net0 virtio,firewall=1,bridge=${BRIDGE} --scsihw virtio-scsi-pci \
 --bios ovmf --machine q35 --agent enabled=1 --ostype l26 \
 --cpu cputype=max \
 --serial0 socket --vga serial0 \
---efidisk0 ${DSTORE}:${VMSKELETONID},efitype=4m --scsi1 ${DSTORE}:cloudinit![image](https://github.com/user-attachments/assets/23686943-1b30-4066-bca3-0e2605095ea8)
+--efidisk0 ${DSTORE}:${VMSKELETONID},efitype=4m --scsi1 ${DSTORE}:cloudinit
 {% endhighlight %}
 
-### Find a work directory
+## Find a work directory
 
-We'll need a work directory to download and manipulate the disk images.
+We'll need a work directory to download and manipulate the disk images. Make sure you have enough room.
 
 {% highlight shell %}
 mkdir /tmp/cloud-images
 cd /tmp/cloud-images
 {% endhighlight %}
 
-### Opensuse
+## Opensuse
 
 {% highlight shell %}
 # We increment VMID starting from the skeleton machine ID
@@ -70,7 +90,6 @@ qemu-img resize ${IMG} ${BOOTDISKSIZE}
 echo ptp_kvm > /tmp/ptp_kvm.conf
 virt-customize -a ${IMG} --copy-in /tmp/ptp_kvm.conf:/etc/modules-load.d/
 
-
 # Clone our skeleton machine (full clone)
 qm clone ${VMSKELETONID} ${VMID} --name ${VMNAME} --full 1
 # Import disk in a cluster-wide datastore
@@ -82,7 +101,7 @@ qm set ${VMID} --boot c --bootdisk scsi0
 # Set VM as template
 qm template ${VMID}
 # Cleanup
-rm ${IMG}![image](https://github.com/user-attachments/assets/3caf321d-511d-4200-893d-3e9336392d13)
+rm ${IMG}
 {% endhighlight %}
 
 ### Rocky Linux 9
@@ -161,10 +180,28 @@ qm template ${VMID}
 rm ${IMG}
 {% endhighlight %}
 
+### Oracle Linux 9
 
-## VM provisioning from a template
+{% highlight shell %}
+let VMID=VMID+1
+IMG=OL9U5_x86_64-kvm-b259.qcow2
+VMNAME="tmpl-ci-oel-9"
 
-Once the templates are available, you can deploy a VM using the following procedure on one of the PVE hosts:
+wget https://yum.oracle.com/templates/OracleLinux/OL9/u5/x86_64/${IMG}
+
+qm clone ${VMSKELETONID} ${VMID} --name ${VMNAME} --full 1
+qm importdisk ${VMID} ${IMG} ${DSTORE} --format ${DSKFORMAT}
+qm set ${VMID} --scsihw virtio-scsi-pci --scsi0 ${DSTORE}:vm-${VMID}-disk-1,discard=on,ssd=1
+qm set ${VMID} --boot c --bootdisk scsi0
+qm template ${VMID}
+rm ${IMG}
+{% endhighlight %}
+
+# VM provisioning from a template
+
+Once the templates are available, you can use them via Web UI, Terraform or CLI. We'll demostrate how to deploy a VM using CLI on one of the PVE hosts.
+
+## VM creation
 
 {% highlight shell %}
 ##
@@ -183,7 +220,7 @@ NETGW="192.168.0.1"
 DNS=8.8.8.8
 DNSSEARCH="my.domain"
 # VM name
-NEWVMNAME=test001.ipa.tigotech.center
+NEWVMNAME=test001.mydomain.com
 # Credentials
 GUESTUSER=cloudadmin
 GUESTPASS=Cambiar456
@@ -220,13 +257,11 @@ qm start ${NEWVM_ID}
 qm terminal ${NEWVM_ID}
 {% endhighlight %}
 
-Optionals
+## Optionals
 
 You can add secondary network interfaces and disks to a machine. Example follows.
 
-##
-# Network
-##
+### Network
 
 {% highlight shell %}
 # Defined bridges we're using for the attach operation
@@ -239,9 +274,7 @@ qm set ${NEWVM_ID} -net2 virtio,firewall=1,bridge=${NET2}
 qm set ${NEWVM_ID} -net3 virtio,firewall=1,bridge=${NET3}
 {% endhighlight %}
 
-##
-# Storage
-##
+### Storage
 
 {% highlight shell %}
 # Primary replicated data.
@@ -255,8 +288,4 @@ qm set ${NEWVM_ID} --scsi1 ${DSTORE1}:vm-${NEWVM_ID}-disk-2,size=200G,discard=on
 qm set ${NEWVM_ID} --scsi1 ${DSTORE2}:500,discard=on,ssd=1
 {% endhighlight %}
 
-Improvement opportunities
-
-	1. Provisioning script to accept template name, machine name and IP configuration as parameters to expedite VM creation process.
-	2. Opentofu recipe, to provision full platform infra (VMs & networks) on demand via API, without PVE host shell access
 
