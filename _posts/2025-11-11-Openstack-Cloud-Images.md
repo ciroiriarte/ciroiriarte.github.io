@@ -475,7 +475,7 @@ Well, the shared procedure builds a good starting point. Things I see need to be
 The kernel module seems to be supported by RHEL & clones like Rocky or OEL:
 - [KVM Guest Timing Management](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/virtualization_deployment_and_administration_guide/chap-kvm_guest_timing_management)
 
-It doesn't seem to be supported by Ubuntu
+It doesn't seem to be supported by Ubuntu. You're left either with NTP to network connected servers or no synchronization (poor choice):
 - [LP #1896311](https://bugs.launchpad.net/ubuntu/+source/linux-kvm/+bug/1896311)
 - [LP #1950878](https://bugs.launchpad.net/ubuntu/+source/linux-meta-kvm/+bug/1950878)
 
