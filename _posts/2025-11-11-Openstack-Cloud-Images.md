@@ -466,3 +466,25 @@ openstack image create \
 ${NAME}
 {% endhighlight %}
 
+# Improvement opportunities
+
+Well, the shared procedure builds a good starting point. Things I see need to be addressed:
+
+1- ptp_kvm for all the guests
+
+The kernel module seems to be supported by RHEL & clones like Rocky or OEL:
+- https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/virtualization_deployment_and_administration_guide/chap-kvm_guest_timing_management
+
+Doesn't seem to be supported by Ubuntu
+- https://bugs.launchpad.net/ubuntu/+source/linux-kvm/+bug/1896311
+- https://bugs.launchpad.net/ubuntu/+source/linux-meta-kvm/+bug/1950878
+
+Need to find time to test and document the configuration procedure
+
+2- OS licensing
+
+Additional configuration is required to properly match paid guest instances to a subset of nodes in a given Openstack deployment. I have identified two options (Image properties + Host Aggregates or traits), but actual testing is required.
+
+3- Windows Server guests
+
+It appears to still be a necessary evil in 2025 for large organizations. Need to find time to create a procedure for image creation, it should include Cloudbase-init as alternative to cloud-init.
