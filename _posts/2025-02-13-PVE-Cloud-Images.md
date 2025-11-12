@@ -40,7 +40,7 @@ This will include serial console, cloud-init disk configuration, EFI boot mode (
 
 {% highlight shell %}
 ### We set some helper variables
-# Where are we place the template image?
+# Where are we placing the template image?
 DSTORE="p-replica3"
 # Using Ceph as backend, we must use RAW disk images
 #DSKFORMAT=qcow2
@@ -122,6 +122,22 @@ qm template ${VMID}
 rm ${IMG}
 {% endhighlight %}
 
+### Oracle Linux 9
+
+{% highlight shell %}
+let VMID=VMID+1
+IMG=OL9U5_x86_64-kvm-b259.qcow2
+VMNAME="tmpl-ci-oel-9"
+
+wget https://yum.oracle.com/templates/OracleLinux/OL9/u5/x86_64/${IMG}
+
+qm clone ${VMSKELETONID} ${VMID} --name ${VMNAME} --full 1
+qm importdisk ${VMID} ${IMG} ${DSTORE} --format ${DSKFORMAT}
+qm set ${VMID} --scsihw virtio-scsi-pci --scsi0 ${DSTORE}:vm-${VMID}-disk-1,discard=on,ssd=1
+qm set ${VMID} --boot c --bootdisk scsi0
+qm template ${VMID}
+rm ${IMG}
+{% endhighlight %}
 
 ### Ubuntu 24.04
 
@@ -180,22 +196,7 @@ qm template ${VMID}
 rm ${IMG}
 {% endhighlight %}
 
-### Oracle Linux 9
 
-{% highlight shell %}
-let VMID=VMID+1
-IMG=OL9U5_x86_64-kvm-b259.qcow2
-VMNAME="tmpl-ci-oel-9"
-
-wget https://yum.oracle.com/templates/OracleLinux/OL9/u5/x86_64/${IMG}
-
-qm clone ${VMSKELETONID} ${VMID} --name ${VMNAME} --full 1
-qm importdisk ${VMID} ${IMG} ${DSTORE} --format ${DSKFORMAT}
-qm set ${VMID} --scsihw virtio-scsi-pci --scsi0 ${DSTORE}:vm-${VMID}-disk-1,discard=on,ssd=1
-qm set ${VMID} --boot c --bootdisk scsi0
-qm template ${VMID}
-rm ${IMG}
-{% endhighlight %}
 
 # VM provisioning from a template
 
@@ -232,13 +233,11 @@ echo ${MYKEY} > ${KEYFILE}
 NEWVM_ID=$(pvesh get /cluster/nextid)
 # Fetching template id using the template name
 TMPL_ID=$(pvesh get /cluster/resources --type vm --noborder|grep ${TMPL}| awk '{ print $1 }'|cut -f 2 -d "/")
-{% endhighlight %}
 
 ##
 # Actual provisioning
 ##
 
-{% highlight shell %}
 # We clone template to create the new VM, full clone (by default a template spawns linked clones)
 qm clone ${TMPL_ID} ${NEWVM_ID} --name ${NEWVMNAME} --full 1
 # Remove and reassign the network device with the correct bridge
