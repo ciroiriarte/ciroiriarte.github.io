@@ -529,7 +529,7 @@ runcmd:
   - systemctl enable apache2
   - systemctl start apache2
   # Create Simple index.html
-  - ['sh', '-c', 'echo "<h1>CVT: Hello world!</h1>" > /srv/www/htdocs/index.html']
+  - ['sh', '-c', 'echo "<h1>Hello world!</h1>" > /srv/www/htdocs/index.html']
 - # Firewall is not present
   #- firewall-cmd --permanent --add-service=http
   #- firewall-cmd --reload
