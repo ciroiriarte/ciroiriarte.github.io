@@ -466,6 +466,89 @@ openstack image create \
 ${NAME}
 {% endhighlight %}
 
+# How to use the images?
+
+So, after all that preparation, we should be able to instantiate a virtual machine & automatically configure it with cloud-init with the procedure underneath.
+
+It will take the image, create a virtual disk with the proper size for the OS system to boot from and instantiate our new shiny VM with the parameters defined in the image. As a quick example of what can be done with cloud-init, we also install and start a web server with a basic landing page to be published.
+
+{% highlight shell %}
+##
+# Credentials
+##
+
+source novarc
+
+## 
+# Helper variables
+##
+# Network that will host the VM
+TESTNETWORK="ttc-dflt-internal-net"
+# Alternative reference by ID
+TESTNETWORKID=$(openstack network show ${TESTNETWORK} -f json| jq .id|tr -d '"')
+# VM name
+TESTVMNAME="prd-mysuper-vm-001"
+# VM flavor to use
+FLAVOR=c4a.4c-8G
+# Base image to use
+IMAGE=ci-opensuse-leap-16.0-x86_64-20251111.2246
+# OS Disk size in GB
+OSDISKSIZE=60
+# Were we put the temporary files
+TMPDIR=tmpdir-${RANDOM}
+# User account to use
+MYUSER=cloudadmin
+# Our SSH public key for authentication
+SSHKEY="ssh-ed25519 AAAA...Ica5ij ciro@laptop001"
+
+##
+# Creation procedure
+##
+
+# We create our cloud-init config file
+mkdir -p ${TMPDIR}
+
+cat > ${TMPDIR}/userdata.yaml <<EOF
+#cloud-config
+hostname: ${TESTVMNAME}
+users:
+  - name: ${MYUSER}
+    ssh-authorized-keys:
+      - ${SSHKEY}
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+#packages:
+#  - vim
+#  - curl
+#  - apache2
+runcmd:
+  # Add repository
+  - zypper ar -f -c https://download.opensuse.org/distribution/leap/16.0/repo/oss/x86_64/ leap-16-oss
+  - zypper in -y vim curl apache2
+  # Enable and start Apache
+  - systemctl enable apache2
+  - systemctl start apache2
+  # Create Simple index.html
+  - ['sh', '-c', 'echo "<h1>CVT: Hello world!</h1>" > /srv/www/htdocs/index.html']
+- # Firewall is not present
+  #- firewall-cmd --permanent --add-service=http
+  #- firewall-cmd --reload
+EOF
+
+# Create the VM instance
+openstack server create \
+--image ${IMAGE} \
+--flavor ${FLAVOR} \
+--network ${TESTNETWORK} \
+--use-config-drive \
+--user-data ${TMPDIR}/userdata.yaml \
+--boot-from-volume ${OSDISKSIZE} \
+${TESTVMNAME}
+
+# List all the VMs
+openstack server list
+{% endhighlight %}
+
 # Improvement opportunities
 
 Well, the shared procedure builds a good starting point. Things I see need to be addressed:
