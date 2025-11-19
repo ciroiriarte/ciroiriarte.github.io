@@ -483,7 +483,7 @@ source novarc
 # Helper variables
 ##
 # Network that will host the VM
-TESTNETWORK="ttc-dflt-internal-net"
+TESTNETWORK="tnt01-dflt-internal-net"
 # Alternative reference by ID
 TESTNETWORKID=$(openstack network show ${TESTNETWORK} -f json| jq .id|tr -d '"')
 # VM name
