@@ -6,14 +6,15 @@ author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=128'
 permalink: /index.php/2011/03/20/quick-tonido-installation-on-opensuse/
+description: 'Step-by-step guide for installing Tonido personal cloud platform on openSUSE using alien to convert deb packages, with init script and SuSEfirewall2 configuration.'
 categories:
     - Linux
     - Projects
 tags:
-    - MoneyManagerEx
-    - openSUSE
-    - SuSEfirewall2
-    - Tonido
+    - opensuse
+    - tonido
+    - linux
+    - firewall
 ---
 
 Ok, last week I updated my laptop to openSUSE 11.4, that, unluckily, broke my MoneyManagerEx installation as I needed a package for this new distro and the one from Packman is currently broken because of some repo [changes](http://www.mail-archive.com/packman@links2linux.de/msg05268.html).
@@ -24,7 +25,9 @@ Then, that’s were I saw it, there’s a web version of MMEx!!!, and that’s g
 
 [Here](http://www.tonido.com/tonidocloud_what.html) are the Tonido options, ranging from super cool appliance to a cloud service, passing by your own local installation. As I already have a VPS, using Tonido on it sounds like a nice solution, I don’t have to rely on my ISP crappy conection or my desktop uptime (local electricity company is no warranty).
 
-The VPS is running openSUSE 11.3 @i586 (that is, 32bit version). Tonido doesn’t provide source code or generic tar files, so we are working with deb packages for Ubuntu. As a pending task, I might make a nice clean package on [OBS](https://build.opensuse.org) to automate the procedure I’m going to document here, for the time being this is a “quick, dirty if you like, hack documentation”. Also, note this is a dedicated server installation, it won’t contemplate “desktop integration” as desktop integration will be left outside.
+The VPS is running openSUSE 11.3 @i586 (that is, 32bit version). Tonido doesn't provide source code or generic tar files, so we are working with deb packages for Ubuntu. As a pending task, I might make a nice clean package on [OBS](https://build.opensuse.org) to automate the procedure I'm going to document here, for the time being this is a "quick, dirty if you like, hack documentation". Also, note this is a dedicated server installation, it won't contemplate "desktop integration" as desktop integration will be left outside.
+
+<!-- more -->
 
 First, we need to install alien, to allow us to convert the deb package to rpm from were we’ll extract the files.
 
@@ -42,7 +45,7 @@ This package comes from Contrib repository, zypper will take care of the depende
 
 - - - - - -
 
-We’ll make this conversion to extract the files: deb –&gt; rpm –&gt; cpio
+We'll make this conversion to extract the files: deb -> rpm -> cpio
 
 - - - - - -
 

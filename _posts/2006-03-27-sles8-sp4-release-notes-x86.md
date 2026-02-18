@@ -6,8 +6,13 @@ author: Ciro Iriarte
 layout: post
 guid: 'https://cyruspy.wordpress.com/2006/03/27/sles8-sp4-release-notes-x86/'
 permalink: /index.php/2006/03/27/sles8-sp4-release-notes-x86/
+description: 'Complete release notes for UnitedLinux 1.0 x86 Service Pack 4, covering enhancements, security fixes, extensive bug fixes, and known issues.'
 categories:
     - SLES
+tags:
+    - linux
+    - sles
+deprecated: true
 ---
 
 # Release Notes for UnitedLinux 1.0 x86 Service Pack 4

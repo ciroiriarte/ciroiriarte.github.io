@@ -6,13 +6,21 @@ author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=58'
 permalink: /index.php/2010/03/02/cambio-de-hora-en-paraguay-2010/
+description: 'Guía sobre el cambio de reglas DST en Paraguay en 2010 y cómo actualizar la base de datos de zonas horarias Olson en Linux, Solaris, Tru64 y HP-UX.'
 categories:
     - Linux
+tags:
+    - linux
+    - timezone
+    - paraguay
+    - dst
 ---
 
 El Gobierno Paraguayo resolvió modificar la fecha de entrada en vigencia del horario de invierno en toda la república. Con el anterior decreto vigente desde el 2004 se tenia que la hora debía retrasarse en 60 minutos el segundo domingo de Marzo (14/Mar este año) y volver a adelantarse en 60 minutos el tercer domingo de Octubre (17/Oct este año).
 
 Con el nuevo decreto esto cambia a retrasar la hora en 60 minutos el segundo domingo de Abril (11/Abr este año) y volver a adelantarla en 60 minutos el primer domingo de Octubre (3/Oct este año).
+
+<!-- more -->
 
 Referencias:
 
@@ -22,7 +30,7 @@ http://www.presidencia.gov.py/v1/wp-content/uploads/2010/02/decreto3958.pdf
 
 Bueno, esto que implica para los que trabajamos con sistemas unix?. En un equipo unix se mantiene la hora interna del sistema en UTC, y se ajusta la hora local según los usos horarios (o zona horaria). Para esto se utiliza la base de datos Olson, que registra las diferentes zonas horarias y las reglas para el cambio a horarios de verano (daylight saving transition o DST) según corresponda.
 
-Esta base de datos puede bajarse en su ultima versión de ftp://elsie.nci.nih.gov/pub/tzdata\*.tar.gz. Si no tenemos la suerte de que se refleje esta nueva legislación, debemos realizar los cambios a mano.
+Esta base de datos puede bajarse en su ultima versión de ftp://elsie.nci.nih.gov/pub/tzdata*.tar.gz. Si no tenemos la suerte de que se refleje esta nueva legislación, debemos realizar los cambios a mano.
 
 En nuestro caso, debemos limitar la ultima regla (que empieza en el 2004) al 2009 y agregar una nueva regla que este vigente desde el 2010 hasta “final de los tiempos”. Probablemente esta no sea la ultima regla a agregar, pero hasta que no haya una nueva, debería tener vigencia indefinida.
 
@@ -64,7 +72,7 @@ Guardamos estas lineas en un archivo de texto plano para luego ser compilado: **
 
 Para los siguientes unix y unix-like, detallo el procedimiento de verificación de fecha de cambio de hora y de corrección.
 
-### Linux
+## Linux
 
 - Estado inicial
 
@@ -86,7 +94,7 @@ Para los siguientes unix y unix-like, detallo el procedimiento de verificación 
 
 **\#** cp /usr/share/zoneinfo/America/Asuncion /etc/localtime
 
-### Solaris
+## Solaris
 
 - Estado inicial
 
@@ -109,7 +117,7 @@ Para los siguientes unix y unix-like, detallo el procedimiento de verificación 
 **\#** grep TZ= /etc/TIMEZONE  
 TZ=America/Asuncion
 
-### Tru64
+## Tru64
 
 - Verificar estado inicial
 
@@ -127,7 +135,7 @@ TZ=America/Asuncion
 
 **\#** zdump -v America/Asuncion|grep 2010
 
-### HPUX
+## HPUX
 
 Bueno, no utiliza la base de datos Olson, y mantiene sus propias reglas para DST.
 
@@ -136,7 +144,7 @@ Bueno, no utiliza la base de datos Olson, y mantiene sus propias reglas para DST
 Ref:
 
 http://forums11.itrc.hp.com/service/forums/questionanswer.do?threadId=1089676  
-http://forums11.itrc.hp.com/service/forums/questionanswer.do?admit=109447626+1267560461229+28353475&amp;threadId=1007176
+http://forums11.itrc.hp.com/service/forums/questionanswer.do?admit=109447626+1267560461229+28353475&threadId=1007176
 
 \# ./dst.pl
 
@@ -167,7 +175,7 @@ export TZ
 
 **\#** ./dst.pl
 
-### Observación.
+## Observación.
 
 Algunos procesos que corren perpetuamente puede requerir un reinicio luego de este cambio. Uno de estos seria el crond.
 

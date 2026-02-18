@@ -6,17 +6,25 @@ author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=90'
 permalink: /index.php/2010/05/11/compiling-nrpe-in-hpux-11-31-2/
+description: 'Guide for compiling NRPE with --enable-command-args on HP-UX 11.31, including TCP wrappers workaround, nrpe.c patch, build steps, and a custom init script.'
 categories:
     - Nagios
+tags:
+    - nagios
+    - monitoring
+    - hpux
+    - nrpe
 ---
 
-Ok, we got our brand new HP rx8640 servers running HPUX 11.31 and needed to monitor them with nagios. As check\_by\_ssh turned to be a lot slower than NRPE+SSL on our former Solaris servers, we defined as policy that every server under our control should be monitored using NRPE.
+Ok, we got our brand new HP rx8640 servers running HPUX 11.31 and needed to monitor them with nagios. As check_by_ssh turned to be a lot slower than NRPE+SSL on our former Solaris servers, we defined as policy that every server under our control should be monitored using NRPE.
 
-Found that [someone ](http://www.mayoxide.com/naghpux/)already did the nasty work of compiling it and even created a current depot (software package in HPUX terms) that works with 11.31. There are a couple of drawbacks though, it runs using inetd which is not practical when you run a lot of frequent checks and it’s compiled without the “–enable-command-args” and this last bit makes it useless for our needs.
+Found that [someone ](http://www.mayoxide.com/naghpux/)already did the nasty work of compiling it and even created a current depot (software package in HPUX terms) that works with 11.31. There are a couple of drawbacks though, it runs using inetd which is not practical when you run a lot of frequent checks and it's compiled without the "--enable-command-args" and this last bit makes it useless for our needs.
 
-Using Olivier’s build notes, slightly modified, I’ve built NRPE with “–enable-command-args” and created a script to start it as a standalone service rather than using inetd.
+Using Olivier's build notes, slightly modified, I've built NRPE with "--enable-command-args" and created a script to start it as a standalone service rather than using inetd.
 
-Here’s the process:
+<!-- more -->
+
+Here's the process:
 
 ## **TCP Wrappers note**
 
@@ -72,7 +80,7 @@ PATH="$(cat /etc/PATH):/usr/local/bin" ./configure --prefix=/opt/nagios \
    --enable-command-args
 {% endhighlight %}
 
-## **Compilation &amp; Installation**
+## **Compilation & Installation**
 
 {% highlight shell %}
 make

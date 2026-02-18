@@ -6,8 +6,13 @@ author: Ciro Iriarte
 layout: post
 guid: 'https://cyruspy.wordpress.com/2006/03/25/sles8-sp3-release-notes-x86/'
 permalink: /index.php/2006/03/25/sles8-sp3-release-notes-x86/
+description: 'Complete release notes for UnitedLinux 1.0 x86 Service Pack 3, covering enhancements, bug fixes, security patches, and new packages.'
 categories:
     - SLES
+tags:
+    - linux
+    - sles
+deprecated: true
 ---
 
 Release Notes for UnitedLinux 1.0 x86 Service Pack 3  

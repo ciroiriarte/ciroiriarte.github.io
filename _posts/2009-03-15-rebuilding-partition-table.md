@@ -4,15 +4,17 @@ title: 'Rebuilding partition table'
 date: '2009-03-15T20:00:26-04:00'
 author: Ciro Iriarte
 excerpt: 'Recovering partition table from data on disk'
+description: 'How to recover a partition table that was overwritten by an aborted Linux installation, using the TestDisk tool to restore the original partition layout.'
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=32'
 permalink: /index.php/2009/03/15/rebuilding-partition-table/
 categories:
     - OSS
 tags:
-    - fdisk
-    - 'rebuild partition table'
+    - linux
     - testdisk
+    - recovery
+    - partitioning
 ---
 
 Ok, an ex school partner brought me his laptop today and told me that it suddenly stopped working (yeah right).
@@ -31,7 +33,7 @@ Booted a linux rescue disk and after inspecting the hard disk I found it had 3 p
 
 Hmm, Linux partition.. But how can this be?, he’s a Windows-only guy… Obviously someone screwed it big time…
 
-Tried to mount the first partition, but it didn’t have a valid filesystem aparently. Took out the disk and mounted it on a external SATA &lt;–&gt; USB cage and plugged it on my laptop.
+Tried to mount the first partition, but it didn’t have a valid filesystem aparently. Took out the disk and mounted it on a external SATA <-> USB cage and plugged it on my laptop.
 
 First of all tried to check what was on each partition, “file” utility only stated “data”, but “strings” on the partition showed there still was the WinXP data on the disk. Apparently someone booted the laptop with a linux installer and aborted the installation process, not before it screwed the partition table.
 

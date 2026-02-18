@@ -6,13 +6,21 @@ author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=75'
 permalink: /index.php/2010/04/01/compiling-cnet-in-a-hurry/
+description: 'How to compile and install the cnet network simulator in a user home directory on openSUSE, with Makefile modifications for a local installation.'
 categories:
     - Linux
     - openSUSE
     - Projects
+tags:
+    - linux
+    - networking
+    - opensuse
+    - simulation
 ---
 
-Well, we have an assignment for college, the idea is to simulate a network and the tool chosen is [cnet](http://www.csse.uwa.edu.au/cnet/ "CNET Simulator"). Ideally I would build a package for it in the OpenSUSE Build Service, but the process is kind of slow and we’re in a hurry. Here’s the process to install it in your home. Building the package is on my TODO list….
+Well, we have an assignment for college, the idea is to simulate a network and the tool chosen is [cnet](http://www.csse.uwa.edu.au/cnet/ "CNET Simulator"). Ideally I would build a package for it in the OpenSUSE Build Service, but the process is kind of slow and we're in a hurry. Here's the process to install it in your home. Building the package is on my TODO list….
+
+<!-- more -->
 
 Go [here](http://www.csse.uwa.edu.au/cnet/) and download the latest version (3.2.1 as of today)
 
@@ -63,7 +71,7 @@ BINDIR         = $(PREFIX)/bin
 #
 {% endhighlight %}
 
-- Install TCL and TK, from the documentation, version 8.4 is required as a minimum. The procedure depends on the distribution used, here’s the case of OpenSUSE 11.2 (which includes tk &amp; tcl 8.5), also install libelf-devel. Make sure you already have installed make and gcc.
+- Install TCL and TK, from the documentation, version 8.4 is required as a minimum. The procedure depends on the distribution used, here's the case of OpenSUSE 11.2 (which includes tk & tcl 8.5), also install libelf-devel. Make sure you already have installed make and gcc.
 
 {% highlight shell %}
 mainwks:/usr/src/packages/SPECS # zypper in tcl-devel tk-devel libelf-devel

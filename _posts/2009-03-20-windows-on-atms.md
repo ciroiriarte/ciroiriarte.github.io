@@ -6,9 +6,14 @@ author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=38'
 permalink: /index.php/2009/03/20/windows-on-atms/
+description: 'Anecdote about inadvertently rebooting a Diebold ATM running Windows XP, and waiting for it to restart and come back online.'
 categories:
     - Nonsense
     - Windows
+tags:
+    - windows
+    - atm
+    - nonsense
 ---
 
 Well, this morning I found to be out of cash. Walked about 6 blocks to the ATM on my way to the office.

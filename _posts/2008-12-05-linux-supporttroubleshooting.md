@@ -6,10 +6,14 @@ author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/2008/12/05/linux-supporttroubleshooting/'
 permalink: /index.php/2008/12/05/linux-supporttroubleshooting/
+description: "Overview of Novell's supportconfig bash script for collecting system data from SLES/Linux systems for remote troubleshooting."
 categories:
     - Uncategorized
 tags:
-    - 'novell linux support sles troubleshooting'
+    - linux
+    - sles
+    - troubleshooting
+    - support
 ---
 
 Dealing with Novell Linux support found about their supportconfig script, it’s really useful while troubleshooting systems remotely (or on-site :D).

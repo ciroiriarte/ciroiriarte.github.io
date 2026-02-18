@@ -6,11 +6,20 @@ author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=153'
 permalink: /index.php/2011/07/07/symsnaponpowershell/
+description: 'Script PowerShell para automatizar snapshots en EMC Symmetrix VMAX para backup de MS SQL Server Analysis Services, usando PSExec y Solutions Enabler.'
 categories:
     - Uncategorized
+tags:
+    - storage
+    - windows
+    - powershell
+    - backup
+    - emc
 ---
 
 Hace poco me tocó automatizar el backup de una aplicación no soportada por NetBackup, puntualmente MS SQL Server Analysis Services. La idea es básicamente realizar un backup en frío sin dejar a la aplicacion fuera de servicio por mucho tiempo.
+
+<!-- more -->
 
 A modo ilustrativo, el equipo productivo tiene presentada una Meta de un VMax y el snapshot de esta Meta debe ser montado en un equipo secundario para copiar los datos a cinta. El script corre en el equipo secundario donde necesitamos PSExec y Solutions Enabler debe estar instalado en ambos equipos. Además se asume que el pool para snapshots y el grupo necesario ya están preparados.
 

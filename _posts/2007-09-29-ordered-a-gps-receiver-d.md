@@ -6,12 +6,15 @@ author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/2007/09/29/ordered-a-gps-receiver-d/'
 permalink: /index.php/2007/09/29/ordered-a-gps-receiver-d/
+description: 'Short post about ordering an i-Blue 747 GPS receiver and track logger, with plans to contribute to OpenStreetMap in Paraguay.'
 categories:
     - Gadget
     - Linux
     - Projects
 tags:
-    - 'toys gps gadget'
+    - gps
+    - gadget
+    - openstreetmap
 ---
 
 ![i-Blue 747](https://commons.wikimedia.org/wiki/File:I-blue_747_A_plus.png)

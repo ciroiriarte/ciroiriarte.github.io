@@ -6,21 +6,24 @@ author: Ciro Iriarte
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=16'
 permalink: /index.php/2008/02/29/ldap-authentication-with-apache2/
+description: 'Guide for setting up LDAP authentication on Apache2 with mod_auth_ldap on SLES9, including SSL certificate setup and .htaccess configuration.'
 categories:
     - apache
     - Linux
     - SLES
 tags:
     - apache2
-    - LDAP
+    - ldap
     - mod_auth_ldap
-    - sles9
+    - sles
     - ssl
 ---
 
-Well, needed to setup authentication using mod\_auth\_ldap, here’s the procedure.
+Well, needed to setup authentication using mod_auth_ldap, here's the procedure.
 
-First we need to make sure the required modules are loaded on apache2 startup, in SLES9 we should modify **/etc/sysconfig/apache2** adding *“ldap”* and *“auth\_ldap”* to the **APACHE\_MODULES** variable. This modules are builtin in apache2, so we don’t need to install them.
+<!-- more -->
+
+First we need to make sure the required modules are loaded on apache2 startup, in SLES9 we should modify **/etc/sysconfig/apache2** adding *"ldap"* and *"auth_ldap"* to the **APACHE_MODULES** variable. This modules are builtin in apache2, so we don't need to install them.
 
 As we are using SSL, we’ll need the certificate of the CA that signs the LDAP server certificate, also two variables need to be setup, **LDAPTrustedCAType** specifies the certificate type, “BASE64\_FILE” would be fine most of the time (the other option would be “DER\_FILE”) and **LDAPTrustedCA** that points to the certificate file.
 
@@ -44,7 +47,7 @@ Well, we are almost there, we need to restart apache now, in sles: **“rcapache
 
 In the logs we should find this lines:
 
-LDAP: Built with OpenLDAP LDAP SDK &lt;— *ldap modules loaded succesfully*  
-LDAP: SSL support available &lt;— *CA cert found and read succesfully*
+LDAP: Built with OpenLDAP LDAP SDK <— *ldap modules loaded succesfully*
+LDAP: SSL support available <— *CA cert found and read succesfully*
 
 That’s all…

@@ -6,8 +6,12 @@ author: Ciro Iriarte
 layout: post
 guid: 'https://cyruspy.wordpress.com/2006/03/29/serial-console/'
 permalink: /index.php/2006/03/29/serial-console/
+description: 'Quick reference for connecting to equipment via serial console using kermit on Linux.'
 categories:
     - Linux
+tags:
+    - linux
+    - serial
 ---
 
 Para conectarse a un equipo (servidor, pc, etc) con kermit al puerto serial:
