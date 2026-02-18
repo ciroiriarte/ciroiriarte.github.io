@@ -68,7 +68,7 @@ Zone America/Asuncion    -3:50:40 -    LMT    1890
             -4:00    Para    PY%sT
 ```
 
-Guardamos estas lineas en un archivo de texto plano para luego ser compilado: **/root/america\_asuncion.zone**
+Guardamos estas lineas en un archivo de texto plano para luego ser compilado: **/root/america_asuncion.zone**
 
 Para los siguientes unix y unix-like, detallo el procedimiento de verificación de fecha de cambio de hora y de corrección.
 
@@ -76,64 +76,64 @@ Para los siguientes unix y unix-like, detallo el procedimiento de verificación 
 
 - Estado inicial
 
-**\#** zdump -v America/Asuncion |grep 2010
+**#** zdump -v America/Asuncion |grep 2010
 
 - Crear archivo con el contenido listado mas arriba
 
-**\#** vi /root/america\_asuncion.zone
+**#** vi /root/america_asuncion.zone
 
 - Compilar la zona horaria
 
-**\#** zic /root/america\_asuncion.zone
+**#** zic /root/america_asuncion.zone
 
 - Verificar cambios, la salida debería diferir de la salida original
 
-**\#** zdump -v America/Asuncion |grep 2010
+**#** zdump -v America/Asuncion |grep 2010
 
 - Copiamos la zona a /etc/localtime. Antiguamente se utilizaba un link simbolico, pero a veces daba problemas de “archivo no encontrado” cuando /usr era un sistema de archivos separado.
 
-**\#** cp /usr/share/zoneinfo/America/Asuncion /etc/localtime
+**#** cp /usr/share/zoneinfo/America/Asuncion /etc/localtime
 
 ## Solaris
 
 - Estado inicial
 
-**\#** zdump -v America/Asuncion|grep 2010
+**#** zdump -v America/Asuncion|grep 2010
 
-- Crear america\_asuncion.zone
+- Crear america_asuncion.zone
 
-**\#** vi /root/america\_asuncion.zone
+**#** vi /root/america_asuncion.zone
 
 - Compilar reglas
 
-**\#** zic /root/america\_asuncion.zone
+**#** zic /root/america_asuncion.zone
 
 - Verificar cambios
 
-**\#** zdump -v America/Asuncion|grep 2010
+**#** zdump -v America/Asuncion|grep 2010
 
 - Asegurarse que el sistema utilice la zona correcta:
 
-**\#** grep TZ= /etc/TIMEZONE  
+**#** grep TZ= /etc/TIMEZONE  
 TZ=America/Asuncion
 
 ## Tru64
 
 - Verificar estado inicial
 
-**\#** zdump -v America/Asuncion|grep 2010
+**#** zdump -v America/Asuncion|grep 2010
 
 - Crear el archivo con las reglas
 
-**\#** vi /root/america\_asuncion.zone
+**#** vi /root/america_asuncion.zone
 
 - Compilar archivo de reglas
 
-**\#** zic /root/america\_asuncion.zone
+**#** zic /root/america_asuncion.zone
 
 - Verificar cambios
 
-**\#** zdump -v America/Asuncion|grep 2010
+**#** zdump -v America/Asuncion|grep 2010
 
 ## HPUX
 
@@ -146,16 +146,16 @@ Ref:
 http://forums11.itrc.hp.com/service/forums/questionanswer.do?threadId=1089676  
 http://forums11.itrc.hp.com/service/forums/questionanswer.do?admit=109447626+1267560461229+28353475&threadId=1007176
 
-\# ./dst.pl
+**#** ./dst.pl
 
 - Editamos el archivo de sistema que contiene las reglas
 
-**\#** vi /usr/lib/tztab
+**#** vi /usr/lib/tztab
 
 - Agregamos al final del archivo:
 
 ```
-<pre style="padding-left:30px;"># Horario normal es PYT con diferencia GMT-4, el horario de verano es PYST con diferencia GMT-3.
+# Horario normal es PYT con diferencia GMT-4, el horario de verano es PYST con diferencia GMT-3.
 PYT4PYST
 # Minuto - Hora - Dia - Mes - Año - Dia Semana.
 0 23 8-14 4 2010-2038 6 PYT4
@@ -164,27 +164,19 @@ PYT4PYST
 
 - Definimos la zona horaria
 
-**\#** vi /etc/TIMEZONE
+**#** vi /etc/TIMEZONE
 
 ```
-<pre style="padding-left:30px;">TZ=PYT4PYST
+TZ=PYT4PYST
 export TZ
 ```
 
 - Corroboramos los cambios
 
-**\#** ./dst.pl
+**#** ./dst.pl
 
 ## Observación.
 
 Algunos procesos que corren perpetuamente puede requerir un reinicio luego de este cambio. Uno de estos seria el crond.
 
 Y eso es todo, ahora nuestros sistemas contemplan la nueva regla vigente desde este año.
-
-<div id="_mcePaste" style="overflow:hidden;position:absolute;left:-10000px;top:182px;width:1px;height:1px;">```
-<pre style="margin-left:2em;">```
-ftp://elsie.nci.nih.gov/pub/tz
-```
-```
-
-</div>
