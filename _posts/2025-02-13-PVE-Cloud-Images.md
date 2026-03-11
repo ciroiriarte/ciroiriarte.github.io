@@ -20,6 +20,8 @@ PVE provides the feature of instantiating a VM from a template. We'll be creatin
 
 <!--more-->
 
+> **Note:** For ease of use, this knowhow was incorporated into a script available at [pve-import-cloud-images](https://github.com/ciroiriarte/pve-scripts/blob/master/pve-import-cloud-images).
+
 # Pre-requisites
 
 A fully configured PVE cluster must be set, with properly configured bridges & datastore to be used.
