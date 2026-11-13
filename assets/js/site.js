@@ -29,8 +29,8 @@
     return Promise.resolve();
   }
 
-  document.querySelectorAll("div.highlight > pre, pre.highlight").forEach(function (pre) {
-    var host = pre.parentElement.classList.contains("highlight") ? pre.parentElement : pre;
+  document.querySelectorAll(".highlight > pre").forEach(function (pre) {
+    var host = pre.parentElement;
     if (host.querySelector(".copy-code")) return;
     var btn = document.createElement("button");
     btn.type = "button";
