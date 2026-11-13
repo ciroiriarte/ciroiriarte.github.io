@@ -56,11 +56,15 @@ Leve em conta que “Group Object Class Attribute Name” pode receber “groupo
 Olhando os logs, o atributo para a busca de associação de usuários parece estar fixo em UID, então a busca é:
 
 
-> SRCH base="cn=groups,cn=accounts,dc=ipa,dc=mydomain,dc=com" scope=2 filter="(member=john.doe)" attrs="cn"
+{% highlight text %}
+SRCH base="cn=groups,cn=accounts,dc=ipa,dc=mydomain,dc=com" scope=2 filter="(member=john.doe)" attrs="cn"
+{% endhighlight %}
 
 Quando deveria ser algo como:
 
-> SRCH base="cn=groups,cn=accounts,dc=ipa,dc=mydomain,dc=com" scope=2 filter="(member=uid=john.doe,cn=users,cn=accounts,dc=ipa,dc=mydomain,dc=com)" attrs="cn"
+{% highlight text %}
+SRCH base="cn=groups,cn=accounts,dc=ipa,dc=mydomain,dc=com" scope=2 filter="(member=uid=john.doe,cn=users,cn=accounts,dc=ipa,dc=mydomain,dc=com)" attrs="cn"
+{% endhighlight %}
 
 ## O workaround {#the-workaround}
 

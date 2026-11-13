@@ -23,20 +23,21 @@ Find a suitable repository using http://software.opensuse.org/search
 
 Add the repository to your system (you don’t HAVE TO, but this way you can get updates later):
 
-> zypper addrepo http://download.opensuse.org/repositories/home:/swyear/openSUSE\_11.0 “Japanese Fonts”
+{% highlight shell %}
+zypper addrepo http://download.opensuse.org/repositories/home:/swyear/openSUSE_11.0 "Japanese Fonts"
+{% endhighlight %}
 
 Install the packages:
 
-> zypper install ttf-wqy-zenhei wqy-bitmapfont
+{% highlight shell %}
+zypper install ttf-wqy-zenhei wqy-bitmapfont
+{% endhighlight %}
 
 It will ask if it should trust and later import the key, just answer “YES” to both questions. You’ll have to restart Firefox to use this new fonts..
 
 Pages to test rendering:
 
-> <https://ja.wikipedia.org/wiki/%E6%97%A5%E6%9C%AC>
-> 
-> <http://news.google.com/news?ned=cn>
-> 
-> <http://news.google.com/news?ned=jp>
-> 
-> <http://kayanomori.net/memo/index.php?iFolder%20Simple%20Server>
+- <https://ja.wikipedia.org/wiki/%E6%97%A5%E6%9C%AC>
+- <http://news.google.com/news?ned=cn>
+- <http://news.google.com/news?ned=jp>
+- <http://kayanomori.net/memo/index.php?iFolder%20Simple%20Server>

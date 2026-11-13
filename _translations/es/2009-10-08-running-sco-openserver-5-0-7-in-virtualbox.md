@@ -95,8 +95,10 @@ Aquí tienes un parche:
 
 Reenlaza el kernel y reinicia:
 
-> cd /etc/conf/cf.d  
-> ./link\_unix
+{% highlight shell %}
+cd /etc/conf/cf.d
+./link_unix
+{% endhighlight %}
 
 **Reportes de bugs pendientes**:
 

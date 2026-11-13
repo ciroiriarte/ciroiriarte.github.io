@@ -57,11 +57,15 @@ Take into account that “Group Object Class Attribute Name” can take “group
 Looking at the logs, the attribute for user membership lookup seems to be hardcoded to UID, hence the lookup is:
 
 
-> SRCH base="cn=groups,cn=accounts,dc=ipa,dc=mydomain,dc=com" scope=2 filter="(member=john.doe)" attrs="cn"
+{% highlight text %}
+SRCH base="cn=groups,cn=accounts,dc=ipa,dc=mydomain,dc=com" scope=2 filter="(member=john.doe)" attrs="cn"
+{% endhighlight %}
 
 When it should be like:
 
-> SRCH base="cn=groups,cn=accounts,dc=ipa,dc=mydomain,dc=com" scope=2 filter="(member=uid=john.doe,cn=users,cn=accounts,dc=ipa,dc=mydomain,dc=com)" attrs="cn"
+{% highlight text %}
+SRCH base="cn=groups,cn=accounts,dc=ipa,dc=mydomain,dc=com" scope=2 filter="(member=uid=john.doe,cn=users,cn=accounts,dc=ipa,dc=mydomain,dc=com)" attrs="cn"
+{% endhighlight %}
 
 ## The workaround
 

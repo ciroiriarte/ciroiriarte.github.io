@@ -17,15 +17,17 @@ Bueno, un ex compañero del colegio me trajo hoy su laptop y me dijo que de pron
 
 Arranqué un disco de rescate de Linux y, tras inspeccionar el disco duro, vi que tenía 3 particiones:
 
-> Disco /dev/sdb: 160.0 GB, 160041885696 bytes  
-> 255 heads, 63 sectors/track, 19457 cylinders  
-> Units = cilindros of 16065 \* 512 = 8225280 bytes  
-> Disk identifier: 0xac23bbdb
-> 
-> Disposit. Inicio Comienzo Fin Bloques Id Sistema  
-> /dev/sdb1 1 18748 150593278+ 83 Linux  
-> /dev/sdb2 18749 19457 5695042+ 5 Extendida  
-> /dev/sdb5 18749 19457 5695011 82 Linux swap / Solaris
+{% highlight text %}
+Disco /dev/sdb: 160.0 GB, 160041885696 bytes
+255 heads, 63 sectors/track, 19457 cylinders
+Units = cilindros of 16065 * 512 = 8225280 bytes
+Disk identifier: 0xac23bbdb
+
+Disposit. Inicio Comienzo Fin Bloques Id Sistema
+/dev/sdb1 1 18748 150593278+ 83 Linux
+/dev/sdb2 18749 19457 5695042+ 5 Extendida
+/dev/sdb5 18749 19457 5695011 82 Linux swap / Solaris
+{% endhighlight %}
 
 Mmm, una partición Linux... ¿Pero cómo puede ser?, si es un tipo que solo usa Windows… Obviamente alguien la embarró en grande…
 

@@ -56,11 +56,15 @@ Tieni presente che “Group Object Class Attribute Name” può assumere “grou
 Guardando i log, l'attributo per la ricerca dell'appartenenza degli utenti sembra essere fisso su UID, quindi la ricerca è:
 
 
-> SRCH base="cn=groups,cn=accounts,dc=ipa,dc=mydomain,dc=com" scope=2 filter="(member=john.doe)" attrs="cn"
+{% highlight text %}
+SRCH base="cn=groups,cn=accounts,dc=ipa,dc=mydomain,dc=com" scope=2 filter="(member=john.doe)" attrs="cn"
+{% endhighlight %}
 
 Mentre dovrebbe essere come:
 
-> SRCH base="cn=groups,cn=accounts,dc=ipa,dc=mydomain,dc=com" scope=2 filter="(member=uid=john.doe,cn=users,cn=accounts,dc=ipa,dc=mydomain,dc=com)" attrs="cn"
+{% highlight text %}
+SRCH base="cn=groups,cn=accounts,dc=ipa,dc=mydomain,dc=com" scope=2 filter="(member=uid=john.doe,cn=users,cn=accounts,dc=ipa,dc=mydomain,dc=com)" attrs="cn"
+{% endhighlight %}
 
 ## Il workaround {#the-workaround}
 

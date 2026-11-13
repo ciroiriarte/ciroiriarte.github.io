@@ -28,9 +28,11 @@ Este es un diagrama básico de lo que se probó. Cada endpoint OPNSense correrí
 
 Rutas tal como se definieron en el controller:
 
-> 10.1.0.0/24 via 172.16.1.10
-> 
-> 10.2.0.0/24 via 172.16.1.20
+{% highlight text %}
+10.1.0.0/24 via 172.16.1.10
+
+10.2.0.0/24 via 172.16.1.20
+{% endhighlight %}
 
 ## El problema {#the-issue}
 

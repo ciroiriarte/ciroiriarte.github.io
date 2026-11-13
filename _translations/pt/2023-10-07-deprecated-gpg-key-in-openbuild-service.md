@@ -92,33 +92,35 @@ Vamos usar o cliente/ferramenta CLI do OBS: osc.
 
 Na man page do osc podemos encontrar:
 
->        signkey
->              Manage Project Signing Key
->
->              osc signkey [--create|--delete|--extend] <PROJECT> osc signkey [--notraverse] <PROJECT>
->
->              This command is for managing gpg keys. It shows the public key by default. There is no way to download or upload the private  part  of  a
->              key by design.
->
->              However you can create a new own key. You may want to consider to sign the public key with your own existing key.
->
->              If  a  project  has  no  key,  the  key  from upper level project will be used (e.g. when dropping "KDE:KDE4:Community" key, the one from
->              "KDE:KDE4" will be used).
->
->              WARNING: THE OLD KEY CANNOT BE RESTORED AFTER USING DELETE OR CREATE
->
->              Usage:
->                  osc signkey [ARGS...]
->
->              Options:
->                  -h, --help  show this help message and exit
->                  --sslcert   fetch SSL certificate instead of GPG key
->                  --notraverse
->                              don't traverse projects upwards to find key
->                  --delete    delete the gpg signing key in this project
->                  --extend    extend expiration date of the gpg public key for this
->                              project
->                  --create    create new gpg signing key for this project
+{% highlight text %}
+       signkey
+             Manage Project Signing Key
+
+             osc signkey [--create|--delete|--extend] <PROJECT> osc signkey [--notraverse] <PROJECT>
+
+             This command is for managing gpg keys. It shows the public key by default. There is no way to download or upload the private  part  of  a
+             key by design.
+
+             However you can create a new own key. You may want to consider to sign the public key with your own existing key.
+
+             If  a  project  has  no  key,  the  key  from upper level project will be used (e.g. when dropping "KDE:KDE4:Community" key, the one from
+             "KDE:KDE4" will be used).
+
+             WARNING: THE OLD KEY CANNOT BE RESTORED AFTER USING DELETE OR CREATE
+
+             Usage:
+                 osc signkey [ARGS...]
+
+             Options:
+                 -h, --help  show this help message and exit
+                 --sslcert   fetch SSL certificate instead of GPG key
+                 --notraverse
+                             don't traverse projects upwards to find key
+                 --delete    delete the gpg signing key in this project
+                 --extend    extend expiration date of the gpg public key for this
+                             project
+                 --create    create new gpg signing key for this project
+{% endhighlight %}
 
 
 Em uma máquina Linux, você precisa seguir este procedimento:

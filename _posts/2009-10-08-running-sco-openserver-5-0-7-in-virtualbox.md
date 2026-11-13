@@ -96,8 +96,10 @@ Here’s a patch:
 
 Relink the kernel and reboot:
 
-> cd /etc/conf/cf.d  
-> ./link\_unix
+{% highlight shell %}
+cd /etc/conf/cf.d
+./link_unix
+{% endhighlight %}
 
 **Pending bug reports**:
 

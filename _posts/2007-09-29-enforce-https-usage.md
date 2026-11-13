@@ -32,4 +32,4 @@ RewriteRule ^/(.*) https://%{HTTP_HOST}/$1 [NC,R,L]
 </IfModule>
 ```
 
-The exact path to mod_rewrite module can be found with "rpm -ql apache2|grep rewrite". Now restart apache (rcapache2 restart)
+The exact path to mod_rewrite module can be found with `rpm -ql apache2 | grep rewrite`. Now restart apache (`rcapache2 restart`)

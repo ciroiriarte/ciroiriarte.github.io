@@ -23,78 +23,98 @@ SLES11 + SLE11-SDK + Updates
 
 *# Repositórios adicionais*
 
-> zypper ar -f http://download.opensuse.org/repositories/network:/utilities/SLE_11_SP1 network:utilities
+{% highlight shell %}
+zypper ar -f http://download.opensuse.org/repositories/network:/utilities/SLE_11_SP1 network:utilities
+{% endhighlight %}
 
 *# Instalação dos pacotes*
 
-> zypper in apache2-mod_php5 php5-mysql php5-gd php5-snmp php5-pear net-snmp graphviz-gd graphviz subversion mysql rrdtool fping ImageMagick whois mtr nmap ipmitool
+{% highlight shell %}
+zypper in apache2-mod_php5 php5-mysql php5-gd php5-snmp php5-pear net-snmp graphviz-gd graphviz subversion mysql rrdtool fping ImageMagick whois mtr nmap ipmitool
+{% endhighlight %}
 
 *# Módulos adicionais usando PEAR*
 
-> pear install Net_IPv6
-> pear install Net_IPv4
+{% highlight shell %}
+pear install Net_IPv6
+pear install Net_IPv4
+{% endhighlight %}
 
 *# Para monitorar VMs usando libvirt*
 
-> zypper in libvirt
+{% highlight shell %}
+zypper in libvirt
+{% endhighlight %}
 
 *# Checkout do Observium a partir do SVN*
 
-> cd /opt
-> svn co http://www.observium.org/svn/observer/trunk observium
+{% highlight shell %}
+cd /opt
+svn co http://www.observium.org/svn/observer/trunk observium
+{% endhighlight %}
 
 **Banco de dados**
 
 *# Criação do BD e do usuário*
 
-> mysql> create database observium;
-
-> mysql> grant all privileges on observium.* to 'observium'@'localhost' -> identified by '<pass>';
+{% highlight text %}
+mysql> create database observium;
+mysql> grant all privileges on observium.* to 'observium'@'localhost'
+    -> identified by '<pass>';
+{% endhighlight %}
 
 *# Criação do esquema*
 
-> cd observium
-
-> mysql -u observium -p observium < database-schema.sql
+{% highlight shell %}
+cd observium
+mysql -u observium -p observium < database-schema.sql
+{% endhighlight %}
 
 *# Atualizar o config.php para incluir as informações de conexão ao BD*
 
-> cp config.php{.default,}
-
-> vi config.php
+{% highlight shell %}
+cp config.php{.default,}
+vi config.php
+{% endhighlight %}
 
 *# Atualizações do esquema*
 
-> for F in database-update*;do scripts/update-sql.php $F;done
+{% highlight shell %}
+for F in database-update*;do scripts/update-sql.php $F;done
+{% endhighlight %}
 
 *# Criação dos diretórios de RRD e gráficos*
 
-> mkdir graphs rrd
-> chown wwwrun: graphs/ rrd/
+{% highlight shell %}
+mkdir graphs rrd
+chown wwwrun: graphs/ rrd/
+{% endhighlight %}
 
 **CAMINHOS**
 
 *# fping*
 
-> vi config.php
+{% highlight shell %}
+vi config.php
+{% endhighlight %}
 
-> ---
-
-> $config['fping'] = "/usr/sbin/fping";
-
-> ---
+{% highlight php %}
+$config['fping'] = "/usr/sbin/fping";
+{% endhighlight %}
 
 **Apache**
 
 *# Habilitar o Mod Rewrite*
 
-> a2enmod rewrite
+{% highlight shell %}
+a2enmod rewrite
+{% endhighlight %}
 
 *# Configuração do vhost do apache*
 
-> vi /etc/apache2/vhosts.d/observium.conf
-
-> ---
+{% highlight shell %}
+vi /etc/apache2/vhosts.d/observium.conf
+{% endhighlight %}
 
 ```apache
 <VirtualHost *:80>
@@ -111,42 +131,49 @@ Allow from all
 </VirtualHost>
 ```
 
-> ---
 
 *# Diretório de destino dos logs*
 
-> mkdir /opt/observium/logs/
-
-> chown wwwrun: /opt/observium/logs/
+{% highlight shell %}
+mkdir /opt/observium/logs/
+chown wwwrun: /opt/observium/logs/
+{% endhighlight %}
 
 *# Inicialização*
 
-> rcapache2 start
-> chkconfig apache2 on
+{% highlight shell %}
+rcapache2 start
+chkconfig apache2 on
+{% endhighlight %}
 
 *# Usuários (para produção, é melhor configurar LDAP)*
 
 *# Administradores, nível 10*
 
-> /opt/observium/adduser.php user1 pass 10
+{% highlight shell %}
+/opt/observium/adduser.php user1 pass 10
+{% endhighlight %}
 
 **Dispositivos**
 
 *# Adicionando novos dispositivos*
 
-> cd /opt/observium/ && ./addhost.php <hostname> <community> v2c
+{% highlight shell %}
+cd /opt/observium/ && ./addhost.php <hostname> <community> v2c
+{% endhighlight %}
 
 *# Descoberta inicial + coleta de dados*
 
-> ./discovery.php -h all
-
-> ./poller.php -h all
+{% highlight shell %}
+./discovery.php -h all
+./poller.php -h all
+{% endhighlight %}
 
 *# Habilitar a coleta de dados usando o cron*
 
-> vi /etc/cron.d/observium
-
-> ---
+{% highlight shell %}
+vi /etc/cron.d/observium
+{% endhighlight %}
 
 ```
 33 */6 * * * root cd /opt/observium/ && ./discovery.php -h all >> /dev/null 2>&1
@@ -161,21 +188,24 @@ Allow from all
 */5 * * * * root cd /opt/observium/ && ./poller.php -i 8 -n 7 >> /dev/null 2>&1
 ```
 
-> ---
 
 **Ajuste de desempenho**
 
 *# Instalar o XCache, reconstruir o pacote a partir do OBS, já que não existe para o SP1*
 
-> mkdir ~/tmp
-> cd ~/tmp
-> wget http://download.opensuse.org/repositories/server:/php:/extensions/SLE_11/src/php5-xcache-1.3.2-2.1.src.rpm
-> rpmbuild --rebuild php5-xcache-1.3.2-2.1.src.rpm
+{% highlight shell %}
+mkdir ~/tmp
+cd ~/tmp
+wget http://download.opensuse.org/repositories/server:/php:/extensions/SLE_11/src/php5-xcache-1.3.2-2.1.src.rpm
+rpmbuild --rebuild php5-xcache-1.3.2-2.1.src.rpm
+{% endhighlight %}
 
 *# Instalar o resultado do comando acima*
 
 *# Reiniciar o apache*
 
-> rcapache2 restart
+{% highlight shell %}
+rcapache2 restart
+{% endhighlight %}
 
 É isso, o mesmo procedimento deve funcionar com openSUSE, desde que você use os repositórios certos…
