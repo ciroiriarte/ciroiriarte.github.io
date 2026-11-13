@@ -1,12 +1,9 @@
 ---
-id: 120
-title: 'InstantClient RPMs'
-date: '2011-01-03T00:59:38-03:00'
+title: InstantClient RPMs
+description: "Sharing an enhanced Oracle InstantClient RPM spec file based on Remi Collet work, with added ORACLE_HOME, tnsnames.ora support, and other improvements for openSUSE Build Service."
+date: 2011-01-03 00:59:38 -0300
 author: Ciro Iriarte
-layout: post
-guid: 'http://cyruspy.wordpress.com/?p=120'
 permalink: /index.php/2011/01/03/instantclient-rpms/
-description: 'Sharing an enhanced Oracle InstantClient RPM spec file based on Remi Collet work, with added ORACLE_HOME, tnsnames.ora support, and other improvements for openSUSE Build Service.'
 lang: en
 categories:
   - linux
@@ -33,7 +30,10 @@ I made some changes to it (them, as they were split in two) and I’m sharing th
 
 **My changes to Remi’s SPEC files:**
 
-`<br></br>* Sun Jan 2 2011 Ciro Iriarte  11.2.0.2.0<br></br>- Added ORACLE_HOME definition<br></br>- Added tnsnames.ora example and required directory structure`
+{% highlight text %}
+* Sun Jan 2 2011 Ciro Iriarte  11.2.0.2.0
+- Added ORACLE_HOME definition
+- Added tnsnames.ora example and required directory structure
 
 * Sat Jan 1 2011 Ciro Iriarte 11.2.0.2.0
 - merge i386/x86_64 SPECs again
@@ -46,6 +46,7 @@ I made some changes to it (them, as they were split in two) and I’m sharing th
 - general cleanup to make openSUSE 11.3 sanity checks happy
  o ToDo: Verify rpmlint filters
 - add precomp and precomp-devel sub-packages
+{% endhighlight %}
 
 **Ref:**
 

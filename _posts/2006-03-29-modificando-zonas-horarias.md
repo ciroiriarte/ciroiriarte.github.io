@@ -1,12 +1,9 @@
 ---
-id: 9
-title: 'Modificando zonas horarias'
-date: '2006-03-29T01:50:01-04:00'
+title: Modificando zonas horarias
+description: "Guía para modificar archivos de zonas horarias en Linux usando zic y la base de datos Olson, con un ejemplo para Paraguay."
+date: 2006-03-29 01:50:01 -0400
 author: Ciro Iriarte
-layout: post
-guid: 'https://cyruspy.wordpress.com/2006/03/29/modificando-zonas-horarias/'
 permalink: /index.php/2006/03/29/modificando-zonas-horarias/
-description: 'Guía para modificar archivos de zonas horarias en Linux usando zic y la base de datos Olson, con un ejemplo para Paraguay.'
 lang: es
 categories:
   - linux

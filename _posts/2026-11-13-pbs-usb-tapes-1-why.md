@@ -1,13 +1,9 @@
 ---
-permalink: /datacenter/2026/11/13/pbs-usb-tapes-1-why.html
 title: "USB disks as tapes for Proxmox Backup Server (1/3): why, and what's new"
-description: Why you might want PBS tape jobs on plain USB disks, what mhVTL gained to make it work (raw-disk cartridges, hot-plug bays, real drive encryption) and where it is heading.
+description: "Why you might want PBS tape jobs on plain USB disks, what mhVTL gained to make it work (raw-disk cartridges, hot-plug bays, real drive encryption) and where it is heading."
 date: 2026-11-13 10:00:00 -0300
-layout: post
 author: Ciro Iriarte
-series: pbs-usb-tapes
-series_part: 1
-series_title: "Why, and what's new"
+permalink: /datacenter/2026/11/13/pbs-usb-tapes-1-why.html
 lang: en
 categories:
   - storage-backup
@@ -16,6 +12,9 @@ tags:
   - pbs
   - tape
   - mhvtl
+series: pbs-usb-tapes
+series_part: 1
+series_title: "Why, and what's new"
 ---
 
 A Proxmox Backup Server datastore is online storage. It is fast, deduplicated and always online. That's the problem: whoever gets root on the PBS host, or a token with enough privileges, can reach it too. The copy that has to survive ransomware, a fat-fingered `rm` or a fire should sit on a shelf, unplugged, ideally in another building.

@@ -1,9 +1,9 @@
 ---
-permalink: /datacenter/networking/2023/12/27/setting-up-junos-devices-for-jsi.html
 title: Setting up JunOS devices for Juniper Support Insights
 description: Walkthrough NE setup to allow vLWC to connect and extract information.
-layout: post
+date: 2023-12-27 00:00:00 -0300
 author: Ciro Iriarte
+permalink: /datacenter/networking/2023/12/27/setting-up-junos-devices-for-jsi.html
 lang: en
 categories:
   - networking
@@ -27,12 +27,7 @@ After reading the [JSI FAQ](https://www.juniper.net/documentation/us/en/software
 An overview of how data collection works can be found in this [flyer](https://www.juniper.net/content/dam/www/assets/flyers/us/en/juniper-support-insights-security-and-privacy-overview.pdf)
 
 
-<figure>
-  <a href="/assets/img/2023-12-27_datacollection_overview.png">
-  <img src="/assets/img/2023-12-27_datacollection_overview.png" alt="Flow Overview"/>
-  </a>
-  <figcaption><i>Image 1 - Data collection overview</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-12-27_datacollection_overview.png" description="Image 1 - Data collection overview" alt="Flow Overview" width=1102 height=553 %}
 
 ## Pre-requirements
 
@@ -123,28 +118,13 @@ In this environment we don't have TACACS+ (it's 2023 Juniper team, can we please
 #### Configlet creation
 
 1. Reach the configlet creation page.
-<figure>
-  <a href="/assets/img/2023-12-27_configlet00.png">
-  <img src="/assets/img/2023-12-27_configlet00.png" alt="Apstra screenshot"/>
-  </a>
-  <figcaption><i>Image 2 - Design --> Configlets</i></figcaption>
-</figure>
-<figure>
-  <a href="/assets/img/2023-12-27_configlet01.png">
-  <img src="/assets/img/2023-12-27_configlet01.png" alt="Apstra screenshot"/>
-  </a>
-  <figcaption><i>Image 3 - Create configlet button "</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-12-27_configlet00.png" description="Image 2 - Design --> Configlets" alt="Apstra screenshot" width=259 height=613 %}
+{% include image.html url="/assets/img/2023-12-27_configlet01.png" description="Image 3 - Create configlet button &quot;" alt="Apstra screenshot" width=1352 height=262 %}
 
 {:start="2"}
 2. Fill in the basic configlet data
 
-<figure>
-  <a href="/assets/img/2023-12-27_configlet02.png">
-  <img src="/assets/img/2023-12-27_configlet02.png" alt="Apstra screenshot"/>
-  </a>
-  <figcaption><i>Image 4 - Actual configlet create</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-12-27_configlet02.png" description="Image 4 - Actual configlet create" alt="Apstra screenshot" width=955 height=720 %}
 
 {:start="3"}
 3. Paste the following content in the body, and click "Create"
@@ -177,36 +157,16 @@ To actually apply the previously created configlet to your network elements, you
 
 1. Import configlet to the blueprint, assigning it to the devices of interest. In my case, that would be all the spines and leaf switches.
 
-<figure>
-  <a href="/assets/img/2023-12-27_import-configlet00.png">
-  <img src="/assets/img/2023-12-27_import-configlet00.png" alt="Apstra screenshot"/>
-  </a>
-  <figcaption><i>Image 5 - Reach the import section</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-12-27_import-configlet00.png" description="Image 5 - Reach the import section" alt="Apstra screenshot" width=1455 height=437 %}
 
-<figure>
-  <a href="/assets/img/2023-12-27_import-configlet01.png">
-  <img src="/assets/img/2023-12-27_import-configlet01.png" alt="Apstra screenshot"/>
-  </a>
-  <figcaption><i>Image 6 - Select configlet and assign to devices of interest</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-12-27_import-configlet01.png" description="Image 6 - Select configlet and assign to devices of interest" alt="Apstra screenshot" width=1020 height=777 %}
 
 {:start="2"}
 2. Commit the configuration to be pushed to the devices.
 
-<figure>
-  <a href="/assets/img/2023-12-27_commit00.png">
-  <img src="/assets/img/2023-12-27_commit00.png" alt="Apstra screenshot"/>
-  </a>
-  <figcaption><i>Image 7 - Request to push changes to the NEs</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-12-27_commit00.png" description="Image 7 - Request to push changes to the NEs" alt="Apstra screenshot" width=1337 height=491 %}
 
-<figure>
-  <a href="/assets/img/2023-12-27_commit01.png">
-  <img src="/assets/img/2023-12-27_commit01.png" alt="Apstra screenshot"/>
-  </a>
-  <figcaption><i>Image 8 - Fill-in the changelog</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-12-27_commit01.png" description="Image 8 - Fill-in the changelog" alt="Apstra screenshot" width=976 height=377 %}
 
 ## Standalone switches
 

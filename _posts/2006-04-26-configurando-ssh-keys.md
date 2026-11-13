@@ -1,19 +1,16 @@
 ---
-id: 13
-title: 'Configurando SSH keys'
-date: '2006-04-26T02:05:42-04:00'
+title: Configurando SSH keys
+description: "Guía paso a paso para configurar autenticación SSH con llaves DSA en Linux, desde la generación del par de llaves hasta la configuración en el host remoto."
+date: 2006-04-26 02:05:42 -0400
 author: Ciro Iriarte
-layout: post
-guid: 'https://cyruspy.wordpress.com/2006/04/26/configurando-ssh-keys/'
 permalink: /index.php/2006/04/26/configurando-ssh-keys/
-description: 'Guía paso a paso para configurar autenticación SSH con llaves DSA en Linux, desde la generación del par de llaves hasta la configuración en el host remoto.'
-deprecated: true
 lang: es
 categories:
   - linux
   - security
 tags:
   - ssh
+deprecated: true
 ---
 
 Para dejar de lado la autenticacion por contraseña se usan keys DSA. Seguir los siguientes pasos:

@@ -1,9 +1,9 @@
 ---
-permalink: /homelab/2023/09/07/vsan-esa-on-esxi-over-pve.html
 title: vSAN ESA on ESXi-over-PVE
 description: Nested vSAN ESA cluster for testing purposes
-layout: post
+date: 2023-09-07 00:00:00 -0400
 author: Ciro Iriarte
+permalink: /homelab/2023/09/07/vsan-esa-on-esxi-over-pve.html
 lang: en
 categories:
   - virtualization
@@ -87,28 +87,13 @@ You can setup the vSAN Cluster as you would normally do, during vCenter Deployme
 
 First warning you would see, is that the NICs are not supported (25GbE is mandated). You can keep moving forward eitherway.
 
-<figure>
-  <a href="/assets/img/2023-09-07-nic-speed-warning.png">
-  <img src="/assets/img/2023-09-07-nic-speed-warning.png" alt="NIC warning"/>
-  </a>
-  <figcaption><i>Image 1 - NIC warning</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-09-07-nic-speed-warning.png" description="Image 1 - NIC warning" alt="NIC warning" width=1365 height=907 %}
 
 If you keep moving forward, disks will be marked as incompatible. Just claim them manually.
 
-<figure>
-  <a href="/assets/img/2023-09-07-incompatible-disk-warning.png">
-  <img src="/assets/img/2023-09-07-incompatible-disk-warning.png" alt="Disk marked as not compatible"/>
-  </a>
-  <figcaption><i>Image 2 - Disk marked as not compatible</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-09-07-incompatible-disk-warning.png" description="Image 2 - Disk marked as not compatible" alt="Disk marked as not compatible" width=1817 height=683 %}
 
-<figure>
-  <a href="/assets/img/2023-09-07-disk-claiming.png">
-  <img src="/assets/img/2023-09-07-disk-claiming.png" alt="Manual claim"/>
-  </a>
-  <figcaption><i>Image 3 - Manual claim</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-09-07-disk-claiming.png" description="Image 3 - Manual claim" alt="Manual claim" width=1800 height=812 %}
 
 ## Outcome
 

@@ -1,12 +1,9 @@
 ---
-id: 43
-title: 'Won a Netbook!, thanks Novell!!'
-date: '2009-08-03T17:13:35-04:00'
+title: "Won a Netbook!, thanks Novell!!"
+description: Short post about winning a netbook as a reward for participating in the SLES11 beta testing program with Novell/SUSE.
+date: 2009-08-03 17:13:35 -0400
 author: Ciro Iriarte
-layout: post
-guid: 'http://cyruspy.wordpress.com/2009/08/03/won-a-netbook-thanks-novell/'
 permalink: /index.php/2009/08/03/won-a-netbook-thanks-novell/
-description: 'Short post about winning a netbook as a reward for participating in the SLES11 beta testing program with Novell/SUSE.'
 lang: en
 categories:
   - misc

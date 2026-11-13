@@ -1,12 +1,9 @@
 ---
-id: 46
-title: 'Running SCO Openserver 5.0.7 in VirtualBox'
-date: '2009-10-08T16:38:22-04:00'
+title: Running SCO Openserver 5.0.7 in VirtualBox
+description: "Technical guide for virtualizing SCO OpenServer 5.0.7 on VirtualBox, including VM configuration, installation procedure, network setup, and a Guru Meditation workaround."
+date: 2009-10-08 16:38:22 -0400
 author: Ciro Iriarte
-layout: post
-guid: 'http://cyruspy.wordpress.com/?p=46'
 permalink: /index.php/2009/10/08/running-sco-openserver-5-0-7-in-virtualbox/
-description: 'Technical guide for virtualizing SCO OpenServer 5.0.7 on VirtualBox, including VM configuration, installation procedure, network setup, and a Guru Meditation workaround.'
 lang: en
 categories:
   - virtualization

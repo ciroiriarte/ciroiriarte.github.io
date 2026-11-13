@@ -1,12 +1,9 @@
 ---
-id: 153
-title: 'Automatizando Snapshots en Symmetrix VMAX con Powershell'
-date: '2011-07-07T10:26:25-04:00'
+title: Automatizando Snapshots en Symmetrix VMAX con Powershell
+description: "Script PowerShell para automatizar snapshots en EMC Symmetrix VMAX para backup de MS SQL Server Analysis Services, usando PSExec y Solutions Enabler."
+date: 2011-07-07 10:26:25 -0400
 author: Ciro Iriarte
-layout: post
-guid: 'http://cyruspy.wordpress.com/?p=153'
 permalink: /index.php/2011/07/07/symsnaponpowershell/
-description: 'Script PowerShell para automatizar snapshots en EMC Symmetrix VMAX para backup de MS SQL Server Analysis Services, usando PSExec y Solutions Enabler.'
 lang: es
 categories:
   - storage-backup

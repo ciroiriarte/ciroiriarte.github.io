@@ -1,12 +1,9 @@
 ---
-id: 116
-title: 'Take that Cruise!!'
-date: '2010-09-28T14:24:33-04:00'
+title: "Take that Cruise!!"
+description: "An xkcd comic about sysadmin devotion to duty, even on a cruise."
+date: 2010-09-28 14:24:33 -0400
 author: Ciro Iriarte
-layout: post
-guid: 'http://cyruspy.wordpress.com/?p=116'
 permalink: /index.php/2010/09/28/take-that-cruise/
-description: 'An xkcd comic about sysadmin devotion to duty, even on a cruise.'
 lang: en
 categories:
   - misc

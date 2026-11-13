@@ -1,12 +1,9 @@
 ---
-id: 14
-title: 'Enforce HTTPS usage'
-date: '2007-09-29T05:23:10-04:00'
+title: Enforce HTTPS usage
+description: "How to force HTTPS on Apache2 using mod_rewrite on SLES9/10, redirecting all HTTP traffic to the HTTPS port with a simple configuration file."
+date: 2007-09-29 05:23:10 -0400
 author: Ciro Iriarte
-layout: post
-guid: 'http://cyruspy.wordpress.com/2007/09/29/enforce-https-usage/'
 permalink: /index.php/2007/09/29/enforce-https-usage/
-description: 'How to force HTTPS on Apache2 using mod_rewrite on SLES9/10, redirecting all HTTP traffic to the HTTPS port with a simple configuration file.'
 lang: en
 categories:
   - linux

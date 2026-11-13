@@ -1,13 +1,9 @@
 ---
-permalink: /datacenter/2026/11/13/pbs-usb-tapes-2-cli.html
 title: "USB disks as tapes for Proxmox Backup Server (2/3): the CLI way"
-description: Step by step, from the shell. Install mhVTL, define a library with a USB dock as its mail slot, format disks as tape cartridges, and run encrypted PBS tape jobs and restores against them.
+description: "Step by step, from the shell. Install mhVTL, define a library with a USB dock as its mail slot, format disks as tape cartridges, and run encrypted PBS tape jobs and restores against them."
 date: 2026-11-13 10:01:00 -0300
-layout: post
 author: Ciro Iriarte
-series: pbs-usb-tapes
-series_part: 2
-series_title: "The CLI way"
+permalink: /datacenter/2026/11/13/pbs-usb-tapes-2-cli.html
 lang: en
 categories:
   - storage-backup
@@ -16,6 +12,9 @@ tags:
   - pbs
   - tape
   - mhvtl
+series: pbs-usb-tapes
+series_part: 2
+series_title: The CLI way
 ---
 
 In [part 1]({% post_url 2026-11-13-pbs-usb-tapes-1-why %}) I explained why you might want PBS tape jobs on plain USB disks. This part builds it from the shell: one virtual library, one LTO-8 drive, a USB dock acting as the library's mail slot, and an encrypted media pool rotating disks.

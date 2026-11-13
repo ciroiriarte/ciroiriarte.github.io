@@ -1,12 +1,9 @@
 ---
-id: 38
-title: 'Windows on ATMs'
-date: '2009-03-20T09:41:13-04:00'
+title: Windows on ATMs
+description: "Anecdote about inadvertently rebooting a Diebold ATM running Windows XP, and waiting for it to restart and come back online."
+date: 2009-03-20 09:41:13 -0400
 author: Ciro Iriarte
-layout: post
-guid: 'http://cyruspy.wordpress.com/?p=38'
 permalink: /index.php/2009/03/20/windows-on-atms/
-description: 'Anecdote about inadvertently rebooting a Diebold ATM running Windows XP, and waiting for it to restart and come back online.'
 lang: en
 categories:
   - misc

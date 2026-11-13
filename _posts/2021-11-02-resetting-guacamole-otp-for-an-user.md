@@ -1,12 +1,9 @@
 ---
 title: Resetting Guacamole OTP for an user
-id: 329
-date: '2021-11-02T10:19:37-03:00'
+description: How to reset the TOTP enrollment of a Guacamole user backed by FreeIPA (LDAP) and MySQL.
+date: 2021-11-02 10:19:37 -0300
 author: Ciro Iriarte
-layout: post
-guid: https://iriarte.it/?p=329
-permalink: "/index.php/2021/11/02/resetting-guacamole-otp-for-an-user/"
-description: 'How to reset the TOTP enrollment of a Guacamole user backed by FreeIPA (LDAP) and MySQL.'
+permalink: /index.php/2021/11/02/resetting-guacamole-otp-for-an-user/
 lang: en
 categories:
   - security

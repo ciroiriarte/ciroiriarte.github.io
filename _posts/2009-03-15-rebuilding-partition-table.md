@@ -1,12 +1,8 @@
 ---
-id: 32
-title: 'Rebuilding partition table'
-date: '2009-03-15T20:00:26-04:00'
+title: Rebuilding partition table
+description: "How to recover a partition table that was overwritten by an aborted Linux installation, using the TestDisk tool to restore the original partition layout."
+date: 2009-03-15 20:00:26 -0400
 author: Ciro Iriarte
-excerpt: 'Recovering partition table from data on disk'
-description: 'How to recover a partition table that was overwritten by an aborted Linux installation, using the TestDisk tool to restore the original partition layout.'
-layout: post
-guid: 'http://cyruspy.wordpress.com/?p=32'
 permalink: /index.php/2009/03/15/rebuilding-partition-table/
 lang: en
 categories:

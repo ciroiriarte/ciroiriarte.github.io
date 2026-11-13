@@ -1,12 +1,9 @@
 ---
-id: 158
-title: 'Quickguide: Observium installation on SLES11'
-date: '2012-01-24T15:57:34-03:00'
+title: "Quickguide: Observium installation on SLES11"
+description: "Quick installation guide for Observium network monitoring on SLES11, covering Apache/MySQL/PHP/rrdtool setup, database configuration, vhost, cron jobs, and XCache tuning."
+date: 2012-01-24 15:57:34 -0300
 author: Ciro Iriarte
-layout: post
-guid: 'http://cyruspy.wordpress.com/?p=158'
 permalink: /index.php/2012/01/24/quickguide-observium-installation-on-sles11/
-description: 'Quick installation guide for Observium network monitoring on SLES11, covering Apache/MySQL/PHP/rrdtool setup, database configuration, vhost, cron jobs, and XCache tuning.'
 lang: en
 categories:
   - monitoring

@@ -1,12 +1,9 @@
 ---
-id: 282
-title: 'I/O hung forever trying to access VDEV device'
-date: '2012-07-20T11:01:53-04:00'
+title: I/O hung forever trying to access VDEV device
+description: How to fix multipath I/O hung processes when accessing Hitachi VSP VDEV snapshot devices by enabling fail_if_no_path in the multipath configuration.
+date: 2012-07-20 11:01:53 -0400
 author: Ciro Iriarte
-layout: post
-guid: 'http://cyruspy.wordpress.com/?p=282'
 permalink: /index.php/2012/07/20/io-hung-forever-trying-to-access-vdev-device/
-description: 'How to fix multipath I/O hung processes when accessing Hitachi VSP VDEV snapshot devices by enabling fail_if_no_path in the multipath configuration.'
 lang: en
 categories:
   - linux

@@ -1,12 +1,9 @@
 ---
-id: 90
-title: 'Compiling nrpe in HPUX 11.31'
-date: '2010-05-11T16:20:32-04:00'
+title: Compiling nrpe in HPUX 11.31
+description: "Guide for compiling NRPE with --enable-command-args on HP-UX 11.31, including TCP wrappers workaround, nrpe.c patch, build steps, and a custom init script."
+date: 2010-05-11 16:20:32 -0400
 author: Ciro Iriarte
-layout: post
-guid: 'http://cyruspy.wordpress.com/?p=90'
 permalink: /index.php/2010/05/11/compiling-nrpe-in-hpux-11-31-2/
-description: 'Guide for compiling NRPE with --enable-command-args on HP-UX 11.31, including TCP wrappers workaround, nrpe.c patch, build steps, and a custom init script.'
 lang: en
 categories:
   - monitoring

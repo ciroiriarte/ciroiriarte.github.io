@@ -1,9 +1,9 @@
 ---
-permalink: /datacenter/networking/2023/12/25/deploying-juniper-vlwc-on-pve.html
 title: Deploying Juniper vLWC on PVE
-description: Walkthrough of analysis and deployment of a Juniper Virtual Lightweight Collector for "call home" functionality 
-layout: post
+description: "Walkthrough of analysis and deployment of a Juniper Virtual Lightweight Collector for \"call home\" functionality"
+date: 2023-12-25 00:00:00 -0300
 author: Ciro Iriarte
+permalink: /datacenter/networking/2023/12/25/deploying-juniper-vlwc-on-pve.html
 lang: en
 categories:
   - networking
@@ -36,12 +36,7 @@ I'll deploy vLWC on Proxmox VE to oversee QFX switches managed by Apstra & EX sw
 
 ## Here be dragons.
 
-<figure>
-  <a href="https://education.nationalgeographic.org/resource/here-be-dragons/">
-  <img src="/assets/img/2023-12-25_1570-theatrum-orbis-terrarum-map-monsters.jpg" alt="1570 Theatrum Orbis Terrarum Map Monsters"/>
-  </a>
-  <figcaption><i>Image 1 - 1570 Theatrum Orbis Terrarum Map Monsters</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-12-25_1570-theatrum-orbis-terrarum-map-monsters.jpg" link="https://education.nationalgeographic.org/resource/here-be-dragons/" description="Image 1 - 1570 Theatrum Orbis Terrarum Map Monsters" width=860 height=580 %}
 
 As a word of warning, I should highlight the setup I'm about to execute and share with you is not supported by Juniper and your Service Manager will either frown on you, yell at you or just plainly ignore you (depending on the kind of relationship you have) if you ever request help deploying vLWC on KVM. In our case, I welcome Alejandro for the administrative support!.
 
@@ -65,32 +60,17 @@ With this "sidecart" environment, no matter what is needed to be rearranged in t
 
 For the scope of our discussion, the logical environment looks something like this:
 
-<figure>
-  <a href="/assets/img/2023-12-25_lab-environment.svg">
-  <img src="/assets/img/2023-12-25_lab-environment.svg" alt="Lab networks overview"/>
-  </a>
-  <figcaption><i>Image 2 - Related management network environment</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-12-25_lab-environment.svg" description="Image 2 - Related management network environment" alt="Lab networks overview" %}
 
 Physically, the sidecart is just a pair of Cisco Nexus switches in stack to provide redudant L2 1GbE/10GbE services, and the OOBM network is a pair of Juniper EX switches providing 1GbE connectivity to switches and IPMI server boards.
 
 Logically, the setup is quite involved and provides things like access control and network segmentation via OPNSense providing L3 & Filtering capabilities. We need users to authenticate via username/password + OTP, then we hit the Jump hosts using Guacamole:
 
-<figure>
-  <a href="/assets/img/2023-12-25_lab-environment-flows.svg">
-  <img src="/assets/img/2023-12-25_lab-environment-flows.svg" alt="Remote access"/>
-  </a>
-  <figcaption><i>Image 3 - Remote access flow</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-12-25_lab-environment-flows.svg" description="Image 3 - Remote access flow" alt="Remote access" %}
 
 My natural expectation was to deploy the call-home appliance next to other supporting appliances like Apstra or LibreNMS.
 
-<figure>
-  <a href="/assets/img/2023-12-25_lab-environment-plus-vlwc.svg">
-  <img src="/assets/img/2023-12-25_lab-environment-plus-vlwc.svg" alt="vLWC in the picture"/>
-  </a>
-  <figcaption><i>Image 4 - Adding vLWC to the picture</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-12-25_lab-environment-plus-vlwc.svg" description="Image 4 - Adding vLWC to the picture" alt="vLWC in the picture" %}
 
 This is relevant for the next section.
 
@@ -106,12 +86,7 @@ Management|IPv4 address only|Used for captive portal access (web portal presente
 
 We could try to comply, and shoe-horn the appliance requirements to our environment:
 
-<figure>
-  <a href="/assets/img/2023-12-25_lab-environment-plus-vlwc-forced-compliance.svg">
-  <img src="/assets/img/2023-12-25_lab-environment-plus-vlwc-forced-compliance.svg" alt="vLWC in the picture"/>
-  </a>
-  <figcaption><i>Image 5 - Forced compliance</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-12-25_lab-environment-plus-vlwc-forced-compliance.svg" description="Image 5 - Forced compliance" alt="vLWC in the picture" %}
 
 
 It doesn't make me confortable, VMs connected to different segments that should only interact through the firewall was not an option in our case.
@@ -165,12 +140,7 @@ Anyhow kids, don't place the appliance directly connected to Internet without in
 
 **Fourth takeaway:** The following screenshot depicts how a healthy appliance looks like.
 
-<figure>
-  <a href="/assets/img/2023-12-25_status-deployment-test-3if.png">
-  <img src="/assets/img/2023-12-25_status-deployment-test-3if.png" alt="Appliance status"/>
-  </a>
-  <figcaption><i>Image 6 - Appliance status with supported network layout</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-12-25_status-deployment-test-3if.png" description="Image 6 - Appliance status with supported network layout" alt="Appliance status" width=782 height=754 %}
 
 #### **Second run:** 1 network setup with DHCP (internal)
 *"int"* keeps the default route, provides access to captive portal (appliance status page)  
@@ -178,12 +148,7 @@ Anyhow kids, don't place the appliance directly connected to Internet without in
 
 **Fifth takeway:** Even though the status page show a "Connection Status" errored for "External Network", you can see that we still have "Juniper Cloud Connected" & "Cloud Provisioned". My interpretation is that we have an error because there's no EXT interface that can be setup, but it's cosmetic since we have Internet access using INT with the default route.
 
-<figure>
-  <a href="/assets/img/2023-12-25_status-deployment-test-1if.png">
-  <img src="/assets/img/2023-12-25_status-deployment-test-1if.png" alt="Appliance status"/>
-  </a>
-  <figcaption><i>Image 6 - Appliance status with just one interface</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-12-25_status-deployment-test-1if.png" description="Image 6 - Appliance status with just one interface" alt="Appliance status" width=775 height=767 %}
 
 Also I can confirm that after checking the appliance at the OS level, there are no static routes. No adjustments are needed for a single interface deployment to connect to JSI.
 
@@ -198,26 +163,11 @@ You have to request two things to your Juniper support team:
 
 1. Once you have the correct permissions set for your user, head to [Juniper Support Portal](https://supportportal.juniper.net/)
 2. Request the appliance via the web portal.
-<figure>
-  <a href="/assets/img/2023-12-25_request_appliance_00.png">
-  <img src="/assets/img/2023-12-25_request_appliance_00.png" alt="Collectors section"/>
-  </a>
-  <figcaption><i>Image 7 - Access collectors section</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-12-25_request_appliance_00.png" description="Image 7 - Access collectors section" alt="Collectors section" width=887 height=368 %}
   
-<figure>
-  <a href="/assets/img/2023-12-25_request_appliance_01.png">
-  <img src="/assets/img/2023-12-25_request_appliance_01.png" alt="Request"/>
-  </a>
-  <figcaption><i>Image 8 - Click "Request Virtual Lightweight Collector"</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-12-25_request_appliance_01.png" description="Image 8 - Click &quot;Request Virtual Lightweight Collector&quot;" alt="Request" width=1433 height=217 %}
   
-<figure>
-  <a href="/assets/img/2023-12-25_request_appliance_02.png">
-  <img src="/assets/img/2023-12-25_request_appliance_02.png" alt="Request"/>
-  </a>
-  <figcaption><i>Image 9 - Click "Fill-in and submit form"</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-12-25_request_appliance_02.png" description="Image 9 - Click &quot;Fill-in and submit form&quot;" alt="Request" width=1494 height=775 %}
 
 {:start="3"}
 3. In less than an hour, you should receive an email from *do_not_reply@juniper.net* with a link to download the appliance. The file is purged in 7 days, after which you would need to re-request the appliance.
@@ -236,12 +186,7 @@ The VMDK is apparently generic for all the customers, the OVF file includes the 
 
 With OVF customization available via vSphere + VMware Tools some parameters are passed to the VM at instantiation time, but that's not supported by Proxmox VE. Proxmox VE + cloud-init could provide similar capabilities, but that's not currently support by the vLWC appliance.
 
-<figure>
-  <a href="/assets/img/2023-12-25_missmatch.jpg">
-  <img src="/assets/img/2023-12-25_missmatch.jpg" alt="Missmatch"/>
-  </a>
-  <figcaption><i>Image 10 - Autoconfig capabilities, Proxmox VE to the left, Juniper vLWC to the right "</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-12-25_missmatch.jpg" description="Image 10 - Autoconfig capabilities, Proxmox VE to the left, Juniper vLWC to the right &quot;" alt="Missmatch" width=1200 height=630 %}
 
 We would need to modify the original disk before importing it to the virtual machine. I'll try to make as few modifications as possible.
 

@@ -1,9 +1,9 @@
 ---
-permalink: /sdn/networking/2023/12/09/intermittent-connection-with-zerotier-in-site-2-site.html
 title: Intermittent connection with Zerotier in Site-2-Site
 description: Found an odd behaviour with Zerotier while using OPNSense as L3 peering nodes for site 2 site integration.
-layout: post
+date: 2023-12-09 00:00:00 -0300
 author: Ciro Iriarte
+permalink: /sdn/networking/2023/12/09/intermittent-connection-with-zerotier-in-site-2-site.html
 lang: en
 categories:
   - networking
@@ -24,12 +24,7 @@ I've identified a 128 routes limit in the "managed routes" option, so probably w
 
 This is a basic diagram of what was tested. Each OPNSense endpoint would run the zerotier client and provide forwarding. Route information would be pushed by the controller.
 
-<figure>
-  <a href="/assets/img/2023-12-09-zerotier-s2s-poc.png">
-  <img src="/assets/img/2023-12-09-zerotier-s2s-poc.png" alt="network layout"/>
-  </a>
-  <figcaption><i>Image 1 - PoC network layout </i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-12-09-zerotier-s2s-poc.png" description="Image 1 - PoC network layout" alt="network layout" width=1046 height=591 %}
 
 
 Routes as defined in the controller:

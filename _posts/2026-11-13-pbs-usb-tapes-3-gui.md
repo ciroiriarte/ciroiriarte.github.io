@@ -1,13 +1,9 @@
 ---
-permalink: /datacenter/2026/11/13/pbs-usb-tapes-3-gui.html
 title: "USB disks as tapes for Proxmox Backup Server (3/3): point & click"
-description: The same setup as part 2, from the mhVTL Control dashboard and the PBS web UI. A few shell lines remain; everything else is clicks.
+description: "The same setup as part 2, from the mhVTL Control dashboard and the PBS web UI. A few shell lines remain; everything else is clicks."
 date: 2026-11-13 10:02:00 -0300
-layout: post
 author: Ciro Iriarte
-series: pbs-usb-tapes
-series_part: 3
-series_title: "Point & click"
+permalink: /datacenter/2026/11/13/pbs-usb-tapes-3-gui.html
 lang: en
 categories:
   - storage-backup
@@ -16,6 +12,9 @@ tags:
   - pbs
   - tape
   - mhvtl
+series: pbs-usb-tapes
+series_part: 3
+series_title: "Point & click"
 ---
 
 [Part 2]({% post_url 2026-11-13-pbs-usb-tapes-2-cli %}) built the setup from the shell. This part does it with a mouse: [mhVTL Control](https://github.com/ciroiriarte/mhvtl-control) for the virtual library, and the PBS web UI for the tape side. If you haven't read [part 1]({% post_url 2026-11-13-pbs-usb-tapes-1-why %}), it explains why you'd want PBS tape jobs on USB disks in the first place.

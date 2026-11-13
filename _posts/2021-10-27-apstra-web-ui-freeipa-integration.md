@@ -1,12 +1,9 @@
 ---
 title: Apstra Web UI + FreeIPA integration
-id: 319
-date: '2021-10-27T12:42:05-03:00'
+description: "Making Apstra 4.0 LDAP providers authorize FreeIPA users: the group lookup that fails and the posixGroup workaround that works."
+date: 2021-10-27 12:42:05 -0300
 author: Ciro Iriarte
-layout: post
-guid: https://iriarte.it/?p=319
-permalink: "/index.php/2021/10/27/apstra-web-ui-freeipa-integration/"
-description: 'Making Apstra 4.0 LDAP providers authorize FreeIPA users: the group lookup that fails and the posixGroup workaround that works.'
+permalink: /index.php/2021/10/27/apstra-web-ui-freeipa-integration/
 lang: en
 categories:
   - networking
@@ -127,7 +124,7 @@ Don’t forget to setup the “Provider Role Mapping” section to get authoriza
 
 ## Side note
 
-Even though I can get proper authentication &amp; authorization, the “role” user attribute in the profile just shows a gray box for the LDAP backed user. Might be a presentation bug, otherwise the authorization works as expected
+Even though I can get proper authentication & authorization, the “role” user attribute in the profile just shows a gray box for the LDAP backed user. Might be a presentation bug, otherwise the authorization works as expected
 
 {% include image.html url="/assets/img/2021-10-27-apstra-ldap-user-profile.png" description="Image 1 - Profile for LDAP backed user." alt="Roles field of an LDAP-backed user profile in Apstra: an empty grey box" width=279 height=66 %}
 

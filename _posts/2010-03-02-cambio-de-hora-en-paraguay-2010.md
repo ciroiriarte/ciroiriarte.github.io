@@ -1,12 +1,9 @@
 ---
-id: 58
-title: 'Cambio de hora en Paraguay 2010'
-date: '2010-03-02T17:17:04-03:00'
+title: Cambio de hora en Paraguay 2010
+description: "Guía sobre el cambio de reglas DST en Paraguay en 2010 y cómo actualizar la base de datos de zonas horarias Olson en Linux, Solaris, Tru64 y HP-UX."
+date: 2010-03-02 17:17:04 -0300
 author: Ciro Iriarte
-layout: post
-guid: 'http://cyruspy.wordpress.com/?p=58'
 permalink: /index.php/2010/03/02/cambio-de-hora-en-paraguay-2010/
-description: 'Guía sobre el cambio de reglas DST en Paraguay en 2010 y cómo actualizar la base de datos de zonas horarias Olson en Linux, Solaris, Tru64 y HP-UX.'
 lang: es
 categories:
   - linux

@@ -1,9 +1,9 @@
 ---
-permalink: /homelab/sdn/2023/10/07/Integrating-Apstra-Appliances-OS-to-FreeIPA.html
 title: Integrating Apstra Appliances Operating System to FreeIPA
 description: IPA client installation on Ubuntu based appliances for Apstra 4.2.0
-layout: post
+date: 2023-10-07 00:00:00 -0300
 author: Ciro Iriarte
+permalink: /homelab/sdn/2023/10/07/Integrating-Apstra-Appliances-OS-to-FreeIPA.html
 lang: en
 categories:
   - networking

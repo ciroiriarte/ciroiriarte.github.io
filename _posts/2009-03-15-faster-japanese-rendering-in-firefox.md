@@ -1,12 +1,8 @@
 ---
-id: 28
-title: 'Faster Japanese rendering in Firefox'
-date: '2009-03-15T00:10:14-04:00'
+title: Faster Japanese rendering in Firefox
+description: "How to fix slow Japanese text rendering in Firefox on openSUSE by installing WQY fonts, with step-by-step zypper instructions."
+date: 2009-03-15 00:10:14 -0400
 author: Ciro Iriarte
-excerpt: 'Need decent rendering time for japanese text in Firefox?, here''s the solution..'
-description: 'How to fix slow Japanese text rendering in Firefox on openSUSE by installing WQY fonts, with step-by-step zypper instructions.'
-layout: post
-guid: 'http://cyruspy.wordpress.com/?p=28'
 permalink: /index.php/2009/03/15/faster-japanese-rendering-in-firefox/
 lang: en
 categories:
@@ -37,7 +33,7 @@ It will ask if it should trust and later import the key, just answer “YES” t
 
 Pages to test rendering:
 
-> [<span class="wpGallery">http://ja.wikipedia.org/wiki/%E6%97%A5%E6%9C%AC</span>](http://ja.wikipedia.org/wiki/%E6%97%A5%E6%9C%AC)
+> <https://ja.wikipedia.org/wiki/%E6%97%A5%E6%9C%AC>
 > 
 > <http://news.google.com/news?ned=cn>
 > 

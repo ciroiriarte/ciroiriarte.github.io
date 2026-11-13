@@ -1,10 +1,9 @@
 ---
-permalink: /homelab/2023/09/05/esxi-on-proxmox-as-nested-hypervisor.html
 title: ESXi on Proxmox as nested hypervisor
 description: Step by step implementation of a nested ESXi machine running on Proxmox/PVE KVM host.
-#permalink: esxi-on-pve
-layout: post
+date: 2023-09-05 00:00:00 -0400
 author: Ciro Iriarte
+permalink: /homelab/2023/09/05/esxi-on-proxmox-as-nested-hypervisor.html
 lang: en
 categories:
   - virtualization
@@ -178,26 +177,11 @@ After that, manual initial setup of ESXi is required (hostname, static IP or sen
 
 In the end, we should have the 3 VMs up & running and ready for testing.
 
-<figure>
-  <a href="/assets/img/2023-09-05-nested-esxi-vm-list.png">
-  <img src="/assets/img/2023-09-05-nested-esxi-vm-list.png" alt="PVE web console"/>
-  </a>
-  <figcaption><i>Image 1 - Created Virtual Machines</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-09-05-nested-esxi-vm-list.png" description="Image 1 - Created Virtual Machines" alt="PVE web console" width=425 height=460 %}
 
-<figure>
-  <a href="/assets/img/2023-09-05-nested-esxi-console.png">
-  <img src="/assets/img/2023-09-05-nested-esxi-console.png" alt="VM console"/>
-  </a>
-  <figcaption><i>Image 2 - VM console</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-09-05-nested-esxi-console.png" description="Image 2 - VM console" alt="VM console" width=1290 height=1026 %}
 
-<figure>
-  <a href="/assets/img/2023-09-05-nested-esxi-webUI.png">
-  <img src="/assets/img/2023-09-05-nested-esxi-webUI.png" alt="ESXi Web UI"/>
-  </a>
-  <figcaption><i>Image 3 - ESXi web UI</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2023-09-05-nested-esxi-webUI.png" description="Image 3 - ESXi web UI" alt="ESXi Web UI" width=1900 height=785 %}
 
 ## ToDo list
 

@@ -1,19 +1,16 @@
 ---
-id: 279
-title: 'Quickguide: Installing Sun JRE on SLES11'
-date: '2012-07-18T09:06:20-04:00'
+title: "Quickguide: Installing Sun JRE on SLES11"
+description: "Quick guide for installing and registering Sun JRE 7 on SLES11 using update-alternatives, with all relevant slave links for tools like keytool and javaws."
+date: 2012-07-18 09:06:20 -0400
 author: Ciro Iriarte
-layout: post
-guid: 'http://cyruspy.wordpress.com/?p=279'
 permalink: /index.php/2012/07/18/quickguide-installing-sun-jre-on-sles11/
-description: 'Quick guide for installing and registering Sun JRE 7 on SLES11 using update-alternatives, with all relevant slave links for tools like keytool and javaws.'
-deprecated: true
 lang: en
 categories:
   - linux
 tags:
   - java
   - sles
+deprecated: true
 ---
 
 For Internet archiving purposes: After installing Sun JRE (rpm -Uvh jre-7u5-linux-x64.rpm), the properly way to use it is setting up the alternatives links:

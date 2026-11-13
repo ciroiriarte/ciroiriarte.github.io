@@ -1,12 +1,9 @@
 ---
-id: 16
-title: 'The toy arrived!'
-date: '2007-10-12T01:43:16-04:00'
+title: "The toy arrived!"
+description: "The i-Blue 747 GPS logger arrived and was tested on a few trips around town, discovering nearby Wi-Fi access points with Kismet."
+date: 2007-10-12 01:43:16 -0400
 author: Ciro Iriarte
-layout: post
-guid: 'http://cyruspy.wordpress.com/2007/10/12/the-toy-arrived/'
 permalink: /index.php/2007/10/12/the-toy-arrived/
-description: 'The i-Blue 747 GPS logger arrived and was tested on a few trips around town, discovering nearby Wi-Fi access points with Kismet.'
 lang: en
 categories:
   - misc

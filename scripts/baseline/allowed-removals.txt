@@ -1,4 +1,7 @@
 /assets/img/2023-12-25_lab-environment-plus-vlwc-forced-compliance.svg.crswap
+/index.php/2006/03/25/sles8-sp3-release-notes-x86/
+/index.php/2006/03/25/sles9-sp3-release-notes-x86/
+/index.php/2006/03/27/sles8-sp4-release-notes-x86/
 /wp-content/uploads/2007/10/paseogps-1024x598.jpg
 /wp-content/uploads/2007/10/paseogps-150x150.jpg
 /wp-content/uploads/2007/10/paseogps-300x175.jpg

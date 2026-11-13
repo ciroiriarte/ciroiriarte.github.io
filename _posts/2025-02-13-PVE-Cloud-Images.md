@@ -1,9 +1,9 @@
 ---
-permalink: /datacenter/2025/02/13/PVE-Cloud-Images.html
 title: PVE Cloud Images
 description: Walkthrough of the process to import Cloud Images to Proxmox VE.
-layout: post
+date: 2025-02-13 00:00:00 -0300
 author: Ciro Iriarte
+permalink: /datacenter/2025/02/13/PVE-Cloud-Images.html
 lang: en
 categories:
   - virtualization

@@ -1,12 +1,9 @@
 ---
-id: 75
-title: 'Compiling cnet in a hurry'
-date: '2010-04-01T16:06:23-03:00'
+title: Compiling cnet in a hurry
+description: "How to compile and install the cnet network simulator in a user home directory on openSUSE, with Makefile modifications for a local installation."
+date: 2010-04-01 16:06:23 -0300
 author: Ciro Iriarte
-layout: post
-guid: 'http://cyruspy.wordpress.com/?p=75'
 permalink: /index.php/2010/04/01/compiling-cnet-in-a-hurry/
-description: 'How to compile and install the cnet network simulator in a user home directory on openSUSE, with Makefile modifications for a local installation.'
 lang: en
 categories:
   - linux

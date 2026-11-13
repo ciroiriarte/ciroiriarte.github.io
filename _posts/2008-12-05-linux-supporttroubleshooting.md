@@ -1,12 +1,9 @@
 ---
-id: 27
-title: 'Linux support/troubleshooting'
-date: '2008-12-05T19:41:24-03:00'
-author: Ciro Iriarte
-layout: post
-guid: 'http://cyruspy.wordpress.com/2008/12/05/linux-supporttroubleshooting/'
-permalink: /index.php/2008/12/05/linux-supporttroubleshooting/
+title: Linux support/troubleshooting
 description: "Overview of Novell's supportconfig bash script for collecting system data from SLES/Linux systems for remote troubleshooting."
+date: 2008-12-05 19:41:24 -0300
+author: Ciro Iriarte
+permalink: /index.php/2008/12/05/linux-supporttroubleshooting/
 lang: en
 categories:
   - linux

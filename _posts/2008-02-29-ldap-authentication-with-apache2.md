@@ -1,12 +1,9 @@
 ---
-id: 18
-title: 'LDAP authentication with apache2'
-date: '2008-02-29T08:59:34-03:00'
+title: LDAP authentication with apache2
+description: "Guide for setting up LDAP authentication on Apache2 with mod_auth_ldap on SLES9, including SSL certificate setup and .htaccess configuration."
+date: 2008-02-29 08:59:34 -0300
 author: Ciro Iriarte
-layout: post
-guid: 'http://cyruspy.wordpress.com/?p=16'
 permalink: /index.php/2008/02/29/ldap-authentication-with-apache2/
-description: 'Guide for setting up LDAP authentication on Apache2 with mod_auth_ldap on SLES9, including SSL certificate setup and .htaccess configuration.'
 lang: en
 categories:
   - linux
