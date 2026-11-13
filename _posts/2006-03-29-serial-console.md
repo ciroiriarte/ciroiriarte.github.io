@@ -4,7 +4,7 @@ description: Quick reference for connecting to equipment via serial console usin
 date: 2006-03-29 01:52:02 -0400
 author: Ciro Iriarte
 permalink: /index.php/2006/03/29/serial-console/
-lang: en
+lang: es
 categories:
   - linux
 tags:

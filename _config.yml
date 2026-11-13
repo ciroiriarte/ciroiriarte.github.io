@@ -24,6 +24,12 @@ repository: ciroiriarte/ciroiriarte.github.io
 branch: main
 
 permalink: /:year/:month/:day/:title.html
+
+# Translations: _translations/<lang>/<same filename as the post>.md, with
+# permalink "/<lang>" + the original's permalink. See README.
+collections:
+  translations:
+    output: true
 excerpt_separator: <!--more-->
 
 remote_theme: jekyll/minima@4de322363fca5927e6f4012cb94f6dad69ab5e6c
@@ -83,6 +89,12 @@ defaults:
   - scope:
       path: ""
       type: posts
+    values:
+      layout: post
+      author: Ciro Iriarte
+  - scope:
+      path: ""
+      type: translations
     values:
       layout: post
       author: Ciro Iriarte

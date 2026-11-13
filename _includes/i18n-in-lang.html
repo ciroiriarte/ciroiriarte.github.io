@@ -1,0 +1,10 @@
+{%- comment -%}
+  The version of include.post in include.lang, or the post itself when no
+  translation exists. Sets i18n_match.
+{%- endcomment -%}
+{%- assign i18n_match = include.post -%}
+{%- if include.post and include.post.lang != include.lang -%}
+  {%- assign m_needle = "/" | append: include.post.path | split: "/" | last | prepend: "/" -%}
+  {%- assign m = site.translations | where: "lang", include.lang | where_exp: "t", "t.path contains m_needle" | first -%}
+  {%- if m %}{% assign i18n_match = m %}{% endif -%}
+{%- endif -%}

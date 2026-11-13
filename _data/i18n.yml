@@ -1,0 +1,79 @@
+# Interface text per language. Posts pick the block matching `lang:`; a
+# missing key falls back to English. `languages` sets the switcher order.
+languages: [en, es, it, pt]
+
+en:
+  name: English
+  date_format: "%b %-d, %Y"
+  published: "Published:"
+  updated: "Updated:"
+  min_read: min read
+  outdated_label: "Outdated:"
+  outdated_text: "this post covers software that has reached end of life. It's kept for reference; the steps are unlikely to apply to current versions."
+  about_author: About the author
+  more_posts: More posts
+  older: "← Older"
+  newer: "Newer →"
+  edit: Edit this post on GitHub
+  edit_note: "found an error? Pull requests are welcome."
+  series: "Series:"
+  versions: "Read in:"
+  translated: "Translated from the original in %s."
+  language_names: {en: English, es: Spanish, it: Italian, pt: Portuguese}
+
+es:
+  name: Español
+  date_format: "%d/%m/%Y"
+  published: "Publicado:"
+  updated: "Actualizado:"
+  min_read: min de lectura
+  outdated_label: "Desactualizado:"
+  outdated_text: "este artículo trata sobre software que ya llegó al final de su vida útil. Se conserva como referencia; es poco probable que los pasos sirvan para versiones actuales."
+  about_author: Sobre el autor
+  more_posts: Más artículos
+  older: "← Anterior"
+  newer: "Siguiente →"
+  edit: Editar este artículo en GitHub
+  edit_note: "¿encontraste un error? Los pull requests son bienvenidos."
+  series: "Serie:"
+  versions: "Leer en:"
+  translated: "Traducido del original en %s."
+  language_names: {en: inglés, es: español, it: italiano, pt: portugués}
+
+it:
+  name: Italiano
+  date_format: "%d/%m/%Y"
+  published: "Pubblicato:"
+  updated: "Aggiornato:"
+  min_read: min di lettura
+  outdated_label: "Obsoleto:"
+  outdated_text: "questo articolo tratta software che ha raggiunto la fine del supporto. Resta come riferimento; difficilmente i passaggi valgono per le versioni attuali."
+  about_author: L'autore
+  more_posts: Altri articoli
+  older: "← Precedente"
+  newer: "Successivo →"
+  edit: Modifica questo articolo su GitHub
+  edit_note: "hai trovato un errore? Le pull request sono benvenute."
+  series: "Serie:"
+  versions: "Leggi in:"
+  translated: "Tradotto dall'originale in %s."
+  language_names: {en: inglese, es: spagnolo, it: italiano, pt: portoghese}
+
+pt:
+  name: Português
+  date_format: "%d/%m/%Y"
+  published: "Publicado:"
+  updated: "Atualizado:"
+  min_read: min de leitura
+  outdated_label: "Desatualizado:"
+  outdated_text: "este post trata de software que já chegou ao fim da vida útil. Fica como referência; é pouco provável que os passos sirvam para versões atuais."
+  about_author: Sobre o autor
+  more_posts: Mais posts
+  older: "← Anterior"
+  newer: "Próximo →"
+  edit: Editar este post no GitHub
+  edit_note: "achou um erro? Pull requests são bem-vindos."
+  series: "Série:"
+  versions: "Ler em:"
+  translated: "Traduzido do original em %s."
+  language_names: {en: inglês, es: espanhol, it: italiano, pt: português}

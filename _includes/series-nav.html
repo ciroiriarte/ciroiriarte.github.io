@@ -1,14 +1,19 @@
 {%- comment -%}
   Navigation for a multi-part series. The page needs `series:` (a key in
-  _data/series.yml), `series_part:` and `series_title:`.
+  _data/series.yml), `series_part:` and `series_title:`. On a translation the
+  entries point at the same-language version of each part when there is one.
 {%- endcomment -%}
 {%- if page.series -%}
 {%- assign series_posts = site.posts | where: "series", page.series | sort: "series_part" -%}
 {%- assign series = site.data.series[page.series] -%}
-<nav class="series-nav" aria-label="Series: {{ series.name | default: page.series | escape }}">
-  <p class="series-nav-title"><strong>Series:</strong> {{ series.name | default: page.series | escape }}</p>
+{%- assign sname = series.names[page.lang] | default: series.name | default: page.series -%}
+{%- assign i18n = site.data.i18n[page.lang] | default: site.data.i18n.en -%}
+<nav class="series-nav" aria-label="{{ i18n.series | remove: ':' }} {{ sname | escape }}">
+  <p class="series-nav-title"><strong>{{ i18n.series }}</strong> {{ sname | escape }}</p>
   <ol>
-  {%- for p in series_posts -%}
+  {%- for sp in series_posts -%}
+    {%- include i18n-in-lang.html post=sp lang=page.lang -%}
+    {%- assign p = i18n_match -%}
     {%- if p.url == page.url %}
     <li aria-current="page"><strong>{{ p.series_title | default: p.title | escape }}</strong></li>
     {%- else %}

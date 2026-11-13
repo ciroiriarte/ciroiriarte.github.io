@@ -45,9 +45,11 @@ npx -y pagefind@1.4.0 --serve          # http://localhost:1414
 ├── _config.yml            # Site configuration
 ├── _posts/                # Published posts (YYYY-MM-DD-title.md)
 ├── _drafts/               # Unpublished drafts (served with --drafts)
+├── _translations/<lang>/  # Translated posts (en, es, it, pt), same filename as the original
 ├── _data/
 │   ├── taxonomy.yml       # Allowed topics (categories) and tags
 │   ├── series.yml         # Multi-part series names
+│   ├── i18n.yml           # Interface text per language (labels, date format)
 │   └── authors.yml        # Author bios shown under posts
 ├── _includes/             # Overrides and snippets (image, series nav, header, footer...)
 ├── _layouts/              # Overrides of minima's post and home layouts
@@ -67,7 +69,7 @@ Scaffold a draft with `bundle exec jekyll draft "My Post Title"` (or create the 
 title: 'Post title'
 date: 2026-11-13 10:00:00 -0300
 description: '1–2 sentence summary for search results and social cards.'
-lang: en                 # or es
+lang: en                 # en, es, it or pt
 categories:              # topic keys from _data/taxonomy.yml
   - virtualization
 tags:                    # tag keys from _data/taxonomy.yml
@@ -92,6 +94,27 @@ Put `<!--more-->` after the first paragraph to mark the excerpt. Images go throu
 ```liquid
 {% include image.html url="/assets/img/2026-11-13-example.png" description="Caption" alt="What the image shows" width=1200 height=800 %}
 ```
+
+## Translations
+
+Every post is available in English, Spanish, Italian and Portuguese. The original stays in `_posts/` at its usual URL; each translation is a file in `_translations/<lang>/` with the **same filename** as the original, which is what links the versions together.
+
+```yaml
+---
+title: "Titolo tradotto"
+description: "Descrizione tradotta."
+date: 2026-11-13 10:00:00 -0300        # same as the original
+permalink: /it/datacenter/2026/11/13/my-post.html   # "/<lang>" + the original's URL
+lang: it
+categories: [...]                      # same as the original
+tags: [...]                            # same as the original
+series_title: "..."                    # translated, if the original is in a series
+---
+```
+
+Code blocks, commands, URLs and image files stay identical to the original; only prose, captions and alt text change. A `{% post_url %}` link in a translation should point at the same-language URL instead (`/it/...`), and headings keep the original's anchor with `{#id}` so `#section` links work in every language.
+
+Posts with translations get a "Read in:" language switcher, a note linking the original, `hreflang` alternate links for search engines, and series/older/newer navigation that stays in the reader's language. Interface text comes from [`_data/i18n.yml`](_data/i18n.yml); series names can be translated under `names:` in `_data/series.yml`. Translations are in the sitemap and the search index (with a Language filter) but not in the feed or the post lists, which show each post once.
 
 ## Topics and tags
 

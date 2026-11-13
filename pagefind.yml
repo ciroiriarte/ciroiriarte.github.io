@@ -1,6 +1,7 @@
 # Pagefind search index, built after `jekyll build` (see .github/workflows/pages.yml).
 site: _site
-# One index for English and Spanish posts, so either is found from any page.
+# One index for every language, so any version is found from any page; the
+# "Language" filter in the search UI narrows it down.
 force_language: en
 # Post listings repeat every title; leave them out so results point at posts.
 exclude_selectors:
@@ -16,3 +17,5 @@ exclude_selectors:
   - ".post-edit"
   - ".post-meta"
   - ".post-taxonomy"
+  - ".lang-switch"
+  - ".notice-translation"

@@ -1,6 +1,10 @@
 Ciro Iriarte:
   name: "Ciro Iriarte"
   bio: "IT Infrastructure guy (SAN, Centralized Storage, Virtualization, UNIX/Linux Operating System, Networking/SDN, Virtual Network Functions / VNF). Impossible solutions beta tester."
+  bios:
+    es: "Tipo de infraestructura IT (SAN, almacenamiento centralizado, virtualización, sistemas operativos UNIX/Linux, redes/SDN, funciones de red virtuales / VNF). Beta tester de soluciones imposibles."
+    it: "Uno che si occupa di infrastruttura IT (SAN, storage centralizzato, virtualizzazione, sistemi operativi UNIX/Linux, networking/SDN, funzioni di rete virtuali / VNF). Beta tester di soluzioni impossibili."
+    pt: "Um cara de infraestrutura de TI (SAN, armazenamento centralizado, virtualização, sistemas operacionais UNIX/Linux, redes/SDN, funções de rede virtuais / VNF). Beta tester de soluções impossíveis."
   avatar: "/assets/img/avatar.jpg"
   links:
     - label: "Email"

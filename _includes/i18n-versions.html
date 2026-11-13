@@ -1,0 +1,20 @@
+{%- comment -%}
+  Collects every language version of the current post. A translation lives in
+  _translations/<lang>/ under the same filename as the original in _posts/.
+  Sets: i18n_original (the post), i18n_versions (original + translations,
+  in _data/i18n.yml order) and i18n (the label block for page.lang).
+{%- endcomment -%}
+{%- assign i18n_key = "/" | append: page.path | split: "/" | last -%}
+{%- assign i18n_needle = "/" | append: i18n_key -%}
+{%- assign i18n_original = site.posts | where_exp: "p", "p.path contains i18n_needle" | first -%}
+{%- assign i18n_found = site.translations | where_exp: "t", "t.path contains i18n_needle" -%}
+{%- assign i18n_versions = "" | split: "" -%}
+{%- for l in site.data.i18n.languages -%}
+  {%- if i18n_original and i18n_original.lang == l -%}
+    {%- assign i18n_versions = i18n_versions | push: i18n_original -%}
+  {%- else -%}
+    {%- assign v = i18n_found | where: "lang", l | first -%}
+    {%- if v %}{% assign i18n_versions = i18n_versions | push: v %}{% endif -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign i18n = site.data.i18n[page.lang] | default: site.data.i18n.en -%}

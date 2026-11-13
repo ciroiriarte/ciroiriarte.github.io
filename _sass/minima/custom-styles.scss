@@ -73,6 +73,13 @@ h2:hover > .heading-anchor, h3:hover > .heading-anchor, .heading-anchor:focus { 
   border-left: 4px solid #d9822b;
   background: var(--minima-code-background-color);
 }
+.notice-translation { border-left-color: var(--minima-brand-color); font-size: 0.9em; }
+.lang-switch {
+  margin: 6px 0 0;
+  font-size: 0.85em;
+  span { color: var(--minima-brand-color); margin-right: .3em; }
+  a, strong { margin-right: .6em; white-space: nowrap; }
+}
 .series-nav {
   margin: 0 0 $spacing-unit;
   padding: 10px 14px;

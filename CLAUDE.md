@@ -23,7 +23,8 @@ scripts/check-urls.sh _site                              # no live URL may disap
 
 - Never change an existing post's URL. Every post before 2026-11 has an explicit `permalink:`; new posts use `/:year/:month/:day/:title.html`. `scripts/check-urls.sh` enforces this in CI; intentional removals go in `scripts/baseline/allowed-removals.txt`.
 - `categories` and `tags` must be keys in `_data/taxonomy.yml` (lowercase, hyphenated). Add new keys there first.
-- Every post has `lang: en|es` and a `description:`.
+- Every post has `lang: en|es|it|pt` and a `description:`.
+- Translations: `_translations/<lang>/<same filename as the post>.md`, `permalink: /<lang>` + the original's URL, same date/categories/tags; code blocks, URLs and image files byte-identical; headings pinned to the original's ids with `{#id}`; `post_url` links rewritten to the same-language URL. A new post needs its three translations.
 - Images live in `assets/img/YYYY-MM-DD-*.{png,jpg}` and are embedded with `{% include image.html url=... description=... alt=... width=... height=... %}`.
 - Series: `series`, `series_part`, `series_title` front matter plus `{% include series-nav.html %}`; series names in `_data/series.yml`.
 - `deprecated: true` marks posts about end-of-life software (banner + badge).

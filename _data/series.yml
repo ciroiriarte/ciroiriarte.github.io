@@ -2,3 +2,7 @@
 # and a short `series_title:` used in the navigation.
 pbs-usb-tapes:
   name: USB disks as tapes for Proxmox Backup Server
+  names:
+    es: Discos USB como cintas para Proxmox Backup Server
+    it: Dischi USB come nastri per Proxmox Backup Server
+    pt: Discos USB como fitas para o Proxmox Backup Server
