@@ -14,9 +14,11 @@ The content is related to my experiences and opinions (or the ones from any gues
 
 This is a static site hosted on GitHub Pages. There are no comments, accounts or forms, so I don't collect anything you type.
 
-To see which posts are useful, the site uses two analytics tools:
+To see which posts are useful, the site uses {% if site.goatcounter %}two analytics tools{% else %}Google Analytics{% endif %}:
 
 - **Google Analytics 4** records page views, approximate location, device and browser, and the terms typed into the site search. It sets cookies. You can block it with any content blocker or the [Google Analytics opt-out add-on](https://tools.google.com/dlpage/gaoptout).
+{%- if site.goatcounter %}
 - **[GoatCounter](https://www.goatcounter.com/)** counts page views without cookies and without storing personal data.
+{%- endif %}
 
 Search runs entirely in your browser using [Pagefind](https://pagefind.app/); queries are not sent to a search service. GitHub, as the host, keeps standard server logs under its own [privacy statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement).

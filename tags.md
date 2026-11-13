@@ -3,7 +3,10 @@ layout: page
 title: Tags
 permalink: /tags/
 ---
-{%- assign tag_keys = site.data.taxonomy.tags | map: "first" | sort_natural -%}
+{%- comment -%} Iterating a hash yields [key, value] pairs; collect the keys. {%- endcomment -%}
+{%- assign tag_keys = "" | split: "" -%}
+{%- for pair in site.data.taxonomy.tags -%}{%- assign tag_keys = tag_keys | push: pair[0] -%}{%- endfor -%}
+{%- assign tag_keys = tag_keys | sort_natural -%}
 <p class="tag-cloud">
 {%- for key in tag_keys -%}
   {%- assign tagged = site.posts | where_exp: "p", "p.tags contains key" -%}

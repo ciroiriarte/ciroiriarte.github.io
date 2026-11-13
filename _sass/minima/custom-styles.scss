@@ -137,3 +137,43 @@ figure.image {
   --pagefind-ui-tag: var(--minima-code-background-color);
   --pagefind-ui-font: inherit;
 }
+
+// Mobile menu ------------------------------------------------------------
+// minima draws the hamburger with a Font Awesome glyph; the footer no longer
+// loads Font Awesome, so draw three bars (and an X when open) in CSS.
+.site-nav {
+  #nav-trigger ~ label[for=nav-trigger] .menu-icon::before,
+  #nav-trigger:checked ~ label[for=nav-trigger] .menu-icon::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 14px;
+    font-size: 0;
+    background:
+      linear-gradient(var(--minima-text-color), var(--minima-text-color)) 0 0 / 100% 2px no-repeat,
+      linear-gradient(var(--minima-text-color), var(--minima-text-color)) 0 50% / 100% 2px no-repeat,
+      linear-gradient(var(--minima-text-color), var(--minima-text-color)) 0 100% / 100% 2px no-repeat;
+  }
+  #nav-trigger:checked ~ label[for=nav-trigger] .menu-icon::before {
+    background:
+      linear-gradient(45deg, transparent 45%, var(--minima-text-color) 45%, var(--minima-text-color) 55%, transparent 55%),
+      linear-gradient(-45deg, transparent 45%, var(--minima-text-color) 45%, var(--minima-text-color) 55%, transparent 55%);
+  }
+  #nav-trigger:focus-visible ~ label[for=nav-trigger] {
+    outline: 2px solid var(--minima-link-base-color);
+    outline-offset: 2px;
+  }
+}
+// Keep the menu checkbox reachable from the keyboard on small screens
+// (minima hides it with display: none; Space toggles it once focused).
+@media screen and (max-width: $on-medium) {
+  .site-nav #nav-trigger {
+    display: block;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    opacity: 0;
+    overflow: hidden;
+  }
+}

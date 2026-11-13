@@ -15,8 +15,8 @@ tags:
 ---
 
 <!--
-  Rebuilt on 2026-11-13 from nine screenshots left in wp-content/uploads
-  (2021/09 and 2021/10). The original text was never published: the
+  Rebuilt on 2026-11-13 from nine screenshots left in the old WordPress
+  uploads tree (2021/09 and 2021/10). The original text was never published: the
   Wayback Machine has no such post. The outline follows the screenshots'
   numbered steps; the prose still has to be written.
 -->
