@@ -1,58 +1,30 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-#
-# If you need help with YAML syntax, here are some quick references for you: 
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-#
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
+# Site settings. This file is not reloaded by `jekyll serve`; restart after editing.
 
 title: Doing the blog thing
-#email: ciro.iriarte+blog@gmail.com
-description: >- # this means to ignore newlines until "baseurl:"
+description: >-
   These are personal notes I believe would like to recall at some point in time,
   sharing them to the wind...
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://iriarte.it" # the base hostname & protocol for your site, e.g. http://example.com
-#twitter_username: ciroiriarte
-#github_username:  ciroiriarte
+baseurl: ""
+url: "https://iriarte.it"
+lang: en
+timezone: America/Asuncion
+
 twitter:
   username: ciroiriarte
-  card: summary
 google_site_verification: wLRgHwF6nai9tTLgxgfnssURwBRLZG68NZtpiEPMN94
+
+# Analytics. Both are emitted only when JEKYLL_ENV=production.
 google_analytics: G-ZZ8BN39FB0
+# Cookieless counter: create a site at https://www.goatcounter.com and put its
+# code here (e.g. `iriarte` for iriarte.goatcounter.com). Empty = disabled.
+goatcounter:
 
-search: true
-google:
-  search_engine_id: b6768f2ca26904f82
+# Source repository, used for "Edit on GitHub" links.
+repository: ciroiriarte/ciroiriarte.github.io
+branch: main
 
-
-#analytics:
-#  provider: "google-gtag"
-#  google:
-#    tracking_id: "G-ZZ8BN39FB0"
-
-# Multiple authors
-#collections:
-#  authors:
-#    output: true
-#    permalink: /author/:title/
-
-
-# Build settings
-#theme: minima
 permalink: /:year/:month/:day/:title.html
+excerpt_separator: <!--more-->
 
 remote_theme: jekyll/minima@4de322363fca5927e6f4012cb94f6dad69ab5e6c
 plugins:
@@ -61,65 +33,56 @@ plugins:
   - jekyll-sitemap
   - jekyll-remote-theme
   - jekyll-redirect-from
-#  - jekyll-google_search_console_verification_file
 
+minima:
+  skin: auto
+  show_excerpts: true
+  date_format: "%b %-d, %Y"
+  nav_pages:
+    - topics.md
+    - tags.md
+    - archive.md
+    - search.md
+    - about.markdown
 
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+sass:
+  quiet_deps: true
+  silence_deprecations: [import, global-builtin, color-functions]
 
-languages: ["en", "es"]
-timezone: America/Asuncion
-
-##jekyll_admin:
-  #hidden_links:
-  #  - posts
-  #  - pages
-  #  - staticfiles
-  #  - datafiles
-  #  - configuration
- ## homepage: "posts"
+exclude:
+  - CLAUDE.md
+  - pagefind.yml
+  - scripts/
+  - vendor/
+  - Gemfile
+  - Gemfile.lock
+  - .ruby-version
 
 jekyll_compose:
-  post_default_front_matter:
-    last_modified_at: 
-    permalink: 
-    description:
-    image:
-    published: true
-    sitemap: true
-    excerpt_separator: <!--more-->
-    categories:
-    tags:
-
-#show_excerpts: true
-#excerpt_separator: <!--more-->
+  default_front_matter:
+    drafts:
+      description:
+      image:
+      lang: en
+      categories:
+      tags:
+    posts:
+      description:
+      image:
+      lang: en
+      categories:
+      tags:
 
 defaults:
-  # _posts
+  # Social card image for every page (jekyll-seo-tag); a page's own `image:`
+  # wins. With an image, seo-tag emits twitter:card summary_large_image.
+  - scope:
+      path: ""
+    values:
+      image: /assets/img/og-default.png
   - scope:
       path: ""
       type: posts
     values:
       layout: post
-      author_profile: true
-      read_time: true
-      comments: true
-      share: true
-      related: true
+      author: Ciro Iriarte

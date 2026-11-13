@@ -1,103 +1,102 @@
-# iriarte.it — Personal Blog
+# iriarte.it: personal blog
 
-Source code for [iriarte.it](https://iriarte.it), a Jekyll-based personal blog covering Linux, infrastructure, virtualization, networking, and programming.
+Source for [iriarte.it](https://iriarte.it), a Jekyll blog about Linux, virtualization, networking, storage and backup.
 
-## Tech Stack
+## Tech stack
 
-- **Generator:** [Jekyll](https://jekyllrb.com/) via GitHub Pages
-- **Theme:** [Minima](https://github.com/jekyll/minima) (remote theme)
-- **Hosting:** GitHub Pages with custom domain `iriarte.it`
-- **Plugins:** jekyll-feed, jekyll-seo-tag, jekyll-sitemap, jekyll-compose
+- **Generator:** [Jekyll](https://jekyllrb.com/) 4.4, built by GitHub Actions (`.github/workflows/pages.yml`) and deployed to GitHub Pages
+- **Theme:** [Minima](https://github.com/jekyll/minima) as a remote theme, pinned to a commit in `_config.yml`, with local overrides in `_layouts/`, `_includes/` and `_sass/minima/`
+- **Plugins:** jekyll-feed, jekyll-seo-tag, jekyll-sitemap, jekyll-remote-theme, jekyll-redirect-from, jekyll-compose (local only)
+- **Search:** [Pagefind](https://pagefind.app/), indexed after the Jekyll build (`pagefind.yml`)
+- **Analytics:** Google Analytics 4, plus an optional cookieless [GoatCounter](https://www.goatcounter.com/) counter (`goatcounter:` in `_config.yml`). Both are emitted only when `JEKYLL_ENV=production`.
+- **Hosting:** GitHub Pages with the custom domain `iriarte.it` (`CNAME`)
 
-## Local Development
+## Local development
+
+The repository pins Ruby in `.ruby-version` (the same version CI uses). The easiest way to get it is the Docker wrapper, which needs nothing installed on the host but Docker:
 
 ```bash
-# Install dependencies
-gem install bundler
-bundle install
-
-# Serve locally (live reload at http://localhost:4000)
-bundle exec jekyll serve
-
-# Build for production
-bundle exec jekyll build
+scripts/docker-jekyll.sh serve --livereload --drafts   # http://localhost:4000
+JEKYLL_ENV=production scripts/docker-jekyll.sh build   # -> _site/
 ```
 
-## Directory Structure
+With a local Ruby that matches `.ruby-version`:
+
+```bash
+bundle install
+bundle exec jekyll serve --livereload --drafts
+```
+
+Search only works on a built site, because the index is generated afterwards:
+
+```bash
+JEKYLL_ENV=production scripts/docker-jekyll.sh build
+npx -y pagefind@1.4.0 --serve          # http://localhost:1414
+```
+
+### URL check
+
+`scripts/check-urls.sh [_site]` fails if any URL the site served before the Jekyll 4 migration (`scripts/baseline/files.txt`) is missing from a build. Paths removed on purpose are listed in `scripts/baseline/allowed-removals.txt`. CI runs it before every deploy, so a post can't silently change address.
+
+## Directory structure
 
 ```
 .
-├── _config.yml          # Site configuration (title, URL, plugins, defaults)
-├── _posts/              # Blog posts (Markdown with YAML front matter)
-├── _includes/           # Reusable HTML snippets included in posts
-├── assets/              # Static files (CSS, images)
-├── code/                # Example code referenced by posts
-├── Gemfile              # Ruby gem dependencies
-└── CNAME                # Custom domain for GitHub Pages
+├── _config.yml            # Site configuration
+├── _posts/                # Published posts (YYYY-MM-DD-title.md)
+├── _drafts/               # Unpublished drafts (served with --drafts)
+├── _data/
+│   ├── taxonomy.yml       # Allowed topics (categories) and tags
+│   ├── series.yml         # Multi-part series names
+│   └── authors.yml        # Author bios shown under posts
+├── _includes/             # Overrides and snippets (image, series nav, header, footer...)
+├── _layouts/              # Overrides of minima's post and home layouts
+├── _sass/minima/          # Style overrides (custom-variables.scss, custom-styles.scss)
+├── assets/                # Images (assets/img/YYYY-MM-DD-*.png) and JS
+├── topics.md, tags.md, archive.md, search.md, about.markdown
+├── scripts/               # check-urls.sh, docker-jekyll.sh, URL baseline
+└── .github/workflows/     # Build and deploy
 ```
 
-## Writing Posts
+## Writing posts
 
-Posts live in `_posts/` and follow the naming convention:
-
-```
-YYYY-MM-DD-post-title.md
-```
-
-### Front Matter
-
-Each post requires YAML front matter. Use `jekyll compose` to scaffold a new post:
-
-```bash
-bundle exec jekyll post "My Post Title"
-```
-
-Standard fields:
+Scaffold a draft with `bundle exec jekyll draft "My Post Title"` (or create the file by hand), then move it to `_posts/` with a date prefix when it's ready.
 
 ```yaml
 ---
-title: 'Post Title'
-date: 'YYYY-MM-DDTHH:MM:SS-04:00'
-author: Ciro Iriarte
-layout: post
-description: '1–2 sentence summary for SEO and social cards.'
-categories:
-    - Linux
-tags:
-    - linux
-    - networking
-published: true
+title: 'Post title'
+date: 2026-11-13 10:00:00 -0300
+description: '1–2 sentence summary for search results and social cards.'
+lang: en                 # or es
+categories:              # topic keys from _data/taxonomy.yml
+  - virtualization
+tags:                    # tag keys from _data/taxonomy.yml
+  - proxmox
 ---
 ```
 
+New posts get `/:year/:month/:day/:title.html` URLs. Older posts carry an explicit `permalink:`, so don't remove it.
+
 Optional fields:
 
-| Field | Description |
+| Field | Effect |
 |---|---|
-| `description` | Used by `jekyll-seo-tag` for meta descriptions and social cards |
-| `deprecated: true` | Marks posts covering EOL software — can be used by the theme for a banner |
-| `excerpt` | Short summary used in some listing contexts |
+| `image` | Social card image; defaults to `/assets/img/og-default.png` |
+| `deprecated: true` | Shows an "outdated" banner and badge (end-of-life software) |
+| `series`, `series_part`, `series_title` | Adds the post to a series from `_data/series.yml`; place `{% include series-nav.html %}` where the navigation should appear |
+| `modified_date` | Shows an "Updated" date |
+| `redirect_from` | Old URLs that should redirect to this post |
 
-### Excerpt Separator
+Put `<!--more-->` after the first paragraph to mark the excerpt. Images go through the include, which lazy-loads them and adds a caption:
 
-Add `<!-- more -->` after the first meaningful paragraph to control what appears in post listings and the homepage preview.
+```liquid
+{% include image.html url="/assets/img/2026-11-13-example.png" description="Caption" alt="What the image shows" width=1200 height=800 %}
+```
 
-## Tag Vocabulary
+## Topics and tags
 
-Use these tags consistently to keep navigation working:
-
-`linux`, `networking`, `virtualization`, `storage`, `security`, `monitoring`, `opensuse`, `sles`, `windows`, `bash`, `ssh`, `apache`, `nagios`, `backup`, `timezone`, `java`, `oracle`, `powershell`, `gps`, `sysadmin`, `nonsense`, `meta`
+Topics and tags are a controlled vocabulary in [`_data/taxonomy.yml`](_data/taxonomy.yml). Add a key there before using it in a post; the key is the URL anchor on `/topics/` and `/tags/`, and `name` is what readers see.
 
 ## Deployment
 
-Commits pushed to the `main` branch are automatically built and deployed by GitHub Pages. The live site is available at [https://iriarte.it](https://iriarte.it).
-
-## Content
-
-The blog spans 2006–2025 with 40+ published posts in English and Spanish. Topics include:
-
-- Linux system administration (SLES, openSUSE)
-- Virtualization (VirtualBox, Proxmox, VMware)
-- Networking and monitoring (Nagios, Observium, Apstra)
-- Storage (Hitachi VSP, EMC Symmetrix)
-- Personal projects and anecdotes
+Pushing to `main` runs `.github/workflows/pages.yml`: Jekyll build (production), Pagefind index, URL check, then deploy with `actions/deploy-pages`. The repository's Pages source must be set to **GitHub Actions** (Settings → Pages).

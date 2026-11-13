@@ -1,0 +1,5 @@
+<link rel="icon" href="{{ '/assets/img/avatar.jpg' | relative_url }}">
+<script src="{{ '/assets/js/site.js' | relative_url }}" defer></script>
+{%- if jekyll.environment == 'production' and site.goatcounter %}
+<script data-goatcounter="https://{{ site.goatcounter }}.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+{%- endif %}

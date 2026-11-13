@@ -1,0 +1,10 @@
+<ul class="post-list-compact">
+{%- for p in include.posts %}
+  <li>
+    <time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%Y-%m-%d" }}</time>
+    <a href="{{ p.url | relative_url }}"{% if p.lang and p.lang != site.lang %} hreflang="{{ p.lang }}"{% endif %}>{{ p.title | escape }}</a>
+    {%- if p.lang and p.lang != site.lang %} <span class="lang-badge" title="Written in {{ p.lang }}">{{ p.lang | upcase }}</span>{% endif %}
+    {%- if p.deprecated %} <span class="deprecated-badge" title="Covers end-of-life software">outdated</span>{% endif %}
+  </li>
+{%- endfor %}
+</ul>

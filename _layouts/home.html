@@ -1,0 +1,52 @@
+---
+layout: base
+---
+{%- comment -%}
+  Overrides minima's home layout: adds topics/tags and language/outdated
+  badges to each entry, and a block listing multi-part series.
+{%- endcomment -%}
+<div class="home">
+  {%- if page.title -%}
+    <h1 class="page-heading">{{ page.title }}</h1>
+  {%- endif -%}
+
+  {{ content }}
+
+  {%- assign series_keys = site.posts | where_exp: "p", "p.series" | map: "series" | uniq -%}
+  {%- if series_keys.size > 0 %}
+  <section class="home-series" aria-labelledby="home-series-heading">
+    <h2 id="home-series-heading" class="post-list-heading">Series</h2>
+    <ul>
+    {%- for key in series_keys -%}
+      {%- assign first = site.posts | where: "series", key | sort: "series_part" | first -%}
+      {%- assign count = site.posts | where: "series", key | size %}
+      <li><a href="{{ first.url | relative_url }}">{{ site.data.series[key].name | default: key | escape }}</a> <span class="count">{{ count }} parts</span></li>
+    {%- endfor %}
+    </ul>
+  </section>
+  {%- endif %}
+
+  {%- assign posts = site.posts -%}
+  {%- if posts.size > 0 %}
+  <h2 class="post-list-heading">{{ page.list_title | default: "Posts" }}</h2>
+  <ul class="post-list">
+    {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+    {%- for post in posts %}
+    <li>
+      <span class="post-meta">
+        {{ post.date | date: date_format }}
+        {%- if post.lang and post.lang != site.lang %} <span class="lang-badge" title="Written in {{ post.lang }}">{{ post.lang | upcase }}</span>{% endif %}
+        {%- if post.deprecated %} <span class="deprecated-badge" title="Covers end-of-life software">outdated</span>{% endif %}
+      </span>
+      <h3>
+        <a class="post-link" href="{{ post.url | relative_url }}"{% if post.lang and post.lang != site.lang %} hreflang="{{ post.lang }}"{% endif %}>{{ post.title | escape }}</a>
+      </h3>
+      {%- include post-taxonomy.html post=post -%}
+      {%- if site.minima.show_excerpts %}
+      <p class="post-excerpt">{{ post.description | default: post.excerpt | strip_html | normalize_whitespace | truncatewords: 45 }}</p>
+      {%- endif %}
+    </li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+</div>

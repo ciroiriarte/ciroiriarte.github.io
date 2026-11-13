@@ -1,0 +1,76 @@
+---
+layout: base
+---
+{%- comment -%}
+  Overrides minima's post layout: adds topics/tags, the deprecated banner,
+  series navigation, author box, prev/next links and an edit link.
+{%- endcomment -%}
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+    <div class="post-meta">
+      {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+      {%- assign pdate = page.date | date_to_xmlschema -%}
+      {%- if page.modified_date %}<span class="meta-label">Published:</span>{% endif %}
+      <time class="dt-published" datetime="{{ pdate }}" itemprop="datePublished">{{ pdate | date: date_format }}</time>
+      {%- if page.modified_date -%}
+        <span class="bullet-divider">•</span>
+        <span class="meta-label">Updated:</span>
+        {%- assign mdate = page.modified_date | date_to_xmlschema %}
+        <time class="dt-modified" datetime="{{ mdate }}" itemprop="dateModified">{{ mdate | date: date_format }}</time>
+      {%- endif -%}
+      {%- if page.author %}
+        <span class="bullet-divider">•</span>
+        <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author | escape }}</span></span>
+      {%- endif %}
+      {%- assign words = content | strip_html | number_of_words -%}
+      <span class="bullet-divider">•</span>
+      <span class="reading-time">{{ words | divided_by: 200 | at_least: 1 }} min read</span>
+    </div>
+    {%- include post-taxonomy.html post=page -%}
+  </header>
+
+  {%- if page.deprecated %}
+  <aside class="notice notice-deprecated" role="note">
+    <strong>Outdated:</strong> this post covers software that has reached end of life. It's kept for reference; the steps are unlikely to apply to current versions.
+  </aside>
+  {%- endif %}
+
+  <div class="post-content e-content" itemprop="articleBody">
+    {{ content }}
+  </div>
+
+  {%- assign author = site.data.authors[page.author] -%}
+  {%- if author %}
+  <aside class="author-box h-card" aria-label="About the author">
+    {%- if author.avatar %}<img class="u-photo" src="{{ author.avatar | relative_url }}" alt="" width="64" height="64" loading="lazy">{% endif %}
+    <div>
+      <p class="author-name p-name">{{ author.name | escape }}</p>
+      {%- if author.bio %}<p class="author-bio p-note">{{ author.bio | escape }}</p>{% endif %}
+      {%- if author.links %}
+      <p class="author-links">
+        {%- for link in author.links -%}
+          {%- unless link.url contains "mailto:" %}<a href="{{ link.url }}" rel="me">{{ link.label | escape }}</a>{% endunless -%}
+        {%- endfor -%}
+      </p>
+      {%- endif %}
+    </div>
+  </aside>
+  {%- endif %}
+
+  <nav class="post-pager" aria-label="More posts">
+    {%- if page.previous %}
+    <a class="post-pager-prev" rel="prev" href="{{ page.previous.url | relative_url }}"><span>← Older</span>{{ page.previous.title | escape }}</a>
+    {%- endif -%}
+    {%- if page.next %}
+    <a class="post-pager-next" rel="next" href="{{ page.next.url | relative_url }}"><span>Newer →</span>{{ page.next.title | escape }}</a>
+    {%- endif %}
+  </nav>
+
+  {%- if site.repository %}
+  <p class="post-edit"><a href="https://github.com/{{ site.repository }}/edit/{{ site.branch | default: 'main' }}/{{ page.path }}">Edit this post on GitHub</a> · found an error? Pull requests are welcome.</p>
+  {%- endif %}
+
+  <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+</article>

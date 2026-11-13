@@ -4,11 +4,8 @@ Ciro Iriarte:
   avatar: "/assets/img/avatar.jpg"
   links:
     - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
       url: "mailto:ciro.iriarte+blog@gmail.com"
     - label: "Website"
-      icon: "fas fa-fw fa-link"
       url: "https://iriarte.it"
     - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
       url: "https://twitter.com/ciroiriarte"

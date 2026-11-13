@@ -1,0 +1,139 @@
+// Site-specific styles, loaded after minima's. Colours use the skin's CSS
+// variables so they follow the light/dark (auto) scheme.
+
+$mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", "DejaVu Sans Mono", "Liberation Mono", Menlo, Consolas, monospace;
+
+// Code -------------------------------------------------------------------
+pre, code, kbd, samp { font-family: $mono; }
+pre, code { font-size: 0.88em; }
+.highlight { position: relative; }
+.highlight pre { padding: 12px 14px; }
+.highlight .gp { user-select: none; } // prompts in console blocks
+
+.copy-code {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  padding: 2px 8px;
+  font: 12px/1.6 $mono;
+  color: var(--minima-text-color);
+  background: var(--minima-background-color);
+  border: 1px solid var(--minima-border-color-01);
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .15s;
+}
+.highlight:hover .copy-code,
+.copy-code:focus-visible { opacity: 1; }
+@media (hover: none) { .copy-code { opacity: .85; } }
+
+// Focus & headings -------------------------------------------------------
+a:focus-visible, button:focus-visible, input:focus-visible {
+  outline: 2px solid var(--minima-link-base-color);
+  outline-offset: 2px;
+}
+.post-content h2, .post-content h3 { scroll-margin-top: 1rem; }
+.heading-anchor {
+  margin-left: .35em;
+  font-weight: normal;
+  text-decoration: none;
+  color: var(--minima-brand-color);
+  opacity: 0;
+}
+h2:hover > .heading-anchor, h3:hover > .heading-anchor, .heading-anchor:focus { opacity: 1; }
+
+// Post metadata ----------------------------------------------------------
+.post-taxonomy {
+  margin: 6px 0 0;
+  font-size: 0.85em;
+  a { margin-right: .6em; white-space: nowrap; }
+}
+.post-topic {
+  padding: 1px 8px;
+  border: 1px solid var(--minima-border-color-01);
+  border-radius: 999px;
+}
+.lang-badge, .deprecated-badge {
+  margin-left: .4em;
+  padding: 0 6px;
+  font-size: 0.75em;
+  border-radius: 3px;
+  border: 1px solid var(--minima-border-color-01);
+  vertical-align: middle;
+}
+.deprecated-badge { border-style: dashed; }
+.post-list .post-excerpt { margin: 6px 0 0; }
+.count { font-size: 0.85em; color: var(--minima-brand-color); }
+
+// Notices, series, author, pager ----------------------------------------
+.notice {
+  margin: 0 0 $spacing-unit;
+  padding: 10px 14px;
+  border-left: 4px solid #d9822b;
+  background: var(--minima-code-background-color);
+}
+.series-nav {
+  margin: 0 0 $spacing-unit;
+  padding: 10px 14px;
+  border: 1px solid var(--minima-border-color-01);
+  border-radius: 6px;
+  p { margin: 0 0 4px; }
+  ol { margin: 0 0 0 1.4em; }
+}
+.author-box {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-top: $spacing-unit * 1.5;
+  padding-top: $spacing-unit * .75;
+  border-top: 1px solid var(--minima-border-color-01);
+  img { border-radius: 50%; flex: none; }
+  p { margin: 0 0 4px; }
+  .author-name { font-weight: 600; }
+  .author-bio { font-size: 0.9em; }
+  .author-links a + a::before { content: " · "; color: var(--minima-text-color); }
+}
+.post-pager {
+  display: flex;
+  justify-content: space-between;
+  gap: $spacing-unit;
+  margin-top: $spacing-unit;
+  a { display: block; max-width: 48%; }
+  span { display: block; font-size: 0.8em; color: var(--minima-brand-color); }
+  .post-pager-next { margin-left: auto; text-align: right; }
+}
+.post-edit { margin-top: $spacing-unit; font-size: 0.85em; }
+
+// Index pages ------------------------------------------------------------
+.post-list-compact {
+  list-style: none;
+  margin-left: 0;
+  time { display: inline-block; min-width: 6.5em; font-family: $mono; font-size: 0.85em; color: var(--minima-brand-color); }
+}
+.tag-cloud a { display: inline-block; margin: 0 .8em .4em 0; }
+.topic-index, .home-series ul { list-style: none; margin-left: 0; }
+.taxonomy-section { scroll-margin-top: 1rem; }
+.taxonomy-description { margin-top: -10px; color: var(--minima-brand-color); }
+
+// Images -----------------------------------------------------------------
+figure.image {
+  margin: $spacing-unit 0;
+  text-align: center;
+  img { max-width: 100%; height: auto; }
+  figcaption { font-size: 0.85em; font-style: italic; }
+}
+
+// Footer -----------------------------------------------------------------
+.footer-links a { margin-right: 1em; white-space: nowrap; }
+.footer-links .svg-icon { width: 14px; height: 14px; vertical-align: -2px; fill: currentColor; }
+
+// Search -----------------------------------------------------------------
+#search {
+  --pagefind-ui-primary: var(--minima-link-base-color);
+  --pagefind-ui-text: var(--minima-text-color);
+  --pagefind-ui-background: var(--minima-background-color);
+  --pagefind-ui-border: var(--minima-border-color-01);
+  --pagefind-ui-tag: var(--minima-code-background-color);
+  --pagefind-ui-font: inherit;
+}

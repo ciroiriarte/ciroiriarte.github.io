@@ -28,6 +28,8 @@ jobs:
         run: bundle exec jekyll build
         env:
           JEKYLL_ENV: production
+      - name: Build search index
+        run: npx -y pagefind@1.4.0
       - name: Check no live URL disappeared
         run: scripts/check-urls.sh _site
       - uses: actions/upload-pages-artifact@v3

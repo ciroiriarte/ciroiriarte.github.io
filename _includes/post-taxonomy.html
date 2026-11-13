@@ -1,0 +1,14 @@
+{%- comment -%} Topic and tag links for a post. Pass post=... {%- endcomment -%}
+{%- assign p = include.post | default: page -%}
+{%- if p.categories.size > 0 or p.tags.size > 0 -%}
+<div class="post-taxonomy">
+  {%- for c in p.categories -%}
+    {%- assign topic = site.data.taxonomy.topics[c] %}
+  <a class="post-topic" href="{{ '/topics/' | relative_url }}#{{ c }}">{{ topic.name | default: c | escape }}</a>
+  {%- endfor -%}
+  {%- for t in p.tags -%}
+    {%- assign tag = site.data.taxonomy.tags[t] %}
+  <a class="post-tag" href="{{ '/tags/' | relative_url }}#{{ t }}">#{{ tag.name | default: t | escape }}</a>
+  {%- endfor %}
+</div>
+{%- endif -%}
