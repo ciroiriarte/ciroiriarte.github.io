@@ -30,7 +30,7 @@ This is part 1 of a series of three:
 2. [The CLI procedure]({% post_url 2026-11-13-pbs-usb-tapes-2-cli %}): mhVTL and PBS from the shell, copy and paste.
 3. [The point & click procedure]({% post_url 2026-11-13-pbs-usb-tapes-3-gui %}): the same, from the mhVTL Control dashboard and the PBS web UI.
 
-# What PBS already offers
+## What PBS already offers
 
 Before building anything, it's worth checking what PBS already offers.
 
@@ -60,42 +60,58 @@ For one or two disks, a removable datastore is simpler, and probably the better 
 
 Two small bonuses for the raw disk: no desktop component tries to auto-mount it, and a disk pulled at the wrong time has no filesystem to `fsck`.
 
-# What changed in mhVTL
+## What changed in mhVTL
 
 [mhVTL](https://github.com/markh794/mhvtl) is a virtual tape library for Linux. It emulates SCSI tape drives and robotic changers well enough that backup applications can't tell the difference. Traditionally, each virtual cartridge is a directory of files under `/opt/mhvtl`. That works for testing, but a cartridge stuck inside a filesystem on the backup server doesn't help anyone when the building burns down.
 
 Over the last few weeks, a set of changes landed upstream that lets cartridges live on removable disks. I wrote them; Mark Harvey, the mhVTL maintainer, reviewed and merged them.
 
-## Raw-disk cartridges
+### Raw-disk cartridges
 
-A whole block device can now be a cartridge ([#214](https://github.com/markh794/mhvtl/pull/214)). One disk is one tape. No partition table and no filesystem. The first megabyte is left empty, so nothing on the host thinks the disk is worth mounting. After it come a superblock (plus a mirror copy) with the barcode and layout, the cartridge memory (MAM), and the data stream. `mhvtl-raw-format` initializes a disk, and since [#293](https://github.com/markh794/mhvtl/pull/293) it also writes a proper MAM, so the drive knows the capacity from the first write.
+A whole block device can now be a cartridge ([#214](https://github.com/markh794/mhvtl/pull/214)). One disk is one tape. No partition table and no filesystem.
+
+The first megabyte is left empty, so nothing on the host thinks the disk is worth mounting. After it come a superblock (plus a mirror copy) with the barcode and layout, the cartridge memory (MAM), and the data stream.
+
+`mhvtl-raw-format` initializes a disk, and since [#293](https://github.com/markh794/mhvtl/pull/293) it also writes a proper MAM, so the drive knows the capacity from the first write.
 
 When a backup application writes a filemark or unloads the tape, mhVTL flushes the disk (`fdatasync`) before answering. In a test environment, disks pulled from the mail slot and plugged back in read back intact every time.
 
-## Hot-plug bays
+### Hot-plug bays
 
-`mhvtl-bay-monitor` watches udev and binds a physical USB port (its stable `/dev/disk/by-path` name, never `/dev/sdX`) to a library's mail slots. Mail slots are the import/export station of a library: mhVTL calls them MAP, PBS calls them I/E slots. Plug a formatted disk into the dock and its cartridge appears in a mail slot. Pull it out and the cartridge disappears from the library. Follow-ups handle the corner cases: a disk formatted in place ([#294](https://github.com/markh794/mhvtl/pull/294)), a monitor restarted with a disk in the dock ([#296](https://github.com/markh794/mhvtl/pull/296)), and several docks on one library ([#298](https://github.com/markh794/mhvtl/pull/298)).
+`mhvtl-bay-monitor` watches udev and binds a physical USB port (its stable `/dev/disk/by-path` name, never `/dev/sdX`) to a library's mail slots. Mail slots are the import/export station of a library: mhVTL calls them MAP, PBS calls them I/E slots.
+
+Plug a formatted disk into the dock and its cartridge appears in a mail slot. Pull it out and the cartridge disappears from the library. Follow-ups handle the corner cases:
+
+- a disk formatted in place ([#294](https://github.com/markh794/mhvtl/pull/294))
+- a monitor restarted with a disk in the dock ([#296](https://github.com/markh794/mhvtl/pull/296))
+- several docks on one library ([#298](https://github.com/markh794/mhvtl/pull/298))
 
 To PBS this looks exactly like an operator walking up to a real library and dropping a tape in the mail slot.
 
-## Real encryption {#real-encryption}
+### Real encryption {#real-encryption}
 
 Until recently, mhVTL drive encryption was *simulated*. The drive accepted the key and wrote the data in plain text, with the key in every block header. Fine for testing an application, but useless for disks that leave the building.
 
-Since [#328](https://github.com/markh794/mhvtl/pull/328), the drive encrypts every block with AES-256-GCM. The key is derived from what the application sends plus a random salt stored in the cartridge memory, and is never written to the disk. That's the default for drives that support encryption, so a PBS media pool with an encryption key now gives you an encrypted disk. In a test environment, I searched the raw disk for samples of a random file I'd backed up: they were all in the PBS datastore, and none were on the encrypted disk.
+Since [#328](https://github.com/markh794/mhvtl/pull/328), the drive encrypts every block with AES-256-GCM. The key is derived from what the application sends plus a random salt stored in the cartridge memory, and is never written to the disk.
 
-## Faster compression
+That's the default for drives that support encryption, so a PBS media pool with an encryption key now gives you an encrypted disk. In a test environment, I searched the raw disk for samples of a random file I'd backed up: they were all in the PBS datastore, and none were on the encrypted disk.
+
+### Faster compression
 
 LZ4 and Zstandard joined the old zlib and LZO. It doesn't matter much for PBS, whose chunks are already compressed, and mhVTL stores a block as-is when compression doesn't shrink it.
 
-## A dashboard
+### A dashboard
 
 [mhVTL Control](https://github.com/ciroiriarte/mhvtl-control) is a separate project of mine: a REST API and web dashboard for mhVTL. It shows the libraries live, edits the configuration with a check step before applying it, and formats raw disks. Part 3 uses it for the point & click version.
 
-# Where this is going
+## Where this is going
 
 In this series, the USB dock hangs off the PBS host itself. The next step is to move the disks to a separate box.
 
 mhVTL can now export its libraries over **iSCSI**: `mhvtl-fabrics` ([#337](https://github.com/markh794/mhvtl/pull/337)) provisions the targets on top of the TCMU backend, which is still experimental. **Fibre Channel** target support is in the works too. With either, a separate box with hot-swap bays becomes "the tape library", and the PBS host sees an ordinary tape library on the fabric. No mhVTL on the backup server, no USB cable to it, and disks rotated at the box that holds them.
 
 That deserves its own post once it has been through a test environment. For now, [part 2]({% post_url 2026-11-13-pbs-usb-tapes-2-cli %}) builds the local version from the shell.
+
+---
+
+{% include series-pbs-usb-tapes.html current="1" %}

@@ -22,22 +22,26 @@ Not everything has a button yet: installing packages, turning on dashboard write
 
 <!--more-->
 
+{% include series-pbs-usb-tapes.html current="3" %}
+
 The setup is the same as before: PBS 4.2 with a datastore called `store1`, a USB dock, and disks to rotate. The test environment was a fresh Debian 13 VM with mhVTL `1.8.0+git20261101.7e3a101` and mhVTL Control 0.6.0, both from my [OBS project](https://build.opensuse.org/project/show/home:ciriarte:mhvtl).
 
-# The shell part
+## The shell part
 
 Add the repository, install both packages, and keep the kernel's `ch` driver out. It leaks drive references every time a changer appears, and PBS doesn't need it ([part 2]({% post_url 2026-11-13-pbs-usb-tapes-2-cli %}#install-mhvtl) has the details):
 
 {% highlight shell %}
+REPO=https://download.opensuse.org/repositories/home:/ciriarte:/mhvtl/Debian_13
 install -d /etc/apt/keyrings
-curl -fsSL -o /etc/apt/keyrings/mhvtl.asc \
-    https://download.opensuse.org/repositories/home:/ciriarte:/mhvtl/Debian_13/Release.key
-echo "deb [signed-by=/etc/apt/keyrings/mhvtl.asc] https://download.opensuse.org/repositories/home:/ciriarte:/mhvtl/Debian_13/ /" \
+curl -fsSL -o /etc/apt/keyrings/mhvtl.asc $REPO/Release.key
+echo "deb [signed-by=/etc/apt/keyrings/mhvtl.asc] $REPO/ /" \
     > /etc/apt/sources.list.d/mhvtl.list
 apt-get update
-apt-get install linux-headers-amd64 mhvtl mhvtl-control   # proxmox-default-headers on a Proxmox kernel
+# on a Proxmox kernel, use proxmox-default-headers instead:
+apt-get install linux-headers-amd64 mhvtl mhvtl-control
 echo "blacklist ch" > /etc/modprobe.d/mhvtl-no-ch.conf
-modprobe -r ch     # if this fails, ch is in use: reboot before going on
+# if this fails, ch is in use: reboot before going on
+modprobe -r ch
 {% endhighlight %}
 
 The kernel module is built with DKMS for the running kernel. If you just upgraded the kernel, reboot first.
@@ -61,7 +65,7 @@ ssh -L 8080:127.0.0.1:8080 root@pbs.example.com
 
 Open <http://localhost:8080>, click **Target…** and paste the token.
 
-# Create the library
+## Create the library
 
 The package ships two sample STK libraries. PBS can't see them: it needs a changer that reports INQUIRY VPD page 0x83, and the STK models mhVTL emulates don't. So we add a library with an IBM personality.
 
@@ -82,20 +86,20 @@ Click **Apply**. The library is live within seconds.
 
 The wizard leaves drive compression off, which is fine: PBS chunks are already compressed. The sample libraries stay where they are (see [Rough edges](#rough-edges)), so their drives will show up in PBS's drive list later.
 
-# Bind the dock
+## Bind the dock
 
 This one is still a shell step. Plug a disk into the dock, find the port's stable `/dev/disk/by-path` name (the `usb-` one, not `usbv3-`), and bind it to library 20. The second column is the intended mail slot; for now the cartridge lands in the first free one:
 
 {% highlight shell %}
 ls -l /dev/disk/by-path/ | grep -- -usb-
-echo "20  1  /dev/disk/by-path/pci-0000:00:01.0-usb-0:1:1.0-scsi-0:0:0:0" \
-    > /etc/mhvtl/mhvtl_raw_bays.conf
+BAY=/dev/disk/by-path/pci-0000:00:01.0-usb-0:1:1.0-scsi-0:0:0:0
+echo "20  1  $BAY" > /etc/mhvtl/mhvtl_raw_bays.conf
 systemctl enable --now mhvtl-bay-monitor
 {% endhighlight %}
 
 The disk is blank, so the monitor logs "not placed" and waits.
 
-# Format the disk
+## Format the disk
 
 In **Raw Disk Dock**, the disk shows up as "NO MVTL (UNFORMATTED)". Click **Format…**, type the device name to confirm (this **erases the disk**), and give it a barcode. The `L8` suffix makes it LTO-8 media, matching the drive:
 
@@ -107,7 +111,7 @@ The bay monitor picks up the new cartridge right away, and the **Library Rack** 
 
 Switch to the PBS web UI, at `https://<pbs>:8007`.
 
-# Add the changer and the drive
+## Add the changer and the drive
 
 **Tape Backup → Changers → Add**. The path dropdown lists only the IBM changer (`scsi-MHV0020`). The STK samples are invisible to PBS, as expected. I named it `usblib` and left Import-Export Slots blank, since PBS reads them from the changer.
 
@@ -117,7 +121,7 @@ Switch to the PBS web UI, at `https://<pbs>:8007`.
 
 {% include image.html url="/assets/img/2026-11-13-pbs-usb-p02-add-drive.jpg" description="PBS: add the drive, picked by serial" %}
 
-# Encryption key and media pool
+## Encryption key and media pool
 
 **Encryption Keys → Add**: a hint and a password. PBS then offers a paper key. Print it and keep it away from this server: without the key, the disks are just noise.
 
@@ -132,13 +136,13 @@ Switch to the PBS web UI, at `https://<pbs>:8007`.
 
 {% include image.html url="/assets/img/2026-11-13-pbs-usb-p04-add-pool.jpg" description="PBS: media pool offsite" %}
 
-# Label the disk
+## Label the disk
 
 Open the changer (**usblib** in the left tree). The disk sits in I/E slot 5, "Not Labeled". Mail slots are numbered after the four storage slots. PBS won't label media in a mail slot, so click **Import** and move it to slot 1, then **Barcode Label** with pool `offsite`.
 
 {% include image.html url="/assets/img/2026-11-13-pbs-usb-p05-changer-ie.jpg" description="PBS changer view: the new disk in I/E slot 5" %}
 
-# Back up
+## Back up
 
 **Content → New Backup**: datastore `store1`, pool `offsite`, drive `usbdrive`, and tick **Export Media-Set**. That moves the cartridge back to the mail slot when the job ends, ready to unplug.
 
@@ -150,7 +154,7 @@ For the weekly routine, add a job under **Backup Jobs → Add**: same datastore,
 
 {% include image.html url="/assets/img/2026-11-13-pbs-usb-p11-backup-job.jpg" description="PBS: weekly tape backup job" %}
 
-# Pull the disk
+## Pull the disk
 
 When the task log says the media was exported, unplug the disk. The bay monitor takes the cartridge out of the library. PBS caches what it knows, so click **Reload** in **Inventory**: the disk is listed as offline, with its catalog.
 
@@ -160,7 +164,7 @@ The changer view also keeps showing the cartridge until you click **Reload** the
 
 Next week: plug in the disk that is due, **Import** it to a storage slot, and let the job run. An expired disk is reused automatically. Formatting and labeling are only for new disks.
 
-# Restore
+## Restore
 
 Plug the disk back in. Once it's in the mail slot, **Reload** the changer and **Import** it to a slot. Then in **Content**, click the restore icon next to the media set, pick the snapshots, and choose a target drive and datastore:
 
@@ -176,7 +180,7 @@ The restore leaves the disk in the drive. Before unplugging it, send it back to 
 
 Restoring on a rebuilt PBS takes a few more steps, starting with restoring the key from the paper copy. [Part 2]({% post_url 2026-11-13-pbs-usb-tapes-2-cli %}#restore) has the commands, all run in a test environment.
 
-# Rough edges
+## Rough edges
 
 mhVTL Control 0.6.0 is young, and this run turned up a few things I'll fix:
 
@@ -185,3 +189,7 @@ mhVTL Control 0.6.0 is young, and this run turned up a few things I'll fix:
 - Raw Disk Dock offers **Format…** for the CD-ROM drive, and names disks by `sdX` instead of their bay.
 
 None of them got in the way of the procedure. The caveats from [part 2]({% post_url 2026-11-13-pbs-usb-tapes-2-cli %}#caveats) apply here too: wait for the mail slot before pulling a disk, use a dock that honors cache flushes, and test a restore before you rely on it.
+
+---
+
+{% include series-pbs-usb-tapes.html current="3" %}

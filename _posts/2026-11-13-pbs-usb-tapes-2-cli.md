@@ -22,7 +22,9 @@ Every command and output below comes from a run on a fresh test environment. If 
 
 <!--more-->
 
-# Starting point
+{% include series-pbs-usb-tapes.html current="2" %}
+
+## Starting point
 
 - Proxmox Backup Server 4.2 with a datastore holding some backups. Mine is called `store1`.
 - A USB dock or USB-SATA adapter, plus the disks you want to rotate. One disk is one cartridge.
@@ -34,19 +36,21 @@ The steps assume a PBS host without mhVTL yet: they replace the sample configura
 
 Run everything as root.
 
-# Install mhVTL
+## Install mhVTL
 
 Add the repository and install mhVTL. The kernel module is built with DKMS, so name the headers package explicitly:
 
 {% highlight shell %}
+REPO=https://download.opensuse.org/repositories/home:/ciriarte:/mhvtl/Debian_13
 install -d /etc/apt/keyrings
-curl -fsSL -o /etc/apt/keyrings/mhvtl.asc \
-    https://download.opensuse.org/repositories/home:/ciriarte:/mhvtl/Debian_13/Release.key
-echo "deb [signed-by=/etc/apt/keyrings/mhvtl.asc] https://download.opensuse.org/repositories/home:/ciriarte:/mhvtl/Debian_13/ /" \
+curl -fsSL -o /etc/apt/keyrings/mhvtl.asc $REPO/Release.key
+echo "deb [signed-by=/etc/apt/keyrings/mhvtl.asc] $REPO/ /" \
     > /etc/apt/sources.list.d/mhvtl.list
 apt-get update
-apt-get install linux-headers-amd64 mhvtl      # PBS on top of Debian
-#apt-get install proxmox-default-headers mhvtl  # PBS from the ISO (Proxmox kernel)
+# PBS on top of Debian:
+apt-get install linux-headers-amd64 mhvtl
+# PBS from the ISO (Proxmox kernel), instead:
+#apt-get install proxmox-default-headers mhvtl
 {% endhighlight %}
 
 **Note:** Headers have to match the running kernel. If you just upgraded the kernel, reboot first, or DKMS builds the module only for the kernel you aren't running yet. Name the headers metapackage, too: without it, apt pulled Proxmox kernel headers into my Debian-kernel box to satisfy `mhvtl-dkms`.
@@ -55,10 +59,11 @@ The install doesn't start mhVTL yet, which leaves time for one more step. Linux'
 
 {% highlight shell %}
 echo "blacklist ch" > /etc/modprobe.d/mhvtl-no-ch.conf
-modprobe -r ch     # if this fails, ch is in use: reboot before going on
+# if this fails, ch is in use: reboot before going on
+modprobe -r ch
 {% endhighlight %}
 
-# Define the library
+## Define the library
 
 The package ships two sample STK libraries, and PBS won't see either of them. PBS only lists a changer when udev gives it an `ID_SCSI_SERIAL`, which comes from INQUIRY VPD page 0x83. The STK L700 and L80 that mhVTL emulates faithfully don't have it, so I use an IBM TS3500 personality (`03584L22`), which does.
 
@@ -68,6 +73,7 @@ Keep a copy of the samples, then replace `/etc/mhvtl/device.conf` with one libra
 cp -a /etc/mhvtl /root/mhvtl.orig
 {% endhighlight %}
 
+**`/etc/mhvtl/device.conf`**
 
 {% highlight text %}
 VERSION: 5
@@ -95,7 +101,9 @@ Drive: 11 CHANNEL: 00 TARGET: 01 LUN: 00
 
 There's no `Encryption:` line because AES-256-GCM is the default for drives that support it (see `man device.conf`). PBS chunks are already compressed, so LZ4 is just the cheapest codec to have enabled.
 
-Then `/etc/mhvtl/library_contents.10`: four storage slots and two mail slots, all empty. The disks bring their own cartridges.
+Then the library's contents: four storage slots and two mail slots, all empty. The disks bring their own cartridges.
+
+**`/etc/mhvtl/library_contents.10`**
 
 {% highlight text %}
 VERSION: 2
@@ -129,7 +137,7 @@ sleep 5; lsscsi -g
 
 The devices take a few seconds to show up after the restart. (My run shows `/dev/sch0` because `ch` wasn't blacklisted yet. With the blacklist in place, that column shows `-`.)
 
-# Bind the dock to a mail slot
+## Bind the dock to a mail slot
 
 `mhvtl-bay-monitor` maps a physical disk location to a library's mail slots. The location is the stable `/dev/disk/by-path` name of the USB port, never `/dev/sdX`. Plug any disk into the dock and look it up:
 
@@ -153,25 +161,41 @@ systemctl enable --now mhvtl-bay-monitor
 journalctl -u mhvtl-bay-monitor -o cat | grep -E 'handle_add|monitoring'
 {% endhighlight %}
 
+The log lines here and below shorten the by-path name to `…usb-0:1:1.0-scsi-0:0:0:0`:
+
 {% highlight text %}
-mhvtl-bay-monitor: handle_add(): bay /dev/disk/by-path/pci-0000:00:01.0-usb-0:1:1.0-scsi-0:0:0:0 not placed: no readable MVTL cartridge in bay
+mhvtl-bay-monitor: handle_add(): bay …usb-0:1:1.0-scsi-0:0:0:0 not placed: no readable MVTL cartridge in bay
 mhvtl-bay-monitor: main(): monitoring 1 bay(s) for raw-disk hot-plug events
 {% endhighlight %}
 
 The disk in the dock is blank, so nothing is placed yet. That's expected.
 
-# Configure PBS
+## Configure PBS
 
 PBS now finds the changer and the drive:
 
 {% highlight shell %}
 proxmox-tape changer scan
+{% endhighlight %}
+
+{% highlight text %}
+┌───────────────────────────────┬────────┬──────────┬──────────┐
+│ path                          │ vendor │ model    │ serial   │
+╞═══════════════════════════════╪════════╪══════════╪══════════╡
+│ /dev/tape/by-id/scsi-USBLIB01 │ IBM    │ 03584L22 │ USBLIB01 │
+└───────────────────────────────┴────────┴──────────┴──────────┘
+{% endhighlight %}
+
+{% highlight shell %}
 proxmox-tape drive scan
 {% endhighlight %}
 
 {% highlight text %}
-│ /dev/tape/by-id/scsi-USBLIB01 │ IBM    │ 03584L22 │ USBLIB01 │
+┌────────────────────────────────────┬────────┬─────────────┬────────────┐
+│ path                               │ vendor │ model       │ serial     │
+╞════════════════════════════════════╪════════╪═════════════╪════════════╡
 │ /dev/tape/by-id/scsi-00USBDRV01-sg │ IBM    │ ULT3580-TD8 │ 00USBDRV01 │
+└────────────────────────────────────┴────────┴─────────────┴────────────┘
 {% endhighlight %}
 
 Create them:
@@ -186,12 +210,15 @@ Next, an encryption key and a media pool that uses it. `key create` prompts for 
 
 {% highlight shell %}
 proxmox-tape key create --hint offsite-2026
-(umask 077; proxmox-tape key paperkey <fingerprint> --output-format text > /root/offsite-paperkey.txt)
+(umask 077; proxmox-tape key paperkey <fingerprint> --output-format text \
+    > /root/offsite-paperkey.txt)
 proxmox-tape pool create offsite --allocation always --retention "20 days" \
     --encrypt <fingerprint>
 {% endhighlight %}
 
-`--allocation always` starts a new media set on every run. As long as a run fits on one disk, each disk is a self-contained copy that can leave the building. If it doesn't, the media set spans several disks, and they travel (and restore) together. Retention has to be shorter than the rotation cycle, or the disk coming back is still protected and PBS asks for a new one. With three disks rotated weekly, a disk returns after 21 days, so 20 days works.
+`--allocation always` starts a new media set on every run. As long as a run fits on one disk, each disk is a self-contained copy that can leave the building. If it doesn't, the media set spans several disks, and they travel (and restore) together.
+
+Retention has to be shorter than the rotation cycle, or the disk coming back is still protected and PBS asks for a new one. With three disks rotated weekly, a disk returns after 21 days, so 20 days works.
 
 In the changer, mail slots are numbered after the storage slots. With four slots, the dock is element 5:
 
@@ -207,7 +234,7 @@ proxmox-tape changer status usblib
 ...
 {% endhighlight %}
 
-# Initialize a disk
+## Initialize a disk
 
 This happens once per disk and **erases whatever is on it**. Format the disk in the dock as a cartridge. The `L8` barcode suffix makes it LTO-8 media, matching the drive, and the capacity is whatever the disk holds:
 
@@ -216,7 +243,7 @@ mhvtl-raw-format $BAY --barcode USB001L8
 {% endhighlight %}
 
 {% highlight text %}
-Formatted /dev/disk/by-path/pci-0000:00:01.0-usb-0:1:1.0-scsi-0:0:0:0 as raw cartridge 'USB001L8' (partitions: 100, min record 65536 bytes)
+Formatted …usb-0:1:1.0-scsi-0:0:0:0 as raw cartridge 'USB001L8' (partitions: 100, min record 65536 bytes)
 {% endhighlight %}
 
 The monitor notices on its own and drops the cartridge into the mail slot:
@@ -226,7 +253,7 @@ journalctl -u mhvtl-bay-monitor -o cat | tail -1
 {% endhighlight %}
 
 {% highlight text %}
-mhvtl-bay-monitor: handle_add(): placed USB001L8 (library 10 MAP, bay /dev/disk/by-path/pci-0000:00:01.0-usb-0:1:1.0-scsi-0:0:0:0)
+mhvtl-bay-monitor: handle_add(): placed USB001L8 (library 10 MAP, bay …usb-0:1:1.0-scsi-0:0:0:0)
 {% endhighlight %}
 
 PBS caches the changer state, so ask for a fresh read:
@@ -255,7 +282,7 @@ Label media 'USB001L8' for pool 'offsite'
 TASK OK
 {% endhighlight %}
 
-# Run a backup
+## Run a backup
 
 `--export-media-set` moves the cartridge back to the mail slot when the job ends, so the disk is ready to pull as soon as the task finishes:
 
@@ -287,7 +314,7 @@ proxmox-tape backup-job create weekly-usb --store store1 --pool offsite \
 
 Is the disk really encrypted? I searched all 16 GB of the raw device for four 32-byte samples of a random file in that backup. Each sample showed up once in the PBS datastore and nowhere on the disk.
 
-# Pull the disk
+## Pull the disk
 
 Check that the cartridge is in the mail slot, then unplug the disk:
 
@@ -306,7 +333,7 @@ journalctl -u mhvtl-bay-monitor -o cat | tail -1
 {% endhighlight %}
 
 {% highlight text %}
-mhvtl-bay-monitor: handle_remove(): removed USB001L8 (library 10 MAP, bay /dev/disk/by-path/pci-0000:00:01.0-usb-0:1:1.0-scsi-0:0:0:0)
+mhvtl-bay-monitor: handle_remove(): removed USB001L8 (library 10 MAP, bay …usb-0:1:1.0-scsi-0:0:0:0)
 {% endhighlight %}
 
 PBS keeps the disk in its inventory as offline media, with its catalog:
@@ -327,7 +354,7 @@ proxmox-tape unload --drive usbdrive
 proxmox-tape export-media --drive usbdrive USB001L8
 {% endhighlight %}
 
-# The weekly routine
+## The weekly routine
 
 Once the disks are initialized, a rotation is:
 
@@ -338,7 +365,7 @@ Once the disks are initialized, a rotation is:
 
 An expired disk is reused by the pool automatically. `mhvtl-raw-format` and `barcode-label` are only needed for new disks. In the test environment, a second disk (`USB002L8`) went through the same steps, and the job wrote to it on its own.
 
-# Restore
+## Restore
 
 Plug the disk back in, move it to a storage slot, and restore its media set into a datastore. `proxmox-tape media list` shows the media-set UUID:
 
@@ -370,7 +397,8 @@ proxmox-tape export-media --drive usbdrive USB001L8
 On a rebuilt PBS, the key store and the media catalog are gone. Set up mhVTL and the PBS changer and drive again as above, but **don't format or label the disks**. Plug in the disk, move it to a slot, then bring the key back from the paper copy and let PBS read the disk:
 
 {% highlight shell %}
-proxmox-tape key restore --key-file /root/offsite-paperkey.txt   # asks for the key password
+# asks for the key password:
+proxmox-tape key restore --key-file /root/offsite-paperkey.txt
 proxmox-tape inventory --drive usbdrive --read-all-labels true
 proxmox-tape load-media USB001L8 --drive usbdrive
 proxmox-tape catalog --drive usbdrive
@@ -385,10 +413,14 @@ TASK OK
 
 Then restore the media set as above. I tested this by wiping the key, pool, inventory and catalogs on the test PBS: the restore into a new datastore worked and the checksum matched.
 
-# Caveats
+## Caveats
 
 - **Don't pull a loaded disk.** I tried: while the disk was out, the drive reported "Medium format corrupted". After plugging it back in, `proxmox-tape unload` followed by `proxmox-tape load-media USB001L8 --drive usbdrive` brought it back, and a full catalog rescan read the data fine. Still, wait for the mail slot.
 - **USB bridges and flushes.** mhVTL asks for a flush on every filemark and unload, but some cheap USB-SATA bridges ignore cache flushes. Buy a decent UAS dock.
 - **More docks.** A second dock is another line in `mhvtl_raw_bays.conf` (restart `mhvtl-bay-monitor` afterwards). Each disk lands in the first free mail slot, not necessarily the one in its line, so check `changer status --cache false` for the barcode before moving or pulling anything. Pulling one disk only takes its own cartridge out.
 - **Encryption needs this snapshot or newer.** On mhVTL builds older than [#328](https://github.com/markh794/mhvtl/pull/328), drive encryption is simulated and the key is written next to the data. Check `man device.conf` for the `Encryption:` option. If it's not there, use [PBS client-side encryption](https://pbs.proxmox.com/docs/backup-client.html#encryption) instead.
 - **New code.** Raw-disk cartridges are young. Test a restore before you rely on them, as with any backup.
+
+---
+
+{% include series-pbs-usb-tapes.html current="2" %}
