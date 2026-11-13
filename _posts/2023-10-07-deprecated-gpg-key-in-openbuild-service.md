@@ -1,4 +1,5 @@
 ---
+permalink: /homelab/2023/10/07/deprecated-gpg-key-in-openbuild-service.html
 title: Deprecated GPG Key in OpenBuild Service
 description: Quick fix to force key replacement
 layout: post

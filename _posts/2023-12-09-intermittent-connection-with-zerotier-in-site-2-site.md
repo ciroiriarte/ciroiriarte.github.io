@@ -1,4 +1,5 @@
 ---
+permalink: /sdn/networking/2023/12/09/intermittent-connection-with-zerotier-in-site-2-site.html
 title: Intermittent connection with Zerotier in Site-2-Site
 description: Found an odd behaviour with Zerotier while using OPNSense as L3 peering nodes for site 2 site integration.
 layout: post

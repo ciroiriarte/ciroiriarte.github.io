@@ -1,4 +1,5 @@
 ---
+permalink: /datacenter/2025/11/11/Openstack-Cloud-Images.html
 title: Openstack Cloud Images
 description: Walkthrough of the process to import Cloud Images to Openstack.
 layout: post

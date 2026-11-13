@@ -1,4 +1,5 @@
 ---
+permalink: /datacenter/2026/11/13/pbs-usb-tapes-2-cli.html
 title: "USB disks as tapes for Proxmox Backup Server (2/3): the CLI way"
 description: Step by step, from the shell. Install mhVTL, define a library with a USB dock as its mail slot, format disks as tape cartridges, and run encrypted PBS tape jobs and restores against them.
 date: 2026-11-13 10:01:00 -0300

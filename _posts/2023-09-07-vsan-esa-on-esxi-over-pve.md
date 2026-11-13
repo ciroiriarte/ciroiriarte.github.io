@@ -1,4 +1,5 @@
 ---
+permalink: /homelab/2023/09/07/vsan-esa-on-esxi-over-pve.html
 title: vSAN ESA on ESXi-over-PVE
 description: Nested vSAN ESA cluster for testing purposes
 layout: post

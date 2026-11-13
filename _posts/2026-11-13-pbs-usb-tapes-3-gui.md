@@ -1,4 +1,5 @@
 ---
+permalink: /datacenter/2026/11/13/pbs-usb-tapes-3-gui.html
 title: "USB disks as tapes for Proxmox Backup Server (3/3): point & click"
 description: The same setup as part 2, from the mhVTL Control dashboard and the PBS web UI. A few shell lines remain; everything else is clicks.
 date: 2026-11-13 10:02:00 -0300

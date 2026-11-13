@@ -1,4 +1,5 @@
 ---
+permalink: /datacenter/networking/2023/12/25/deploying-juniper-vlwc-on-pve.html
 title: Deploying Juniper vLWC on PVE
 description: Walkthrough of analysis and deployment of a Juniper Virtual Lightweight Collector for "call home" functionality 
 layout: post

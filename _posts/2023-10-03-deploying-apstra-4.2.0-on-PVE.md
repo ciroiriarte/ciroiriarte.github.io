@@ -1,4 +1,5 @@
 ---
+permalink: /homelab/sdn/2023/10/03/deploying-apstra-4.2.0-on-PVE.html
 title: Deploying Apstra 4.2.0 on Proxmox VE
 description: Step by step deployment of Apstra 4.2.0 AOS & ZTP appliances
 layout: post
