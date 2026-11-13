@@ -47,7 +47,7 @@ minima:
 
 sass:
   quiet_deps: true
-  silence_deprecations: [import, global-builtin, color-functions]
+  silence_deprecations: [import]
 
 exclude:
   - CLAUDE.md

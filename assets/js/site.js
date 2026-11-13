@@ -31,7 +31,6 @@
 
   document.querySelectorAll(".highlight > pre").forEach(function (pre) {
     var host = pre.parentElement;
-    if (host.querySelector(".copy-code")) return;
     var btn = document.createElement("button");
     btn.type = "button";
     btn.className = "copy-code";

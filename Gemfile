@@ -13,9 +13,7 @@ group :jekyll_plugins do
   gem "jekyll-compose", group: :development
 end
 
-# Not in the default gem set since Ruby 3.4 / 3.0.
-gem "webrick"
-gem "csv"
-gem "base64"
+# Liquid 4 needs these, and they left Ruby's default gems in 3.4/3.5.
+# (webrick, csv and base64 already come in as Jekyll dependencies.)
 gem "bigdecimal"
 gem "logger"
