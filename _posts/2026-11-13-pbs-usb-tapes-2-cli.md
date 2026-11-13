@@ -18,7 +18,7 @@ tags:
 
 In [part 1]({% post_url 2026-11-13-pbs-usb-tapes-1-why %}) I explained why you might want PBS tape jobs on plain USB disks. This part builds it from the shell: one virtual library, one LTO-8 drive, a USB dock acting as the library's mail slot, and an encrypted media pool rotating disks.
 
-Every command and output below comes from a fresh lab run. If you prefer clicking, [part 3]({% post_url 2026-11-13-pbs-usb-tapes-3-gui %}) does the same from the web UIs.
+Every command and output below comes from a run on a fresh test environment. If you prefer clicking, [part 3]({% post_url 2026-11-13-pbs-usb-tapes-3-gui %}) does the same from the web UIs.
 
 <!--more-->
 
@@ -28,7 +28,7 @@ Every command and output below comes from a fresh lab run. If you prefer clickin
 - A USB dock or USB-SATA adapter, plus the disks you want to rotate. One disk is one cartridge.
 - mhVTL `1.8.0+git20261101.7e3a101` from my [openSUSE Build Service project](https://build.opensuse.org/project/show/home:ciriarte:mhvtl). Everything used here is in mhVTL master but not in a tagged release yet, hence the snapshot.
 
-My lab was a Debian 13 VM with PBS installed on top, and the "USB dock" a USB port on a virtual xHCI controller with 16 GB disks hot-plugged into it. The kernel sees real USB hot-plug events, so mhVTL can't tell the difference. Throughput numbers are from that VM, not a benchmark.
+My test environment was a Debian 13 VM with PBS installed on top, and the "USB dock" a USB port on a virtual xHCI controller with 16 GB disks hot-plugged into it. The kernel sees real USB hot-plug events, so mhVTL can't tell the difference. Throughput numbers are from that VM, not a benchmark.
 
 The steps assume a PBS host without mhVTL yet: they replace the sample configuration the package installs. If you already run mhVTL libraries on that host, add the library and drive below to your own `device.conf` instead.
 
@@ -336,7 +336,7 @@ Once the disks are initialized, a rotation is:
 3. Let the job run. It exports the disk back to slot 5.
 4. Unplug it and take it off site.
 
-An expired disk is reused by the pool automatically. `mhvtl-raw-format` and `barcode-label` are only needed for new disks. In the lab, a second disk (`USB002L8`) went through the same steps, and the job wrote to it on its own.
+An expired disk is reused by the pool automatically. `mhvtl-raw-format` and `barcode-label` are only needed for new disks. In the test environment, a second disk (`USB002L8`) went through the same steps, and the job wrote to it on its own.
 
 # Restore
 
@@ -383,7 +383,7 @@ successfully restored catalog
 TASK OK
 {% endhighlight %}
 
-Then restore the media set as above. I tested this by wiping the key, pool, inventory and catalogs on the lab PBS: the restore into a new datastore worked and the checksum matched.
+Then restore the media set as above. I tested this by wiping the key, pool, inventory and catalogs on the test PBS: the restore into a new datastore worked and the checksum matched.
 
 # Caveats
 

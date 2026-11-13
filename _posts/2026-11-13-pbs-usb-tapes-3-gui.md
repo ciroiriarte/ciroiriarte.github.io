@@ -22,7 +22,7 @@ Not everything has a button yet: installing packages, turning on dashboard write
 
 <!--more-->
 
-The setup is the same as before: PBS 4.2 with a datastore called `store1`, a USB dock, and disks to rotate. The lab was a fresh Debian 13 VM with mhVTL `1.8.0+git20261101.7e3a101` and mhVTL Control 0.6.0, both from my [OBS project](https://build.opensuse.org/project/show/home:ciriarte:mhvtl).
+The setup is the same as before: PBS 4.2 with a datastore called `store1`, a USB dock, and disks to rotate. The test environment was a fresh Debian 13 VM with mhVTL `1.8.0+git20261101.7e3a101` and mhVTL Control 0.6.0, both from my [OBS project](https://build.opensuse.org/project/show/home:ciriarte:mhvtl).
 
 # The shell part
 
@@ -174,7 +174,7 @@ The restore leaves the disk in the drive. Before unplugging it, send it back to 
 
 {% include image.html url="/assets/img/2026-11-13-pbs-usb-p12-transfer-to-ie.jpg" description="Changer view: USB001L8 back in I/E slot 5, ready to unplug" %}
 
-Restoring on a rebuilt PBS takes a few more steps, starting with restoring the key from the paper copy. [Part 2]({% post_url 2026-11-13-pbs-usb-tapes-2-cli %}#restore) has the commands, tested in the lab.
+Restoring on a rebuilt PBS takes a few more steps, starting with restoring the key from the paper copy. [Part 2]({% post_url 2026-11-13-pbs-usb-tapes-2-cli %}#restore) has the commands, all run in a test environment.
 
 # Rough edges
 

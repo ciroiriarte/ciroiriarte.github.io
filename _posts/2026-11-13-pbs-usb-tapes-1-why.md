@@ -70,7 +70,7 @@ Over the last few weeks, a set of changes landed upstream that lets cartridges l
 
 A whole block device can now be a cartridge ([#214](https://github.com/markh794/mhvtl/pull/214)). One disk is one tape. No partition table and no filesystem. The first megabyte is left empty, so nothing on the host thinks the disk is worth mounting. After it come a superblock (plus a mirror copy) with the barcode and layout, the cartridge memory (MAM), and the data stream. `mhvtl-raw-format` initializes a disk, and since [#293](https://github.com/markh794/mhvtl/pull/293) it also writes a proper MAM, so the drive knows the capacity from the first write.
 
-When a backup application writes a filemark or unloads the tape, mhVTL flushes the disk (`fdatasync`) before answering. In the lab, disks pulled from the mail slot and plugged back in read back intact every time.
+When a backup application writes a filemark or unloads the tape, mhVTL flushes the disk (`fdatasync`) before answering. In a test environment, disks pulled from the mail slot and plugged back in read back intact every time.
 
 ## Hot-plug bays
 
@@ -82,7 +82,7 @@ To PBS this looks exactly like an operator walking up to a real library and drop
 
 Until recently, mhVTL drive encryption was *simulated*. The drive accepted the key and wrote the data in plain text, with the key in every block header. Fine for testing an application, but useless for disks that leave the building.
 
-Since [#328](https://github.com/markh794/mhvtl/pull/328), the drive encrypts every block with AES-256-GCM. The key is derived from what the application sends plus a random salt stored in the cartridge memory, and is never written to the disk. That's the default for drives that support encryption, so a PBS media pool with an encryption key now gives you an encrypted disk. In the lab I searched the raw disk for samples of a random file I'd backed up: they were all in the PBS datastore, and none were on the encrypted disk.
+Since [#328](https://github.com/markh794/mhvtl/pull/328), the drive encrypts every block with AES-256-GCM. The key is derived from what the application sends plus a random salt stored in the cartridge memory, and is never written to the disk. That's the default for drives that support encryption, so a PBS media pool with an encryption key now gives you an encrypted disk. In a test environment, I searched the raw disk for samples of a random file I'd backed up: they were all in the PBS datastore, and none were on the encrypted disk.
 
 ## Faster compression
 
@@ -98,4 +98,4 @@ In this series, the USB dock hangs off the PBS host itself. The next step is to 
 
 mhVTL can now export its libraries over **iSCSI**: `mhvtl-fabrics` ([#337](https://github.com/markh794/mhvtl/pull/337)) provisions the targets on top of the TCMU backend, which is still experimental. **Fibre Channel** target support is in the works too. With either, a separate box with hot-swap bays becomes "the tape library", and the PBS host sees an ordinary tape library on the fabric. No mhVTL on the backup server, no USB cable to it, and disks rotated at the box that holds them.
 
-That deserves its own post once it has been through the lab. For now, [part 2]({% post_url 2026-11-13-pbs-usb-tapes-2-cli %}) builds the local version from the shell.
+That deserves its own post once it has been through a test environment. For now, [part 2]({% post_url 2026-11-13-pbs-usb-tapes-2-cli %}) builds the local version from the shell.
