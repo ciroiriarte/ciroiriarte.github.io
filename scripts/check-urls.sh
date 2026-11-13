@@ -43,18 +43,35 @@ if (( missing > 0 )); then
 fi
 echo "OK: all $total baseline URLs present in $site"
 
-# Feed entry ids: an entry whose title was in the baseline feed must keep its id.
-python3 -I - scripts/baseline/feed.xml "$site/feed.xml" <<'PY'
-import sys, xml.etree.ElementTree as ET
+# Feed entry ids. jekyll-feed uses the post URL as the entry <id>. Every id in
+# the baseline feed must either still be an entry in the new feed, or (once the
+# post has scrolled out of the feed window) still be a real page, not a
+# redirect stub: a redirect means the post moved and readers would see it again
+# under a new id.
+python3 -I - scripts/baseline/feed.xml "$site" <<'PY'
+import os, sys, xml.etree.ElementTree as ET
+from urllib.parse import urlparse
 ns = {"a": "http://www.w3.org/2005/Atom"}
-def entries(path):
-    return {e.findtext("a:title", namespaces=ns): e.findtext("a:id", namespaces=ns)
-            for e in ET.parse(path).getroot().findall("a:entry", ns)}
-old, new = entries(sys.argv[1]), entries(sys.argv[2])
-changed = [(t, old[t], new[t]) for t in old if t in new and old[t] != new[t]]
-for t, a, b in changed:
-    print(f"FEED ID CHANGED: {t!r}: {a} -> {b}")
-if changed:
+def ids(path):
+    return [e.findtext("a:id", namespaces=ns) for e in ET.parse(path).getroot().findall("a:entry", ns)]
+baseline_ids, site = ids(sys.argv[1]), sys.argv[2]
+new_ids = set(ids(os.path.join(site, "feed.xml")))
+if not new_ids:
+    sys.exit("FAIL: generated feed has no entries")
+bad = 0
+for i in baseline_ids:
+    if i in new_ids:
+        continue
+    # ids drop the .html extension (Jekyll's post.id), so try the variants
+    base = os.path.join(site, urlparse(i).path.lstrip("/"))
+    f = next((c for c in (base, base + ".html", os.path.join(base, "index.html"))
+              if os.path.isfile(c)), None)
+    if f is None:
+        print(f"FEED ID GONE: {i}"); bad += 1
+    elif 'http-equiv="refresh"' in open(f, encoding="utf-8", errors="replace").read():
+        print(f"FEED ID MOVED (now a redirect): {i}"); bad += 1
+if bad:
     sys.exit(1)
-print(f"OK: feed ids stable ({sum(t in new for t in old)} baseline entries still in the feed)")
+kept = sum(i in new_ids for i in baseline_ids)
+print(f"OK: feed ids stable ({kept} of {len(baseline_ids)} baseline entries still in the feed, rest still served)")
 PY
