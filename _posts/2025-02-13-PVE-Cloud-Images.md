@@ -11,7 +11,7 @@ tags:
 - Proxmox
 ---
 
-# Intro
+## Intro
 Cloud images are pre-configured operating system (OS) images that can be deployed in a cloud environment. The main Linux distributions offer cloud images alongside the regular ISO installers.
 
 Minimal configuration is executed on the public images and imported as PVE templates. The procedure described underneath, expects you to create all the images (some variables defined in a given step are not necessarily re-defined in the next one).
@@ -22,7 +22,7 @@ PVE provides the feature of instantiating a VM from a template. We'll be creatin
 
 > **Note:** For ease of use, this knowhow was incorporated into a script available at [pve-import-cloud-images](https://github.com/ciroiriarte/pve-scripts/blob/master/pve-import-cloud-images).
 
-# Pre-requisites
+## Pre-requisites
 
 A fully configured PVE cluster must be set, with properly configured bridges & datastore to be used.
 In one of the PVE nodes, basic tooling is required to modify the images in some cases, most notable, Ubuntu/Debian images are missing the QEMU agent.
@@ -31,9 +31,9 @@ In one of the PVE nodes, basic tooling is required to modify the images in some 
 apt install -y libguestfs-tools
 {% endhighlight %}
 
-# Template creation
+## Template creation
 
-## Basic skeleton
+### Basic skeleton
 
 To simplify the rollout of the templates, we create a template VM with the common required configuration for cloud-init to work. It will be used to create the distro specific template.
 
@@ -65,7 +65,7 @@ qm create ${VMSKELETONID} --name ${VMSKELETON} --cores 2 --memory 2048 \
 --efidisk0 ${DSTORE}:${VMSKELETONID},efitype=4m --scsi1 ${DSTORE}:cloudinit
 {% endhighlight %}
 
-## Find a work directory
+### Find a work directory
 
 We'll need a work directory to download and manipulate the disk images. Make sure you have enough room.
 
@@ -74,7 +74,7 @@ mkdir /tmp/cloud-images
 cd /tmp/cloud-images
 {% endhighlight %}
 
-## Opensuse
+### Opensuse
 
 {% highlight shell %}
 # We increment VMID starting from the skeleton machine ID
@@ -106,7 +106,7 @@ qm template ${VMID}
 rm ${IMG}
 {% endhighlight %}
 
-### Rocky Linux 9
+#### Rocky Linux 9
 
 {% highlight shell %}
 let VMID=VMID+1
@@ -124,7 +124,7 @@ qm template ${VMID}
 rm ${IMG}
 {% endhighlight %}
 
-### Oracle Linux 9
+#### Oracle Linux 9
 
 {% highlight shell %}
 let VMID=VMID+1
@@ -141,7 +141,7 @@ qm template ${VMID}
 rm ${IMG}
 {% endhighlight %}
 
-### Ubuntu 24.04
+#### Ubuntu 24.04
 
 {% highlight shell %}
 let VMID=VMID+1
@@ -160,7 +160,7 @@ qm template ${VMID}
 rm ${IMG}
 {% endhighlight %}
 
-### Ubuntu 22.04
+#### Ubuntu 22.04
 
 {% highlight shell %}
 let VMID=VMID+1
@@ -179,7 +179,7 @@ qm template ${VMID}
 rm ${IMG}
 {% endhighlight %}
 
-### Debian 12
+#### Debian 12
 
 {% highlight shell %}
 let VMID=VMID+1
@@ -200,11 +200,11 @@ rm ${IMG}
 
 
 
-# VM provisioning from a template
+## VM provisioning from a template
 
 Once the templates are available, you can use them via Web UI, Terraform or CLI. We'll demostrate how to deploy a VM using CLI on one of the PVE hosts.
 
-## VM creation
+### VM creation
 
 {% highlight shell %}
 ##
@@ -258,11 +258,11 @@ qm start ${NEWVM_ID}
 qm terminal ${NEWVM_ID}
 {% endhighlight %}
 
-## Optionals
+### Optionals
 
 You can add secondary network interfaces and disks to a machine. Example follows.
 
-### Network
+#### Network
 
 {% highlight shell %}
 # Defined bridges we're using for the attach operation
@@ -275,7 +275,7 @@ qm set ${NEWVM_ID} -net2 virtio,firewall=1,bridge=${NET2}
 qm set ${NEWVM_ID} -net3 virtio,firewall=1,bridge=${NET3}
 {% endhighlight %}
 
-### Storage
+#### Storage
 
 {% highlight shell %}
 # Primary replicated data.

@@ -13,7 +13,7 @@ tags:
 - JunOS
 ---
 
-# Intro
+## Intro
 
 As with any critical infrastructure, technology vendors provide a "call-home" feature for their products. For more than a decade (at least to my knowledge), storage vendors like Hitachi or EMC would provide a solution that would allow the vendor to connect to systems you own for support/assistance departments to directly work on them instead of telling you on the phone what to do. Other expected functionality includes opening a proactive ticket on hardware failure, extract/upload logs or inventory installed base.
 
@@ -23,7 +23,7 @@ Implementing such functionality, is always a good thing to do as it allows the v
 
 <!--more-->
 
-# The need
+## The need
 
 We were approached by the Juniper Support team, pitching for a WLC appliance which would provide call-home capabilities, and oversee our installed base. This appliance is part of their Juniper Support Insights (JSI) initiative.
 
@@ -33,7 +33,7 @@ The formal [documentation](https://www.juniper.net/documentation/us/en/software/
 
 I'll deploy vLWC on Proxmox VE to oversee QFX switches managed by Apstra & EX switches which comprise the OOBM network for the QFX switches too.
 
-# Here be dragons.
+## Here be dragons.
 
 <figure>
   <a href="https://education.nationalgeographic.org/resource/here-be-dragons/">
@@ -48,8 +48,8 @@ Also remember, "not supported" doesn't mean it's not technically possible. It ju
 
 Yes, I'll get support via a "not supported" appliance. Does it qualify as oximoron?
 
-# Network architecture
-## Lab sidecart environment
+## Network architecture
+### Lab sidecart environment
 In the lab, we have an environment with the usual set of vendors & technology we work with. That setup includes a EVPN/VXLAN IP Fabric network with several clients being served. That network and the client platforms are expected to be reinstalled or rearranged at any point in time.
 
 To provide some stable essential services, we've built a small parallel environment with some switches and PVE servers to run elements that must be available at all times:
@@ -93,7 +93,7 @@ My natural expectation was to deploy the call-home appliance next to other suppo
 
 This is relevant for the next section.
 
-## Required network topology
+### Required network topology
 
 Reviewing the [deployment guide](https://www.juniper.net/documentation/us/en/software/jsi/vlwc-deploy/topics/concept/system-requirements.html), you can see it mandates 3 networks interfaces:
 
@@ -115,13 +115,13 @@ We could try to comply, and shoe-horn the appliance requirements to our environm
 
 It doesn't make me confortable, VMs connected to different segments that should only interact through the firewall was not an option in our case.
 
-## Appliance analysis: Trial & Error
+### Appliance analysis: Trial & Error
 
 I did several runs of the deployment on KVM in a vacuum to validate what's going on with the network setup and analyze what's required to deploy it with a single interface.
 
 I'll spare you on the details, but the summary of the findings is:
 
-### **First run:** 3 networks with DHCP (internal + external + management)
+#### **First run:** 3 networks with DHCP (internal + external + management)
 *"int"* keeps the default route  
 *"ext"* has static routes to reach Death Star (JNI)  
 *"cap"* is used for captive portal (appliance status page)
@@ -171,7 +171,7 @@ Anyhow kids, don't place the appliance directly connected to Internet without in
   <figcaption><i>Image 6 - Appliance status with supported network layout</i></figcaption>
 </figure>
 
-### **Second run:** 1 network setup with DHCP (internal)
+#### **Second run:** 1 network setup with DHCP (internal)
 *"int"* keeps the default route, provides access to captive portal (appliance status page)  
 *"ext"* status is reported as failed  
 
@@ -186,14 +186,14 @@ Anyhow kids, don't place the appliance directly connected to Internet without in
 
 Also I can confirm that after checking the appliance at the OS level, there are no static routes. No adjustments are needed for a single interface deployment to connect to JSI.
 
-# The appliance
-## First administrative steps.
+## The appliance
+### First administrative steps.
 
 You have to request two things to your Juniper support team:
 - Access to Juniper Support Insights to request the appliance
 - Proper permissions to be setup to manage/use the appliance. We have a myriad of support accounts and something was not setup properly for my account in JSI.
 
-## How to request the appliance.
+### How to request the appliance.
 
 1. Once you have the correct permissions set for your user, head to [Juniper Support Portal](https://supportportal.juniper.net/)
 2. Request the appliance via the web portal.
@@ -221,9 +221,9 @@ You have to request two things to your Juniper support team:
 {:start="3"}
 3. In less than an hour, you should receive an email from *do_not_reply@juniper.net* with a link to download the appliance. The file is purged in 7 days, after which you would need to re-request the appliance.
 
-# Deployment
+## Deployment
 
-## What are you receiving from Juniper?
+### What are you receiving from Juniper?
 
 When you download the appliance from the Juniper Support site, you will get a OVA file with a name similar to vLWC-${VERSION}-$(SERIAL_NUMBER).ova. In my case it was version 2.3.26.
 
@@ -231,7 +231,7 @@ An OVA file is basically a ZIP file with a VMDK disk image and a OVF file with t
 
 The VMDK is apparently generic for all the customers, the OVF file includes the serial number specific to your deployment and needs to be incorporated during the instantiation/rollout.
 
-## Initial setup
+### Initial setup
 
 With OVF customization available via vSphere + VMware Tools some parameters are passed to the VM at instantiation time, but that's not supported by Proxmox VE. Proxmox VE + cloud-init could provide similar capabilities, but that's not currently support by the vLWC appliance.
 
@@ -390,7 +390,7 @@ losetup -d $MYLOOP
 
 At this point, the disk image containes the setup required for your site/instance.
 
-## VM creation
+### VM creation
 
 For a vSphere supported solution, the OVF file is imported in vCloud Director or vCenter. It includes the VM definition (quantity & type of CPU, RAM, disks & network adapters).
 
@@ -447,11 +447,11 @@ After a couple of minutes, you should be able to visit the web captive portal vi
 Use the plain text serial number to login and look for "Juniper Cloud Connected" + "Cloud Provisioned" to make sure it's online.
 
 
-# Wishlist for the PLM
+## Wishlist for the PLM
 
 In case a Juniper vLWC appliance Product Owner passes by :), I would recommend the following to be included in the backlog:
 
-## 1- Support for a single interface setup
+### 1- Support for a single interface setup
 
 I totally get the 3 interfaces setup for a physical appliance that's colocated with a lone MX960 on a remote site forgotten by God. You get:
 - A "trusted" port that is either connected to a OOBM network serving several NEs or directly connected to the OOBM port on a lone router.
@@ -464,7 +464,7 @@ A virtual machine most probably will be deployed at a cozy TIER-something datace
 
 The ask would be: please support/allow a "single interface" setup as an alternative to the 3-port setup. Today it works as is, besides the EXT related errors in the status page.
 
-## 2- Newer Linux distribution
+### 2- Newer Linux distribution
 
 As of vLWC-2.3.26, the appliance is based in Ubuntu 18.04.6 LTS which is already [out of Standard Support after June 2023](https://wiki.ubuntu.com/Releases). Only Ubuntu Pro support subscribers will get minimal patch releases, and after quick verification I can tell that's not available on the deployed appliance (maybe even sporting a buggy openssl version?):
 
@@ -477,7 +477,7 @@ Please check your openssl configuration.
 
 Old Linux distributions instances and the security implications for a given environment is a threshed topic. I would just summarize the ask as: an OS refresh is due and Ubuntu 22.04.3 LTS is at your disposal. No, "we'll eventually re-package a new version of the appliance with patches applied and you should re-deploy" is not acceptable
 
-## 3- Support for PVE/KVM
+### 3- Support for PVE/KVM
 
 Not all the Juniper shops run VMware vSphere on the compute side, and if they do, it may not always be the choice for each and every deployment. Even though I welcome the work done on the [OVF](https://www.dmtf.org/standards/ovf) file preparation to automate the initial setup, I strongly recommend your team invests some time implementing support for [cloud-init](https://cloudinit.readthedocs.io/en/latest/) in the initial setup script, which is the de facto standard to deploy virtual appliance in cloud environments (KVM on prem, vSphere, AWS, Azure, etc).
 
@@ -486,7 +486,7 @@ Some low hanging fruits at your disposal:
 - QEMU agent can easily be installed from Ubuntu repos pre-setup in the appliance (nice to have, covers some functionality of VMware Tools for KVM/QEMU). Used in this deployment.
 - cloud-init agent can be easily installed from Ubuntu repos pre-setup in the appliance. Not used in this deployment.
 
-## 4- Allow for hostname change
+### 4- Allow for hostname change
 
 Due to some arguable requirements/conventions we have, we need to assign a proper hostname to the VM. It seems to be used for appliance versioning as noted a little early in the article.
 - We match the VM name & OS hostname for inventory purposes (several tools data consolidation & crosscheck).

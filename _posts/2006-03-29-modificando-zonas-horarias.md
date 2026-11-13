@@ -16,7 +16,7 @@ tags:
     - linux
 ---
 
-# Intro
+## Intro
 
 Los archivos con informacion sobre las zonas horarias y el popular “daylight saving” se encuentran en /usr/share/zoneinfo. Los mismos pueden ser consultados con:
 
@@ -30,7 +30,7 @@ En nuestro caso es muy comun el que cambien las fechas donde se efectua el cambi
 
 Las definiciones de zonas se bajan de [ftp://elsie.nci.nih.gov/pub/](ftp://elsie.nci.nih.gov/pub/)
 
-# Procedimiento (ejemplo para Paraguay)
+## Procedimiento (ejemplo para Paraguay)
 
 {% highlight shell %}
 

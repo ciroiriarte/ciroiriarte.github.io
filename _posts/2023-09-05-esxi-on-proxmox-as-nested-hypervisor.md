@@ -21,10 +21,10 @@ Now, if for some reason you cannot install ESXi on your home lab machine, and li
 
 The starting point would be a properly setup [Proxmox host for nested virtualization](https://pve.proxmox.com/wiki/Nested_Virtualization). After you get it up & running, we're ready to move forward.
 
-# The ESXi appliance
+## The ESXi appliance
 This [ESXi appliance](https://williamlam.com/nested-virtualization/nested-esxi-virtual-appliance) is pre-configured to simplify deployment as a nested hypervisor. With each new vSphere release, a matching appliance is created and published.
 
-# Downloading the appliance
+## Downloading the appliance
 The mentioned appliances are published via a public vSphere Content Library. To get a list of the available releases, we can run the following command from your PVE host:
 
 {% highlight shell %}
@@ -96,7 +96,7 @@ total 1696791
 -rw-r--r-- 1 root root       54052 Jun  2 11:35 Nested_ESXi8.0u1a_Appliance_Template_v1.ovf
 {% endhighlight %}
 
-# Importing the appliance
+## Importing the appliance
 
 After downloading the files, we'll create a virtual machine using the OVF as source. It's mostly used to import the disk images, large parts of the file are actually ignored (advanced configuration parameters for example are not taken into account). For such task & initial VM configuration, I've created a quick script (create-esxi.sh) to be run in your PVE host.
 
@@ -173,7 +173,7 @@ To create 3 virtual machines for our initial cluster, we just execute:
 
 After that, manual initial setup of ESXi is required (hostname, static IP or sending hostname in DHCP request, etc)
 
-# Outcome
+## Outcome
 
 In the end, we should have the 3 VMs up & running and ready for testing.
 
@@ -198,9 +198,9 @@ In the end, we should have the 3 VMs up & running and ready for testing.
   <figcaption><i>Image 3 - ESXi web UI</i></figcaption>
 </figure>
 
-# ToDo list
+## ToDo list
 
-### 1. Advanced configuration parameters
+#### 1. Advanced configuration parameters
 Part of the "ready for nested virtualization" experience involves a series of advanced configurations that come defined in the OVF file. Some of them are only relevant to ESXi hosts for the appliance, but some might need to be "translated" to QEMU/KVM configuration adjustments.
 
 {% highlight shell %}
@@ -307,7 +307,7 @@ root@bigiron:~/esxi# grep -E "vmw:ExtraConfig|vmw:Config" Nested_ESXi8.0u1a_Appl
 
 With more time, I'll take a look at the list and provide an update if needed.
 
-### 2. cloud-init
+#### 2. cloud-init
 
 PVE provides support for cloud-init as a way to automate VM provisioning & initial configuration. ESXi doesn't provide a cloud-init agent out of the box.
 

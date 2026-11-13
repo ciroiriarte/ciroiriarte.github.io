@@ -19,7 +19,7 @@ I'll provide here a procedure to prepare production grade images coming from the
 
 <!--more-->
 
-# Cloud Images
+## Cloud Images
 
 Enter ["Cloud Images"](https://docs.openstack.org/image-guide/obtain-images.html). These OS images are basically instances prepared/curated by the different Linux distribution projects (or companies) ready to boot in a cloud environment (AWS, Azure, GCP, Openstack, etc). You can treat them as secure as the ISO installer you download for your favorite distribution project, they have a minimal footprint and usually include cloud-init to automate the deployment process.
 
@@ -27,20 +27,20 @@ In Openstack, cloud-init is critical for deployment as you don't want to resize 
 
 Paid Linux distributions (like SLES or RHEL) also provide cloud images. I can't seem to find a Windows Server 2025 Cloud image to download (shame on you Microsoft!).
 
-# Configuration
+## Configuration
 
 Actual virtual machine definition needs to be set as properties during the disk image import process. We'll be defining them as that is not part of the Cloud Images files you download.
 
 Some attributes I'm proposing here provide proper documentation (name, version, licensing, etc), others provide performance best practices (machine type, NIC/HBA types) or provide operational best practices (backup related parameters).
 
-# Disk format
+## Disk format
 
 In my case, I'm using Ceph RBD as backend for Cinder. If you tell Cinder/Nova to create a volume from a qcow2 image it is going to first download the image, convert it to raw then re-upload it to Ceph. This consumes a lot more space in Ceph, more network bandwidth and is prone to timeouts if conversion and upload takes too long.
 
 If you're using a filesystem backend go with QCOW2 but if you're using Ceph RBD like me, go with RAW in order to benefit from Copy-on-Write cloning of images in both Cinder and Nova & quicker instantiation times.
  
 
-# Tooling
+## Tooling
 
 Depending on the machine you're working on, install guestfs-tools. This will allow us to customize the image.
 
@@ -56,7 +56,7 @@ Ubuntu:
 sudo apt install -y libguestfs-tools whois
 {% endhighlight %}
 
-# Free Images
+## Free Images
 
 Find a spot to download files
 
@@ -65,7 +65,7 @@ mkdir cloud-images
 cd cloud-images
 {% endhighlight %}
 	
-## openSUSE
+### openSUSE
 
 My personal favorite, we'll download Leap which is very similar to SLES (the commercial version of the distribution). Other alternatives are Tumbleweed (bleeding edge) or Slowroll ("I want something newer, but don't get crazy").
 
@@ -115,11 +115,11 @@ ${NAME}
 {% endhighlight %}
 
 
-## Rocky Linux
+### Rocky Linux
 
 Usual tool for the CentOS refugees. Cloud-init is available out of the box. 
 
-### LVM based image
+#### LVM based image
 
 In case you want to have all your filesystems under LVM management, the project provides a specific image. Only drawback is that cloud-init filesystem resize won't work and manual maneuvering will be required (don't expect hardcore Linux users to have a problem with that).
 
@@ -163,7 +163,7 @@ ${NAME}
 {% endhighlight %}
 
 
-### Bare partitions image
+#### Bare partitions image
 
 This image has bare partitions for operating system filesystems. As with any other Linux image, you can still use LVM for data disks (and probably you should, since hot migration between Ceph pools is not supported by Openstack and LVM-in-guest can save the day when data relocation is required)
 
@@ -206,7 +206,7 @@ openstack image create \
 ${NAME}
 {% endhighlight %}
 
-## Oracle Enterprise Linux 9
+### Oracle Enterprise Linux 9
 
 This is an odd one and I've never been a fan. Another RHEL clone with unfair advantages regarding the made-up Oracle licensing rules. Similarly to Ubuntu, you can pay for support or not. Repositories are public.
 
@@ -249,7 +249,7 @@ openstack image create \
 ${NAME}
 {% endhighlight %}
 
-## Ubuntu 24.04
+### Ubuntu 24.04
 
 Ubiquitous distribution, if you like Debian you'll feel at home.
 
@@ -295,7 +295,7 @@ openstack image create \
 ${NAME}
 {% endhighlight %}
 
-## Ubuntu 22.04
+### Ubuntu 22.04
 
 Older & still used version of Ubuntu.
 
@@ -339,7 +339,7 @@ openstack image create \
 ${NAME}
 {% endhighlight %}
 
-## Debian 12
+### Debian 12
 
 Omnipresent and still relevant.
 
@@ -383,9 +383,9 @@ openstack image create \
 ${NAME}
 {% endhighlight %}
 
-# Paid Images
+## Paid Images
 
-## RedHat Enterprise Linux 10
+### RedHat Enterprise Linux 10
 
 There are some shops that still require this guy. You'll have to download the file via the paid portal and place it in the working directory.
 
@@ -426,7 +426,7 @@ ${NAME}
 {% endhighlight %}
 
 
-## RedHat Enterprise Linux 9
+### RedHat Enterprise Linux 9
 
 Same but older. File needs to be downloaded and copied to the working directory.
 
@@ -466,7 +466,7 @@ openstack image create \
 ${NAME}
 {% endhighlight %}
 
-# How to use the images?
+## How to use the images?
 
 So, after all that preparation, we should be able to instantiate a virtual machine & automatically configure it with cloud-init with the procedure underneath.
 
@@ -549,11 +549,11 @@ ${TESTVMNAME}
 openstack server list
 {% endhighlight %}
 
-# Improvement opportunities
+## Improvement opportunities
 
 Well, the shared procedure builds a good starting point. Things I see need to be addressed:
 
-## 1- ptp_kvm for all the guests
+### 1- ptp_kvm for all the guests
 
 The kernel module seems to be supported by RHEL & clones like Rocky or OEL:
 - [KVM Guest Timing Management](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/virtualization_deployment_and_administration_guide/chap-kvm_guest_timing_management)
@@ -564,10 +564,10 @@ It doesn't seem to be supported by Ubuntu. You're left either with NTP to networ
 
 Need to find time to test and document the configuration procedure
 
-## 2- OS licensing
+### 2- OS licensing
 
 Additional configuration is required to properly match paid guest instances to a subset of nodes in a given Openstack deployment. I have identified two options (Image properties + Host Aggregates or traits), but actual testing is required.
 
-## 3- Windows Server guests
+### 3- Windows Server guests
 
 It appears to still be a necessary evil in 2025 for large organizations. Need to find time to create a procedure for image creation, it should include Cloudbase-init as alternative to cloud-init.

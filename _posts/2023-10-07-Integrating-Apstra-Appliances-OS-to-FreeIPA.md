@@ -12,13 +12,13 @@ tags:
 - Ubuntu
 ---
 
-# Intent
+## Intent
 
 If you're working in any sane environment involving Unix/Linux servers, for sure you should have in place some kind of centralized authentication/authorization schema for operating system access. These days it's LDAP or LDAP+Kerberos.
 
 In my case, I'm using FreeIPA for the Linux ecosystem.
 
-# Apstra appliances
+## Apstra appliances
 
 Apstra is configuration management & monitoring tool for Datacenter Networks, I don't think of it being a proper SDN controller (at least in the original term conception) because it's more related to configuration management tools like Puppet or Ansible. Nonetheless, it's part of the SDN tooling ecosystem. 
 
@@ -26,13 +26,13 @@ Apstra appliances are based on Ubuntu LTS, gladly, we have the official FreeIPA 
 
 I've implemented this with Apstra 4.1.0, 4.1.1 and 4.1.2 before, but 4.2.0 needs a tweak this time. It works and doesn't interfere with its functionality in my experience, nonetheless, testing in a lab environment is recommended before moving to production. Proceed at your own risk.
 
-# Assumptions
+## Assumptions
 1. You have a properly deployed Apstra related ecosystems appliances (AOS, ZTP, workers)
 2. Correct Timezone is already setup
 3. NTP client configuration is in place
 4. DNS client configutarion is in place
 
-# FreeIPA server side configuration
+## FreeIPA server side configuration
 
 Make sure the client has a DNS entry.
 
@@ -41,7 +41,7 @@ ipa dnsrecord-add <your domain> <client shortname> --a-rec <IPv4 for the client>
 ipa dnsrecord-add <your domain> <client shortname> --aaaa-rec <IPv6 for the client>
 {% endhighlight %}
 
-# Python libraries and AOS
+## Python libraries and AOS
 
 Well, this is a special case with Apstra 4.2.0. There are python modules installed with *pip* outside of what apt based packages provide, they apparently are needed for the Apstra platform but break other tools like ipa-client-install for the AOS appliance (doesn't happen with the ZTP appliance).
 
@@ -81,7 +81,7 @@ Note that the version for AOS is newer, and modules reside in /usr/local/lib ins
 
 A container based application like Apstra should have everything needed for the application inside the container and should not require or mess host level libraries.
 
-## How it affects ipa-client-install
+### How it affects ipa-client-install
 The IPA configuration tool fails with this error:
 
 {% highlight shell %}
@@ -108,18 +108,18 @@ It seems FreeIPA was using a function that was not expected to be used outside o
 
 FreeIPA project is [complying with the upstream change](https://github.com/freeipa/freeipa/pull/6455), and should be included in 4.11+
 
-## The correct way of dealing with this
+### The correct way of dealing with this
 
-### Golden rule
+#### Golden rule
 
 You don't mess with Linux Distribution provided libraries. Ever.
 
-### Tools at hand for software packagers
+#### Tools at hand for software packagers
 
 Containers is one current software delivery solution that could address this. In fact, Juniper is using docker containers. I'm a little lost about why this is a problem today with the Apstra AOS appliance, but packaging all the dependancies within the containers should be the correct course of action.
 
 
-## Workaround for Juniper customers
+### Workaround for Juniper customers
 
 All we can do until Juniper properly packages Apstra as a set of container images is to choose the less ugly route. In this case, I've rebuilt a package from Ubuntu Ubuntu 23.04, which is based on FreeIPA 4.9.11 source code, for Ubuntu 22.04 (in which the Apstra appliance is based).
 
@@ -136,11 +136,11 @@ sudo apt update
 After adding the repository, just follow the below procedure.
 
 
-# Clients configuration
+## Clients configuration
 
 For each client in question, ZTP appliance, main AOS appliance or workers you would need to execute these steps.
 
-## DNS validation
+### DNS validation
 DNS is critical in this environment, make sure the clients can actually locate your IP servers.
 
 1. Test the the client is actually configured
@@ -155,7 +155,7 @@ dig @<recursor/resolver 1 IP>  _ldap._tcp.<your domain> SRV
 dig @<recursor/resolver 2 IP>  _ldap._tcp.<your domain> SRV
 {% endhighlight %}
 
-## Client installation & configuration
+### Client installation & configuration
 
 The FreeIPA client is part of the default repositories, just install it with the package manager:
 
@@ -165,7 +165,7 @@ sudo ipa-client-install --mkhomedir --enable-dns-updates \
  --domain=<IPA domain in lowercase> --realm=<IPA domain in uppercase>
 {% endhighlight %}
 
-## Limit SSH access
+### Limit SSH access
 
 It's good practice to limit access via SSH to users that really need access to the node. 
 

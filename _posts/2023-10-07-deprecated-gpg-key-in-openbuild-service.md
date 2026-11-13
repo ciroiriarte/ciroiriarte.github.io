@@ -11,23 +11,23 @@ tags:
 - Ubuntu
 ---
 
-# OpenBuild Service
+## OpenBuild Service
 
 The openSuSE guys built a nice selfservice Linux package construction solution, which I believe was originally named openSuSE Build Service (OBS). Later it was renamed to OpenBuild Service to reflect the capability of building packages for more distros than just openSuSE.
 
 More info: [Wikipedia](https://en.wikipedia.org/wiki/Open_Build_Service)
 
-# GPG Signature
+## GPG Signature
 
 To protect the each Linux distribution community, the creators of each package management solution thought about signing the repository contents and packages with GPG keys. It was very intelligent and very useful as a basic hygienic/safety measure.
 
 Such GPG signature functionality is included in OBS.
 
-# DSA-1024 key deprecation
+## DSA-1024 key deprecation
 
 As many other software packaging communities, Ubuntu deprecated DSA-1024 based GPG keys around 2016 which means apt doesn't accept those keys anymore.
 
-# The issue
+## The issue
 
 In my case, I created a sub-project for Ubuntu 22.04 packages. Given I already had a parent project with a DSA-1024 key that was inherited by the new sub-project, all the packages were signed by it and later the package manager would complain about the key without too much feedback regarding why.
 
@@ -83,7 +83,7 @@ uid           [ unknown] Ubuntu Archive Automatic Signing Key (2018)
 <ftpmaster@ubuntu.com>
 {% endhighlight %}
 
-# The fix
+## The fix
 
 In the end, the one to blame was the old deprecated key type (my home project was created a long time ago). I couln't find a way to create a new GPG key in the [web UI](https://build.opensuse.org), either it's not there or I'm just blind.
 

@@ -12,7 +12,7 @@ tags:
 - Virtualization
 ---
 
-# Apstra appliances
+## Apstra appliances
 
 Juniper is not distributing appliances per se for KVM deployments, but OS disk images in QCOW2 format:
 
@@ -24,9 +24,9 @@ Main Apstra server appliance, also used for optional workers for the scaleout se
 
 Zero Touch provisioning appliance. This is an optional ZTP appliance running PXE+TFTP. It can be used as pure TFTP with a pre-existing DHCP server.
 
-# Installation
+## Installation
 
-## Overview
+### Overview
 
 For the VM sizing, the vendor has a [recommendated sizing table](https://www.juniper.net/documentation/us/en/software/apstra4.2/apstra-install-upgrade/topics/ref/apstra-server-resources.html):
 
@@ -40,9 +40,9 @@ In my experience, that many resources are not needed, especially the RAM. For my
 We'll create the empty virtual machines in Proxmox VE 7.4-15, importing afterwards the QCOW2 disks as needed. The procedure asumes you have downloaded all the files to a working directory (curl/wget are your friends) in a PVE node.
 
 
-## Apstra OS 
+### Apstra OS 
 
-### VM creation
+#### VM creation
 
 We'll create a virtual machine with CLI, with 4 vCPUs and 32GB of RAM. 
 
@@ -67,7 +67,7 @@ qm create ${VMID} --name ${VMNAME} \
 --net0 model=virtio,bridge=${BRIDGE},firewall=0,tag=${VLANLAB}
 {% endhighlight %}
 
-### Importing disk
+#### Importing disk
 
 Now, we'll be importing the QCOW2 file provided by Juniper.
 
@@ -81,7 +81,7 @@ qm set ${VMID} -scsi0 ${STORAGE}:vm-${VMID}-disk-1
 qm set ${VMID} --boot order=scsi0
 {% endhighlight %}
 
-### Additional disk
+#### Additional disk
 
 According to the documentation, the OS disk is 80GB only and optionally you could add a second 80GB. Given it's not onerous and I won't be using additional worker nodes, I'll add the second disk.
 
@@ -95,7 +95,7 @@ qm set ${VMID} --scsi1 ${STORAGE}:80
 qm start ${VMID}
 {% endhighlight %}
 
-## ZTP appliance  
+### ZTP appliance  
 
 DHCP & TFTP are not that demanding, you can go with 2 vCPUs and 4GB of RAM. 
 
@@ -120,7 +120,7 @@ qm create ${VMID} --name ${VMNAME} \
 --net0 model=virtio,bridge=${BRIDGE},firewall=0,tag=${VLANLAB}
 {% endhighlight %}
 
-### Importing disk
+#### Importing disk
 
 Now, we'll be importing the QCOW2 file provided by Juniper.
 
@@ -135,8 +135,8 @@ qm set ${VMID} --boot order=scsi0
 qm start ${VMID}
 {% endhighlight %}
 
-# Initial Configuration
-## AOS setup
+## Initial Configuration
+### AOS setup
 
 1. Search for the IP of the appliance in your DHCP leases and connect through SSH with admin/admin.
 2. On first login set new password as requested.
@@ -165,7 +165,7 @@ sudo apt install -y qemu-guest-agent
 1. Reboot after full system update
 sudo shutdown -r now
 
-## ZTP appliance setup
+### ZTP appliance setup
 
 1. Search for the IP of the appliance in your DHCP leases and connect through SSH with admin/admin.
 2. Set hostname
@@ -213,7 +213,7 @@ sudo apt install -y qemu-guest-agent
 sudo shutdown -r now
 {% endhighlight %}
 
-# Migration from 4.1.2
+## Migration from 4.1.2
 
 If you already have a working environment, most probably you would like to migrate all the configuration to your new installation, there is a script you should run in the new Apstra Server.
 

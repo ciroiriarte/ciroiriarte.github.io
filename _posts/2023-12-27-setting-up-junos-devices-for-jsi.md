@@ -16,7 +16,7 @@ tags:
 
 
 
-# Intro
+## Intro
 
 Going back to the "supported" track, after deploying vLWC you need to prepare the devices being monitored. I can't seem to find a concise guide to properly setup network elements for JSI, so I'm sharing my notes notes after a long trial & error exercise.
 
@@ -38,9 +38,9 @@ An overview of how data collection works can be found in this [flyer](https://ww
   <figcaption><i>Image 1 - Data collection overview</i></figcaption>
 </figure>
 
-# Pre-requirements
+## Pre-requirements
 
-## SSH key pair
+### SSH key pair
 
 We need a pair of public/private SSH keys for the user. You can create it on any Linux machine. 
 
@@ -73,7 +73,7 @@ You'll use:
 - the contents of *~/.ssh/id_rsa-jsi.pub* to setup access in the switches
 - the contents of *~/.ssh/id_rsa-jsi* + *the passphrase will* be used in the JSI portal to define the access credentials.
 
-## Actual commands that should be permitted.
+### Actual commands that should be permitted.
 
 From the FAQ mentioned before we get that the commands the appliance will execute are:
 
@@ -100,9 +100,9 @@ request support information
 sftp
 ```
 
-# Apstra managed switches
+## Apstra managed switches
 
-## NETCONF
+### NETCONF
 NETCONF is already an Apstra requirement, so you should have that already covered. To quickly validate, you can verify the default port is listening for connection requests:
 
 {% highlight shell %}
@@ -117,14 +117,14 @@ PORT    STATE SERVICE
 Nmap done: 1 IP address (1 host up) scanned in 6.58 seconds
 {% endhighlight %}
 
-## SFTP
+### SFTP
 Not sure if SFTP is a requirement for Apstra, but found out that all the switches in the Apstra environment had the SFTP subsystem already enabled. If that's not your case, a configlet for enabling it is all you need.
 
-## Process user
+### Process user
 
 In this environment we don't have TACACS+ (it's 2023 Juniper team, can we please get LDAP already?). For practical purposes, we'll use Apstra configlets to create a process users from Apstra.
 
-### Configlet creation
+#### Configlet creation
 
 1. Reach the configlet creation page.
 <figure>
@@ -175,7 +175,7 @@ system {
 
 **Note:** Make sure UID is unique in your environment. I saw random posts/notes/documentation referencing UID 2000 (for other unrelated implementations), I was super clever changing that to 2001 so I would avoid clashing with config everybody else could be copying/pasting, it turns out whoever implemented Apstra had the same thought.
 
-### Importing Configlet to blueprint
+#### Importing Configlet to blueprint
 
 To actually apply the previously created configlet to your network elements, you must:
 
@@ -212,13 +212,13 @@ To actually apply the previously created configlet to your network elements, you
   <figcaption><i>Image 8 - Fill-in the changelog</i></figcaption>
 </figure>
 
-# Standalone switches
+## Standalone switches
 
 These switches aren't managed by Apstra or any other manager, also there's no TACACS+ or similar authentication  or RBAC services (did I mention I would love to have LDAP available to reuse already existing authentication services?). Given they are only 2, manual & local setup should not be a problem.
 
 Connect to the switch with an admin user, in edit mode.
 
-## NETCONF
+### NETCONF
 
 We enable the service. Cool automation kids recommend the last 3 commands for interoperability, but given vLWC is a closed tool by Juniper for JunOS it might expect the less standard non compliant default configuration. Something to monitor and validate after adding switches to JSI.
 
@@ -229,7 +229,7 @@ set system services netconf yang-compliant
 set system services netconf hello-message yang-module-capabilities advertise-standard-yang-modules
 ```
 
-## SFTP
+### SFTP
 
 SFTP subssystem needs to be enabled, seems to be disabled by default.
 
@@ -237,7 +237,7 @@ SFTP subssystem needs to be enabled, seems to be disabled by default.
 set system services ssh sftp-server
 ```
 
-## Process user
+### Process user
 
 1. We create the user class with the required access level
 ```
@@ -255,14 +255,14 @@ set system login user svcjsi uid 2007
 set system login user svcjsi authentication ssh-rsa "ssh-rsa your-key-super-long-string JSI process user"
 ```
 
-## Final commit
+### Final commit
 
 3. Commit the configuration (both service & user)
 ```
 commit
 ```
 
-# Testing NETCONF by hand
+## Testing NETCONF by hand
 
 Before going through the whole JSI apparatus, my recommendation would be to run a basic local test with the user we have created.
 
@@ -307,13 +307,13 @@ Answer should be similar to
 ]]>]]>
 {% endhighlight %}
 
-# Is that it?
+## Is that it?
 
 Well, it should be all for the NE configuration. Now you should be able to login to the JSI portal an onboard devices (Juniper guys, please add support for FQDN in the form besides IP addresses).
 
 Have fun!
 
-# More reference documents
+## More reference documents
 
 In case you're still reading, these are some documents & notes I've reviewed in the process.
 
@@ -323,13 +323,13 @@ In case you're still reading, these are some documents & notes I've reviewed in 
 - [Connect to the NETCONF Server Using SSH](https://www.juniper.net/documentation/us/en/software/junos/netconf/topics/task/netconf-session-connecting-to-server.html)
 - [Technical note on using SSH keys with JunOS](https://supportportal.juniper.net/s/article/Junos-Generating-SSH-RSA-keys-locally-on-devices-running-Junos-OS)
 
-# Known errors
+## Known errors
 
-## JSI reporting wrong credentials
+### JSI reporting wrong credentials
 
 During my tests, I found that JSI web portal didn't handle credential updates. You could save the changes, you can see the new information in the web portal but it seems it doesn't reach their backend. I had to delete/recreate the credentials in the web portal for them to work.
 
-## NETCONF reported as not configured
+### NETCONF reported as not configured
 
 During my tests, I could confirm manually that NETCONF was properly setup, but JSI kept reporting:
 

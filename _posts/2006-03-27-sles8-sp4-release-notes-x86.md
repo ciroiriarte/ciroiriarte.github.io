@@ -15,9 +15,9 @@ tags:
 deprecated: true
 ---
 
-# Release Notes for UnitedLinux 1.0 x86 Service Pack 4
+## Release Notes for UnitedLinux 1.0 x86 Service Pack 4
 
-## Knowledgebase
+### Knowledgebase
 
 *(Last modified: 21MAR2005)*
 

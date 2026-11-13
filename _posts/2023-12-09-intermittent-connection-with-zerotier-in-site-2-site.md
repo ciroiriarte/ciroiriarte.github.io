@@ -11,7 +11,7 @@ tags:
 - Zerotier
 ---
 
-# Starting point
+## Starting point
 
 I've been evaluating an idea to connect several sites using "just Internet", versus traditional MPLS services. Out of the several options I have in mind, one of them is having a OPNSense as peering point for each LAN. All of them should be connected using Zerotier SDN in L3 with "managed routes".
 
@@ -19,7 +19,7 @@ I've identified a 128 routes limit in the "managed routes" option, so probably w
 
 <!--more-->
 
-## Basic layout of the PoC
+### Basic layout of the PoC
 
 This is a basic diagram of what was tested. Each OPNSense endpoint would run the zerotier client and provide forwarding. Route information would be pushed by the controller.
 
@@ -37,11 +37,11 @@ Routes as defined in the controller:
 > 
 > 10.2.0.0/24 via 172.16.1.20
 
-# The issue
+## The issue
 
 During my tests, I've seen that the connection between sites (LAN on side A vs LAN on side B) is very intermittent, with 30-60% of packet lost.
 
-# Analysis of the issue
+## Analysis of the issue
 
 I've created a small script for OPNsense to continuosly check peer status.
 
@@ -99,13 +99,13 @@ In the past, I've seen through firewall logs and tcpdump captures that Zerotier 
 
 I would expect that Zerotier avoids using zt* interfaces by default.
 
-# Similar reports
+## Similar reports
 
-## Andy Liebman
+### Andy Liebman
 
 Andy Liebman reported the same scenario in the [forum](https://discuss.zerotier.com/t/troubleshooting-intermittent-connection-with-site-to-site/15435), but unluckily nobody provided feedback and by the time I reached the post, it was closed and no further comments were possible.
 
-## u/legacyproblems at Reddit
+### u/legacyproblems at Reddit
 
 Not necesarrily the same scenario, but it's similar. This person blocked the unwanted flows through firewall rules:
 
@@ -115,7 +115,7 @@ Not necesarrily the same scenario, but it's similar. This person blocked the unw
 
 [reference](https://www.reddit.com/r/zerotier/comments/15zw33a/how_to_make_zerotier_not_use_other_tunnels/)
 
-## Blacklists
+### Blacklists
 
 I recall seeing similar reports which got addressed through the use of [blacklists](https://docs.zerotier.com/config/#local-configuration-options), but can't seem to find those posts right now to add links.
 
@@ -123,7 +123,7 @@ I prefer not going that route because with firewalls, adding new interfaces is k
 
 For my usecase whitelisting would make much more sense, telling Zerotier "use WAN1 & WAN2 interfaces and nothing more", but unluckily, that doesn't seem to be supported.
 
-# The fix
+## The fix
 
 I've found that using the new [multipath](https://docs.zerotier.com/multipath/) implementation seems to mimic the whitelist logic I'm after. I found this by accident, the private IP for the peer was only seen in the site that doesn't have multipath configured.
 
