@@ -52,13 +52,15 @@ google:
 
 # Build settings
 #theme: minima
-remote_theme: jekyll/minima
+permalink: /:year/:month/:day/:title.html
+
+remote_theme: jekyll/minima@4de322363fca5927e6f4012cb94f6dad69ab5e6c
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
-  - jekyll-compose
   - jekyll-remote-theme
+  - jekyll-redirect-from
 #  - jekyll-google_search_console_verification_file
 
 
