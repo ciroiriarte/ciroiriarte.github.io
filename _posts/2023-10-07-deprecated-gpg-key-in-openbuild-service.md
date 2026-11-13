@@ -4,12 +4,13 @@ title: Deprecated GPG Key in OpenBuild Service
 description: Quick fix to force key replacement
 layout: post
 author: Ciro Iriarte
+lang: en
 categories:
-- HomeLab
+  - linux
 tags:
-- OpenBuildService
-- openSuSE
-- Ubuntu
+  - open-build-service
+  - opensuse
+  - ubuntu
 ---
 
 ## OpenBuild Service

@@ -7,19 +7,19 @@ layout: post
 guid: 'http://cyruspy.wordpress.com/2007/09/29/enforce-https-usage/'
 permalink: /index.php/2007/09/29/enforce-https-usage/
 description: 'How to force HTTPS on Apache2 using mod_rewrite on SLES9/10, redirecting all HTTP traffic to the HTTPS port with a simple configuration file.'
+lang: en
 categories:
-    - apache
-    - Linux
-    - SLES
+  - linux
+  - security
 tags:
-    - ssl
-    - apache2
-    - mod_rewrite
+  - apache
+  - ssl
+  - sles
 ---
 
 Want to enforce SSL usage on apache2?, after having it working you only need a few mod_rewrite lines. In the case of SLES9/10, create a file /etc/apache2/conf.d/enforce.conf with the following content:
 
-<!-- more -->
+<!--more-->
 
 ```apache
 # Se indica a apache que todas las conexiones al puerto 80 deben ir al puerto 433, sin excepciones/This forces SSL usage without exceptions

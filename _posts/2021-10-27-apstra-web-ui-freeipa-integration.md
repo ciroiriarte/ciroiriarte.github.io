@@ -6,12 +6,15 @@ author: Ciro Iriarte
 layout: post
 guid: https://iriarte.it/?p=319
 permalink: "/index.php/2021/10/27/apstra-web-ui-freeipa-integration/"
+description: 'Making Apstra 4.0 LDAP providers authorize FreeIPA users: the group lookup that fails and the posixGroup workaround that works.'
+lang: en
 categories:
-- Uncategorized
+  - networking
+  - security
 tags:
-- Apstra
-- FreeIPA
-- LDAP
+  - apstra
+  - freeipa
+  - ldap
 ---
 
 ## First Attempt (the correct one?)
@@ -30,9 +33,7 @@ I happily adapted the default configuration to match the FreeIPA schema (tested 
 | Password | you.wish |
 | Encryption | STARTTLS |
 
-<figure>
-<figcaption><i>Table 1 - Tested “Provider-specific Parameters” – Not working</i></figcaption>
-</figure>
+*Table 1 - Tested “Provider-specific Parameters” – Not working*
 
 
 | **Parameter** | **Value** | **Apstra default?** |
@@ -51,9 +52,7 @@ I happily adapted the default configuration to match the FreeIPA schema (tested 
 | Group Member Mapping Attribute Name | member | No |
 | Group Object Class Attribute Name | groupofnames\* | No |
 
-<figure>
-<figcaption><i>Table 2 - Tested “Advanced configuration” – Not working</i></figcaption>
-</figure>
+*Table 2 - Tested “Advanced configuration” – Not working*
 
 
 Take into account that “Group Object Class Attribute Name” can take “groupofnames” or “ipausergroup” for this usecase.
@@ -91,9 +90,7 @@ As only the group lookup fails, we’ll use the compat view only for the groups.
 | Password | you.wish |
 | Encryption | STARTTLS |
 
-<figure>
-<figcaption><i>Table 3 - Tested “Provider-specific Parameters” – Working workaround</i></figcaption>
-</figure>
+*Table 3 - Tested “Provider-specific Parameters” – Working workaround*
 
 
 
@@ -113,9 +110,7 @@ As only the group lookup fails, we’ll use the compat view only for the groups.
 | Group Member Mapping Attribute Name | **memberUid** | **Yes** |
 | Group Object Class Attribute Name | **posixGroup** | **Yes** |
 
-<figure>
-<figcaption><i>Table 4 - Tested “Advanced configuration” – Working workaround</i></figcaption>
-</figure>
+*Table 4 - Tested “Advanced configuration” – Working workaround*
 
 
 Don’t forget to setup the “Provider Role Mapping” section to get authorization working.
@@ -128,31 +123,12 @@ Don’t forget to setup the “Provider Role Mapping” section to get authoriza
 | user | gapstra-user |
 | viewer | gapstra-viewer |
 
-<figure>
-<figcaption><i>Table 5 - Role Mapping setup</i></figcaption>
-	</figure>
+*Table 5 - Role Mapping setup*
 
 ## Side note
 
 Even though I can get proper authentication &amp; authorization, the “role” user attribute in the profile just shows a gray box for the LDAP backed user. Might be a presentation bug, otherwise the authorization works as expected
 
-<!--
-|  ![Profile for LDAP backed user](https://iriarte.it/wp-content/uploads/2021/10/image-3.png) |
-|:--:| 
-| *Profile for LDAP backed user* |
--->
+{% include image.html url="/assets/img/2021-10-27-apstra-ldap-user-profile.png" description="Image 1 - Profile for LDAP backed user." alt="Roles field of an LDAP-backed user profile in Apstra: an empty grey box" width=279 height=66 %}
 
-<figure>
-  <img src="/wp-content/uploads/2021/10/image-3.png" alt="my alt text"/>
-  <figcaption><i>Image 1 - Profile for LDAP backed user.</i></figcaption>
-</figure>
-
-
-<!--
-![Profile for internal admin user](https://iriarte.it/wp-content/uploads/2021/10/image-4.png)
--->
-
-<figure>
-  <img src="/wp-content/uploads/2021/10/image-4.png" alt="my alt text"/>
-  <figcaption><i>Image 2 - Profile for internal admin user.</i></figcaption>
-</figure>
+{% include image.html url="/assets/img/2021-10-27-apstra-admin-user-profile.png" description="Image 2 - Profile for internal admin user." alt="Roles field of the internal admin user profile in Apstra: administrator" width=346 height=76 %}

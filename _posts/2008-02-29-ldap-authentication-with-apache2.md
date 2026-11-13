@@ -7,21 +7,20 @@ layout: post
 guid: 'http://cyruspy.wordpress.com/?p=16'
 permalink: /index.php/2008/02/29/ldap-authentication-with-apache2/
 description: 'Guide for setting up LDAP authentication on Apache2 with mod_auth_ldap on SLES9, including SSL certificate setup and .htaccess configuration.'
+lang: en
 categories:
-    - apache
-    - Linux
-    - SLES
+  - linux
+  - security
 tags:
-    - apache2
-    - ldap
-    - mod_auth_ldap
-    - sles
-    - ssl
+  - apache
+  - ldap
+  - ssl
+  - sles
 ---
 
 Well, needed to setup authentication using mod_auth_ldap, here's the procedure.
 
-<!-- more -->
+<!--more-->
 
 First we need to make sure the required modules are loaded on apache2 startup, in SLES9 we should modify **/etc/sysconfig/apache2** adding *"ldap"* and *"auth_ldap"* to the **APACHE_MODULES** variable. This modules are builtin in apache2, so we don't need to install them.
 

@@ -7,14 +7,12 @@ layout: post
 guid: 'http://cyruspy.wordpress.com/?p=128'
 permalink: /index.php/2011/03/20/quick-tonido-installation-on-opensuse/
 description: 'Step-by-step guide for installing Tonido personal cloud platform on openSUSE using alien to convert deb packages, with init script and SuSEfirewall2 configuration.'
+lang: en
 categories:
-    - Linux
-    - Projects
+  - linux
 tags:
-    - opensuse
-    - tonido
-    - linux
-    - firewall
+  - opensuse
+  - tonido
 ---
 
 Ok, last week I updated my laptop to openSUSE 11.4, that, unluckily, broke my MoneyManagerEx installation as I needed a package for this new distro and the one from Packman is currently broken because of some repo [changes](http://www.mail-archive.com/packman@links2linux.de/msg05268.html).
@@ -27,7 +25,7 @@ Then, that’s were I saw it, there’s a web version of MMEx!!!, and that’s g
 
 The VPS is running openSUSE 11.3 @i586 (that is, 32bit version). Tonido doesn't provide source code or generic tar files, so we are working with deb packages for Ubuntu. As a pending task, I might make a nice clean package on [OBS](https://build.opensuse.org) to automate the procedure I'm going to document here, for the time being this is a "quick, dirty if you like, hack documentation". Also, note this is a dedicated server installation, it won't contemplate "desktop integration" as desktop integration will be left outside.
 
-<!-- more -->
+<!--more-->
 
 First, we need to install alien, to allow us to convert the deb package to rpm from were we’ll extract the files.
 

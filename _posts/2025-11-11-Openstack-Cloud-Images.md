@@ -3,13 +3,13 @@ permalink: /datacenter/2025/11/11/Openstack-Cloud-Images.html
 title: Openstack Cloud Images
 description: Walkthrough of the process to import Cloud Images to Openstack.
 layout: post
-author_profile: true
 author: Ciro Iriarte
+lang: en
 categories:
-- Datacenter
+  - virtualization
 tags:
-- Virtualization
-- Openstack
+  - openstack
+  - cloud-images
 ---
 
 Once you have your shiny Openstack environment up & running you would like to inmediately start provisioning virtual machines. The starting point are OS images that will provide the base copy of Operating System to use for your new virtual machines.

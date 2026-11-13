@@ -1,0 +1,20 @@
+{%- comment -%}
+  Navigation for a multi-part series. The page needs `series:` (a key in
+  _data/series.yml), `series_part:` and `series_title:`.
+{%- endcomment -%}
+{%- if page.series -%}
+{%- assign series_posts = site.posts | where: "series", page.series | sort: "series_part" -%}
+{%- assign series = site.data.series[page.series] -%}
+<nav class="series-nav" aria-label="Series: {{ series.name | default: page.series | escape }}">
+  <p class="series-nav-title"><strong>Series:</strong> {{ series.name | default: page.series | escape }}</p>
+  <ol>
+  {%- for p in series_posts -%}
+    {%- if p.url == page.url %}
+    <li aria-current="page"><strong>{{ p.series_title | default: p.title | escape }}</strong></li>
+    {%- else %}
+    <li><a href="{{ p.url | relative_url }}">{{ p.series_title | default: p.title | escape }}</a></li>
+    {%- endif -%}
+  {%- endfor %}
+  </ol>
+</nav>
+{%- endif -%}

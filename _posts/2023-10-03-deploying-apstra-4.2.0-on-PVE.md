@@ -4,13 +4,13 @@ title: Deploying Apstra 4.2.0 on Proxmox VE
 description: Step by step deployment of Apstra 4.2.0 AOS & ZTP appliances
 layout: post
 author: Ciro Iriarte
+lang: en
 categories:
-- HomeLab
-- SDN
+  - virtualization
+  - networking
 tags:
-- Apstra
-- Proxmox
-- Virtualization
+  - proxmox
+  - apstra
 ---
 
 ## Apstra appliances

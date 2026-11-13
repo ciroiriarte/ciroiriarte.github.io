@@ -7,20 +7,18 @@ layout: post
 guid: 'http://cyruspy.wordpress.com/?p=75'
 permalink: /index.php/2010/04/01/compiling-cnet-in-a-hurry/
 description: 'How to compile and install the cnet network simulator in a user home directory on openSUSE, with Makefile modifications for a local installation.'
+lang: en
 categories:
-    - Linux
-    - openSUSE
-    - Projects
+  - linux
+  - networking
 tags:
-    - linux
-    - networking
-    - opensuse
-    - simulation
+  - opensuse
+  - simulation
 ---
 
 Well, we have an assignment for college, the idea is to simulate a network and the tool chosen is [cnet](http://www.csse.uwa.edu.au/cnet/ "CNET Simulator"). Ideally I would build a package for it in the OpenSUSE Build Service, but the process is kind of slow and we're in a hurry. Here's the process to install it in your home. Building the package is on my TODO list….
 
-<!-- more -->
+<!--more-->
 
 Go [here](http://www.csse.uwa.edu.au/cnet/) and download the latest version (3.2.1 as of today)
 

@@ -7,19 +7,18 @@ layout: post
 guid: 'http://cyruspy.wordpress.com/?p=282'
 permalink: /index.php/2012/07/20/io-hung-forever-trying-to-access-vdev-device/
 description: 'How to fix multipath I/O hung processes when accessing Hitachi VSP VDEV snapshot devices by enabling fail_if_no_path in the multipath configuration.'
+lang: en
 categories:
-    - Linux
-    - Storage
+  - linux
+  - storage-backup
 tags:
-    - storage
-    - multipath
-    - linux
-    - hitachi
+  - multipath
+  - hitachi
 ---
 
 Setting up snapshots with Hitachi VSP we saw that many kpart processes were waiting for I/O trying to access VDEV devices. That's because of the queue_if_no_path feature in multipath.
 
-<!-- more -->
+<!--more-->
 
 The thing is, that’s a good feature, if you have really small gaps of times without access to the storage (cluster transition, someone messing with fiber cables, etc) you want the I/O to be queued and resume once conection comes back to live.
 

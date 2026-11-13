@@ -4,14 +4,15 @@ title: vSAN ESA on ESXi-over-PVE
 description: Nested vSAN ESA cluster for testing purposes
 layout: post
 author: Ciro Iriarte
+lang: en
 categories:
-- HomeLab
+  - virtualization
+  - storage-backup
 tags:
-- ESXi
-- Proxmox
-- Nested
-- Virtualization
-- vSAN
+  - proxmox
+  - esxi
+  - vsan
+  - nested-virtualization
 ---
 
 ## A little bit of context

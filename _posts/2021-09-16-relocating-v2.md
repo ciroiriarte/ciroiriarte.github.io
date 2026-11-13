@@ -6,8 +6,12 @@ author: Ciro Iriarte
 layout: post
 guid: 'https://iriarte.it/?p=305'
 permalink: /index.php/2021/09/16/relocating-v2/
+description: 'Second relaunch of the blog in 2021, after some posts were lost in the previous move.'
+lang: en
 categories:
-    - Uncategorized
+  - misc
+tags:
+  - meta
 ---
 
 Hello world v2.!. This is a new attempt to jump start the blog. Unluckily some posts from the previous relocation were lost.

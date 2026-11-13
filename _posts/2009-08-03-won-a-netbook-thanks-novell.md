@@ -7,12 +7,12 @@ layout: post
 guid: 'http://cyruspy.wordpress.com/2009/08/03/won-a-netbook-thanks-novell/'
 permalink: /index.php/2009/08/03/won-a-netbook-thanks-novell/
 description: 'Short post about winning a netbook as a reward for participating in the SLES11 beta testing program with Novell/SUSE.'
+lang: en
 categories:
-    - Uncategorized
+  - misc
 tags:
-    - novell
-    - sles
-    - betatesting
+  - novell
+  - sles
 ---
 
 Well, I’ve been a SuSE user for quit some time, since 7.3 days and some months ago (around January) I was accepted as a SuSE Linux Enterprise 11 (SLES11) betatester. I was happy to test the bleeding edge enterprise distribution and happy to help releasing it.

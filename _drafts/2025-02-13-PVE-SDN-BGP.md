@@ -2,12 +2,14 @@
 title: North/South BGP Peering for Proxmox SDN
 description: How to integrate PVE SDN with other network elements
 layout: post
-author: ciroiriarte
+author: Ciro Iriarte
+lang: en
 categories:
-- HomeLab
+  - networking
+  - virtualization
 tags:
-- Proxmox
-- SDN
+  - proxmox
+  - sdn
 ---
 
 # Reference documentation

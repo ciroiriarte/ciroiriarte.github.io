@@ -1,0 +1,4 @@
+# Multi-part series. Posts join one with `series: <key>`, `series_part: <n>`
+# and a short `series_title:` used in the navigation.
+pbs-usb-tapes:
+  name: USB disks as tapes for Proxmox Backup Server

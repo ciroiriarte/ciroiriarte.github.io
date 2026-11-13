@@ -2,20 +2,15 @@
 title: Modeling Servers in Apstra
 description: Walkthrough to properly create servers connected to your IP Fabric.
 layout: post
-author_profile: true
 author: Ciro Iriarte
+lang: en
 categories:
-- Datacenter
-- Networking
+  - networking
 tags:
-- Juniper
-- QFX
-- Apstra
-- JunOS
+  - apstra
+  - juniper
+  - junos
 ---
-
-
-
 # Rationale
 
 I found Apstra quite intersting for a Datacenter environment where you would like to have an overall view of the environment you're working on. 

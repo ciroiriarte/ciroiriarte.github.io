@@ -7,16 +7,14 @@ layout: post
 guid: 'http://cyruspy.wordpress.com/2007/09/29/ordered-a-gps-receiver-d/'
 permalink: /index.php/2007/09/29/ordered-a-gps-receiver-d/
 description: 'Short post about ordering an i-Blue 747 GPS receiver and track logger, with plans to contribute to OpenStreetMap in Paraguay.'
+lang: en
 categories:
-    - Gadget
-    - Linux
-    - Projects
+  - misc
 tags:
-    - gps
-    - gadget
-    - openstreetmap
+  - gps
+  - openstreetmap
 ---
 
-![i-Blue 747](https://commons.wikimedia.org/wiki/File:I-blue_747_A_plus.png)
+{% include image.html url="https://upload.wikimedia.org/wikipedia/commons/1/10/I-blue_747_A_plus.png" alt="i-Blue 747 A+ GPS receiver" width=633 height=382 description='i-Blue 747 A+ (<a href="https://commons.wikimedia.org/wiki/File:I-blue_747_A_plus.png">Wikimedia Commons</a>, CC BY-SA 3.0)' %}
 
 Well, i felt like i was in need of a new toy, so yesterday ordered an i-Blue 747 (gps receiver/track logger). So i guess i’ll be busy playing with it once it arrives. Already found two projects (http://gpsmapper.sourceforge.net/ and http://triptracker.sourceforge.net/) that would allow me to have a realtime track of my position using a GPRS enabled phone with the receiver. Also would like to contribute to OpenStreetMap, as there are no maps available for Paraguay, let’s see how hard can that be….

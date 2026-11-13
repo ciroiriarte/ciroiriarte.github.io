@@ -3,19 +3,14 @@ permalink: /datacenter/networking/2023/12/27/setting-up-junos-devices-for-jsi.ht
 title: Setting up JunOS devices for Juniper Support Insights
 description: Walkthrough NE setup to allow vLWC to connect and extract information.
 layout: post
-author_profile: true
 author: Ciro Iriarte
+lang: en
 categories:
-- Datacenter
-- Networking
+  - networking
 tags:
-- Juniper
-- QFX
-- EX
-- JunOS
+  - juniper
+  - junos
 ---
-
-
 
 ## Intro
 

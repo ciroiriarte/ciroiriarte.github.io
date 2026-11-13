@@ -2,15 +2,15 @@
 title: Relocating vCenter from ESXi to PVE
 description: Export/Import vcsa virtual appliance to improve performance
 layout: post
-author: ciroiriarte
+author: Ciro Iriarte
+lang: en
 categories:
-- HomeLab
+  - virtualization
 tags:
-- ESXi
-- Proxmox
-- Nested
-- Virtualization
-- vSAN
+  - vmware
+  - esxi
+  - proxmox
+  - nested-virtualization
 ---
 
 # Starting point & the need

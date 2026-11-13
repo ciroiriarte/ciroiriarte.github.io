@@ -5,13 +5,13 @@ description: Step by step implementation of a nested ESXi machine running on Pro
 #permalink: esxi-on-pve
 layout: post
 author: Ciro Iriarte
+lang: en
 categories:
-- HomeLab
+  - virtualization
 tags:
-- ESXi
-- Proxmox
-- Nested
-- Virtualization
+  - proxmox
+  - esxi
+  - nested-virtualization
 ---
 
 Thanks to the work of [William Lam](https://williamlam.com/nested-virtualization), running ESXi on top of ESXi for testing/lab purposes is really straightforward. 

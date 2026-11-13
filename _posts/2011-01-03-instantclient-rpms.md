@@ -7,19 +7,18 @@ layout: post
 guid: 'http://cyruspy.wordpress.com/?p=120'
 permalink: /index.php/2011/01/03/instantclient-rpms/
 description: 'Sharing an enhanced Oracle InstantClient RPM spec file based on Remi Collet work, with added ORACLE_HOME, tnsnames.ora support, and other improvements for openSUSE Build Service.'
+lang: en
 categories:
-    - Linux
-    - openSUSE
+  - linux
 tags:
-    - oracle
-    - instantclient
-    - rpm
-    - opensuse
+  - oracle
+  - rpm
+  - opensuse
 ---
 
 Well, a few years back I came across the Oracle InstantClient SPEC file prepared by Remi Collet, it was great to find it because the original RPMs made by Oracle don't help to build other packages depending on them.
 
-<!-- more -->
+<!--more-->
 
 I created a set of packages for a project using the original file from Remi. Some days later I enhanced them to make the use of the package by end users really smooth (ORACLE\_HOME environment variable, PATHs, etc). Also added other tweaks like a script to help building Perl-DBD-Oracle (not made by me) and was really happy with the results. Here’s where everything went downhill. There was a policy of only allowing software with source code on the openSUSE Build Service and the guys in charge just deleted the package from my repo project and I lost all the work done.
 

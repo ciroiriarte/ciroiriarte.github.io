@@ -1,0 +1,76 @@
+# Controlled vocabulary for post classification.
+# Every post's `categories` must be topic keys and `tags` must be tag keys.
+# Keys are URL anchors on /topics/ and /tags/; `name` is what readers see.
+
+topics:
+  linux:           { name: "Linux & Unix", description: "System administration on SLES, openSUSE and friends." }
+  virtualization:  { name: "Virtualization", description: "Proxmox VE, ESXi, OpenStack and cloud images." }
+  networking:      { name: "Networking", description: "Data center fabrics, SDN, Juniper and overlays." }
+  storage-backup:  { name: "Storage & Backup", description: "SAN, ZFS, Proxmox Backup Server and tape." }
+  security:        { name: "Security & Identity", description: "SSH, TLS, LDAP/FreeIPA and MFA." }
+  monitoring:      { name: "Monitoring", description: "Nagios, Observium and friends." }
+  misc:            { name: "Misc", description: "Gadgets, announcements and nonsense." }
+
+tags:
+  apache: { name: Apache }
+  apstra: { name: Apstra }
+  ceph: { name: Ceph }
+  cloud-images: { name: Cloud images }
+  emc: { name: EMC }
+  esxi: { name: ESXi }
+  firefox: { name: Firefox }
+  fonts: { name: Fonts }
+  freeipa: { name: FreeIPA }
+  gps: { name: GPS }
+  guacamole: { name: Guacamole }
+  hitachi: { name: Hitachi }
+  hpux: { name: HP-UX }
+  humor: { name: Humor }
+  java: { name: Java }
+  juniper: { name: Juniper }
+  junos: { name: Junos }
+  kismet: { name: Kismet }
+  ldap: { name: LDAP }
+  meta: { name: Meta }
+  mfa: { name: MFA }
+  mhvtl: { name: mhVTL }
+  multipath: { name: Multipath }
+  nagios: { name: Nagios }
+  nested-virtualization: { name: Nested virtualization }
+  novell: { name: Novell }
+  object-storage: { name: Object storage }
+  observium: { name: Observium }
+  open-build-service: { name: Open Build Service }
+  openstack: { name: OpenStack }
+  openstreetmap: { name: OpenStreetMap }
+  opensuse: { name: openSUSE }
+  opnsense: { name: OPNsense }
+  oracle: { name: Oracle }
+  paraguay: { name: Paraguay }
+  partitioning: { name: Partitioning }
+  pbs: { name: Proxmox Backup Server }
+  powershell: { name: PowerShell }
+  proxmox: { name: Proxmox VE }
+  recovery: { name: Recovery }
+  rpm: { name: RPM }
+  s3: { name: S3 }
+  sco: { name: SCO }
+  sdn: { name: SDN }
+  serial-console: { name: Serial console }
+  simulation: { name: Simulation }
+  sles: { name: SLES }
+  ssh: { name: SSH }
+  ssl: { name: TLS/SSL }
+  tape: { name: Tape }
+  testdisk: { name: TestDisk }
+  timezone: { name: Time zones }
+  tonido: { name: Tonido }
+  troubleshooting: { name: Troubleshooting }
+  ubuntu: { name: Ubuntu }
+  virtualbox: { name: VirtualBox }
+  vmware: { name: VMware }
+  vsan: { name: vSAN }
+  windows: { name: Windows }
+  xkcd: { name: xkcd }
+  zerotier: { name: ZeroTier }
+  zfs: { name: ZFS }

@@ -7,12 +7,12 @@ layout: post
 guid: 'https://cyruspy.wordpress.com/2006/03/27/sles8-sp4-release-notes-x86/'
 permalink: /index.php/2006/03/27/sles8-sp4-release-notes-x86/
 description: 'Complete release notes for UnitedLinux 1.0 x86 Service Pack 4, covering enhancements, security fixes, extensive bug fixes, and known issues.'
-categories:
-    - SLES
-tags:
-    - linux
-    - sles
 deprecated: true
+lang: en
+categories:
+  - linux
+tags:
+  - sles
 ---
 
 ## Release Notes for UnitedLinux 1.0 x86 Service Pack 4
@@ -28,7 +28,7 @@ deprecated: true
 Release Notes for UnitedLinux 1.0 x86 Service Pack 4  
 SuSE Linux Maintenance Web (2703b9bc0638a38f2dbe780920d828a6)
 
-| ![](http://support.novell.com/img/h_arrow.gif) | applies to |
+| → | applies to |
 |---|---|
 |  |
 
@@ -1679,7 +1679,7 @@ where `<FILENAME>.rpm` is the name of the rpm.
 - CD1: 0a8593c25861f4fffd0d6fbcf3b1a9fd
 - CD2: 682e8e4dfdb0b7a37f5eef1eba2c3294
 
-| ![](http://support.novell.com/img/h_arrow.gif) | links to download packages |
+| → | links to download packages |
 |---|---|
 |  |
 | - [SUSE Linux Enterprise Server 8 for x86 (i386) (most recent package)](http://download.novell.com/Download?buildid=3E5CBzM8w0A%7E) |

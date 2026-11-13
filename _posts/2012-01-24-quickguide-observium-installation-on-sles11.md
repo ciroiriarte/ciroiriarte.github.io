@@ -7,19 +7,17 @@ layout: post
 guid: 'http://cyruspy.wordpress.com/?p=158'
 permalink: /index.php/2012/01/24/quickguide-observium-installation-on-sles11/
 description: 'Quick installation guide for Observium network monitoring on SLES11, covering Apache/MySQL/PHP/rrdtool setup, database configuration, vhost, cron jobs, and XCache tuning.'
+lang: en
 categories:
-    - Linux
-    - OSS
+  - monitoring
 tags:
-    - monitoring
-    - observium
-    - sles
-    - networking
+  - observium
+  - sles
 ---
 
 I came accross a great tool for collecting data called [Observium](http://www.observium.org), it works with mysql+php+rrdtool collecting data through SNMP. Here are my notes based on original Debian+SVN guide.
 
-<!-- more -->
+<!--more-->
 
 **Initial Repos**
 

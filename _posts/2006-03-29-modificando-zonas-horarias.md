@@ -7,13 +7,11 @@ layout: post
 guid: 'https://cyruspy.wordpress.com/2006/03/29/modificando-zonas-horarias/'
 permalink: /index.php/2006/03/29/modificando-zonas-horarias/
 description: 'Guía para modificar archivos de zonas horarias en Linux usando zic y la base de datos Olson, con un ejemplo para Paraguay.'
+lang: es
 categories:
-    - Linux
+  - linux
 tags:
-    - timezone
-    - tzdata
-    - zic
-    - linux
+  - timezone
 ---
 
 ## Intro
@@ -21,12 +19,12 @@ tags:
 Los archivos con informacion sobre las zonas horarias y el popular “daylight saving” se encuentran en /usr/share/zoneinfo. Los mismos pueden ser consultados con:
 
 {% highlight shell %}
-zdump -v “archivo”
+zdump -v "archivo"
 {% endhighlight %}
 
 En nuestro caso es muy comun el que cambien las fechas donde se efectua el cambio de hora, para corregir esto hay que recompilar estos archivos luego de modificarlos, esto se realiza con el comando zic.
 
-<!-- more -->
+<!--more-->
 
 Las definiciones de zonas se bajan de [ftp://elsie.nci.nih.gov/pub/](ftp://elsie.nci.nih.gov/pub/)
 

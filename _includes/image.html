@@ -1,4 +1,10 @@
+{%- comment -%}
+  {% include image.html url="/assets/img/x.png" description="Caption" alt="Alt text" width=800 height=600 %}
+  `alt` defaults to the caption. Width/height (intrinsic pixels) avoid layout shift.
+{%- endcomment -%}
 <figure class="image">
-	  <a href="{{ include.url }}"><img src="{{ include.url }}" alt="{{ include.alt | default: include.description | escape }}" loading="lazy"></a>
-	    <figcaption>{{ include.description }}</figcaption>
+  <a href="{{ include.url | relative_url }}"><img src="{{ include.url | relative_url }}" alt="{{ include.alt | default: include.description | strip_html | escape }}"{% if include.width %} width="{{ include.width }}"{% endif %}{% if include.height %} height="{{ include.height }}"{% endif %} loading="lazy" decoding="async"></a>
+  {%- if include.description %}
+  <figcaption>{{ include.description }}</figcaption>
+  {%- endif %}
 </figure>

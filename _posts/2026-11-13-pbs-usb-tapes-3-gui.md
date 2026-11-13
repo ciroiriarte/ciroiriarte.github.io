@@ -4,17 +4,18 @@ title: "USB disks as tapes for Proxmox Backup Server (3/3): point & click"
 description: The same setup as part 2, from the mhVTL Control dashboard and the PBS web UI. A few shell lines remain; everything else is clicks.
 date: 2026-11-13 10:02:00 -0300
 layout: post
-author_profile: true
 author: Ciro Iriarte
+series: pbs-usb-tapes
+series_part: 3
+series_title: "Point & click"
+lang: en
 categories:
-- Datacenter
+  - storage-backup
 tags:
-- Proxmox
-- Proxmox Backup Server
-- mhVTL
-- Tape
-- Storage
-- backup
+  - proxmox
+  - pbs
+  - tape
+  - mhvtl
 ---
 
 [Part 2]({% post_url 2026-11-13-pbs-usb-tapes-2-cli %}) built the setup from the shell. This part does it with a mouse: [mhVTL Control](https://github.com/ciroiriarte/mhvtl-control) for the virtual library, and the PBS web UI for the tape side. If you haven't read [part 1]({% post_url 2026-11-13-pbs-usb-tapes-1-why %}), it explains why you'd want PBS tape jobs on USB disks in the first place.
@@ -23,7 +24,7 @@ Not everything has a button yet: installing packages, turning on dashboard write
 
 <!--more-->
 
-{% include series-pbs-usb-tapes.html current="3" %}
+{% include series-nav.html %}
 
 The setup is the same as before: PBS 4.2 with a datastore called `store1`, a USB dock, and disks to rotate. The test environment was a fresh Debian 13 VM with mhVTL `1.8.0+git20261101.7e3a101` and mhVTL Control 0.6.0, both from my [OBS project](https://build.opensuse.org/project/show/home:ciriarte:mhvtl).
 
@@ -77,11 +78,11 @@ In **Configuration**, click **New library…**:
 - **One drive:** IBM ULT3580-TD8, ID 21, serial `MHV002001`.
 - **For:** Proxmox Backup Server. This turns on a check for what PBS needs.
 
-{% include image.html url="/assets/img/2026-11-13-pbs-usb-m01-new-library.jpg" description="mhVTL Control: New library wizard, IBM 03584 with PBS selected" %}
+{% include image.html url="/assets/img/2026-11-13-pbs-usb-m01-new-library.jpg" description="mhVTL Control: New library wizard, IBM 03584 with PBS selected" width=1512 height=806 %}
 
 Click **Stage library**, then **Check**. Check is a dry run: it validates the new configuration and lists what the apply would restart. Here that's only the two new daemons, and the PBS check passes:
 
-{% include image.html url="/assets/img/2026-11-13-pbs-usb-m02-check-pbs.jpg" description="Check: library 20 meets the PBS requirements, only vtllibrary@20 and vtltape@21 restart" %}
+{% include image.html url="/assets/img/2026-11-13-pbs-usb-m02-check-pbs.jpg" description="Check: library 20 meets the PBS requirements, only vtllibrary@20 and vtltape@21 restart" width=1512 height=806 %}
 
 Click **Apply**. The library is live within seconds.
 
@@ -104,11 +105,11 @@ The disk is blank, so the monitor logs "not placed" and waits.
 
 In **Raw Disk Dock**, the disk shows up as "NO MVTL (UNFORMATTED)". Click **Format…**, type the device name to confirm (this **erases the disk**), and give it a barcode. The `L8` suffix makes it LTO-8 media, matching the drive:
 
-{% include image.html url="/assets/img/2026-11-13-pbs-usb-m03-format.jpg" description="Raw Disk Dock: format the disk as cartridge USB001L8" %}
+{% include image.html url="/assets/img/2026-11-13-pbs-usb-m03-format.jpg" description="Raw Disk Dock: format the disk as cartridge USB001L8" width=1512 height=806 %}
 
 The bay monitor picks up the new cartridge right away, and the **Library Rack** shows it in MAP 1. The drive panel also shows `encryption aes-gcm`: once PBS sets a key, mhVTL encrypts every block with AES-256-GCM.
 
-{% include image.html url="/assets/img/2026-11-13-pbs-usb-m04-rack-map.jpg" description="Library Rack: USB001L8 in the mail slot" %}
+{% include image.html url="/assets/img/2026-11-13-pbs-usb-m04-rack-map.jpg" description="Library Rack: USB001L8 in the mail slot" width=1512 height=806 %}
 
 Switch to the PBS web UI, at `https://<pbs>:8007`.
 
@@ -116,17 +117,17 @@ Switch to the PBS web UI, at `https://<pbs>:8007`.
 
 **Tape Backup → Changers → Add**. The path dropdown lists only the IBM changer (`scsi-MHV0020`). The STK samples are invisible to PBS, as expected. I named it `usblib` and left Import-Export Slots blank, since PBS reads them from the changer.
 
-{% include image.html url="/assets/img/2026-11-13-pbs-usb-p01-add-changer.jpg" description="PBS: add the changer" %}
+{% include image.html url="/assets/img/2026-11-13-pbs-usb-p01-add-changer.jpg" description="PBS: add the changer" width=1512 height=806 %}
 
 **Drives → Add**: name `usbdrive`, changer `usblib`, drive number 0. The path list shows every mhVTL drive, samples included, so pick the one with serial `0MHV002001`:
 
-{% include image.html url="/assets/img/2026-11-13-pbs-usb-p02-add-drive.jpg" description="PBS: add the drive, picked by serial" %}
+{% include image.html url="/assets/img/2026-11-13-pbs-usb-p02-add-drive.jpg" description="PBS: add the drive, picked by serial" width=1512 height=806 %}
 
 ## Encryption key and media pool
 
 **Encryption Keys → Add**: a hint and a password. PBS then offers a paper key. Print it and keep it away from this server: without the key, the disks are just noise.
 
-{% include image.html url="/assets/img/2026-11-13-pbs-usb-p03-add-key.jpg" description="PBS: add a tape encryption key" %}
+{% include image.html url="/assets/img/2026-11-13-pbs-usb-p03-add-key.jpg" description="PBS: add a tape encryption key" width=1512 height=806 %}
 
 **Media Pools → Add**:
 
@@ -135,31 +136,31 @@ Switch to the PBS web UI, at `https://<pbs>:8007`.
 - **Retention:** 20 days. It has to be shorter than the rotation cycle: three disks rotated weekly come back after 21 days.
 - **Encryption key:** the one you just created.
 
-{% include image.html url="/assets/img/2026-11-13-pbs-usb-p04-add-pool.jpg" description="PBS: media pool offsite" %}
+{% include image.html url="/assets/img/2026-11-13-pbs-usb-p04-add-pool.jpg" description="PBS: media pool offsite" width=1512 height=806 %}
 
 ## Label the disk
 
 Open the changer (**usblib** in the left tree). The disk sits in I/E slot 5, "Not Labeled". Mail slots are numbered after the four storage slots. PBS won't label media in a mail slot, so click **Import** and move it to slot 1, then **Barcode Label** with pool `offsite`.
 
-{% include image.html url="/assets/img/2026-11-13-pbs-usb-p05-changer-ie.jpg" description="PBS changer view: the new disk in I/E slot 5" %}
+{% include image.html url="/assets/img/2026-11-13-pbs-usb-p05-changer-ie.jpg" description="PBS changer view: the new disk in I/E slot 5" width=1512 height=806 %}
 
 ## Back up
 
 **Content → New Backup**: datastore `store1`, pool `offsite`, drive `usbdrive`, and tick **Export Media-Set**. That moves the cartridge back to the mail slot when the job ends, ready to unplug.
 
-{% include image.html url="/assets/img/2026-11-13-pbs-usb-p06-new-backup.jpg" description="PBS: new tape backup with Export Media-Set" %}
+{% include image.html url="/assets/img/2026-11-13-pbs-usb-p06-new-backup.jpg" description="PBS: new tape backup with Export Media-Set" width=1512 height=806 %}
 
-{% include image.html url="/assets/img/2026-11-13-pbs-usb-p07-backup-log.jpg" description="Task log: 2148 MB written, media exported to I/E slot 5" %}
+{% include image.html url="/assets/img/2026-11-13-pbs-usb-p07-backup-log.jpg" description="Task log: 2148 MB written, media exported to I/E slot 5" width=1512 height=806 %}
 
 For the weekly routine, add a job under **Backup Jobs → Add**: same datastore, pool and drive, schedule `sat 02:00`, Export Media-Set ticked.
 
-{% include image.html url="/assets/img/2026-11-13-pbs-usb-p11-backup-job.jpg" description="PBS: weekly tape backup job" %}
+{% include image.html url="/assets/img/2026-11-13-pbs-usb-p11-backup-job.jpg" description="PBS: weekly tape backup job" width=1512 height=806 %}
 
 ## Pull the disk
 
 When the task log says the media was exported, unplug the disk. The bay monitor takes the cartridge out of the library. PBS caches what it knows, so click **Reload** in **Inventory**: the disk is listed as offline, with its catalog.
 
-{% include image.html url="/assets/img/2026-11-13-pbs-usb-p08-inventory-offline.jpg" description="PBS inventory: USB001L8 offline, catalog kept" %}
+{% include image.html url="/assets/img/2026-11-13-pbs-usb-p08-inventory-offline.jpg" description="PBS inventory: USB001L8 offline, catalog kept" width=1512 height=806 %}
 
 The changer view also keeps showing the cartridge until you click **Reload** there.
 
@@ -169,15 +170,15 @@ Next week: plug in the disk that is due, **Import** it to a storage slot, and le
 
 Plug the disk back in. Once it's in the mail slot, **Reload** the changer and **Import** it to a slot. Then in **Content**, click the restore icon next to the media set, pick the snapshots, and choose a target drive and datastore:
 
-{% include image.html url="/assets/img/2026-11-13-pbs-usb-p09-restore-target.jpg" description="PBS restore wizard: drive and target datastore" %}
+{% include image.html url="/assets/img/2026-11-13-pbs-usb-p09-restore-target.jpg" description="PBS restore wizard: drive and target datastore" width=1512 height=806 %}
 
-{% include image.html url="/assets/img/2026-11-13-pbs-usb-p10-restore-log.jpg" description="Restore log: the media set was encrypted with the pool key" %}
+{% include image.html url="/assets/img/2026-11-13-pbs-usb-p10-restore-log.jpg" description="Restore log: the media set was encrypted with the pool key" width=1512 height=806 %}
 
 The log shows the key fingerprint the media set was encrypted with, and the restore took 2.148 GB back into the datastore. The 2 GiB random file in that snapshot came back with the same SHA-256 as the original.
 
 The restore leaves the disk in the drive. Before unplugging it, send it back to the mail slot from the changer view. Click **Unload** in the drive's actions, which puts the cartridge back in slot 1. Then click **Transfer** on slot 1 and pick I/E slot 5. (The icon next to Transfer is **Format**. Don't confuse the two.)
 
-{% include image.html url="/assets/img/2026-11-13-pbs-usb-p12-transfer-to-ie.jpg" description="Changer view: USB001L8 back in I/E slot 5, ready to unplug" %}
+{% include image.html url="/assets/img/2026-11-13-pbs-usb-p12-transfer-to-ie.jpg" description="Changer view: USB001L8 back in I/E slot 5, ready to unplug" width=1456 height=818 %}
 
 Restoring on a rebuilt PBS takes a few more steps, starting with restoring the key from the paper copy. [Part 2]({% post_url 2026-11-13-pbs-usb-tapes-2-cli %}#restore) has the commands, all run in a test environment.
 
@@ -193,4 +194,4 @@ None of them got in the way of the procedure. The caveats from [part 2]({% post_
 
 ---
 
-{% include series-pbs-usb-tapes.html current="3" %}
+{% include series-nav.html %}

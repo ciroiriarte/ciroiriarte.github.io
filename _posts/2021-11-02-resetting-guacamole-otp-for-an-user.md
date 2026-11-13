@@ -6,15 +6,18 @@ author: Ciro Iriarte
 layout: post
 guid: https://iriarte.it/?p=329
 permalink: "/index.php/2021/11/02/resetting-guacamole-otp-for-an-user/"
+description: 'How to reset the TOTP enrollment of a Guacamole user backed by FreeIPA (LDAP) and MySQL.'
+lang: en
 categories:
-- Uncategorized
+  - security
 tags:
-- Guacamole
+  - guacamole
+  - mfa
 ---
 
 I’ve implemented Guacamole for remote access, for the time being it uses the builtin OTP module. In the future I might migrate to LemonLDAP or Keycloak for 2FA, for the time being the solution if good enough and works with zero configuration after module installation 🙂
 
-![Multifactor Enrollment](https://iriarte.it/wp-content/uploads/2022/01/totp-enroll.png)
+{% include image.html url="/assets/img/2021-11-02-guacamole-totp-enroll.png" description="Guacamole multifactor (TOTP) enrollment screen" width=625 height=706 %}
 
 My particular setup is pulling users from FreeIPA through LDAP, but also uses MySQL as a supplement to handle the connections definitions and things like the OTP plugin information.
 

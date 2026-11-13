@@ -7,10 +7,11 @@ layout: post
 guid: 'http://cyruspy.wordpress.com/?p=293'
 permalink: /index.php/2013/12/07/relocating/
 description: 'Announcement of the blog relocation from cyruspy.wordpress.com to iriarte.it.'
+lang: en
 categories:
-    - Uncategorized
+  - misc
 tags:
-    - meta
+  - meta
 ---
 
 Hi!, the blog as been relocated to http://[iriarte.it](https://iriarte.it "Cyrus doing the blog thing!"), hope to improve the content of the site with this move.

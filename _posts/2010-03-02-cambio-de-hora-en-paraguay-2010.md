@@ -7,20 +7,19 @@ layout: post
 guid: 'http://cyruspy.wordpress.com/?p=58'
 permalink: /index.php/2010/03/02/cambio-de-hora-en-paraguay-2010/
 description: 'Guía sobre el cambio de reglas DST en Paraguay en 2010 y cómo actualizar la base de datos de zonas horarias Olson en Linux, Solaris, Tru64 y HP-UX.'
+lang: es
 categories:
-    - Linux
+  - linux
 tags:
-    - linux
-    - timezone
-    - paraguay
-    - dst
+  - timezone
+  - paraguay
 ---
 
 El Gobierno Paraguayo resolvió modificar la fecha de entrada en vigencia del horario de invierno en toda la república. Con el anterior decreto vigente desde el 2004 se tenia que la hora debía retrasarse en 60 minutos el segundo domingo de Marzo (14/Mar este año) y volver a adelantarse en 60 minutos el tercer domingo de Octubre (17/Oct este año).
 
 Con el nuevo decreto esto cambia a retrasar la hora en 60 minutos el segundo domingo de Abril (11/Abr este año) y volver a adelantarla en 60 minutos el primer domingo de Octubre (3/Oct este año).
 
-<!-- more -->
+<!--more-->
 
 Referencias:
 

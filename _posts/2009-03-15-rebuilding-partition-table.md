@@ -8,13 +8,14 @@ description: 'How to recover a partition table that was overwritten by an aborte
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=32'
 permalink: /index.php/2009/03/15/rebuilding-partition-table/
+lang: en
 categories:
-    - OSS
+  - linux
+  - storage-backup
 tags:
-    - linux
-    - testdisk
-    - recovery
-    - partitioning
+  - testdisk
+  - partitioning
+  - recovery
 ---
 
 Ok, an ex school partner brought me his laptop today and told me that it suddenly stopped working (yeah right).

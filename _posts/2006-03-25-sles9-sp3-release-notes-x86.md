@@ -7,12 +7,12 @@ layout: post
 guid: 'https://cyruspy.wordpress.com/2006/03/25/sles9-sp3-release-notes-x86/'
 permalink: /index.php/2006/03/25/sles9-sp3-release-notes-x86/
 description: 'Release notes for SUSE Linux Enterprise Server 9 SP3 (x86), covering installation notes, general information, updates, and features.'
-categories:
-    - SLES
-tags:
-    - linux
-    - sles
 deprecated: true
+lang: en
+categories:
+  - linux
+tags:
+  - sles
 ---
 
 Release Notes for SUSE LINUX Enterprise Server 9 for x86 Service Pack 3 SuSE Linux Maintenance Web (3f42148c63f09f8204b32136f311a48d)

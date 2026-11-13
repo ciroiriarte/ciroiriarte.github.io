@@ -7,19 +7,17 @@ layout: post
 guid: 'http://cyruspy.wordpress.com/?p=46'
 permalink: /index.php/2009/10/08/running-sco-openserver-5-0-7-in-virtualbox/
 description: 'Technical guide for virtualizing SCO OpenServer 5.0.7 on VirtualBox, including VM configuration, installation procedure, network setup, and a Guru Meditation workaround.'
+lang: en
 categories:
-    - Projects
-    - Virtualization
+  - virtualization
 tags:
-    - virtualization
-    - sco
-    - virtualbox
-    - linux
+  - virtualbox
+  - sco
 ---
 
 **Update:** *As of VirtualBox 3.0.10, Openserver 5.0.7 should not require workarounds to install, only SCSI support is pending… (check the listed bugreports).*
 
-A customer required to replace and ancient SCO server<!-- more --> used to run Foxplus, given that Openserver 5 is unlikely to be able to run with new hardware the only available route in this case was to virtualize the Openserver server. To date iBCS or ABI or whatever is the latest incarnation, didn’t work for us.
+A customer required to replace and ancient SCO server<!--more--> used to run Foxplus, given that Openserver 5 is unlikely to be able to run with new hardware the only available route in this case was to virtualize the Openserver server. To date iBCS or ABI or whatever is the latest incarnation, didn’t work for us.
 
 We are running SLES10SP2@x86\_64 as host, but any host running VirtualBox should work. The original installation was done on 3.0.4 but this steps where tested in 3.0.8 for this article. The only missing functionality is GUI.
 

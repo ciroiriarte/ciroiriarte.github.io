@@ -7,13 +7,13 @@ layout: post
 guid: 'http://cyruspy.wordpress.com/?p=38'
 permalink: /index.php/2009/03/20/windows-on-atms/
 description: 'Anecdote about inadvertently rebooting a Diebold ATM running Windows XP, and waiting for it to restart and come back online.'
+lang: en
 categories:
-    - Nonsense
-    - Windows
+  - misc
 tags:
-    - windows
-    - atm
-    - nonsense
+  - windows
+  - humor
+  - xkcd
 ---
 
 Well, this morning I found to be out of cash. Walked about 6 blocks to the ATM on my way to the office.
@@ -34,4 +34,4 @@ Suddenly, the message changes to “Out of service” and some seconds later, th
 
 Apparently the device/OS communication fell apart and required a reboot…. At last I extended the life of my shoes, and found out the new ATMs run XP :s
 
-![](http://imgs.xkcd.com/comics/voting_machines.png "Oh god...")
+![](https://imgs.xkcd.com/comics/voting_machines.png "Oh god...")

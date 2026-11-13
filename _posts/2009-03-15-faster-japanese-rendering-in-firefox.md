@@ -8,15 +8,13 @@ description: 'How to fix slow Japanese text rendering in Firefox on openSUSE by 
 layout: post
 guid: 'http://cyruspy.wordpress.com/?p=28'
 permalink: /index.php/2009/03/15/faster-japanese-rendering-in-firefox/
+lang: en
 categories:
-    - Japanese
-    - Linux
-    - openSUSE
+  - linux
 tags:
-    - firefox
-    - fonts
-    - japanese
-    - opensuse
+  - opensuse
+  - firefox
+  - fonts
 ---
 
 Years before I found that rendering japanese content in Firefox was REALLY slow, but just resigned to live with it and some time later forgot about the whole thing as I stopped accessing japanese content….
