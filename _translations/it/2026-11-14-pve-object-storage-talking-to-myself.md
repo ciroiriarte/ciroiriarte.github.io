@@ -1,5 +1,5 @@
 ---
-title: "Proxmox VE e servizi di object storage: parlando da solo"
+title: "Proxmox VE e servizi di object storage: pensando ad alta voce"
 description: "Proxmox VE dovrebbe far girare il RADOS Gateway di Ceph come servizio S3 nativo? Un design discusso ad alta voce: ingress, alta disponibilità, certificati, tenancy e il costo di portarsi dietro un fork."
 lang: it
 date: 2026-11-14 00:10:00 -0300

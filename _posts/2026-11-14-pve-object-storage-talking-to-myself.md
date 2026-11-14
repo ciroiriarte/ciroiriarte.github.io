@@ -1,5 +1,5 @@
 ---
-title: "Proxmox VE & Object Storage Services: Talking to myself"
+title: "Proxmox VE & Object Storage Services: Thinking out loud"
 description: "Should Proxmox VE run Ceph's RADOS Gateway as a native S3 service? A design argued out loud: ingress, high availability, certificates, tenancy, and the cost of carrying a fork."
 author: Ciro Iriarte
 lang: en
