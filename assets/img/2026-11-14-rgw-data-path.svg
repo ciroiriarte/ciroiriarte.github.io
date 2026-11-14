@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="360" viewBox="0 0 860 360" role="img" aria-label="S3 request path from clients through HAProxy to RGW and RADOS">
+<style>
+text{font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:13px;fill:#1f2328}
+.s{font-size:11px;fill:#57606a}.t{font-weight:600}
+.box{fill:#f6f8fa;stroke:#57606a;stroke-width:1.2}
+.gw{fill:#fff4e5;stroke:#d9822b;stroke-width:1.2}
+.ceph{fill:#eaf2fb;stroke:#2f6fb0;stroke-width:1.2}
+.zone{fill:none;stroke:#8c959f;stroke-dasharray:5 4}
+.ln{stroke:#57606a;stroke-width:1.4;fill:none}.d{stroke-dasharray:5 4}
+.ah{fill:#57606a}.bad{stroke:#cf222e;stroke-width:2.5}.badt{fill:#cf222e}
+@media (prefers-color-scheme:dark){text{fill:#e6edf3}.s{fill:#9da7b3}
+.box{fill:#21262d;stroke:#8b949e}.gw{fill:#3a2a14;stroke:#e3a15a}.ceph{fill:#132a43;stroke:#58a6ff}
+.zone{stroke:#6e7681}.ln{stroke:#8b949e}.ah{fill:#8b949e}.bad{stroke:#ff7b72}.badt{fill:#ff7b72}}
+</style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker></defs>
+<rect class="zone" x="140" y="30" width="235" height="310" rx="8"/>
+<text class="s" x="152" y="50">public network · vrf-public</text>
+<rect class="zone" x="375" y="30" width="475" height="310" rx="8"/>
+<text class="s" x="470" y="50">backend network · default VRF</text>
+<rect class="box" x="10" y="150" width="115" height="54" rx="6"/>
+<text class="t" x="67.5" y="173" text-anchor="middle">S3 clients</text>
+<text class="s" x="67.5" y="192" text-anchor="middle">AWS CLI, boto3</text>
+<rect class="gw" x="170" y="160" width="110" height="34" rx="17"/>
+<text x="225" y="182" text-anchor="middle">VIP :443</text>
+<rect class="gw" x="300" y="70" width="150" height="58" rx="6"/>
+<text class="t" x="375" y="94" text-anchor="middle">gw1 · HAProxy</text>
+<text class="s" x="375" y="113" text-anchor="middle">TLS ends here</text>
+<rect class="gw" x="300" y="226" width="150" height="58" rx="6"/>
+<text class="t" x="375" y="250" text-anchor="middle">gw2 · HAProxy</text>
+<text class="s" x="375" y="269" text-anchor="middle">standby (Keepalived)</text>
+<rect class="box" x="500" y="60" width="150" height="50" rx="6"/>
+<text class="t" x="575" y="81" text-anchor="middle">RGW · Beast</text>
+<text class="s" x="575" y="99" text-anchor="middle">pve1 · 10.10.0.1:7480</text>
+<rect class="box" x="500" y="155" width="150" height="50" rx="6"/>
+<text class="t" x="575" y="176" text-anchor="middle">RGW · Beast</text>
+<text class="s" x="575" y="194" text-anchor="middle">pve2 · 10.10.0.2:7480</text>
+<rect class="box" x="500" y="250" width="150" height="50" rx="6"/>
+<text class="t" x="575" y="271" text-anchor="middle">RGW · Beast</text>
+<text class="s" x="575" y="289" text-anchor="middle">pve3 · 10.10.0.3:7480</text>
+<rect class="ceph" x="700" y="70" width="135" height="220" rx="6"/>
+<text class="t" x="767.5" y="172" text-anchor="middle">Ceph RADOS</text>
+<text class="s" x="767.5" y="191" text-anchor="middle">OSDs · pools</text>
+<path class="ln" marker-end="url(#a)" d="M125,177 L168,177"/>
+<path class="ln" marker-end="url(#a)" d="M270,163 L316,130"/>
+<path class="ln d" marker-end="url(#a)" d="M270,191 L316,224"/>
+<path class="ln" marker-end="url(#a)" d="M450,99 L498,85"/>
+<path class="ln" marker-end="url(#a)" d="M450,99 L498,178"/>
+<path class="ln" marker-end="url(#a)" d="M450,99 L498,272"/>
+<path class="ln" marker-end="url(#a)" d="M650,85 L698,110"/>
+<path class="ln" marker-end="url(#a)" d="M650,180 L698,180"/>
+<path class="ln" marker-end="url(#a)" d="M650,275 L698,250"/>
+<text class="s" x="470" y="332">HAProxy → RGW: plain HTTP on a trusted network</text>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="300" viewBox="0 0 900 300" role="img" aria-label="High availability options: failover VIP, DNS round-robin, anycast">
+<style>
+text{font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:13px;fill:#1f2328}
+.s{font-size:11px;fill:#57606a}.t{font-weight:600}
+.box{fill:#f6f8fa;stroke:#57606a;stroke-width:1.2}
+.gw{fill:#fff4e5;stroke:#d9822b;stroke-width:1.2}
+.ceph{fill:#eaf2fb;stroke:#2f6fb0;stroke-width:1.2}
+.zone{fill:none;stroke:#8c959f;stroke-dasharray:5 4}
+.ln{stroke:#57606a;stroke-width:1.4;fill:none}.d{stroke-dasharray:5 4}
+.ah{fill:#57606a}.bad{stroke:#cf222e;stroke-width:2.5}.badt{fill:#cf222e}
+@media (prefers-color-scheme:dark){text{fill:#e6edf3}.s{fill:#9da7b3}
+.box{fill:#21262d;stroke:#8b949e}.gw{fill:#3a2a14;stroke:#e3a15a}.ceph{fill:#132a43;stroke:#58a6ff}
+.zone{stroke:#6e7681}.ln{stroke:#8b949e}.ah{fill:#8b949e}.bad{stroke:#ff7b72}.badt{fill:#ff7b72}}
+</style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker></defs>
+<path class="zone" d="M297,10 L297,290 M597,10 L597,290"/>
+<rect class="box" x="95" y="36" width="100" height="34" rx="6"/><text x="145" y="58" text-anchor="middle">clients</text>
+<rect class="box" x="395" y="36" width="100" height="34" rx="6"/><text x="445" y="58" text-anchor="middle">clients</text>
+<rect class="box" x="695" y="36" width="100" height="34" rx="6"/><text x="745" y="58" text-anchor="middle">clients</text>
+<text class="t" x="10" y="20">A · failover VIP (default)</text>
+<rect class="gw" x="105" y="100" width="80" height="28" rx="14"/><text x="145" y="119" text-anchor="middle">VIP</text>
+<path class="ln" marker-end="url(#a)" d="M145,70 L145,98"/>
+<rect class="gw" x="20" y="170" width="110" height="50" rx="6"/><text class="t" x="75" y="192" text-anchor="middle">gw1</text><text class="s" x="75" y="210" text-anchor="middle">active</text>
+<rect class="box" x="160" y="170" width="110" height="50" rx="6"/><text class="t" x="215" y="192" text-anchor="middle">gw2</text><text class="s" x="215" y="210" text-anchor="middle">standby</text>
+<path class="ln" marker-end="url(#a)" d="M135,128 L95,168"/><path class="ln d" marker-end="url(#a)" d="M155,128 L195,168"/>
+<path class="ln d" d="M130,205 L160,205"/><text class="s" x="145" y="230" text-anchor="middle">VRRP</text>
+<text class="s" x="145" y="265" text-anchor="middle">simple; one node's throughput</text><text class="s" x="145" y="282" text-anchor="middle">VIP moves on failure</text>
+<text class="t" x="310" y="20">B · DNS round-robin</text>
+<rect class="box" x="370" y="100" width="150" height="28" rx="6"/><text x="445" y="119" text-anchor="middle">DNS: 3 × A record</text>
+<path class="ln" marker-end="url(#a)" d="M445,70 L445,98"/>
+<rect class="gw" x="310" y="170" width="80" height="50" rx="6"/><text class="t" x="350" y="200" text-anchor="middle">gw1</text>
+<path class="ln" marker-end="url(#a)" d="M445,128 L350,168"/>
+<rect class="gw" x="405" y="170" width="80" height="50" rx="6"/><text class="t" x="445" y="200" text-anchor="middle">gw2</text>
+<path class="ln" marker-end="url(#a)" d="M445,128 L445,168"/>
+<rect class="box" x="500" y="170" width="80" height="50" rx="6"/><text class="t" x="540" y="200" text-anchor="middle">gw3</text>
+<path class="ln" marker-end="url(#a)" d="M445,128 L540,168"/>
+<path class="bad" d="M505,175 L585,215 M585,175 L505,215"/><text class="s badt" x="545" y="238" text-anchor="middle">dead, still answered</text>
+<text class="s" x="445" y="265" text-anchor="middle">all nodes serve</text><text class="s" x="445" y="282" text-anchor="middle">no health checks</text>
+<text class="t" x="610" y="20">C · anycast (opt-in)</text>
+<rect class="box" x="670" y="100" width="150" height="28" rx="6"/><text x="745" y="119" text-anchor="middle">router · ECMP</text>
+<path class="ln" marker-end="url(#a)" d="M745,70 L745,98"/>
+<rect class="gw" x="610" y="170" width="80" height="50" rx="6"/><text class="t" x="650" y="192" text-anchor="middle">gw1</text><text class="s" x="650" y="210" text-anchor="middle">same /32</text>
+<path class="ln" marker-start="url(#a)" d="M745,130 L650,168"/>
+<rect class="gw" x="705" y="170" width="80" height="50" rx="6"/><text class="t" x="745" y="192" text-anchor="middle">gw2</text><text class="s" x="745" y="210" text-anchor="middle">same /32</text>
+<path class="ln" marker-start="url(#a)" d="M745,130 L745,168"/>
+<rect class="gw" x="800" y="170" width="80" height="50" rx="6"/><text class="t" x="840" y="192" text-anchor="middle">gw3</text><text class="s" x="840" y="210" text-anchor="middle">same /32</text>
+<path class="ln" marker-start="url(#a)" d="M745,130 L840,168"/>
+<text class="s" x="745" y="240" text-anchor="middle">BGP + BFD announcements</text>
+<text class="s" x="745" y="265" text-anchor="middle">all nodes; fast only with BFD</text><text class="s" x="745" y="282" text-anchor="middle">rehash breaks long uploads</text>
+</svg>
